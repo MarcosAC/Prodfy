@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prodfy.App">
     <Application.Resources>
-
+        <ResourceDictionary>
+            <Style TargetType="StackLayout" x:Key="baseStyleStackLayout">
+                <Setter Property="Padding" Value="20" />
+            </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

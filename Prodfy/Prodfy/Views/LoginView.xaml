@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prodfy.Views.LoginView"
+             BackgroundImage="splash_bg2.png">
+    <ContentPage.Content>          
+        <StackLayout Style="{StaticResource baseStyleStackLayout}">
+            <Image Source="prodfy_logo.png" />
+            <Label Text="DISPOSITIVO:" TextColor="ForestGreen" HorizontalOptions="Center" FontSize="Large" Margin="0,30,0,0"/>
+            <Label Text="50000" TextColor="Blue" HorizontalOptions="Center" FontSize="Large" />
+            <Label Text="USUÁRIO:" TextColor="ForestGreen" HorizontalOptions="Center" FontSize="Large" />
+            <Label Text="ROMULO BALGA" TextColor="Blue" HorizontalOptions="Center" FontSize="Large" />
+            <Label Text="SENHA:" TextColor="ForestGreen" HorizontalOptions="Center" FontSize="Large" />
+            <Entry Placeholder="senha de acesso" BackgroundColor="White" PlaceholderColor="LightGray" />
+            <Button Text="Entar"
+                    TextColor="White"                    
+                    BackgroundColor="ForestGreen" 
+                    BorderRadius="7" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
