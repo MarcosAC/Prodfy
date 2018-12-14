@@ -37,7 +37,7 @@
                    FontAttributes="Bold" 
                    FontSize="Large" />
 
-            <Frame CornerRadius="5"
+            <!--<Frame CornerRadius="5"
                    BorderColor="Gray"
                    BackgroundColor="Transparent"
                    Padding="2"
@@ -48,14 +48,18 @@
                        HorizontalTextAlignment="Center"
                        BackgroundColor="White" 
                        PlaceholderColor="LightGray" />
-            </Frame>
+            </Frame>-->
+            <Entry Placeholder="senha de acesso"
+                   PlaceholderColor="LightGray"
+                   HorizontalTextAlignment="Center"
+                   BackgroundColor="White" 
+                   Margin="0,0,0,15" />
 
             <Button Text="Entrar"
                     TextColor="White"
                     FontAttributes="Bold"
                     FontSize="Medium"
-                    BackgroundColor="ForestGreen" 
-                    BorderRadius="7" />
+                    BackgroundColor="ForestGreen" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
