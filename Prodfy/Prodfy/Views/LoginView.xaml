@@ -6,7 +6,7 @@
              BackgroundImage="splash_bg2.png">
     <ContentPage.Content>          
         <StackLayout Style="{StaticResource baseStyleStackLayout}">
-            <Image Source="prodfy_logo_white.png" />
+            <Image Style="{StaticResource ImagemFundo}" />
             
             <Label Style="{StaticResource styleLabelTitulo}" 
                    Text="DISPOSITIVO:"

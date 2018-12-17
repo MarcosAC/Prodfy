@@ -4,6 +4,9 @@
              x:Class="Prodfy.App">
     <Application.Resources>
         <ResourceDictionary>
+            <Style TargetType="Image" x:Key="ImagemFundo">
+                <Setter Property="Source" Value="prodfy_logo_white.png" />
+            </Style>
             <Style TargetType="StackLayout" x:Key="baseStyleStackLayout">
                 <Setter Property="Padding" Value="20" />
             </Style>
@@ -17,7 +20,8 @@
 
             <Style TargetType="Label" x:Key="styleLabelTexto" >
                 <Setter Property="TextColor" Value="Blue" />
-                <Setter Property="FontSize" Value="Large" />                
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
 
