@@ -8,34 +8,21 @@
         <StackLayout Style="{StaticResource baseStyleStackLayout}">
             <Image Source="prodfy_logo_white.png" />
             
-            <Label Text="DISPOSITIVO:" 
-                   TextColor="ForestGreen" 
-                   HorizontalOptions="Center" 
-                   FontSize="Large" 
-                   FontAttributes="Bold" 
+            <Label Style="{StaticResource styleLabelTitulo}" 
+                   Text="DISPOSITIVO:"
                    Margin="0,30,0,0" />
-            
-            <Label Text="50000" 
-                   TextColor="Blue" 
-                   HorizontalOptions="Center" 
-                   FontSize="Large" />
-            
-            <Label Text="USUÁRIO:" 
-                   TextColor="ForestGreen"
-                   HorizontalOptions="Center" 
-                   FontAttributes="Bold" 
-                   FontSize="Large" />
-            
-            <Label Text="ROMULO BALGA"
-                   TextColor="Blue"
-                   HorizontalOptions="Center" 
-                   FontSize="Large" />
-            
-            <Label Text="SENHA:"
-                   TextColor="ForestGreen" 
-                   HorizontalOptions="Center" 
-                   FontAttributes="Bold" 
-                   FontSize="Large" />
+
+            <Label Style="{StaticResource styleLabelTexto}"
+                   Text="50000" />
+
+            <Label Style="{StaticResource styleLabelTitulo}"
+                   Text="USUÁRIO:" />
+
+            <Label Style="{StaticResource styleLabelTexto}"
+                   Text="ROMULO BALGA" />
+
+            <Label Style="{StaticResource styleLabelTitulo}"
+                   Text="SENHA:" />
 
             <!--<Frame CornerRadius="5"
                    BorderColor="Gray"
@@ -55,11 +42,8 @@
                    BackgroundColor="White" 
                    Margin="0,0,0,15" />
 
-            <Button Text="Entrar"
-                    TextColor="White"
-                    FontAttributes="Bold"
-                    FontSize="Medium"
-                    BackgroundColor="ForestGreen" />
+            <Button Style="{StaticResource styleButton}" 
+                    Text="Entrar" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
