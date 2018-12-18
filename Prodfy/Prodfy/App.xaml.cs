@@ -11,7 +11,7 @@ namespace Prodfy
         {
             InitializeComponent();
 
-            MainPage = new MenuBottom();
+            MainPage = new LoginView();
         }
 
         protected override void OnStart()
