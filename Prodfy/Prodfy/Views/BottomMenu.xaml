@@ -2,14 +2,36 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"           
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            xmlns:pagina="clr-namespace:Prodfy.Views"
-            android:TabbedPage.ToolbarPlacement="Bottom"
-            android:TabbedPage.BarItemColor="Black"
+            xmlns:views="clr-namespace:Prodfy.Views"            
+            android:TabbedPage.BarItemColor="Black"            
+            android:TabbedPage.IsSwipePagingEnabled="False"
             x:Class="Prodfy.Views.BottomMenu"
             BarBackgroundColor="LightGray"
             BarTextColor="Gray">
         
     <!--Pages can be added as references or inline-->
-    <pagina:LoginView />
-    <pagina:InicioView />    
+    
+    <TabbedPage.Children>
+        <views:LoginView Title="Início" />
+        <views:InicioView Title="Funções" />
+        <views:LoginView Title="Sincronia" />
+        <views:InicioView Title="Ajustes" />
+    </TabbedPage.Children>
+
+    <!--<views:LoginView Title="Inicio"/>
+            
+        android:TabbedPage.ToolbarPlacement="Bottom"
+                <views:LoginView Title="Inicio"/>
+           
+       
+                <views:LoginView Title="Inicio"/>
+            
+        
+                <views:LoginView Title="Inicio"/>>
+            
+      
+                <views:LoginView Title="Inicio"/>-->
+            
+        
+      
 </TabbedPage>
