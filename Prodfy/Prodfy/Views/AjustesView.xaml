@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prodfy.Views.AjustesView"
+             BackgroundImage="splash_bg2.png">
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource baseStyleStackLayout}">
+            <Image Style="{StaticResource ImagemFundo}" />
+            
+            <Label Text="&#xf085;"
+                   FontSize="100" 
+                   TextColor="ForestGreen"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,20">
+
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
+                </Label.FontFamily>
+            </Label>
+            <Button Style="{StaticResource styleButton}" 
+                    Text="Dispositivos" />
+
+            <Button Style="{StaticResource styleButton}" 
+                    Text="Sobre" />
+
+            <Button Style="{StaticResource styleButton}" 
+                    Text="Conexão" />
+
+            <Button Style="{StaticResource styleButton}" 
+                    Text="Exportar Dados" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
