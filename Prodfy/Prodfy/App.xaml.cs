@@ -11,7 +11,7 @@ namespace Prodfy
         {
             InitializeComponent();
 
-            MainPage = new AjustesView();
+            MainPage = new SincronismoView();
         }
 
         protected override void OnStart()
