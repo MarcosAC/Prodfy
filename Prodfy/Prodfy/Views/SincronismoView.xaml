@@ -3,87 +3,90 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prodfy.Views.SincronismoView"
              BackgroundImage="splash_bg2.png">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label"
+                   x:Key="styleBaseLabel"
+                   BasedOn="{StaticResource styleLabelCamposSincronizar}">
+                <Setter Property="TextColor" Value="#000000" />
+            </Style>
+
+            <Style TargetType="Label"
+                   x:Key="styleLabelDadosSincronismo"
+                   BasedOn="{StaticResource styleBaseLabel}">
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource baseStyleStackLayout}">
-            <Image Style="{StaticResource ImagemFundo}" />
+        <ScrollView>
+            <StackLayout Style="{StaticResource baseStyleStackLayout}">
+                <Image Style="{StaticResource ImagemFundo}" />
 
-            <Label Text="&#xf1eb;"
-                   FontSize="100" 
-                   TextColor="ForestGreen"
-                   HorizontalOptions="Center"
-                   Margin="0,20,0,20">
+                <Label Text="&#xf1eb;"
+                       FontSize="100" 
+                       TextColor="ForestGreen"
+                       HorizontalOptions="Center"
+                       Margin="0,20,0,20">
 
-                <Label.FontFamily>
-                    <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
-                </Label.FontFamily>
-            </Label>
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
+                    </Label.FontFamily>
+                </Label>
 
-            <Label Text="Não Sincronizado!" HorizontalOptions="Center" />
+                <Label Style="{StaticResource styleBaseLabel}"
+                   Text="Não Sincronizado!"                   
+                   HorizontalOptions="Center" />
 
-            <Grid HorizontalOptions="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition  Width="auto" />
-                    <ColumnDefinition  Width="auto" />
-                </Grid.ColumnDefinitions>
+                <Grid HorizontalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width="auto" />
+                        <ColumnDefinition  Width="auto" />
+                    </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
 
-                <Label Style="{StaticResource styleLabelCamposSincronizar}"
-                       Grid.Column="0"
-                       Grid.Row="0" 
-                       Text="Atividades:"
-                       HorizontalTextAlignment="End" />
-                <Label Grid.Column="1"
-                       Grid.Row="0" 
-                       Text="0"
-                       HorizontalTextAlignment="Start" />
+                    <!--Labels Campos -->
+                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="0" Text="Atividades:" HorizontalTextAlignment="End" />
+                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="1" Text="Invetários:" HorizontalTextAlignment="End" />
+                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="2" Text="Perdas:" HorizontalTextAlignment="End" />
+                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="3" Text="Histórico:" HorizontalTextAlignment="End" />
+                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="4" Text="Evoluçôes:" HorizontalTextAlignment="End" />
+                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="5" Text="Ocorrências:" HorizontalTextAlignment="End" />
+                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="6" Text="Medições:" HorizontalTextAlignment="End" />
+                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="7" Text="Expedições:" HorizontalTextAlignment="End" />
 
-                <Label Style="{StaticResource styleLabelCamposSincronizar}"
-                       Grid.Column="0"
-                       Grid.Row="1"
-                       Text="Invetários:"
-                       HorizontalTextAlignment="End" />
-                <Label Grid.Column="1"
-                       Grid.Row="1"
-                       Text="0" 
-                       HorizontalTextAlignment="Start" />
+                    <!--Labels Dados -->
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="0" Text="0" />
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="1" Text="0" />
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="2" Text="0" />
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="3" Text="0" />
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="4" Text="0" />
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="5" Text="0" />
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="6" Text="0" />
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="7" Text="0" />
+                </Grid>
 
-                <Label Style="{StaticResource styleLabelCamposSincronizar}"
-                       Grid.Column="0"
-                       Grid.Row="2" 
-                       Text="Perdas:" 
-                       HorizontalTextAlignment="End" />
-                <Label Text="0"
-                       Grid.Column="1"
-                       Grid.Row="2" 
-                       HorizontalTextAlignment="Start" />
+                <Button Style="{StaticResource styleButton}"
+                        Text="Sincronizar"
+                        Margin="0,15,0,15"/>
 
-                <Label Style="{StaticResource styleLabelCamposSincronizar}"
-                       Text="Histórico:"
-                       Grid.Column="0"
-                       Grid.Row="3"
-                       HorizontalTextAlignment="End"  />
-                <Label Grid.Column="1"
-                       Grid.Row="3"
-                       Text="0"
-                       HorizontalTextAlignment="Start" />
-
-                <Label Style="{StaticResource styleLabelCamposSincronizar}"
-                       Text="Evoluçôes:"
-                       Grid.Column="0"
-                       Grid.Row="4" 
-                       HorizontalTextAlignment="End" />
-                <Label Grid.Column="1"
-                       Grid.Row="4"
-                       Text="0" 
-                       HorizontalTextAlignment="Start" />
-            </Grid>            
-        </StackLayout>
+                <Label Style="{StaticResource styleBaseLabel}"
+                       Text="Atenção: O dispositivo deve estar conectado a uma rede WIFI com acesso a internet!" 
+                       FontSize="Small"
+                       HorizontalTextAlignment="Center" />
+            </StackLayout>
+        </ScrollView>        
     </ContentPage.Content>
 </ContentPage>

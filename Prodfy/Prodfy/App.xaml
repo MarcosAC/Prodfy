@@ -25,8 +25,9 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
 
-            <Style TargetType="Label" x:Key="styleLabelCamposSincronizar" BasedOn="{StaticResource styleLabelTitulo}">
-                <Setter Property="FontSize" Value="Medium" />
+            <Style TargetType="Label" x:Key="styleLabelCamposSincronizar">
+                <Setter Property="TextColor" Value="#206805" />
+                <Setter Property="FontSize" Value="Large" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
 
