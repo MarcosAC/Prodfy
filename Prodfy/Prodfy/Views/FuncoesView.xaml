@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prodfy.Views.FuncoesView"
+             BackgroundImage="splash_bg2.png">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Style="{StaticResource baseStyleStackLayout}">
+                <Image Style="{StaticResource ImagemFundo}" />
+
+                <Label Style="{StaticResource styleLabelTitulo}" 
+                   Text="Produção:" 
+                   Margin="0,15,0,15"/>
+
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Identificação" />
+
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Atividade Realizada" />
+
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Invetário" />
+
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Perdas" />
+
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Histórico" />
+
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Evolução de Lote" />
+
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Expedição" />
+
+                <Label Style="{StaticResource styleLabelTitulo}" 
+                       Text="Monitoramento:" 
+                       Margin="0,15,0,15"/>
+
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Localização" />
+
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Ocorrência" />
+
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Medição" />
+            </StackLayout>
+        </ScrollView>        
+    </ContentPage.Content>
+</ContentPage>
