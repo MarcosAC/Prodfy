@@ -11,7 +11,7 @@ namespace Prodfy
         {
             InitializeComponent();
 
-            MainPage = new FuncoesView();
+            MainPage = new NavigationPage(new DispositivoView());
         }
 
         protected override void OnStart()

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prodfy.Views.DispositivoView"
+             BackgroundImage="splash_bg2.png">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            
+            <!--Botão Voltar-->
+            <Label Text="&#xf104;"
+                   FontSize="40" 
+                   TextColor="White">
+
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" />
+                </Label.FontFamily>
+
+                <!--<Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding BackListNotesCommand}" />
+                </Label.GestureRecognizers>-->
+            </Label>
+
+            <StackLayout HorizontalOptions="FillAndExpand"
+                         VerticalOptions="Center" 
+                         Margin="0,0,20,0">
+                
+                <Label Text="Dispositivo" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="Center" />
+            </StackLayout>
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource baseStyleStackLayout}">
+            
+            <StackLayout HorizontalOptions="Center">
+                <Label Text="&#xf3cd;"
+                       FontSize="100" 
+                       TextColor="#206805"
+                       HorizontalOptions="Center"
+                       Margin="0,20,0,20">
+
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
+                    </Label.FontFamily>
+                </Label>
+
+                <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Dispositivo:" TextColor="Black" HorizontalTextAlignment="Center" />
+                <Label Style="{StaticResource styleLabelTexto}" Text="5001:" HorizontalTextAlignment="Center"/>
+                
+                <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Usuário:" TextColor="Black" HorizontalTextAlignment="Center" />
+                <Label Style="{StaticResource styleLabelTexto}" Text="Rodrigo Gomide" HorizontalTextAlignment="Center"/>
+                
+                <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Empresa:" TextColor="Black" HorizontalTextAlignment="Center" />
+                <Label Style="{StaticResource styleLabelTexto}" Text="Ther Sistemas:" HorizontalTextAlignment="Center" />
+            </StackLayout>
+            
+            <Button Text="Ler QRCode" Style="{StaticResource styleButton}" />
+
+            <Label Style="{StaticResource styleBaseLabel}" Text="Obs: Dispositovo deve estar cadastrado no Portal Prodfy." />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
