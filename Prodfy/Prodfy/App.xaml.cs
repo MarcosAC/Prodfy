@@ -11,7 +11,7 @@ namespace Prodfy
         {
             InitializeComponent();
 
-            MainPage = new SincronismoView();
+            MainPage = new NavigationPage(new IdentificacaoView());
         }
 
         protected override void OnStart()
