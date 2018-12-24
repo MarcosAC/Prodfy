@@ -7,14 +7,9 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label"
-                   x:Key="styleBaseLabel"
-                   BasedOn="{StaticResource styleLabelCamposSincronizar}">
-                <Setter Property="TextColor" Value="#000000" />
-            </Style>
-
-            <Style TargetType="Label"
                    x:Key="styleLabelDadosSincronismo"
                    BasedOn="{StaticResource styleBaseLabel}">
+                <Setter Property="FontSize" Value="Large" />
                 <Setter Property="HorizontalTextAlignment" Value="Start" />
             </Style>
         </ResourceDictionary>
@@ -23,11 +18,12 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Style="{StaticResource baseStyleStackLayout}">
+                
                 <Image Style="{StaticResource ImagemFundo}" />
 
                 <Label Text="&#xf1eb;"
                        FontSize="100" 
-                       TextColor="ForestGreen"
+                       TextColor="#206805"
                        HorizontalOptions="Center"
                        Margin="0,20,0,20">
 
@@ -37,9 +33,10 @@
                 </Label>
 
                 <Label Style="{StaticResource styleBaseLabel}"
-                   Text="Não Sincronizado!"                   
-                   HorizontalOptions="Center" />
-
+                       Text="Não Sincronizado!" 
+                       FontSize="Large"
+                       HorizontalOptions="Center" />
+                
                 <Grid HorizontalOptions="Center">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition  Width="auto" />
@@ -77,15 +74,12 @@
                     <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="6" Text="0" />
                     <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="7" Text="0" />
                 </Grid>
-
+                
                 <Button Style="{StaticResource styleButton}"
                         Text="Sincronizar"
                         Margin="0,15,0,15"/>
 
-                <Label Style="{StaticResource styleBaseLabel}"
-                       Text="Atenção: O dispositivo deve estar conectado a uma rede WIFI com acesso a internet!" 
-                       FontSize="Small"
-                       HorizontalTextAlignment="Center" />
+                <Label Style="{StaticResource styleBaseLabel}" Text="Atenção: O dispositivo deve estar conectado a uma rede WIFI com acesso a internet!" />
             </StackLayout>
         </ScrollView>        
     </ContentPage.Content>
