@@ -11,7 +11,10 @@ namespace Prodfy
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new IdentificacaoView());
+            MainPage = new NavigationPage(new AtividadeRealizadaView())
+            {
+                BarBackgroundColor = Color.FromHex("#206805")
+            };
         }
 
         protected override void OnStart()
