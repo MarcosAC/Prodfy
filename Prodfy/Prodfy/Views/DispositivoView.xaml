@@ -1,36 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.DispositivoView"
              BackgroundImage="splash_bg2.png">
 
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal">
-            
-            <!--Botão Voltar-->
-            <Label Text="&#xf104;"
-                   FontSize="40" 
-                   TextColor="White">
-
-                <Label.FontFamily>
-                    <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" />
-                </Label.FontFamily>
-
-                <!--<Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding BackListNotesCommand}" />
-                </Label.GestureRecognizers>-->
-            </Label>
-
-            <StackLayout HorizontalOptions="FillAndExpand"
-                         VerticalOptions="Center" 
-                         Margin="0,0,20,0">
-                
-                <Label Text="Dispositivo" 
-                       FontSize="20" 
-                       TextColor="White" 
-                       HorizontalOptions="Center" />
-            </StackLayout>
-        </StackLayout>
+        <control:CustomTitleView Titulo="Atividades" />        
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
