@@ -10,21 +10,20 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource baseStyleStackLayout}">
+        <StackLayout Padding="20,10,20,20">
             <Label Style="{StaticResource styleLabelFormulario}" Text="Atividade:" />
-            <Entry Style="{StaticResource styleEntryFormulario}" />
+            <Picker Style="{StaticResource stylePickerFormulario}" />
             <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Início" />
             <Picker Style="{StaticResource stylePickerFormulario}" />
             <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Conclusão" />
             <Picker Style="{StaticResource stylePickerFormulario}" />
             <Label Style="{StaticResource styleLabelFormulario}" Text="Observação(468)" />
-            <Editor HeightRequest="160" Placeholder="Teste de registro de atividade." BackgroundColor="White" />
+            <Editor Style="{StaticResource styleEditorFormulario}" Placeholder="Teste de registro de atividade." />
 
             <StackLayout Orientation="Horizontal">
-                <Button Text="Cancelar" HeightRequest="60" WidthRequest="140" BackgroundColor="#fc0b00" HorizontalOptions="FillAndExpand" />
-                <Button Text="Salvar" HeightRequest="60" WidthRequest="140" BackgroundColor="#007aff" HorizontalOptions="FillAndExpand" />
-            </StackLayout>
-            
+                <Button Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
+                <Button Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+            </StackLayout>            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
