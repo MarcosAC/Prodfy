@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
+             x:Class="Prodfy.Views.CadastroAtividadeView"
+             BackgroundImage="splash_bg2.png">
+
+    <NavigationPage.TitleView>
+        <control:CustomTitleView Titulo="Atividades" Icone="&#xf055;" />
+    </NavigationPage.TitleView>
+    
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource baseStyleStackLayout}">
+            <Label Text="Atividade:" FontSize="16" />
+            <Entry BackgroundColor="White" Margin="0,0,0,10" />
+            <Label Text="Data Hora de Início" FontSize="16" />
+            <Picker BackgroundColor="White" Margin="0,0,0,10"/>
+            <Label Text="Data Hora de Conclusão" FontSize="16" />
+            <Picker BackgroundColor="White" Margin="0,0,0,10"/>
+            <Label Text="Observação(468)" FontSize="16" />
+            <Editor HeightRequest="160" Placeholder="Teste de registro de atividade." BackgroundColor="White" />
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancelar" HeightRequest="60" WidthRequest="140" BackgroundColor="#fc0b00" HorizontalOptions="FillAndExpand" />
+                <Button Text="Salvar" HeightRequest="60" WidthRequest="140" BackgroundColor="#007aff" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
