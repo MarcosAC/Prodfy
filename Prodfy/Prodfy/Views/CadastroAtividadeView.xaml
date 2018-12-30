@@ -11,13 +11,13 @@
     
     <ContentPage.Content>
         <StackLayout Style="{StaticResource baseStyleStackLayout}">
-            <Label Text="Atividade:" FontSize="16" />
-            <Entry BackgroundColor="White" Margin="0,0,0,10" />
-            <Label Text="Data Hora de Início" FontSize="16" />
-            <Picker BackgroundColor="White" Margin="0,0,0,10"/>
-            <Label Text="Data Hora de Conclusão" FontSize="16" />
-            <Picker BackgroundColor="White" Margin="0,0,0,10"/>
-            <Label Text="Observação(468)" FontSize="16" />
+            <Label Style="{StaticResource styleLabelFormulario}" Text="Atividade:" />
+            <Entry Style="{StaticResource styleEntryFormulario}" />
+            <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Início" />
+            <Picker Style="{StaticResource stylePickerFormulario}" />
+            <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Conclusão" />
+            <Picker Style="{StaticResource stylePickerFormulario}" />
+            <Label Style="{StaticResource styleLabelFormulario}" Text="Observação(468)" />
             <Editor HeightRequest="160" Placeholder="Teste de registro de atividade." BackgroundColor="White" />
 
             <StackLayout Orientation="Horizontal">
