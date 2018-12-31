@@ -10,38 +10,42 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <StackLayout Padding="20,10,20,20">
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Estaqueamento - Data:" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Estaquiada:" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Estaqueamento - Colaborador:" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Seleção - Data:" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Seleção - Colaborador" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Densidade da Bandeja:" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde de Bandejas:" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Quantidade:" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Qualidade:" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Data Início:" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Procedimento" />
-            <Picker Style="{StaticResource stylePickerFormulario}" />
-            
-            <StackLayout Orientation="Horizontal">
-                <Button Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
-                <Button Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+        <ScrollView>
+            <StackLayout Padding="20,10,20,20">
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Estaqueamento - Data:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Estaquiada:" />
+                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <Button Style="{StaticResource styleButton}" BackgroundColor="#007aff" Text="&#xf002;" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Estaqueamento - Colaborador:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Seleção - Data:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Seleção - Colaborador" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Densidade da Bandeja:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde de Bandejas:" />                
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Button Style="{StaticResource styleButton}" BackgroundColor="#5d1497" Text="Calcular Quantidade" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Quantidade:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Qualidade:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Data Início:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Procedimento" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
+                    <Button Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>        
     </ContentPage.Content>
 </ContentPage>
