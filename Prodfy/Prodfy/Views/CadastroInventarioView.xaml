@@ -6,7 +6,7 @@
              BackgroundImage="splash_bg2.png">
 
     <NavigationPage.TitleView>
-        <control:CustomTitleView Titulo="Inventário" Icone="&#xf055;" />
+        <control:CustomTitleView Titulo="Inventário" Icone="&#xf029;" />
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
@@ -18,9 +18,26 @@
                 <Picker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Estaqueamento - Data:" />
                 <Picker Style="{StaticResource stylePickerFormulario}" />
-                <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Estaquiada:" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
-                <Button Style="{StaticResource styleButton}" BackgroundColor="#007aff" Text="&#xf002;" />
+
+                <StackLayout Orientation="Horizontal" 
+                             HorizontalOptions="Fill" 
+                             Margin="0,0,0,10">                    
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Estaquiada:" VerticalOptions="Center"/>
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="400" VerticalOptions="Center" />
+
+                    <Button Style="{StaticResource styleButton}" 
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            Text="&#xf002;"
+                            FontSize="16"
+                            BackgroundColor="#007aff"                             
+                            HorizontalOptions="EndAndExpand">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
+                        </Button.FontFamily>
+                    </Button>
+                </StackLayout>          
+               
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Estaqueamento - Colaborador:" />
                 <Picker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Seleção - Data:" />
