@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
+             x:Class="Prodfy.Views.CadastroHistoricoView"
+             BackgroundImage="splash_bg2.png">
+    
+    <NavigationPage.TitleView>
+        <control:CustomTitleView Titulo="Histórico" Icone="&#xf029;" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <!--<ScrollView>-->
+            <StackLayout Padding="20,10,20,20">
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Título:(154)" />
+                <Entry Style="{StaticResource styleEntryFormulario}" />                
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Texto:(1924)" />
+                <Editor Style="{StaticResource styleEditorFormulario}" />                
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
+                    <Button Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+                </StackLayout>
+            </StackLayout>
+        <!--</ScrollView>-->
+    </ContentPage.Content>
+</ContentPage>

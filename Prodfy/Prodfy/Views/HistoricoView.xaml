@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
+             x:Class="Prodfy.Views.HistoricoView"
+             BackgroundImage="splash_bg2.png">
+    
+    <NavigationPage.TitleView>
+        <control:CustomTitleView Titulo="Perdas" Icone="&#xf029;" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <control:BarraPesquisa />
+            <StackLayout Style="{StaticResource baseStyleStackLayout}">
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
