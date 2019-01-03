@@ -11,7 +11,11 @@
 
     <ContentPage.Content>
         <StackLayout Style="{StaticResource baseStyleStackLayout}">
-            
+            <Image Source="qrcode.jpg"/>
+
+            <Label Style="{StaticResource styleBaseLabel}" 
+                   Text="Clique no botão e posicione o código da etiqueta dentro do limite indicado!" 
+                   FontSize="Large" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
