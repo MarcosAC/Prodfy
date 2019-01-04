@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
+             x:Class="Prodfy.Views.ConexaoView"
+             BackgroundImage="splash_bg2.png">
+
+    <NavigationPage.TitleView>
+        <control:CustomTitleView Titulo="Conexão" />
+    </NavigationPage.TitleView>
+    
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource baseStyleStackLayout}">
+            <Label Text="&#xf0c2;"
+                   FontSize="100" 
+                   TextColor="#206805"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,20">
+
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
+                </Label.FontFamily>
+            </Label>
+            
+            <Label Style="{StaticResource styleBaseLabel}" Text="Link de Conexão Principal:" />
+            <Entry Style="{StaticResource styleEntryFormulario}" />
+
+            <Button Style="{StaticResource styleButton}" 
+                    Text="Salvar" />
+
+            <Label Style="{StaticResource styleBaseLabel}" 
+                   Text="ATENÇÃO: Só altere o valor atual quando orientado pela equipe técnica Prodfy."
+                   Margin="0,20,0,0" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
