@@ -11,7 +11,7 @@ namespace Prodfy
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new CadastroOcorrencia())
+            MainPage = new NavigationPage(new CadastroMedicaoView())
             {
                 BarBackgroundColor = Color.FromHex("#206805")
             };

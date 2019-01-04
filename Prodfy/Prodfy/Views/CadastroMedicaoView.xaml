@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
+             x:Class="Prodfy.Views.CadastroMedicaoView"
+             BackgroundImage="splash_bg2.png">
+    
+    <NavigationPage.TitleView>
+        <control:CustomTitleView Titulo="Medições" Icone="&#xf055;" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Style="{StaticResource baseStyleStackLayout}">
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Monitoramento:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Código Árvore:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Altura(m):" />
+                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="CAP(cm):" />
+                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Folha Diagonal:" />
+                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Folha Lateral:" />
+                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Folha na Coluna:" />
+                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Descrição(250):" />
+                <Editor Style="{StaticResource styleEditorFormulario}" />
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
+                    <Button Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
