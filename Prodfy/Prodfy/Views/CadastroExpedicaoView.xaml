@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
+             x:Class="Prodfy.Views.CadastroExpedicaoView"
+             BackgroundImage="splash_bg2.png">
+    
+    <NavigationPage.TitleView>
+        <control:CustomTitleView Titulo="Evolução" Icone="&#xf029;" />
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Style="{StaticResource baseStyleStackLayout}">
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Ponto de Controle:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Estágio:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Seleção - Data:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" 
+                             HorizontalOptions="Fill" 
+                             Margin="0,0,0,10">
+                        <Label Style="{StaticResource styleLabelFormulario}" Text="Estaquiamento:" VerticalOptions="Center"/>
+                        <Label Style="{StaticResource styleLabelFormulario}" Text="01/01/2018" VerticalOptions="Center" />
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal" 
+                             HorizontalOptions="Fill" 
+                             Margin="0,0,0,10">
+                        <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Disponível:" VerticalOptions="Center"/>
+                        <Label Style="{StaticResource styleLabelFormulario}" Text="400 / 400" VerticalOptions="Center" />
+                    </StackLayout>
+                </StackLayout>                
+                
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Expedida Com Tubete:" />
+                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Expedida Sem Tubete:" />
+                <Entry Style="{StaticResource styleEntryFormulario}" />
+                
+                <Button Style="{StaticResource styleButton}" BackgroundColor="#5d1497" Text="Calcular Quantidade" />
+
+                <StackLayout Orientation="Horizontal" 
+                             HorizontalOptions="Fill" 
+                             Margin="0,10">
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="Qtd Total Expedida:" VerticalOptions="Center"/>
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="400" VerticalOptions="Center" />
+                </StackLayout>
+
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Colaborador:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Data Início:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Data Fim:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Destinação:" />
+                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Observação:(1000)" />
+                <Editor Style="{StaticResource styleEditorFormulario}" />
+
+                <StackLayout Orientation="Horizontal">
+                    <Button Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
+                    <Button Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
