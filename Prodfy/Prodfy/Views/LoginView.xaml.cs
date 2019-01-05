@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +10,12 @@ namespace Prodfy.Views
         public LoginView()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        private void OnClick_Entrar(object sender, EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new SincronismoView());
         }
     }
 }

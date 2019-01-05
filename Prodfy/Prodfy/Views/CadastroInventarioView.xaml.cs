@@ -9,6 +9,7 @@ namespace Prodfy.Views
 		public CadastroInventarioView ()
 		{
 			InitializeComponent ();
-		}
+            NavigationPage.SetHasBackButton(this, false);
+        }
 	}
 }

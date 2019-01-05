@@ -13,38 +13,38 @@
                    Margin="0,15,0,15"/>
 
                 <Button Style="{StaticResource styleButton}" 
-                        Text="Identificação" />
+                        Text="Identificação" x:Name="btnIdentificação" Clicked="OnClicked_Identificação" />
 
                 <Button Style="{StaticResource styleButton}" 
-                        Text="Atividade Realizada" />
+                        Text="Atividade Realizada" x:Name="btnAtividade" Clicked="OnClicked_Atividade" />
 
                 <Button Style="{StaticResource styleButton}" 
-                        Text="Invetário" />
+                        Text="Inventário" x:Name="btnInventario" Clicked="OnClicked_Inventario" />
 
                 <Button Style="{StaticResource styleButton}" 
-                        Text="Perdas" />
+                        Text="Perdas" x:Name="btnPerdas" Clicked="OnClicked_Perdas" />
 
                 <Button Style="{StaticResource styleButton}" 
-                        Text="Histórico" />
+                        Text="Histórico" x:Name="btnHistorico" Clicked="OnClicked_btnHistorico" />
 
                 <Button Style="{StaticResource styleButton}" 
-                        Text="Evolução de Lote" />
+                        Text="Evolução de Lote" x:Name="btnEvolucao" Clicked="OnClicked_Evolucao" />
 
                 <Button Style="{StaticResource styleButton}" 
-                        Text="Expedição" />
+                        Text="Expedição" x:Name="btnExpedicao" Clicked="OnClicked_Expedicao" />
 
                 <Label Style="{StaticResource styleLabelTitulo}" 
                        Text="Monitoramento:" 
                        Margin="0,15,0,15"/>
 
                 <Button Style="{StaticResource styleButton}" 
-                        Text="Localização" />
+                        Text="Localização" x:Name="btnLocalizacao" Clicked="OnClicked_btnLocalizacao" />
 
                 <Button Style="{StaticResource styleButton}" 
-                        Text="Ocorrência" />
+                        Text="Ocorrência" x:Name="btnOcorrencia" Clicked="OnClicked_Ocorrencia" />
 
                 <Button Style="{StaticResource styleButton}" 
-                        Text="Medição" />
+                        Text="Medição" x:Name="btnMedicao" Clicked="OnClicked_btnMedicao" />
             </StackLayout>
         </ScrollView>        
     </ContentPage.Content>

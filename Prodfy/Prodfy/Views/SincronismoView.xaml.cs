@@ -9,6 +9,12 @@ namespace Prodfy.Views
 		public SincronismoView ()
 		{
 			InitializeComponent ();
-		}
-	}
+            NavigationPage.SetHasNavigationBar(this, false);
+        }
+
+        private void OnClicked_Sincronizar(object sender, System.EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new AjustesView());
+        }
+    }
 }

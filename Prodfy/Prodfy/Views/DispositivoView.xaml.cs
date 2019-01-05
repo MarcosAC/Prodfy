@@ -9,6 +9,12 @@ namespace Prodfy.Views
 		public DispositivoView ()
 		{
 			InitializeComponent ();
+            NavigationPage.SetHasBackButton(this, false);
         }
-	}
+
+        private void OnClicked_LerCodigoQR(object sender, System.EventArgs e)
+        {
+            App.Current.MainPage.Navigation.PushAsync(new AjustesView());
+        }
+    }
 }

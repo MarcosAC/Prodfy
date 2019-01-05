@@ -29,7 +29,7 @@
                    BackgroundColor="White" 
                    Margin="0,0,0,15" />
 
-            <Button Style="{StaticResource styleButton}" 
+            <Button x:Name="btnEntrar" Clicked="OnClick_Entrar" Style="{StaticResource styleButton}" 
                     Text="Entrar" />
         </StackLayout>
     </ContentPage.Content>

@@ -9,6 +9,7 @@ namespace Prodfy.Views
 		public PerdasView ()
 		{
 			InitializeComponent ();
-		}
+            NavigationPage.SetHasBackButton(this, false);
+        }
 	}
 }

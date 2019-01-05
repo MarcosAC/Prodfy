@@ -6,7 +6,7 @@
              BackgroundImage="splash_bg2.png">
 
     <NavigationPage.TitleView>
-        <control:CustomTitleView Titulo="Atividades" />        
+        <control:CustomTitleView Titulo="Dispositivos" />        
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
@@ -34,7 +34,7 @@
                 <Label Style="{StaticResource styleLabelTexto}" Text="Ther Sistemas:" HorizontalTextAlignment="Center" />
             </StackLayout>
             
-            <Button Text="Ler QRCode" Style="{StaticResource styleButton}" />
+            <Button Text="Ler QRCode" Style="{StaticResource styleButton}" x:Name="btmCodigoQr" Clicked="OnClicked_LerCodigoQR" />
 
             <Label Style="{StaticResource styleBaseLabel}" Text="Obs: Dispositovo deve estar cadastrado no Portal Prodfy." />
         </StackLayout>

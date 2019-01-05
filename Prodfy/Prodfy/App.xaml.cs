@@ -11,7 +11,7 @@ namespace Prodfy
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new ExportarDadosView())
+            MainPage = new NavigationPage(new LoginView())
             {
                 BarBackgroundColor = Color.FromHex("#206805")
             };

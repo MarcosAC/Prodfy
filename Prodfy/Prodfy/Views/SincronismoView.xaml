@@ -75,7 +75,7 @@
                     <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="7" Text="0" />
                 </Grid>
                 
-                <Button Style="{StaticResource styleButton}"
+                <Button x:Name="btnSincronizar" Clicked="OnClicked_Sincronizar" Style="{StaticResource styleButton}"
                         Text="Sincronizar"
                         Margin="0,15,0,15"/>
 

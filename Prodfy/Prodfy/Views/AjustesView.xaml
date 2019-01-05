@@ -17,17 +17,17 @@
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
                 </Label.FontFamily>
             </Label>
-            <Button Style="{StaticResource styleButton}" 
+            <Button x:Name="btnDipositivo" Clicked="OnClicked_Dispositivo" Style="{StaticResource styleButton}" 
                     Text="Dispositivos" />
 
             <Button Style="{StaticResource styleButton}" 
-                    Text="Sobre" />
+                    Text="Sobre" x:Name="btnSobre" Clicked="OnClicked_Sobre" />
 
             <Button Style="{StaticResource styleButton}" 
-                    Text="Conexão" />
+                    Text="Conexão" x:Name="btnConexao" Clicked="OnClicked_Conexao" />
 
             <Button Style="{StaticResource styleButton}" 
-                    Text="Exportar Dados" />
+                    Text="Exportar Dados" x:Name="btnExportar" Clicked="OnClicked_Exportar" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -9,6 +9,7 @@ namespace Prodfy.Views
 		public IdentificacaoView ()
 		{
 			InitializeComponent ();
-		}
+            NavigationPage.SetHasBackButton(this, false);
+        }
 	}
 }

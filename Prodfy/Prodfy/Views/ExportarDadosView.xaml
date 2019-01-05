@@ -6,7 +6,7 @@
              BackgroundImage="splash_bg2.png">
 
     <NavigationPage.TitleView>
-        <control:CustomTitleView Titulo="Conexão" />
+        <control:CustomTitleView Titulo="Exportar Dados" />
     </NavigationPage.TitleView>
     
     <ContentPage.Content>

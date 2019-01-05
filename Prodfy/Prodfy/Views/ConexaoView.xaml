@@ -26,7 +26,7 @@
             <Entry Style="{StaticResource styleEntryFormulario}" />
 
             <Button Style="{StaticResource styleButton}" 
-                    Text="Salvar" />
+                    Text="Salvar" x:Name="btnConexao" Clicked="OnClicked_btnConexao" />
 
             <Label Style="{StaticResource styleBaseLabel}" 
                    Text="ATENÇÃO: Só altere o valor atual quando orientado pela equipe técnica Prodfy."
