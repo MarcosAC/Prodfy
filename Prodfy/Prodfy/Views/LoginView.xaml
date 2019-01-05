@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.LoginView"
              BackgroundImage="splash_bg2.png">
     <ContentPage.Content>          
@@ -23,19 +22,7 @@
 
             <Label Style="{StaticResource styleLabelTitulo}"
                    Text="SENHA:" />
-
-            <!--<Frame CornerRadius="5"
-                   BorderColor="Gray"
-                   BackgroundColor="Transparent"
-                   Padding="2"
-                   HeightRequest="50"
-                   Margin="0,0,0,15">
-                
-                <Entry Placeholder="senha de acesso"
-                       HorizontalTextAlignment="Center"
-                       BackgroundColor="White" 
-                       PlaceholderColor="LightGray" />
-            </Frame>-->
+            
             <Entry Placeholder="senha de acesso"
                    PlaceholderColor="LightGray"
                    HorizontalTextAlignment="Center"
