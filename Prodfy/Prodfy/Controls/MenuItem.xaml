@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:effect="clr-namespace:Prodfy.Effects"
              x:Class="Prodfy.Controls.MenuItem">
     <ContentView.Content>
         <StackLayout Orientation="Horizontal" BackgroundColor="LightGray" Padding="5">
+            
             <StackLayout HorizontalOptions="FillAndExpand">
                 <Label Text="&#xf015;" TextColor="Gray" HorizontalTextAlignment="Center">
                     <Label.FontFamily>
@@ -12,16 +14,26 @@
                 </Label>
 
                 <Label Text="Início" TextColor="Gray" HorizontalTextAlignment="Center" />
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapped_Inicio" />
+                </StackLayout.GestureRecognizers>
             </StackLayout>
+            
             <StackLayout HorizontalOptions="FillAndExpand">
                 <Label Text="&#xf06c;" TextColor="Gray" HorizontalTextAlignment="Center">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
                     </Label.FontFamily>
                 </Label>
-
+                
                 <Label Text="Funções" TextColor="Gray" HorizontalTextAlignment="Center" />
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapped_Funcoes" />
+                </StackLayout.GestureRecognizers>
             </StackLayout>
+            
             <StackLayout HorizontalOptions="FillAndExpand">
                 <Label Text="&#xf1eb;" TextColor="Gray" HorizontalTextAlignment="Center">
                     <Label.FontFamily>
@@ -30,6 +42,10 @@
                 </Label>
 
                 <Label Text="Sincronia" TextColor="Gray" HorizontalTextAlignment="Center" />
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapped_Sincronia" />
+                </StackLayout.GestureRecognizers>
             </StackLayout>
 
             <StackLayout HorizontalOptions="FillAndExpand">
@@ -40,6 +56,10 @@
                 </Label>
 
                 <Label Text="Ajustes" TextColor="Gray" HorizontalTextAlignment="Center" />
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapped_Ajustes" />
+                </StackLayout.GestureRecognizers>
             </StackLayout>
         </StackLayout>
     </ContentView.Content>
