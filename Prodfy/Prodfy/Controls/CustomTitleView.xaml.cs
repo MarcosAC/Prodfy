@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Prodfy.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Controls
@@ -9,6 +10,8 @@ namespace Prodfy.Controls
 		public CustomTitleView ()
 		{
 			InitializeComponent ();
+
+            BindingContext = new CustomTitleViewModel();
 		}
 
         public static readonly BindableProperty TituloProperty =

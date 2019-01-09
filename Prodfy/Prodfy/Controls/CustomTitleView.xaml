@@ -14,9 +14,9 @@
                 <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" />
             </Label.FontFamily>
 
-            <!--<Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding BackListNotesCommand}" />
-            </Label.GestureRecognizers>-->
+            <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+            </Label.GestureRecognizers>
         </Label>
 
         <StackLayout HorizontalOptions="FillAndExpand"
