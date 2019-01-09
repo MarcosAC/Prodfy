@@ -69,6 +69,8 @@
             <Style TargetType="Button" x:Key="styleBaseButtonFormulario">
                 <Setter Property="HeightRequest" Value="60" />
                 <Setter Property="WidthRequest" Value="140" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             </Style>
 
