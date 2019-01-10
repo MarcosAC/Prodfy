@@ -6,7 +6,7 @@
              BackgroundImage="splash_bg2.png">
     
     <NavigationPage.TitleView>
-        <control:CustomTitleView Titulo="Expedição" Icone="&#xf029;" />
+        <control:CustomTitleView Titulo="Expedição" Icone1="&#xf029;" />
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
