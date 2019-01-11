@@ -6,7 +6,7 @@
              BackgroundImage="splash_bg4.png">
 
     <NavigationPage.TitleView>
-        <control:CustomTitleView Titulo="Identificação" Icone1="&#xf029;" VisibleIcone2="true" Icone2="&#xf029;" />
+        <control:CustomTitleView Titulo="Identificação" Icone2="&#xf029;" />
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
