@@ -2,58 +2,58 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prodfy.Controls.CustomTitleView">
-  <ContentView.Content>
-    <StackLayout Orientation="Horizontal">
-        
-        <!--Botão Voltar-->
-        <Label Text="&#xf104;"
+    <ContentView.Content>
+        <StackLayout Orientation="Horizontal">
+
+            <!--Botão Voltar-->
+            <Label Text="&#xf104;"
                FontSize="40" 
                TextColor="White">
 
-            <Label.FontFamily>
-                <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" />
-            </Label.FontFamily>
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" />
+                </Label.FontFamily>
 
-            <Label.GestureRecognizers>
+                <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
-            </Label.GestureRecognizers>
-        </Label>
+                </Label.GestureRecognizers>
+            </Label>
 
-        <StackLayout HorizontalOptions="FillAndExpand"
+            <StackLayout HorizontalOptions="FillAndExpand"
                      VerticalOptions="Center" 
                      Margin="0,0,20,0">
 
-            <Label x:Name="titulo" 
+                <Label x:Name="titulo" 
                    Text="" 
                    FontSize="20" 
                    TextColor="White" 
                    HorizontalOptions="Center" />
-        </StackLayout>
+            </StackLayout>
 
-        <Label x:Name="icone1"
-               Text=""
-               FontSize="30" 
-               TextColor="White"
-               HorizontalOptions="End"
-               VerticalOptions="Center"
-               Margin="0,0,20,0">
+            <Label x:Name="icone1"                   
+                   Text=""
+                   FontSize="30" 
+                   TextColor="White"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   Margin="0,0,20,0">
 
-            <Label.FontFamily>
-                <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" />
-            </Label.FontFamily>
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" />
+                </Label.FontFamily>
 
-            <!--<Label.GestureRecognizers>
+                <!--<Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding BackListNotesCommand}" />
             </Label.GestureRecognizers>-->
-        </Label>
+            </Label>
 
             <Label x:Name="icone2"
-               Text=""
-               FontSize="30" 
-               TextColor="White"
-               HorizontalOptions="End"
-               VerticalOptions="Center"
-               Margin="0,0,20,0">
+                   Text=""
+                   FontSize="30" 
+                   TextColor="White"
+                   HorizontalOptions="End"
+                   VerticalOptions="Center"
+                   Margin="0,0,20,0">
 
                 <Label.FontFamily>
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" />
@@ -64,5 +64,5 @@
             </Label.GestureRecognizers>-->
             </Label>
         </StackLayout>
-  </ContentView.Content>
+    </ContentView.Content>
 </ContentView>

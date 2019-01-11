@@ -5,14 +5,14 @@ using Xamarin.Forms.Xaml;
 namespace Prodfy.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CustomTitleView : ContentView
-	{
-		public CustomTitleView ()
-		{
-			InitializeComponent ();
+    public partial class CustomTitleView : ContentView
+    {
+        public CustomTitleView()
+        {
+            InitializeComponent();
 
             BindingContext = new CustomTitleViewModel();
-		}
+        }
 
         public static readonly BindableProperty TituloProperty =
             BindableProperty.Create(

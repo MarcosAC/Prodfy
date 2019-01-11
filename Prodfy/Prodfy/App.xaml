@@ -81,6 +81,25 @@
             <Style TargetType="Button" x:Key="styleButtonSalvar" BasedOn="{StaticResource styleBaseButtonFormulario}">
                 <Setter Property="BackgroundColor" Value="#007aff" />
             </Style>
+
+            <!-- Styles TitleView -->
+            <OnPlatform x:Key="FontAwesome" x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" />
+            <Style TargetType="Label" x:Key="FonteIcone">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="styleBotaoVoltar" BasedOn="{StaticResource FonteIcone}">
+                <Setter Property="FontSize" Value="40" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="styleLabelIcones" BasedOn="{StaticResource FonteIcone}">
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0,0,20,0" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
