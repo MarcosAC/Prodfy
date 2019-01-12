@@ -19,15 +19,15 @@
                 </Label.GestureRecognizers>
             </Label>
 
-            <StackLayout HorizontalOptions="FillAndExpand"
-                     VerticalOptions="Center" 
-                     Margin="0,0,20,0">
+            <StackLayout HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="Center" 
+                         Margin="20,0,20,0">
 
                 <Label x:Name="titulo" 
-                   Text="" 
-                   FontSize="20" 
-                   TextColor="White" 
-                   HorizontalOptions="Center" />
+                       Text="" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="Center" />
             </StackLayout>
 
             <Label x:Name="icone1"                   

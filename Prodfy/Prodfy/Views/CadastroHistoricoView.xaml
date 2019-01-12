@@ -6,7 +6,7 @@
              BackgroundImage="splash_bg2.png">
     
     <NavigationPage.TitleView>
-        <control:CustomTitleView Titulo="Histórico" Icone1="&#xf029;" />
+        <control:CustomTitleView Titulo="Histórico" Icone2="&#xf029;" />
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
