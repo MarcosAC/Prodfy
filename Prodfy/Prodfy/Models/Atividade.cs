@@ -1,7 +1,10 @@
-﻿namespace Prodfy.Models
+﻿using SQLite;
+
+namespace Prodfy.Models
 {
     public class Atividade
     {
+        [PrimaryKey, AutoIncrement]
         public int idAtividade { get; set; }
         public string disp_Id { get; set; }
         public string colaborador_id { get; set; }
