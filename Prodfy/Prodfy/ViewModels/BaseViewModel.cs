@@ -6,6 +6,18 @@ namespace Prodfy.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        string _title;
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
+
+        public BaseViewModel(string title)
+        {
+            Title = title;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -18,18 +30,6 @@ namespace Prodfy.ViewModels
 
             storege = value;
             OnPropertyChanged(propertyName);
-        }
-
-        string _title;
-        public string Title
-        {
-            get { return _title; }
-            set { _title = value; OnPropertyChanged(); }
-        }
-
-        public BaseViewModel(string title)
-        {
-            Title = title;
-        }
+        }        
     }
 }
