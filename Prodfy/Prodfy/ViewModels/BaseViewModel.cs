@@ -13,11 +13,6 @@ namespace Prodfy.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public BaseViewModel(string title)
-        {
-            Title = title;
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

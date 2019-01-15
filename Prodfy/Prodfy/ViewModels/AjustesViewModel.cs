@@ -1,6 +1,7 @@
 ﻿namespace Prodfy.ViewModels
 {
-    public class AjustesViewModel
+    public class AjustesViewModel : BaseViewModel
     {
+        
     }
 }
