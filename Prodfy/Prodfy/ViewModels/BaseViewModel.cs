@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Prodfy.Services;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -6,13 +7,15 @@ namespace Prodfy.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        string _title;
+        string title = string.Empty;
+
         public string Title
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            get => title;
+            set => SetProperty(ref title, value);
         }
 
+        protected INavigationService NavigationService { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
