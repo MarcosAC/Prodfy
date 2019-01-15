@@ -8,7 +8,7 @@ namespace Prodfy.ViewModels
     {
         private readonly INavigationService _navigationService;
 
-        public CustomTitleViewModel() : base("")
+        public CustomTitleViewModel()
         {
             _navigationService = new NavigationService();
         }
