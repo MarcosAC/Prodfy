@@ -13,11 +13,11 @@ namespace Prodfy.ViewModels
             //_navigationService = new NavigationService();
         }
 
-        private Command _PaginaDispositivo;
-        public Command PaginaDispositivo => 
-            _PaginaDispositivo ?? (_PaginaDispositivo = new Command(async () => await ExecutePaginaDispositivo()));
+        private Command _irPaginaDispositivo;
+        public Command IrPaginaDispositivo => 
+            _irPaginaDispositivo ?? (_irPaginaDispositivo = new Command(async () => await ExecuteIrPaginaDispositivoCommand()));
 
-        private async Task ExecutePaginaDispositivo() => await NavigationService.PushAsync(new DispositivoView());
+        private async Task ExecuteIrPaginaDispositivoCommand() => await NavigationService.PushAsync(new DispositivoView());
 
         //private Command _PaginaSobre;
         //public Command PaginaSobrre =>
@@ -25,16 +25,16 @@ namespace Prodfy.ViewModels
 
         //private async Task ExecutePaginaSobre() => await _navigationService.PushAsync(new SobreView());
 
-        private Command _PaginaConexao;
-        public Command PaginaConexao =>
-            PaginaConexao ?? (_PaginaConexao = new Command(async () => await ExecutePaginaConexao()));
+        private Command _irPaginaConexao;
+        public Command IrPaginaConexao =>
+            _irPaginaConexao ?? (_irPaginaConexao = new Command(async () => await ExecuteIrPaginaConexaoCommand()));
 
-        private async Task ExecutePaginaConexao() => await NavigationService.PushAsync(new ConexaoView());
+        private async Task ExecuteIrPaginaConexaoCommand() => await NavigationService.PushAsync(new ConexaoView());
 
-        private Command _PaginaExportarDados;
-        public Command PaginaExportarDados =>
-            PaginaExportarDados ?? (_PaginaExportarDados = new Command(async () => await ExecutePaginaExportarDados()));
+        private Command _irPaginaExportarDados;
+        public Command IrPaginaExportarDados =>
+            _irPaginaExportarDados ?? (_irPaginaExportarDados = new Command(async () => await ExecuteIrPaginaExportarDadosCommand()));
 
-        private async Task ExecutePaginaExportarDados() => await NavigationService.PushAsync(new ExportarDadosView());
+        private async Task ExecuteIrPaginaExportarDadosCommand() => await NavigationService.PushAsync(new ExportarDadosView());
     }
 }

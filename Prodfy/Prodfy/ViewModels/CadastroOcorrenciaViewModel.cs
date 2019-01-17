@@ -4,53 +4,46 @@ using Xamarin.Forms;
 
 namespace Prodfy.ViewModels
 {
-    public class CadastroAtividadeViewModel : BaseViewModel
+    class CadastroOcorrenciaViewModel : BaseViewModel
     {
-        public CadastroAtividadeViewModel()
+        public CadastroOcorrenciaViewModel()
         {
-            Title = "Atividades";
+            Title = "Ocorrências";
         }
 
-        private string _dispId;
-        public string DispId
+        private string _monitId;
+        public string MonitId
         {
-            get => _dispId;
-            set => SetProperty(ref _dispId, value);
+            get => _monitId;
+            set => SetProperty(ref _monitId, value);
         }
 
-        private string _colaboradorId;
-        public string ColaboradorId
+        private string _data;
+        public string DataId
         {
-            get => _colaboradorId;
-            set => SetProperty(ref _colaboradorId, value);
+            get => _data;
+            set => SetProperty(ref _data, value);
         }
 
-        private string _listaAtvId;
-        public string ListaAtvId
+        private string _rep;
+        public string Rep
         {
-            get => _listaAtvId;
-            set => SetProperty(ref _listaAtvId, value);
+            get => _rep;
+            set => SetProperty(ref _rep, value);
         }
 
-        private string _dataInicio;
-        public string DataInicio
+        private string _trat;
+        public string Trat
         {
-            get => _dataInicio;
-            set => SetProperty(ref _dataInicio, value);
+            get => _trat;
+            set => SetProperty(ref _trat, value);
         }
 
-        private string _dataFim;
-        public string DataFim
+        private string _descr;
+        public string Descr
         {
-            get => _dataFim;
-            set => SetProperty(ref _dataFim, value);
-        }
-
-        private string _obs;
-        public string Obs
-        {
-            get => _obs;
-            set => SetProperty(ref _obs, value);
+            get => _descr;
+            set => SetProperty(ref _descr, value);
         }
 
         private string _lastUpdate;

@@ -4,11 +4,11 @@ using Xamarin.Forms;
 
 namespace Prodfy.ViewModels
 {
-    public class CadastroAtividadeViewModel : BaseViewModel
+    class CadastroHistoricoViewModel : BaseViewModel
     {
-        public CadastroAtividadeViewModel()
+        public CadastroHistoricoViewModel()
         {
-            Title = "Atividades";
+            Title = "Histórico";
         }
 
         private string _dispId;
@@ -18,41 +18,34 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _dispId, value);
         }
 
-        private string _colaboradorId;
-        public string ColaboradorId
+        private string _loteId;
+        public string LoteId
         {
-            get => _colaboradorId;
-            set => SetProperty(ref _colaboradorId, value);
+            get => _loteId;
+            set => SetProperty(ref _loteId, value);
         }
 
-        private string _listaAtvId;
-        public string ListaAtvId
+        private string _data;
+        public string Data
         {
-            get => _listaAtvId;
-            set => SetProperty(ref _listaAtvId, value);
+            get => _data;
+            set => SetProperty(ref _data, value);
         }
 
-        private string _dataInicio;
-        public string DataInicio
+        private string _titulo;
+        public string Titulo
         {
-            get => _dataInicio;
-            set => SetProperty(ref _dataInicio, value);
+            get => _titulo;
+            set => SetProperty(ref _titulo, value);
         }
 
-        private string _dataFim;
-        public string DataFim
+        private string _texto;
+        public string Texto
         {
-            get => _dataFim;
-            set => SetProperty(ref _dataFim, value);
+            get => _texto;
+            set => SetProperty(ref _texto, value);
         }
-
-        private string _obs;
-        public string Obs
-        {
-            get => _obs;
-            set => SetProperty(ref _obs, value);
-        }
-
+                
         private string _lastUpdate;
         public string LastUpdate
         {

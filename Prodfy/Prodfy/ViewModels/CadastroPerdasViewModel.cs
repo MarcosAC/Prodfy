@@ -4,11 +4,11 @@ using Xamarin.Forms;
 
 namespace Prodfy.ViewModels
 {
-    public class CadastroAtividadeViewModel : BaseViewModel
+    public class CadastroPerdasViewModel : BaseViewModel
     {
-        public CadastroAtividadeViewModel()
+        public CadastroPerdasViewModel()
         {
-            Title = "Atividades";
+            Title = "Perdas";
         }
 
         private string _dispId;
@@ -18,39 +18,60 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _dispId, value);
         }
 
-        private string _colaboradorId;
-        public string ColaboradorId
+        private string _loteId;
+        public string LoteId
         {
-            get => _colaboradorId;
-            set => SetProperty(ref _colaboradorId, value);
+            get => _loteId;
+            set => SetProperty(ref _loteId, value);
         }
 
-        private string _listaAtvId;
-        public string ListaAtvId
+        private string _mudaId;
+        public string MudaId
         {
-            get => _listaAtvId;
-            set => SetProperty(ref _listaAtvId, value);
+            get => _mudaId;
+            set => SetProperty(ref _mudaId, value);
         }
 
-        private string _dataInicio;
-        public string DataInicio
+        private string _produtoId;
+        public string ProdutoId
         {
-            get => _dataInicio;
-            set => SetProperty(ref _dataInicio, value);
+            get => _produtoId;
+            set => SetProperty(ref _produtoId, value);
         }
 
-        private string _dataFim;
-        public string DataFim
+        private string _pontoControleId;
+        public string PontoControleId
         {
-            get => _dataFim;
-            set => SetProperty(ref _dataFim, value);
+            get => _pontoControleId;
+            set => SetProperty(ref _pontoControleId, value);
         }
 
-        private string _obs;
-        public string Obs
+        private string _estagioId;
+        public string EstagioId
         {
-            get => _obs;
-            set => SetProperty(ref _obs, value);
+            get => _estagioId;
+            set => SetProperty(ref _estagioId, value);
+        }
+
+        private string _motivoId;
+        public string MotivoId
+        {
+            get => _motivoId;
+            set => SetProperty(ref _motivoId, value);
+        }
+
+        private string _data;
+        public string Data
+        {
+            get => _data;
+            set => SetProperty(ref _data, value);
+        }
+
+        private string _qtde;
+        public string Qtde
+        {
+            get => _qtde;
+            set => SetProperty(ref _qtde, value);
         }
 
         private string _lastUpdate;
