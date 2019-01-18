@@ -79,15 +79,8 @@ namespace Prodfy.ViewModels
         private string _appKey;
         public string AppKey
         {
-            get => _sincUrl;
-            set => SetProperty(ref _sincUrl, value);
-        }
-
-        private string _lang;
-        public string Lang
-        {
-            get => _lang;
-            set => SetProperty(ref _lang, value);
+            get => _appKey;
+            set => SetProperty(ref _appKey, value);
         }
 
         private string _indIdent;

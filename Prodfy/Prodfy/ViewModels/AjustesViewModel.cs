@@ -6,13 +6,6 @@ namespace Prodfy.ViewModels
 {
     public class AjustesViewModel : BaseViewModel
     {
-        //private readonly INavigationService _navigationService;
-
-        public AjustesViewModel()
-        {
-            //_navigationService = new NavigationService();
-        }
-
         private Command _irPaginaDispositivo;
         public Command IrPaginaDispositivo => 
             _irPaginaDispositivo ?? (_irPaginaDispositivo = new Command(async () => await ExecuteIrPaginaDispositivoCommand()));
