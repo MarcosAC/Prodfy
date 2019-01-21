@@ -1,4 +1,5 @@
 ﻿using Prodfy.Services;
+using Prodfy.Views;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -13,9 +14,9 @@ namespace Prodfy.ViewModels
             _navigationService = new NavigationService();
         }
 
-        private Command _navegacaoCommand;
-        public Command NavegacaoCommand => _navegacaoCommand ?? (_navegacaoCommand = new Command(async () => await ExecuteNavegacaoCommand()));
+        private Command _irLeitorQR;
+        public Command IrLeitorQRCommand => _irLeitorQR ?? (_irLeitorQR = new Command(async () => await ExecuteIrLeitorQRCommand()));
 
-        private async Task ExecuteNavegacaoCommand() => await _navigationService.PopAsync();
+        private async Task ExecuteIrLeitorQRCommand() => await _navigationService.PushAsync(new LeitorQRView());
     }
 }
