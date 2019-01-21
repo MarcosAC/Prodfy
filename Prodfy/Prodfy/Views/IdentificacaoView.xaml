@@ -11,21 +11,11 @@
 
     <ContentPage.Content>
         <StackLayout Style="{StaticResource baseStyleStackLayout}">
-            <Image Source="qrcode.jpg">
-                <Image.GestureRecognizers  >
-                    <TapGestureRecognizer Tapped="OnTapped_LeitorQR" />
-                </Image.GestureRecognizers>
-            </Image>
+            <Image Source="qrcode.jpg" />
 
             <Label Style="{StaticResource styleBaseLabel}" 
                    Text="Clique no botão e posicione o código da etiqueta dentro do limite indicado!" 
-                   FontSize="Large" />
-
-            <StackLayout>
-                <Label x:Name="LblCodigoQR" 
-                       Text="{Binding DadosCodigo}" 
-                       HorizontalOptions="CenterAndExpand" />
-            </StackLayout>
+                   FontSize="Large" />            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

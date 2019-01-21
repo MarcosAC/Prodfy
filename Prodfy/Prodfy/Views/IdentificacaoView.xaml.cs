@@ -1,5 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Views
@@ -9,18 +8,9 @@ namespace Prodfy.Views
 	{
 		public IdentificacaoView ()
 		{
-			InitializeComponent ();                   
-        }
+			InitializeComponent ();
 
-        private async void OnTapped_LeitorQR(object sender, EventArgs e)
-        {
-            var scanner = new ZXing.Mobile.MobileBarcodeScanner();
-            var result = await scanner.Scan();
-
-            if (result != null)               
-            {               
-                await DisplayAlert("Valor", $"Leitura do codigo: {result.Text}", "OK");               
-            }
+            NavigationPage.SetHasBackButton(this, false);
         }
     }
 }
