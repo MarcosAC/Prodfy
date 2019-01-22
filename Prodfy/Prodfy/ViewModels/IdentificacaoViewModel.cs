@@ -1,5 +1,4 @@
 ﻿using Prodfy.Services;
-using Prodfy.Views;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -14,9 +13,23 @@ namespace Prodfy.ViewModels
             _navigationService = new NavigationService();
         }
 
-        private Command _irLeitorQR;
-        public Command IrLeitorQRCommand => _irLeitorQR ?? (_irLeitorQR = new Command(async () => await ExecuteIrLeitorQRCommand()));
+        private Command _navegacaoCommand;
+        public Command NavegacaoCommand => _navegacaoCommand ?? (_navegacaoCommand = new Command(async () => await ExecuteNavegacaoCommand()));
 
-        private async Task ExecuteIrLeitorQRCommand() => await _navigationService.PushAsync(new LeitorQRView());
+        private async Task ExecuteNavegacaoCommand() => await _navigationService.PopAsync();
+
+        private Command _leitorQRCommand;
+        public Command LeitorQRCommand => _leitorQRCommand ?? (_leitorQRCommand = new Command(async () => await ExecuteLeitorQRCommand()));
+
+        private async Task ExecuteLeitorQRCommand()
+        {
+            var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+            var result = await scanner.Scan();
+
+            if (result != null)
+            {
+                await App.Current.MainPage.DisplayAlert("Valor", $"Leitura do codigo: {result.Text}", "OK");
+            }
+        }
     }
 }

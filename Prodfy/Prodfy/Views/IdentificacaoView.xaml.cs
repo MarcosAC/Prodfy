@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Prodfy.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Views
@@ -11,6 +12,8 @@ namespace Prodfy.Views
 			InitializeComponent ();
 
             NavigationPage.SetHasBackButton(this, false);
+
+            BindingContext = new IdentificacaoViewModel();
         }
     }
 }
