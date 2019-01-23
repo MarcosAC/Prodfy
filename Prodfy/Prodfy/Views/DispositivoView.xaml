@@ -5,7 +5,7 @@
              BackgroundImage="splash_bg4.png">
 
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal">
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
             <!--Botão Voltar-->
             <Label Style="{StaticResource styleBotaoVoltar}" Text="&#xf104;" >
 
@@ -14,7 +14,11 @@
                 </Label.GestureRecognizers>
             </Label>
 
-            <Label Style="{StaticResource styleTituloTitleView}" Text="Dispositivos" />            
+            <Label Text="{Binding Title}"
+                   FontSize="20" 
+                   TextColor="White"  
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center" Margin="95,0,0,0" />            
         </StackLayout>
     </NavigationPage.TitleView>
     

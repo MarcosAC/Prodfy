@@ -1,13 +1,18 @@
-﻿using System.Threading.Tasks;
+﻿using Prodfy.Services;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Prodfy.ViewModels
 {
     public class DispositivoViewModel : BaseViewModel
     {
+        private readonly INavigationService _navigationService;
+
         public DispositivoViewModel()
         {
             Title = "Dispositivo";
+
+            _navigationService = new NavigationService();
         }
 
         private string _dispositivoId;
@@ -30,6 +35,11 @@ namespace Prodfy.ViewModels
             get => _empresa;
             set => SetProperty(ref _empresa, value);
         }
+
+        private Command _navegacaoCommand;
+        public Command NavegacaoCommand => _navegacaoCommand ?? (_navegacaoCommand = new Command(async () => await ExecuteNavegacaoCommand()));
+
+        private async Task ExecuteNavegacaoCommand() => await _navigationService.PopAsync();
 
         private Command _leitorQRCommand;
         public Command LeitorQRCommand => _leitorQRCommand ?? (_leitorQRCommand = new Command(async () => await ExecuteLeitorQRCommand()));
