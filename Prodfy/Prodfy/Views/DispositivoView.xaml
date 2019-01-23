@@ -1,12 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.DispositivoView"
              BackgroundImage="splash_bg4.png">
 
     <NavigationPage.TitleView>
-        <control:CustomTitleView Titulo="Dispositivos" />        
+        <StackLayout Orientation="Horizontal">
+            <!--Botão Voltar-->
+            <Label Style="{StaticResource styleBotaoVoltar}" Text="&#xf104;" >
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label Style="{StaticResource styleTituloTitleView}" Text="Dispositivos" />            
+        </StackLayout>
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
@@ -25,16 +34,16 @@
                 </Label>
 
                 <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Dispositivo:" TextColor="Black" HorizontalTextAlignment="Center" />
-                <Label Style="{StaticResource styleLabelTexto}" Text="5001:" HorizontalTextAlignment="Center"/>
+                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Dispositivo}" HorizontalTextAlignment="Center"/>
                 
                 <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Usuário:" TextColor="Black" HorizontalTextAlignment="Center" />
-                <Label Style="{StaticResource styleLabelTexto}" Text="Rodrigo Gomide" HorizontalTextAlignment="Center"/>
+                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Usuario}" HorizontalTextAlignment="Center"/>
                 
                 <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Empresa:" TextColor="Black" HorizontalTextAlignment="Center" />
-                <Label Style="{StaticResource styleLabelTexto}" Text="Ther Sistemas:" HorizontalTextAlignment="Center" />
+                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Empresa}" HorizontalTextAlignment="Center" />
             </StackLayout>
-            
-            <Button Text="Ler QRCode" Style="{StaticResource styleButton}" x:Name="btmCodigoQr" Clicked="OnClicked_LerCodigoQR" />
+
+            <Button Text="Ler QRCode" Style="{StaticResource styleButton}" Command="{Binding LeitorQRCommand}" />
 
             <Label Style="{StaticResource styleBaseLabel}" Text="Obs: Dispositovo deve estar cadastrado no Portal Prodfy." />
         </StackLayout>

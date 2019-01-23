@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Prodfy.ViewModels
@@ -32,13 +31,18 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _empresa, value);
         }
 
-        private Command _lerCodigoQRCommand;
-        public Command LerCodigoQRCommand =>
-            _lerCodigoQRCommand ?? (_lerCodigoQRCommand = new Command(async () => await ExecuteLerCodigoQRCommand()));
+        private Command _leitorQRCommand;
+        public Command LeitorQRCommand => _leitorQRCommand ?? (_leitorQRCommand = new Command(async () => await ExecuteLeitorQRCommand()));
 
-        private Task ExecuteLerCodigoQRCommand()
+        private async Task ExecuteLeitorQRCommand()
         {
-            throw new NotImplementedException();
+            var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+            var result = await scanner.Scan();
+
+            if (result != null)
+            {
+                await App.Current.MainPage.DisplayAlert("Valor", $"Leitura do codigo: {result.Text}", "OK");
+            }
         }
     }
 }

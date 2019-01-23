@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Prodfy.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Views
@@ -9,12 +10,10 @@ namespace Prodfy.Views
 		public DispositivoView ()
 		{
 			InitializeComponent ();
-            NavigationPage.SetHasBackButton(this, false);
-        }
 
-        private void OnClicked_LerCodigoQR(object sender, System.EventArgs e)
-        {
-            App.Current.MainPage.Navigation.PushAsync(new AjustesView());
+            NavigationPage.SetHasBackButton(this, false);
+
+            BindingContext = new DispositivoViewModel();
         }
     }
 }
