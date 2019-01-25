@@ -22,7 +22,8 @@
                     Text="Dispositivos" />
 
             <Button Style="{StaticResource styleButton}" 
-                    Text="Sobre" x:Name="btnSobre" Clicked="OnClicked_Sobre" />
+                    Text="Sobre" x:Name="btnSobre" 
+                    Command="{Binding IrPaginaSobre}" />
 
             <Button Style="{StaticResource styleButton}" 
                     Text="Conexão" x:Name="btnConexao" Clicked="OnClicked_Conexao" />

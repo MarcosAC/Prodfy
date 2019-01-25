@@ -92,6 +92,7 @@
             <Style TargetType="Label" x:Key="styleBotaoVoltar" BasedOn="{StaticResource FonteIcone}">
                 <Setter Property="FontSize" Value="40" />
                 <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
             </Style>
 
             <Style TargetType="Label" x:Key="styleTituloTitleView">

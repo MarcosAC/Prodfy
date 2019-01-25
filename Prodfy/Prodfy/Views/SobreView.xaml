@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prodfy.Views.SobreView"
+             BackgroundImage="splash_bg2.png">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,15,0">
+            <!--Botão Voltar-->
+            <Label Style="{StaticResource styleBotaoVoltar}" Text="&#xf104;">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            
+            <Label Text="Sobre"
+                   FontSize="20" 
+                   TextColor="White"  
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Center" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource baseStyleStackLayout}">
+            <Image Style="{StaticResource ImagemFundo}" />
+
+            <StackLayout Margin="0,15,0,0">
+                <Button Style="{StaticResource styleButton}"
+                        Text="Ajuda/FAQ"
+                        Command="{Binding IrTherWebView}" 
+                        CommandParameter="AjudaFAQ"/>
+                
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Contato"
+                        Command="{Binding IrTherWebView}"
+                        CommandParameter="Contato" />
+                
+                <Button Style="{StaticResource styleButton}" 
+                        Text="Termos de Uso"
+                        Command="{Binding IrTherWebView}"
+                        CommandParameter="TermosUso" />
+                
+                
+                <Button Style="{StaticResource styleButton}"
+                        Text="Política de Privacidade" 
+                        Command="{Binding IrTherWebView}" 
+                        CommandParameter="PoliticaPrivacidade" />
+            </StackLayout>
+
+            <Label Style="{StaticResource styleBaseLabel}" Text="Versão: 6.03.02" TextColor="ForestGreen" VerticalOptions="End" />
+            
+            <Image Source="logo_ther.png" VerticalOptions="End" />
+            
+            <Label Style="{StaticResource styleBaseLabel}" 
+                   Text="2019 - Ther Sistemas Inovadores Todos os Direitos Reservados" 
+                   TextColor="White" 
+                   VerticalOptions="End" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

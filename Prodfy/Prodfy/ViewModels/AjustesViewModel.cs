@@ -20,11 +20,11 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteIrPaginaDispositivoCommand() => await _navigationService.PushAsync(new DispositivoView());
 
-        //private Command _PaginaSobre;
-        //public Command PaginaSobrre =>
-        //    _PaginaSobre ?? (_PaginaSobre = new Command(async () => await ExecutePaginaSobre()));
+        private Command _irPaginaSobre;
+        public Command IrPaginaSobre =>
+            _irPaginaSobre ?? (_irPaginaSobre = new Command(async () => await ExecutePaginaSobre()));
 
-        //private async Task ExecutePaginaSobre() => await _navigationService.PushAsync(new SobreView());
+        private async Task ExecutePaginaSobre() => await _navigationService.PushAsync(new SobreView());
 
         private Command _irPaginaConexao;
         public Command IrPaginaConexao =>

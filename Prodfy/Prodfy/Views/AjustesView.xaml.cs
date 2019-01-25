@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Prodfy.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Views
@@ -9,7 +10,10 @@ namespace Prodfy.Views
         public AjustesView()
         {
             InitializeComponent();
+
             NavigationPage.SetHasNavigationBar(this, false);
+
+            BindingContext = new AjustesViewModel();
         }
 
         private void OnClicked_Dispositivo(object sender, System.EventArgs e)
@@ -25,11 +29,6 @@ namespace Prodfy.Views
         private void OnClicked_Exportar(object sender, System.EventArgs e)
         {
             App.Current.MainPage.Navigation.PushAsync(new ExportarDadosView());
-        }
-
-        private void OnClicked_Sobre(object sender, System.EventArgs e)
-        {
-            App.Current.MainPage.Navigation.PushAsync(new AtividadeRealizadaView());
         }
     }
 }
