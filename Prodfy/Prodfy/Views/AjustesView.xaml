@@ -18,18 +18,22 @@
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
                 </Label.FontFamily>
             </Label>
-            <Button x:Name="btnDipositivo" Clicked="OnClicked_Dispositivo" Style="{StaticResource styleButton}" 
-                    Text="Dispositivos" />
+
+            <Button Style="{StaticResource styleButton}"
+                    Text="Dispositivos"
+                    Command="{Binding IrPaginaDispositivo}" />
 
             <Button Style="{StaticResource styleButton}" 
-                    Text="Sobre" x:Name="btnSobre" 
+                    Text="Sobre"
                     Command="{Binding IrPaginaSobre}" />
 
             <Button Style="{StaticResource styleButton}" 
-                    Text="Conexão" x:Name="btnConexao" Clicked="OnClicked_Conexao" />
+                    Text="Conexão" 
+                    Command="{Binding IrPaginaConexao}" />
 
             <Button Style="{StaticResource styleButton}" 
-                    Text="Exportar Dados" x:Name="btnExportar" Clicked="OnClicked_Exportar" />
+                    Text="Exportar Dados"
+                    Command="{Binding IrPaginaExportarDados}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
