@@ -2,7 +2,7 @@
 using SQLite;
 using Xamarin.Forms;
 
-namespace Prodfy.Services.BD
+namespace Prodfy.Helpers
 {
     public class DataBase
     {
@@ -58,7 +58,7 @@ namespace Prodfy.Services.BD
         //{
         //    _conexao.Update(entidade);
         //}
-        
+
         //public User ObterPorId(int id)
         //{
         //    return _conexao.Table<User>().FirstOrDefault(u => u.idUser == id);

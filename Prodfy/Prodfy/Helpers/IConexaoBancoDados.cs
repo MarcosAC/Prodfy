@@ -1,4 +1,4 @@
-﻿namespace Prodfy.Services.BD
+﻿namespace Prodfy.Helpers
 {
     public interface IConexaoBancoDados
     {

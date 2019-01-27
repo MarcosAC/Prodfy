@@ -2,9 +2,9 @@
 using SQLite;
 using System.Collections.Generic;
 
-namespace Prodfy.Services.BD.Repository
+namespace Prodfy.Services.Repository
 {
-    public class UserRepository : IRepository<User>
+    class UserRepository : IRepository<User>
     {
         //DataBase _dataBase;
         private SQLiteConnection _conexao;
