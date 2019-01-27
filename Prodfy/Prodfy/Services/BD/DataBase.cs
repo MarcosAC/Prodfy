@@ -1,8 +1,5 @@
 ﻿using Prodfy.Models;
 using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace Prodfy.Services.BD
@@ -46,5 +43,25 @@ namespace Prodfy.Services.BD
             _conexao.CreateTable<Qualidade>();
             _conexao.CreateTable<User>();
         }
+
+        //public void Adicionar(object entidade)
+        //{
+        //    _conexao.Insert(entidade);
+        //}
+
+        //public void Deletar(object entidade)
+        //{
+        //    _conexao.Delete(entidade);
+        //}
+
+        //public void Editar(object entidade)
+        //{
+        //    _conexao.Update(entidade);
+        //}
+        
+        //public User ObterPorId(int id)
+        //{
+        //    return _conexao.Table<User>().FirstOrDefault(u => u.idUser == id);
+        //}
     }
 }
