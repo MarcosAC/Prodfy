@@ -6,7 +6,7 @@ namespace Prodfy.Helpers
 {
     public class DataBase
     {
-        private static SQLiteConnection _conexao;
+        public static SQLiteConnection _conexao;
 
         public DataBase()
         {

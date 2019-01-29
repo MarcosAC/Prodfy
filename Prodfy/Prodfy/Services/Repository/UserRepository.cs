@@ -1,5 +1,5 @@
-﻿using Prodfy.Models;
-using SQLite;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
@@ -7,7 +7,7 @@ namespace Prodfy.Services.Repository
     class UserRepository : IRepository<User>
     {
         //DataBase _dataBase;
-        private SQLiteConnection _conexao;
+        //private SQLiteConnection _conexao;
 
         //public UserRepository()
         //{
@@ -20,31 +20,32 @@ namespace Prodfy.Services.Repository
         public void Adicionar(User user)
         {
             //_dataBase.Adicionar(user);
-            _conexao.Insert(user);
+            //_conexao.Insert(user);
+            DataBase._conexao.Insert(user);
         }
 
         public void Deletar(User user)
         {
             //_dataBase.Deletar(user);
-            _conexao.Delete(user);
+            DataBase._conexao.Delete(user);
         }
 
         public void Editar(User user)
         {
             //_dataBase.Editar(user);
-            _conexao.Update(user);
+            DataBase._conexao.Update(user);
         }
 
         public User ObterPorId(int id)
         {
             // return _dataBase.ObterPorId(id);
-            return _conexao.Table<User>().FirstOrDefault(u => u.idUser == id);
+            return DataBase._conexao.Table<User>().FirstOrDefault(u => u.idUser == id);
         }
 
         public List<User> ObterTodos()
         {
             //throw new NotImplementedException();
-            return _conexao.Table<User>().OrderBy(u => u.idUser).ToList();
+            return DataBase._conexao.Table<User>().OrderBy(u => u.idUser).ToList();
         }
 
         //IQueryable<User> IRepository<User>.ObterPorId(int id)
