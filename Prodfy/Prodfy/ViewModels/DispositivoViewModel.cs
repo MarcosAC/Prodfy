@@ -1,4 +1,6 @@
-﻿using Prodfy.Services;
+﻿using Prodfy.Models;
+using Prodfy.Services;
+using Prodfy.Services.API;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -49,9 +51,19 @@ namespace Prodfy.ViewModels
             var scanner = new ZXing.Mobile.MobileBarcodeScanner();
             var result = await scanner.Scan();
 
+            string[] dadosQR = result.Text.Split('|');
+
+            var dados = new
+            {
+                appKey = dadosQR[0],
+                idioma = dadosQR[2]
+            };
+
             if (result != null)
             {
-                await App.Current.MainPage.DisplayAlert("Valor", $"Leitura do codigo: {result.Text}", "OK");
+                ConfiguracaoDispositivoService.DadosConfiguracaoDispositivo(dados.appKey, dados.idioma);
+                
+                //await App.Current.MainPage.DisplayAlert("Valor", $"Leitura do codigo: {result.Text}", "OK");
             }
         }
     }
