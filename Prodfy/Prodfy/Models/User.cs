@@ -12,7 +12,7 @@ namespace Prodfy.Models
         public string senha { get; set; }
         public string nome { get; set; }
         public string sobrenome { get; set; }
-        public int empresa { get; set; }
+        public string empresa { get; set; }
         public int autosinc { get; set; }
         public string autosinc_time { get; set; }
         public string sinc_url { get; set; }
