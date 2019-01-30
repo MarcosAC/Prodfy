@@ -1,6 +1,8 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using Prodfy.Services;
 using Prodfy.Services.API;
+using Prodfy.Services.Repository;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -9,12 +11,15 @@ namespace Prodfy.ViewModels
     public class DispositivoViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
+        private UserRepository _userRepository;
 
         public DispositivoViewModel()
         {
             Title = "Dispositivo";
 
             _navigationService = new NavigationService();
+
+            _userRepository = new UserRepository();
         }
 
         private string _dispositivoId;
@@ -61,9 +66,9 @@ namespace Prodfy.ViewModels
 
             if (result != null)
             {
-                ConfiguracaoDispositivoService.DadosConfiguracaoDispositivo(dados.appKey, dados.idioma);
-                
-                //await App.Current.MainPage.DisplayAlert("Valor", $"Leitura do codigo: {result.Text}", "OK");
+                var dadosUsuario = ConfiguracaoDispositivoService.DadosConfiguracaoDispositivo(dados.appKey, dados.idioma);
+
+                _userRepository.Adicionar(dadosUsuario);
             }
         }
     }

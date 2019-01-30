@@ -10,20 +10,12 @@ namespace Prodfy.Services.API
 {
     public class ConfiguracaoDispositivoService
     {
-        //private static readonly string BaseUrl = /*Contantes.BASE_PROTOCOL +*/ Contantes.BASE_URL + Contantes.BASE_API;
-
-        public static void DadosConfiguracaoDispositivo(string appKey, string idioma)
+        public static User DadosConfiguracaoDispositivo(string appKey, string idioma)
         {
-            //string url = BaseUrl;
-
             HttpClient request = new HttpClient
             {
                 BaseAddress = new Uri(Contantes.BASE_URL)
             };
-
-            //string parametros = "{" + '"' + "" + '"' + "}";
-
-            //string key = appKey;
             
             FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("l", idioma),
@@ -41,17 +33,39 @@ namespace Prodfy.Services.API
                     var dadosDispositivo = JsonConvert.DeserializeObject<User>(conteudoResponse);
 
                     var user = new User
-                    {
+                    {                        
+                        disp_id = dadosDispositivo.disp_id,
                         disp_num = dadosDispositivo.disp_num,
-                        nome = dadosDispositivo.nome,
-                        empresa = dadosDispositivo.empresa
+                        senha = dadosDispositivo.senha,
+                        nome = dadosDispositivo.nome,                        
+                        sobrenome = dadosDispositivo.sobrenome,
+                        empresa = dadosDispositivo.empresa,
+                        autosinc = dadosDispositivo.autosinc,
+                        autosinc_time = dadosDispositivo.autosinc_time,
+                        sinc_url = dadosDispositivo.sinc_url,
+                        app_key = dadosDispositivo.app_key,
+                        lang = dadosDispositivo.lang,
+                        ind_ident = dadosDispositivo.ind_inv,
+                        ind_inv = dadosDispositivo.ind_inv,
+                        ind_per = dadosDispositivo.ind_per,
+                        ind_hist = dadosDispositivo.ind_hist,
+                        ind_evo = dadosDispositivo.ind_evo,
+                        ind_mnt = dadosDispositivo.ind_mnt,
+                        ind_exp = dadosDispositivo.ind_exp,
+                        ind_atv = dadosDispositivo.ind_atv,
+                        uso_liberado = dadosDispositivo.uso_liberado,
+                        dht_last_sincr = dadosDispositivo.dht_last_sincr
                     };
+
+                    return user;
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);                
             }
+
+            return null;
         }
     }
 }

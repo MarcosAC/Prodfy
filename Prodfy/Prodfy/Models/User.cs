@@ -18,15 +18,15 @@ namespace Prodfy.Models
         public string sinc_url { get; set; }
         public string app_key { get; set; }
         public string lang { get; set; }
-        public string ind_ident { get; set; }
+        public int ind_ident { get; set; }
         public int ind_inv { get; set; }
         public int ind_per { get; set; }
-        public string ind_hist { get; set; }
-        public string ind_evo { get; set; }
-        public string ind_mnt { get; set; }
-        public string ind_exp { get; set; }
-        public string ind_atv { get; set; }
+        public int ind_hist { get; set; }
+        public int ind_evo { get; set; }
+        public int ind_mnt { get; set; }
+        public int ind_exp { get; set; }
+        public int ind_atv { get; set; }
         public int uso_liberado { get; set; }
-        public int dht_last_sincr { get; set; }
+        public string dht_last_sincr { get; set; }
     }
 }
