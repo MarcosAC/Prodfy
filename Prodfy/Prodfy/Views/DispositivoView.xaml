@@ -38,7 +38,7 @@
                 </Label>
 
                 <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Dispositivo:" TextColor="Black" HorizontalTextAlignment="Center" />
-                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Dispositivo}" HorizontalTextAlignment="Center"/>
+                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding NumeroDispositivo}" HorizontalTextAlignment="Center"/>
                 
                 <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Usuário:" TextColor="Black" HorizontalTextAlignment="Center" />
                 <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Usuario}" HorizontalTextAlignment="Center"/>

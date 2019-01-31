@@ -1,5 +1,4 @@
-﻿using Prodfy.Helpers;
-using Prodfy.Models;
+﻿using Prodfy.Models;
 using Prodfy.Services;
 using Prodfy.Services.API;
 using Prodfy.Services.Repository;
@@ -12,6 +11,7 @@ namespace Prodfy.ViewModels
     {
         private readonly INavigationService _navigationService;
         private UserRepository _userRepository;
+        private User _dadosUsuario = null;
 
         public DispositivoViewModel()
         {
@@ -21,27 +21,10 @@ namespace Prodfy.ViewModels
 
             _userRepository = new UserRepository();
         }
-
-        private string _dispositivoId;
-        public string DispositivoId
-        {
-          get => _dispositivoId;
-          set => SetProperty(ref _dispositivoId, value);
-        }
-
-        private string _usuario;
-        public string Usuario
-        {
-            get => _usuario;
-            set => SetProperty(ref _usuario, value);
-        }
-
-        private string _empresa;
-        public string Empresa
-        {
-            get => _empresa;
-            set => SetProperty(ref _empresa, value);
-        }
+                
+        public string NumeroDispositivo { get => _dadosUsuario?.disp_num; }
+        public string Usuario { get => _dadosUsuario?.nome; }
+        public string Empresa { get => _dadosUsuario?.empresa; }
 
         private Command _navegacaoCommand;
         public Command NavegacaoCommand => _navegacaoCommand ?? (_navegacaoCommand = new Command(async () => await ExecuteNavegacaoCommand()));
@@ -66,9 +49,20 @@ namespace Prodfy.ViewModels
 
             if (result != null)
             {
-                var dadosUsuario = ConfiguracaoDispositivoService.DadosConfiguracaoDispositivo(dados.appKey, dados.idioma);
+                _dadosUsuario = ConfiguracaoDispositivoService.DadosConfiguracaoDispositivo(dados.appKey, dados.idioma);
 
-                _userRepository.Adicionar(dadosUsuario);
+                _userRepository.Adicionar(_dadosUsuario);
+
+                _dadosUsuario = new User
+                {
+                    disp_num = _dadosUsuario.disp_num,
+                    nome = _dadosUsuario.nome,
+                    empresa = _dadosUsuario.empresa
+                };
+
+                OnPropertyChanged(nameof(NumeroDispositivo));
+                OnPropertyChanged(nameof(Usuario));
+                OnPropertyChanged(nameof(Empresa));
             }
         }
     }

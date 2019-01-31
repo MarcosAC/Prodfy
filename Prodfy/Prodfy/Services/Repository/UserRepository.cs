@@ -15,7 +15,14 @@ namespace Prodfy.Services.Repository
 
         public void Adicionar(User user)
         {
-            _dataBase._conexao.Insert(user);
+            try
+            {
+                _dataBase._conexao.Insert(user);                
+            }
+            catch (System.Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public void Deletar(User user)
@@ -37,10 +44,5 @@ namespace Prodfy.Services.Repository
         {
             return _dataBase._conexao.Table<User>().OrderBy(u => u.idUser).ToList();
         }
-
-        //IQueryable<User> IRepository<User>.ObterPorId(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }
