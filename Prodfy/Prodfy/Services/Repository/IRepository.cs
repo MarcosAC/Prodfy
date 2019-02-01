@@ -7,7 +7,8 @@ namespace Prodfy.Services.Repository
         void Adicionar(T entidade);
         void Deletar(T entidade);
         void Editar(T entidade);
-        //IQueryable<T> ObterPorId(int id);
+        T ObterDados();        
         List<T> ObterTodos();
+        //IQueryable<T> ObterPorId(int id);
     }
 }

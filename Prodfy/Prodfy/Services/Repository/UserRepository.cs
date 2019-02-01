@@ -35,6 +35,17 @@ namespace Prodfy.Services.Repository
             _dataBase._conexao.Update(user);
         }
 
+        public User ObterDados()
+        {
+            if (_dataBase._conexao.Table<User>().Count() > 0)
+            {
+                var dadosUsuario = _dataBase._conexao.Table<User>().FirstOrDefault();
+                return dadosUsuario;
+            }
+
+            return null;
+        }
+
         public User ObterPorId(int id)
         {
             return _dataBase._conexao.Table<User>().FirstOrDefault(u => u.idUser == id);

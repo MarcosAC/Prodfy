@@ -7,13 +7,20 @@ namespace Prodfy.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DispositivoView : ContentPage
 	{
-		public DispositivoView ()
+        public DispositivoView ()
 		{
 			InitializeComponent ();
 
             NavigationPage.SetHasBackButton(this, false);
 
             BindingContext = new DispositivoViewModel();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            ((DispositivoViewModel)BindingContext).RefreshCommand.Execute(null);
         }
     }
 }
