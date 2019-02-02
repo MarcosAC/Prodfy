@@ -45,17 +45,17 @@ namespace Prodfy.ViewModels
             var scanner = new ZXing.Mobile.MobileBarcodeScanner();
             var result = await scanner.Scan();
 
-            string[] dadosQR = result.Text.Split('|');
-
-            var dados = new
-            {
-                appKey = dadosQR[0],
-                idioma = dadosQR[2]
-            };
-
             if (result != null)
             {
-                _dadosUsuario = ConfiguracaoDispositivoService.DadosConfiguracaoDispositivo(dados.appKey, dados.idioma);
+                string[] resultadoQR = result.Text.Split('|');
+
+                var dadosQR = new
+                {
+                    appKey = resultadoQR[0],
+                    idioma = resultadoQR[2]
+                };
+
+                _dadosUsuario = ConfiguracaoDispositivoService.DadosConfiguracaoDispositivo(dadosQR.appKey, dadosQR.idioma);
 
                 _userRepository.Adicionar(_dadosUsuario);
 
@@ -71,6 +71,8 @@ namespace Prodfy.ViewModels
                 OnPropertyChanged(nameof(Usuario));
                 OnPropertyChanged(nameof(Empresa));
             }
+
+            scanner.Cancel();            
         }
 
         private Command _RefreshCommand;
