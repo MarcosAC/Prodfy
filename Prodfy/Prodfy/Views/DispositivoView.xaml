@@ -38,8 +38,14 @@
                 </Label>
 
                 <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Dispositivo:" TextColor="Black" HorizontalTextAlignment="Center" />
-                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding NumeroDispositivo}" HorizontalTextAlignment="Center"/>
-                
+                <Label x:Name="label" Style="{StaticResource styleLabelTexto}" Text="{Binding NumeroDispositivo}" HorizontalTextAlignment="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference label}, Path=Text.Length}" Value="0">
+                            <Setter Property="Text" Value="-" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
                 <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Usuário:" TextColor="Black" HorizontalTextAlignment="Center" />
                 <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Usuario}" HorizontalTextAlignment="Center"/>
                 

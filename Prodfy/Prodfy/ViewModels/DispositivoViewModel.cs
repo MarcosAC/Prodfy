@@ -25,7 +25,7 @@ namespace Prodfy.ViewModels
 
             _dialogService = new DialogService();
 
-            _userRepository = new UserRepository();
+            _userRepository = new UserRepository();            
         }
 
         public string NumeroDispositivo { get => _dadosUsuario?.disp_num; }
@@ -88,16 +88,21 @@ namespace Prodfy.ViewModels
             {
                 var dadosDispositivo = _userRepository.ObterDados();
 
-                _dadosUsuario = new User
+                //IsVisibleMessage(dadosDispositivo);
+                
+                if (dadosDispositivo != null)
                 {
-                    disp_num = dadosDispositivo.disp_num,
-                    nome = dadosDispositivo.nome,
-                    empresa = dadosDispositivo.empresa
-                };
+                    _dadosUsuario = new User
+                    {
+                        disp_num = dadosDispositivo.disp_num,
+                        nome = dadosDispositivo.nome,
+                        empresa = dadosDispositivo.empresa
+                    }; 
 
-                OnPropertyChanged(nameof(NumeroDispositivo));
-                OnPropertyChanged(nameof(Usuario));
-                OnPropertyChanged(nameof(Empresa));
+                    OnPropertyChanged(nameof(NumeroDispositivo));
+                    OnPropertyChanged(nameof(Usuario));
+                    OnPropertyChanged(nameof(Empresa));
+                }                
             }
             catch (Exception)
             {
