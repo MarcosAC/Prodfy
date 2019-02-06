@@ -12,10 +12,6 @@ namespace Prodfy.Views
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            //var htmlSource = new HtmlWebViewSource();
-
-            //htmlSource.BaseUrl = DependencyService.Get<IBaseUrl>().Get();
-
             therWebView.Source = "file:///android_asset/" + nomePagina;            
 		}
     }
