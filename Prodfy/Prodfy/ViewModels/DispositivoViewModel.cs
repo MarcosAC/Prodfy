@@ -50,7 +50,8 @@ namespace Prodfy.ViewModels
                                                                           "Sim", "Não");
                 if (configuracaoAceita)
                 {
-                    _userRepository.DeletarTodasTabelas();
+                    if (_dadosUsuario != null)
+                        _userRepository.DeletarTodasTabelas();
 
                     var scanner = new ZXing.Mobile.MobileBarcodeScanner();
                     var result = await scanner.Scan();
@@ -103,7 +104,7 @@ namespace Prodfy.ViewModels
             {
                 var dadosDispositivo = _userRepository.ObterDados();
 
-                if (dadosDispositivo != null || dadosDispositivo == null)
+                if (dadosDispositivo != null)
                 {
                     _dadosUsuario = new User
                     {

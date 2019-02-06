@@ -31,32 +31,38 @@ namespace Prodfy.Services.API
                     var conteudoResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                     var dadosDispositivo = JsonConvert.DeserializeObject<User>(conteudoResponse);
 
-                    var user = new User
-                    {                        
-                        disp_id = dadosDispositivo.disp_id,
-                        disp_num = dadosDispositivo.disp_num,
-                        senha = dadosDispositivo.senha,
-                        nome = dadosDispositivo.nome,                        
-                        sobrenome = dadosDispositivo.sobrenome,
-                        empresa = dadosDispositivo.empresa,
-                        autosinc = dadosDispositivo.autosinc,
-                        autosinc_time = dadosDispositivo.autosinc_time,
-                        sinc_url = dadosDispositivo.sinc_url,
-                        app_key = dadosDispositivo.app_key,
-                        lang = dadosDispositivo.lang,
-                        ind_ident = dadosDispositivo.ind_inv,
-                        ind_inv = dadosDispositivo.ind_inv,
-                        ind_per = dadosDispositivo.ind_per,
-                        ind_hist = dadosDispositivo.ind_hist,
-                        ind_evo = dadosDispositivo.ind_evo,
-                        ind_mnt = dadosDispositivo.ind_mnt,
-                        ind_exp = dadosDispositivo.ind_exp,
-                        ind_atv = dadosDispositivo.ind_atv,
-                        uso_liberado = dadosDispositivo.uso_liberado,
-                        dht_last_sincr = dadosDispositivo.dht_last_sincr
-                    };
-
-                    return user;
+                    switch (dadosDispositivo.sinc_stat)
+                    {
+                        case 0:
+                            App.Current.MainPage.DisplayAlert("", dadosDispositivo.sinc_msg, "Ok");
+                            break;
+                        case 1:
+                            var user = new User
+                            {
+                                disp_id = dadosDispositivo.disp_id,
+                                disp_num = dadosDispositivo.disp_num,
+                                senha = dadosDispositivo.senha,
+                                nome = dadosDispositivo.nome,
+                                sobrenome = dadosDispositivo.sobrenome,
+                                empresa = dadosDispositivo.empresa,
+                                autosinc = dadosDispositivo.autosinc,
+                                autosinc_time = dadosDispositivo.autosinc_time,
+                                sinc_url = dadosDispositivo.sinc_url,
+                                app_key = dadosDispositivo.app_key,
+                                lang = dadosDispositivo.lang,
+                                ind_ident = dadosDispositivo.ind_inv,
+                                ind_inv = dadosDispositivo.ind_inv,
+                                ind_per = dadosDispositivo.ind_per,
+                                ind_hist = dadosDispositivo.ind_hist,
+                                ind_evo = dadosDispositivo.ind_evo,
+                                ind_mnt = dadosDispositivo.ind_mnt,
+                                ind_exp = dadosDispositivo.ind_exp,
+                                ind_atv = dadosDispositivo.ind_atv,
+                                uso_liberado = dadosDispositivo.uso_liberado,
+                                dht_last_sincr = dadosDispositivo.dht_last_sincr
+                            };                            
+                            return user;
+                    }
                 }
             }
             catch (Exception)
