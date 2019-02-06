@@ -24,7 +24,7 @@ namespace Prodfy.Services.Repository
                 App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
             }
         }
-
+               
         public void Deletar(User user)
         {
             _dataBase._conexao.Delete(user);
@@ -54,6 +54,11 @@ namespace Prodfy.Services.Repository
         public List<User> ObterTodos()
         {
             return _dataBase._conexao.Table<User>().OrderBy(u => u.idUser).ToList();
+        }
+
+        public void DeletarTodasTabelas()
+        {
+            _dataBase.DeletaTodasTabelas();
         }
     }
 }

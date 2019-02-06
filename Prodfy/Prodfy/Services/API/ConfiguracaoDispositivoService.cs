@@ -3,9 +3,7 @@ using Prodfy.Helpers;
 using Prodfy.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace Prodfy.Services.API
 {
@@ -61,9 +59,9 @@ namespace Prodfy.Services.API
                     return user;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Debug.WriteLine(ex.Message);                
+                App.Current.MainPage.DisplayAlert("Erro", "Erro na configuração. Favor tentar novamente!", "Ok");                
             }
 
             return null;

@@ -20,7 +20,7 @@ namespace Prodfy.Views
         {
             base.OnAppearing();
 
-            ((DispositivoViewModel)BindingContext).RefreshCommand.Execute(null);
+            ((DispositivoViewModel)BindingContext).RefreshCommand.Execute(null);            
         }
     }
 }

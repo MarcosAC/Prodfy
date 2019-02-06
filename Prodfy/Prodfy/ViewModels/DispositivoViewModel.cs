@@ -3,6 +3,7 @@ using Prodfy.Services;
 using Prodfy.Services.API;
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
+using Prodfy.Utils;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -42,37 +43,51 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteLeitorQRCommand()
         {
-            var scanner = new ZXing.Mobile.MobileBarcodeScanner();
-            var result = await scanner.Scan();
-
-            if (result != null)
+            if (VerificaConexaoInternet.VerificaConexao())
             {
-                string[] resultadoQR = result.Text.Split('|');
-
-                var dadosQR = new
+                bool configuracaoAceita = await _dialogService.AlertAsync("Dispositivo", 
+                                                                          "Ao configurar o dispositivo todos os dados não sincronizados serão descartados. Confirma?", 
+                                                                          "Sim", "Não");
+                if (configuracaoAceita)
                 {
-                    appKey = resultadoQR[0],
-                    idioma = resultadoQR[2]
-                };
+                    _userRepository.DeletarTodasTabelas();
 
-                _dadosUsuario = ConfiguracaoDispositivoService.DadosConfiguracaoDispositivo(dadosQR.appKey, dadosQR.idioma);
+                    var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+                    var result = await scanner.Scan();
 
-                _userRepository.Adicionar(_dadosUsuario);
+                    if (result != null)
+                    {
+                        string[] resultadoQR = result.Text.Split('|');
 
-                _dadosUsuario = new User
-                {
-                    idUser = _dadosUsuario.idUser,
-                    disp_num = _dadosUsuario.disp_num,
-                    nome = _dadosUsuario.nome,
-                    empresa = _dadosUsuario.empresa
-                };
+                        var dadosQR = new
+                        {
+                            appKey = resultadoQR[0],
+                            idioma = resultadoQR[2]
+                        };
 
-                OnPropertyChanged(nameof(NumeroDispositivo));
-                OnPropertyChanged(nameof(Usuario));
-                OnPropertyChanged(nameof(Empresa));
+                        _dadosUsuario = ConfiguracaoDispositivoService.DadosConfiguracaoDispositivo(dadosQR.appKey, dadosQR.idioma);
+
+                        _userRepository.Adicionar(_dadosUsuario);
+
+                        _dadosUsuario = new User
+                        {
+                            idUser = _dadosUsuario.idUser,
+                            disp_num = _dadosUsuario.disp_num,
+                            nome = _dadosUsuario.nome,
+                            empresa = _dadosUsuario.empresa
+                        };
+
+                        OnPropertyChanged(nameof(NumeroDispositivo));
+                        OnPropertyChanged(nameof(Usuario));
+                        OnPropertyChanged(nameof(Empresa));
+                    }
+                    scanner.Cancel();
+                }                
             }
-
-            scanner.Cancel();            
+            else
+            {
+                await _dialogService.AlertAsync("Erro", "Sem conexão com a internet!", "Ok");
+            }
         }
 
         private Command _RefreshCommand;
@@ -88,21 +103,19 @@ namespace Prodfy.ViewModels
             {
                 var dadosDispositivo = _userRepository.ObterDados();
 
-                //IsVisibleMessage(dadosDispositivo);
-                
-                if (dadosDispositivo != null)
+                if (dadosDispositivo != null || dadosDispositivo == null)
                 {
                     _dadosUsuario = new User
                     {
                         disp_num = dadosDispositivo.disp_num,
                         nome = dadosDispositivo.nome,
                         empresa = dadosDispositivo.empresa
-                    }; 
+                    };
 
                     OnPropertyChanged(nameof(NumeroDispositivo));
                     OnPropertyChanged(nameof(Usuario));
                     OnPropertyChanged(nameof(Empresa));
-                }                
+                }
             }
             catch (Exception)
             {

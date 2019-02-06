@@ -16,6 +16,11 @@ namespace Prodfy.Helpers
 
             _conexao = new SQLiteConnection(stringConexao);
 
+            CriarTabelas();
+        }
+
+        private void CriarTabelas()
+        {
             _conexao.CreateTable<Atividade>();
             _conexao.CreateTable<Colaborador>();
             _conexao.CreateTable<Contagem>();
@@ -42,6 +47,36 @@ namespace Prodfy.Helpers
             _conexao.CreateTable<Produto>();
             _conexao.CreateTable<Qualidade>();
             _conexao.CreateTable<User>();
+        }
+
+        public void DeletaTodasTabelas()
+        {            
+            _conexao.DeleteAll<Atividade>();
+            _conexao.DeleteAll<Colaborador>();
+            _conexao.DeleteAll<Contagem>();
+            _conexao.DeleteAll<Estagio>();
+            _conexao.DeleteAll<Estaq>();
+            _conexao.DeleteAll<Evolucao>();
+            _conexao.DeleteAll<Exped_Dest>();
+            _conexao.DeleteAll<Expedicao>();
+            _conexao.DeleteAll<Historico>();
+            _conexao.DeleteAll<Lista_Atv>();
+            _conexao.DeleteAll<Lote>();
+            _conexao.DeleteAll<Lote_Evolucao>();
+            _conexao.DeleteAll<Lote_Inventario>();
+            _conexao.DeleteAll<Monit>();
+            _conexao.DeleteAll<Monit_Cod_Arv>();
+            _conexao.DeleteAll<Monit_Med>();
+            _conexao.DeleteAll<Monit_Ocorr>();
+            _conexao.DeleteAll<Monit_Parcela>();
+            _conexao.DeleteAll<Muda>();
+            _conexao.DeleteAll<Objetivo>();
+            _conexao.DeleteAll<Perda>();
+            _conexao.DeleteAll<Perda_Motivo>();
+            _conexao.DeleteAll<Ponto_Controle>();
+            _conexao.DeleteAll<Produto>();
+            _conexao.DeleteAll<Qualidade>();
+            _conexao.DeleteAll<User>();
         }
     }
 }

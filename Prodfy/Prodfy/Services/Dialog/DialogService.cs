@@ -9,5 +9,8 @@ namespace Prodfy.Services.Dialog
 
         public async Task AlertAsync(string title, string message, string accept, string cancel) 
             => await App.Current.MainPage.DisplayAlert(title, message, accept, cancel);
+
+        async Task<bool> IDialogService.AlertAsync(string title, string message, string ok, string cancel)
+            => await App.Current.MainPage.DisplayAlert(title, message, ok, cancel);
     }
 }
