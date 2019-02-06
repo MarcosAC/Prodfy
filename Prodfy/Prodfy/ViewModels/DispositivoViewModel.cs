@@ -49,10 +49,14 @@ namespace Prodfy.ViewModels
                                                                           "Ao configurar o dispositivo todos os dados não sincronizados serão descartados. Confirma?", 
                                                                           "Sim", "Não");
                 if (configuracaoAceita)
-                {
-                    if (_dadosUsuario != null)
-                        _userRepository.DeletarTodasTabelas();
+                {                    
+                    _userRepository.DeletarTodasTabelas();
 
+                    /*
+                     *  ToDo - Refatarar leitor de QR
+                     *  Criar uma variável que recebe os dados 
+                     *  lidos da classe de leitor de QR.
+                     */
                     var scanner = new ZXing.Mobile.MobileBarcodeScanner();
                     var result = await scanner.Scan();
 
@@ -65,6 +69,7 @@ namespace Prodfy.ViewModels
                             appKey = resultadoQR[0],
                             idioma = resultadoQR[2]
                         };
+                    /**********************************************************/
 
                         _dadosUsuario = ConfiguracaoDispositivoService.DadosConfiguracaoDispositivo(dadosQR.appKey, dadosQR.idioma);
 
@@ -82,7 +87,7 @@ namespace Prodfy.ViewModels
                         OnPropertyChanged(nameof(Usuario));
                         OnPropertyChanged(nameof(Empresa));
                     }
-                    scanner.Cancel();
+                    scanner.Cancel(); //=> Faz parte do scanner de QR.
                 }                
             }
             else
