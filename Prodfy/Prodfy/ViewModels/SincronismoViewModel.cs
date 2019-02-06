@@ -119,7 +119,7 @@ namespace Prodfy.ViewModels
         }
 
         private string _indMnt;
-        public string IndMny
+        public string IndMnt
         {
             get => _indMnt;
             set => SetProperty(ref _indMnt, value);
