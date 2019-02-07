@@ -6,6 +6,72 @@ namespace Prodfy.ViewModels
 {
     public class SincronismoViewModel : BaseViewModel
     {
+        //Atividade
+        private string _indAtv;
+        public string IndAtv
+        {
+            get => _indAtv;
+            set => SetProperty(ref _indAtv, value);
+        }
+
+        //Inventário
+        private string _indInv;
+        public string IndInv
+        {
+            get => _indInv;
+            set => SetProperty(ref _indInv, value);
+        }
+
+        //Perdas
+        private string _indPer;
+        public string IndPer
+        {
+            get => _indPer;
+            set => SetProperty(ref _indPer, value);
+        }
+
+        //Histórico
+        private string _indHist;
+        public string IndHist
+        {
+            get => _indHist;
+            set => SetProperty(ref _indHist, value);
+        }
+
+        //Evolução
+        private string _indEvo;
+        public string IndEvo
+        {
+            get => _indEvo;
+            set => SetProperty(ref _indEvo, value);
+        }
+
+        //Falta propriedade referente ao campo Medições.
+
+        //Medição
+        private string _indMnt;
+        public string IndMnt
+        {
+            get => _indMnt;
+            set => SetProperty(ref _indMnt, value);
+        }
+
+        //Expedições
+        private string _indExp;
+        public string IndExp
+        {
+            get => _indExp;
+            set => SetProperty(ref _indExp, value);
+        }
+
+        //Identificação
+        private string _indIdent;
+        public string IndIdent
+        {
+            get => _indIdent;
+            set => SetProperty(ref _indIdent, value);
+        }
+
         private string _idUser;
         public string IdUser
         {
@@ -13,6 +79,7 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _idUser, value);
         }
 
+        //DispositivoID
         private string _dispId;
         public string DispId
         {
@@ -20,6 +87,7 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _dispId, value);
         }
 
+        //DispositivoNumero
         private string _dispNum;
         public string DispNum
         {
@@ -81,63 +149,7 @@ namespace Prodfy.ViewModels
         {
             get => _appKey;
             set => SetProperty(ref _appKey, value);
-        }
-
-        private string _indIdent;
-        public string IndIdent
-        {
-            get => _indIdent;
-            set => SetProperty(ref _indIdent, value);
-        }
-
-        private string _indInv;
-        public string IndInv
-        {
-            get => _indInv;
-            set => SetProperty(ref _indInv, value);
-        }
-
-        private string _indPer;
-        public string IndPer
-        {
-            get => _indPer;
-            set => SetProperty(ref _indPer, value);
-        }
-
-        private string _indHist;
-        public string IndHist
-        {
-            get => _indHist;
-            set => SetProperty(ref _indHist, value);
-        }
-
-        private string _indEvo;
-        public string IndEvo
-        {
-            get => _indEvo;
-            set => SetProperty(ref _indEvo, value);
-        }
-
-        private string _indMnt;
-        public string IndMnt
-        {
-            get => _indMnt;
-            set => SetProperty(ref _indMnt, value);
-        }
-
-        private string _indExp;
-        public string IndExp
-        {
-            get => _indExp;
-            set => SetProperty(ref _indExp, value);
-        }
-
-        private string _indAtv;
-        public string IndAtv
-        {
-            get => _indAtv;
-            set => SetProperty(ref _indAtv, value);
-        }
+        }        
 
         private string _usoLiberado;
         public string UsoLiberado
