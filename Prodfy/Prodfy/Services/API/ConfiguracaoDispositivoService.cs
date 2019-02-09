@@ -69,7 +69,6 @@ namespace Prodfy.Services.API
             {
                 App.Current.MainPage.DisplayAlert("Erro", "Erro na configuração. Favor tentar novamente!", "Ok");                
             }
-
             return null;
         }
     }
