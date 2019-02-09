@@ -63,4 +63,4 @@
 #*.RTF   diff=astextplain
 
 *.java linguist-language=csharp
-*.html linguist-language=csharp
+*.htm linguist-language=csharp
