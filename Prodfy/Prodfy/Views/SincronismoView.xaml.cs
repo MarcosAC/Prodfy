@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Prodfy.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Views
@@ -9,12 +10,10 @@ namespace Prodfy.Views
 		public SincronismoView ()
 		{
 			InitializeComponent ();
-            NavigationPage.SetHasNavigationBar(this, false);
-        }
 
-        private void OnClicked_Sincronizar(object sender, System.EventArgs e)
-        {
-            App.Current.MainPage.Navigation.PushAsync(new AjustesView());
+            NavigationPage.SetHasNavigationBar(this, false);
+
+            BindingContext = new SincronismoViewModel();
         }
     }
 }

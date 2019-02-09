@@ -1,5 +1,6 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
+using System;
 using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
@@ -19,7 +20,7 @@ namespace Prodfy.Services.Repository
             {
                 _dataBase._conexao.Insert(user);                
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
             }
@@ -32,7 +33,14 @@ namespace Prodfy.Services.Repository
 
         public void Editar(User user)
         {
-            _dataBase._conexao.Update(user);
+            try
+            {
+                _dataBase._conexao.Update(user);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }            
         }
 
         public User ObterDados()

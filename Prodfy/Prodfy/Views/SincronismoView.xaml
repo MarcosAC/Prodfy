@@ -70,14 +70,15 @@
                     <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="2" Text="{Binding IndPer}" />
                     <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="3" Text="{Binding IndHist}" />
                     <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="4" Text="{Binding IndEvo}" />
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="5" Text="{Binding }" />
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="5" Text="0" />
                     <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="6" Text="{Binding IndMnt}" />
                     <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="7" Text="{Binding IndExp}" />
                 </Grid>
                 
-                <Button x:Name="btnSincronizar" Clicked="OnClicked_Sincronizar" Style="{StaticResource styleButton}"
+                <Button Style="{StaticResource styleButton}"
                         Text="Sincronizar"
-                        Margin="0,15,0,15"/>
+                        Margin="0,15,0,15"
+                        Command="{Binding SincronizarCommand}" />
 
                 <Label Style="{StaticResource styleBaseLabel}" Text="Atenção: O dispositivo deve estar conectado a uma rede WIFI com acesso a internet!" />
             </StackLayout>

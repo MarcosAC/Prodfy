@@ -71,7 +71,7 @@ namespace Prodfy.ViewModels
                         };
                     /**********************************************************/
 
-                        _dadosUsuario = ConfiguracaoDispositivoService.DadosConfiguracaoDispositivo(dadosQR.appKey, dadosQR.idioma);
+                        _dadosUsuario = ConfiguracaoDispositivoService.ObterDadosConfiguracaoDispositivo(dadosQR.appKey, dadosQR.idioma);
 
                         _userRepository.Adicionar(_dadosUsuario);
 

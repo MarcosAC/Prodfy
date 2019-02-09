@@ -9,7 +9,7 @@ namespace Prodfy.Services.API
 {
     public class ConfiguracaoDispositivoService
     {
-        public static User DadosConfiguracaoDispositivo(string appKey, string idioma)
+        public static User ObterDadosConfiguracaoDispositivo(string appKey, string idioma)
         {
             HttpClient request = new HttpClient
             {

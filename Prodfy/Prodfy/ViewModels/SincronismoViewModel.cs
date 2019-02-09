@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Prodfy.Models;
+using Prodfy.Services.API;
+using Prodfy.Services.Repository;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -6,172 +8,115 @@ namespace Prodfy.ViewModels
 {
     public class SincronismoViewModel : BaseViewModel
     {
-        //Atividade
-        private string _indAtv;
-        public string IndAtv
+        readonly DadosSincronismoService dadosSincronismo = new DadosSincronismoService();
+        private readonly Sincronismo _sincronismo = null;
+        private UserRepository _userRepository;
+        private User user = null;
+
+        public SincronismoViewModel()
         {
-            get => _indAtv;
-            set => SetProperty(ref _indAtv, value);
+            _userRepository = new UserRepository();
+
+            _sincronismo = CarregarDadosSincronismo();
+        }
+        
+        public int? IndAtv
+        {
+            get { return _sincronismo?.ind_atv; }
+            set { _sincronismo.ind_atv = value; OnPropertyChanged(); }
         }
 
-        //Inventário
-        private string _indInv;
-        public string IndInv
+        
+        public int? IndInv
         {
-            get => _indInv;
-            set => SetProperty(ref _indInv, value);
+            get { return _sincronismo?.ind_inv; }
+            set { _sincronismo.ind_inv = value; OnPropertyChanged(); }
         }
 
-        //Perdas
-        private string _indPer;
-        public string IndPer
+        public int? IndPer
         {
-            get => _indPer;
-            set => SetProperty(ref _indPer, value);
+            get { return _sincronismo?.ind_per; }
+            set { _sincronismo.ind_per = value; OnPropertyChanged(); }
         }
 
-        //Histórico
-        private string _indHist;
-        public string IndHist
-        {
-            get => _indHist;
-            set => SetProperty(ref _indHist, value);
+       
+        public int? IndHist
+        {            
+            get { return _sincronismo?.ind_hist; }
+            set { _sincronismo.ind_hist = value; OnPropertyChanged(); }
         }
 
-        //Evolução
-        private string _indEvo;
-        public string IndEvo
+       
+        public int? IndEvo
         {
-            get => _indEvo;
-            set => SetProperty(ref _indEvo, value);
+            get { return _sincronismo?.ind_evo; }
+            set { _sincronismo.ind_evo = value; OnPropertyChanged(); }
         }
 
         //Falta propriedade referente ao campo Medições.
-
-        //Medição
-        private string _indMnt;
-        public string IndMnt
+       
+        public int? IndMnt
         {
-            get => _indMnt;
-            set => SetProperty(ref _indMnt, value);
+            get { return _sincronismo?.ind_mnt; }
+            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
         }
-
-        //Expedições
-        private string _indExp;
-        public string IndExp
+        
+        public int? IndExp
         {
-            get => _indExp;
-            set => SetProperty(ref _indExp, value);
+            get { return _sincronismo?.ind_mnt; }
+            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
         }
-
-        //Identificação
-        private string _indIdent;
-        public string IndIdent
+        
+        public int? IndIdent
         {
-            get => _indIdent;
-            set => SetProperty(ref _indIdent, value);
-        }
-
-        private string _idUser;
-        public string IdUser
-        {
-            get => _idUser;
-            set => SetProperty(ref _idUser, value);
-        }
-
-        //DispositivoID
-        private string _dispId;
-        public string DispId
-        {
-            get => _dispId;
-            set => SetProperty(ref _dispId, value);
-        }
-
-        //DispositivoNumero
-        private string _dispNum;
-        public string DispNum
-        {
-            get => _dispNum;
-            set => SetProperty(ref _dispNum, value);
-        }
-
-        private string _senha;
-        public string Senha
-        {
-            get => _senha;
-            set => SetProperty(ref _senha, value);
-        }
-
-        private string _nome;
-        public string Nome
-        {
-            get => _nome;
-            set => SetProperty(ref _nome, value);
-        }
-
-        private string _sobrenome;
-        public string Sobrenome
-        {
-            get => _sobrenome;
-            set => SetProperty(ref _sobrenome, value);
-        }
-
-        private string _empresa;
-        public string Empresa
-        {
-            get => _empresa;
-            set => SetProperty(ref _empresa, value);
-        }
-
-        private string _autoSinc;
-        public string AutoSinc
-        {
-            get => _autoSinc;
-            set => SetProperty(ref _autoSinc, value);
-        }
-
-        private string _autoSincTime;
-        public string AutoSincTime
-        {
-            get => _autoSincTime;
-            set => SetProperty(ref _autoSincTime, value);
-        }
-
-        private string _sincUrl;
-        public string SincUrl
-        {
-            get => _sincUrl;
-            set => SetProperty(ref _sincUrl, value);
-        }
-
-        private string _appKey;
-        public string AppKey
-        {
-            get => _appKey;
-            set => SetProperty(ref _appKey, value);
-        }        
-
-        private string _usoLiberado;
-        public string UsoLiberado
-        {
-            get => _usoLiberado;
-            set => SetProperty(ref _usoLiberado, value);
-        }
-
-        private string _dhtLastSincr;
-        public string DhtlastSincr
-        {
-            get => _dhtLastSincr;
-            set => SetProperty(ref _dhtLastSincr, value);
-        }
+            get { return _sincronismo?.ind_mnt; }
+            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
+        }       
 
         private Command _sincronizarCommand;
         public Command SincronizarCommand =>
             _sincronizarCommand ?? (_sincronizarCommand = new Command(async () => await ExecuteSincronizarCommand()));
 
-        private Task ExecuteSincronizarCommand()
+        private async Task ExecuteSincronizarCommand()
+        {            
+            var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(_userRepository.ObterDados().app_key, _userRepository.ObterDados().lang);            
+
+            user = new User
+            {
+                ind_ident = _dadosSincronismo.ind_ident,
+                ind_inv = _dadosSincronismo.ind_inv,
+                ind_per = _dadosSincronismo.ind_per,
+                ind_hist = _dadosSincronismo.ind_hist,
+                ind_evo = _dadosSincronismo.ind_evo,
+                ind_mnt = _dadosSincronismo.ind_mnt,
+                ind_exp = _dadosSincronismo.ind_exp,
+                ind_atv = _dadosSincronismo.ind_atv,
+                uso_liberado = _dadosSincronismo.uso_liberado
+            };
+            _userRepository.Editar(user);            
+        }
+
+        private Sincronismo CarregarDadosSincronismo()
         {
-            throw new NotImplementedException();
+            var dadosSincronismo = _userRepository.ObterDados();
+
+            if (dadosSincronismo != null)
+            {
+                var sincronismo = new Sincronismo
+                {
+                    ind_ident = dadosSincronismo.ind_ident,
+                    ind_inv = dadosSincronismo.ind_inv,
+                    ind_per = dadosSincronismo.ind_per,
+                    ind_hist = dadosSincronismo.ind_hist,
+                    ind_evo = dadosSincronismo.ind_evo,
+                    ind_mnt = dadosSincronismo.ind_mnt,
+                    ind_exp = dadosSincronismo.ind_exp,
+                    ind_atv = dadosSincronismo.ind_atv,
+                    uso_liberado = dadosSincronismo.uso_liberado
+                };
+                return sincronismo;
+            }
+            return null;
         }
     }
 }
