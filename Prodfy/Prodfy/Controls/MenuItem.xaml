@@ -2,18 +2,52 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prodfy.Controls.MenuItem">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style  x:Key="MudancaDeCor" TargetType="Label">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="EstadosDeToque">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="Gray" />
+                                </VisualState.Setters>
+                            </VisualState>
+
+                            <VisualState x:Name="Valid">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="LightSkyBlue" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>                    
+                </Setter>                
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
     
     <ContentView.Content>
         <StackLayout Orientation="Horizontal" BackgroundColor="LightGray" Padding="5">
+            
             <!--Início-->
-            <StackLayout HorizontalOptions="FillAndExpand">
-                <Label Text="&#xf015;" TextColor="Gray" HorizontalTextAlignment="Center">
+            <StackLayout HorizontalOptions="FillAndExpand">                
+                <Label x:Name="lblIconeInicio" 
+                       Style="{StaticResource MudancaDeCor}" 
+                       Text="&#xf015;" 
+                       TextColor="Gray"
+                       HorizontalTextAlignment="Center">
+                    
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
                     </Label.FontFamily>
                 </Label>
 
-                <Label Text="Início" TextColor="Gray" HorizontalTextAlignment="Center" />
+                <Label x:Name="lblInicio" 
+                       Style="{StaticResource MudancaDeCor}" 
+                       Text="Início" 
+                       TextColor="Gray" 
+                       HorizontalTextAlignment="Center" />
 
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped_Inicio" />
@@ -22,13 +56,22 @@
 
             <!--Funções-->
             <StackLayout HorizontalOptions="FillAndExpand">
-                <Label Text="&#xf06c;" TextColor="Gray" HorizontalTextAlignment="Center">
+                <Label x:Name="lblIconeFuncoes" 
+                       Style="{StaticResource MudancaDeCor}" 
+                       Text="&#xf06c;"
+                       TextColor="Gray" 
+                       HorizontalTextAlignment="Center">
+                    
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
                     </Label.FontFamily>
                 </Label>
 
-                <Label Text="Funções" TextColor="Gray" HorizontalTextAlignment="Center" />
+                <Label x:Name="lblFuncoes" 
+                       Style="{StaticResource MudancaDeCor}" 
+                       Text="Funções" 
+                       TextColor="Gray" 
+                       HorizontalTextAlignment="Center" />
 
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped_Funcoes" />
@@ -37,13 +80,22 @@
 
             <!--Sincronia-->
             <StackLayout HorizontalOptions="FillAndExpand">
-                <Label Text="&#xf1eb;" TextColor="Gray" HorizontalTextAlignment="Center">
+                <Label x:Name="lblIconeSincronia" 
+                       Style="{StaticResource MudancaDeCor}" 
+                       Text="&#xf1eb;" 
+                       TextColor="Gray"
+                       HorizontalTextAlignment="Center">
+                    
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
                     </Label.FontFamily>
                 </Label>
 
-                <Label Text="Sincronia" TextColor="Gray" HorizontalTextAlignment="Center" />
+                <Label x:Name="lblSincronia" 
+                       Style="{StaticResource MudancaDeCor}" 
+                       Text="Sincronia" 
+                       TextColor="Gray" 
+                       HorizontalTextAlignment="Center" />
 
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped_Sincronia" />
@@ -52,13 +104,22 @@
 
             <!--Ajustes-->
             <StackLayout HorizontalOptions="FillAndExpand">
-                <Label Text="&#xf013;" TextColor="Gray" HorizontalTextAlignment="Center">
+                <Label x:Name="lblIconeAjustes" 
+                       Style="{StaticResource MudancaDeCor}" 
+                       Text="&#xf013;"
+                       TextColor="Gray"
+                       HorizontalTextAlignment="Center">
+                    
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
                     </Label.FontFamily>
                 </Label>
 
-                <Label Text="Ajustes" TextColor="Gray" HorizontalTextAlignment="Center" />
+                <Label x:Name="lblAjustes" 
+                       Style="{StaticResource MudancaDeCor}"
+                       Text="Ajustes" 
+                       TextColor="Gray" 
+                       HorizontalTextAlignment="Center" />
 
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped_Ajustes" />
