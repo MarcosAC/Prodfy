@@ -20,6 +20,12 @@
                                     <Setter Property="TextColor" Value="LightSkyBlue" />
                                 </VisualState.Setters>
                             </VisualState>
+
+                            <VisualState x:Name="Invalid">
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor" Value="Gray" />
+                                </VisualState.Setters>
+                            </VisualState>
                         </VisualStateGroup>
                     </VisualStateGroupList>                    
                 </Setter>                

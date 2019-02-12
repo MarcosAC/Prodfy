@@ -9,6 +9,7 @@ namespace Prodfy.Controls
 	public partial class MenuItem : ContentView
 	{
         string tapped = string.Empty;
+        bool isValid = false;
 
         public MenuItem ()
 		{
@@ -19,31 +20,59 @@ namespace Prodfy.Controls
 
         private void GoToState(bool isValid, string tapped)
         {
-            string visualState = isValid ? "Valid" : "Normal";
+            string visualState = isValid ? "Valid" : "Normal";            
 
             if (tapped == "inicio")
+            {
+                visualState = "Valid";
                 VisualStateManager.GoToState(lblIconeInicio, visualState);
-
-            if (tapped == "funcoes")
-                VisualStateManager.GoToState(lblIconeFuncoes, visualState);
-
-            if (tapped == "sincronia")
-                VisualStateManager.GoToState(lblIconeSincronia, visualState);
-
-            if (tapped == "ajustes")
-                VisualStateManager.GoToState(lblIconeAjustes, visualState);
-
-            if (tapped == "inicio")
                 VisualStateManager.GoToState(lblInicio, visualState);
+            }
+            else if (tapped != "inicio")
+            {
+                visualState = "Normal";
+                VisualStateManager.GoToState(lblIconeInicio, visualState);
+                VisualStateManager.GoToState(lblInicio, visualState);
+            }
 
             if (tapped == "funcoes")
+            {
+                visualState = "Valid";
+                VisualStateManager.GoToState(lblIconeFuncoes, visualState);
                 VisualStateManager.GoToState(lblFuncoes, visualState);
+            }
+            else if (tapped != "funcoes")
+            {
+                visualState = "Normal";
+                VisualStateManager.GoToState(lblIconeFuncoes, visualState);
+                VisualStateManager.GoToState(lblFuncoes, visualState);
+            }
 
             if (tapped == "sincronia")
+            {
+                visualState = "Valid";
+                VisualStateManager.GoToState(lblIconeSincronia, visualState);
                 VisualStateManager.GoToState(lblSincronia, visualState);
+            }
+            else if (tapped != "sincronia")
+            {
+                visualState = "Normal";
+                VisualStateManager.GoToState(lblIconeSincronia, visualState);
+                VisualStateManager.GoToState(lblSincronia, visualState);
+            }
 
             if (tapped == "ajustes")
+            {
+                visualState = "Valid";
+                VisualStateManager.GoToState(lblIconeAjustes, visualState);
                 VisualStateManager.GoToState(lblAjustes, visualState);
+            }
+            else if (tapped != "ajustes")
+            {
+                visualState = "Normal";
+                VisualStateManager.GoToState(lblIconeAjustes, visualState);
+                VisualStateManager.GoToState(lblAjustes, visualState);
+            }
         }
 
         private void OnTapped_Inicio(object sender, TappedEventArgs e)
@@ -53,7 +82,7 @@ namespace Prodfy.Controls
             if (e != null)
             {
                 string tapped = "inicio";
-                bool isValid = true;
+                isValid = true;
                 GoToState(isValid, tapped);
             }
         }
