@@ -6,6 +6,9 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <Style  x:Key="MudancaDeCor" TargetType="Label">
+                
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="EstadosDeToque">
@@ -17,7 +20,7 @@
 
                             <VisualState x:Name="Valid">
                                 <VisualState.Setters>
-                                    <Setter Property="TextColor" Value="LightSkyBlue" />
+                                    <Setter Property="TextColor" Value="#3383F1" />
                                 </VisualState.Setters>
                             </VisualState>
 
@@ -28,7 +31,8 @@
                             </VisualState>
                         </VisualStateGroup>
                     </VisualStateGroupList>                    
-                </Setter>                
+                </Setter>
+                
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
@@ -41,8 +45,7 @@
                 <Label x:Name="lblIconeInicio" 
                        Style="{StaticResource MudancaDeCor}" 
                        Text="&#xf015;" 
-                       TextColor="Gray"
-                       HorizontalTextAlignment="Center">
+                       TextColor="Gray">
                     
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
@@ -52,8 +55,7 @@
                 <Label x:Name="lblInicio" 
                        Style="{StaticResource MudancaDeCor}" 
                        Text="Início" 
-                       TextColor="Gray" 
-                       HorizontalTextAlignment="Center" />
+                       TextColor="Gray" />
 
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped_Inicio" />
@@ -65,8 +67,7 @@
                 <Label x:Name="lblIconeFuncoes" 
                        Style="{StaticResource MudancaDeCor}" 
                        Text="&#xf06c;"
-                       TextColor="Gray" 
-                       HorizontalTextAlignment="Center">
+                       TextColor="Gray">
                     
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
@@ -76,8 +77,7 @@
                 <Label x:Name="lblFuncoes" 
                        Style="{StaticResource MudancaDeCor}" 
                        Text="Funções" 
-                       TextColor="Gray" 
-                       HorizontalTextAlignment="Center" />
+                       TextColor="Gray" />
 
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped_Funcoes" />
@@ -89,8 +89,7 @@
                 <Label x:Name="lblIconeSincronia" 
                        Style="{StaticResource MudancaDeCor}" 
                        Text="&#xf1eb;" 
-                       TextColor="Gray"
-                       HorizontalTextAlignment="Center">
+                       TextColor="Gray">
                     
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
@@ -100,8 +99,7 @@
                 <Label x:Name="lblSincronia" 
                        Style="{StaticResource MudancaDeCor}" 
                        Text="Sincronia" 
-                       TextColor="Gray" 
-                       HorizontalTextAlignment="Center" />
+                       TextColor="Gray" />
 
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped_Sincronia" />
@@ -113,8 +111,7 @@
                 <Label x:Name="lblIconeAjustes" 
                        Style="{StaticResource MudancaDeCor}" 
                        Text="&#xf013;"
-                       TextColor="Gray"
-                       HorizontalTextAlignment="Center">
+                       TextColor="Gray">
                     
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
@@ -124,8 +121,7 @@
                 <Label x:Name="lblAjustes" 
                        Style="{StaticResource MudancaDeCor}"
                        Text="Ajustes" 
-                       TextColor="Gray" 
-                       HorizontalTextAlignment="Center" />
+                       TextColor="Gray" />
 
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped_Ajustes" />
