@@ -3,7 +3,7 @@
 namespace Prodfy.Models
 {
     [Table("Evolucao")]
-    class Evolucao
+    public class Evolucao
     {
         [PrimaryKey, AutoIncrement]
         public int idEvolucao { get; set; }
