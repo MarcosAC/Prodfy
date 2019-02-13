@@ -9,7 +9,7 @@ namespace Prodfy.ViewModels
     public class SincronismoViewModel : BaseViewModel
     {
         readonly DadosSincronismoService dadosSincronismo = new DadosSincronismoService();
-        private readonly Sincronismo _sincronismo = null;
+        //private readonly Sincronismo _sincronismo = null;
         private UserRepository _userRepository;
         private User user = null;
 
@@ -17,60 +17,72 @@ namespace Prodfy.ViewModels
         {
             _userRepository = new UserRepository();
 
-            _sincronismo = CarregarDadosSincronismo();
-        }
-        
-        public int? IndAtv
-        {
-            get { return _sincronismo?.ind_atv; }
-            set { _sincronismo.ind_atv = value; OnPropertyChanged(); }
+            user = CarregarDadosSincronismo();
         }
 
+        public string DhtLastSincr
+        {
+            get { return user.dht_last_sincr = "Não Sincronizado!"; }
+            set
+            {
+                if (user == null)
+                {
+                    return;
+                }
+                user.dht_last_sincr = value; OnPropertyChanged();
+            }
+        }
+
+        public int? IndAtv
+        {
+            get { return user?.ind_atv; }
+            set { user.ind_atv = value; OnPropertyChanged(); }
+        }
         
         public int? IndInv
         {
-            get { return _sincronismo?.ind_inv; }
-            set { _sincronismo.ind_inv = value; OnPropertyChanged(); }
+            get { return user?.ind_inv; }
+            set { user.ind_inv = value; OnPropertyChanged(); }
         }
 
         public int? IndPer
         {
-            get { return _sincronismo?.ind_per; }
-            set { _sincronismo.ind_per = value; OnPropertyChanged(); }
+            get { return user?.ind_per; }
+            set { user.ind_per = value; OnPropertyChanged(); }
         }
 
        
         public int? IndHist
         {            
-            get { return _sincronismo?.ind_hist; }
-            set { _sincronismo.ind_hist = value; OnPropertyChanged(); }
+            get { return user?.ind_hist; }
+            set { user.ind_hist = value; OnPropertyChanged(); }
         }
 
        
         public int? IndEvo
         {
-            get { return _sincronismo?.ind_evo; }
-            set { _sincronismo.ind_evo = value; OnPropertyChanged(); }
+            get { return user?.ind_evo; }
+            set { user.ind_evo = value; OnPropertyChanged(); }
         }
 
         //Falta propriedade referente ao campo Medições.
        
         public int? IndMnt
         {
-            get { return _sincronismo?.ind_mnt; }
-            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
+            get { return user?.ind_mnt; }
+            set { user.ind_mnt = value; OnPropertyChanged(); }
         }
         
         public int? IndExp
         {
-            get { return _sincronismo?.ind_mnt; }
-            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
+            get { return user?.ind_mnt; }
+            set { user.ind_mnt = value; OnPropertyChanged(); }
         }
         
         public int? IndIdent
         {
-            get { return _sincronismo?.ind_mnt; }
-            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
+            get { return user?.ind_mnt; }
+            set { user.ind_mnt = value; OnPropertyChanged(); }
         }       
 
         private Command _sincronizarCommand;
@@ -96,13 +108,13 @@ namespace Prodfy.ViewModels
             _userRepository.Editar(user);            
         }
 
-        private Sincronismo CarregarDadosSincronismo()
+        private User CarregarDadosSincronismo()
         {
             var dadosSincronismo = _userRepository.ObterDados();
 
             if (dadosSincronismo != null)
-            {
-                var sincronismo = new Sincronismo
+            {                
+                var sincronismo = new User
                 {
                     ind_ident = dadosSincronismo.ind_ident,
                     ind_inv = dadosSincronismo.ind_inv,
@@ -112,8 +124,9 @@ namespace Prodfy.ViewModels
                     ind_mnt = dadosSincronismo.ind_mnt,
                     ind_exp = dadosSincronismo.ind_exp,
                     ind_atv = dadosSincronismo.ind_atv,
-                    uso_liberado = dadosSincronismo.uso_liberado
-                };
+                    uso_liberado = dadosSincronismo.uso_liberado,
+                    dht_last_sincr = dadosSincronismo.dht_last_sincr
+                };                
                 return sincronismo;
             }
             return null;

@@ -1,5 +1,6 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 
@@ -67,6 +68,11 @@ namespace Prodfy.Services.Repository
         public void DeletarTodasTabelas()
         {
             _dataBase.DeletaTodasTabelas();
+        }
+
+        public TableQuery<User> AsQueryable()
+        {
+            throw new NotImplementedException();
         }
     }
 }

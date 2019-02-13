@@ -33,7 +33,7 @@
                 </Label>
 
                 <Label Style="{StaticResource styleBaseLabel}"
-                       Text="Não Sincronizado!" 
+                       Text="{Binding DhtLastSincr}" 
                        FontSize="Large"
                        HorizontalOptions="Center" />
                 
