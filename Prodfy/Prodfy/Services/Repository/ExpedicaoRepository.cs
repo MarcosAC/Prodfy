@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class ExpedicaoRepository : IRepository<Expedicao>
     {
+        private DataBase _dataBase;
+
+        public ExpedicaoRepository()
+        {
+            _dataBase = new DataBase();
+        }
+
+        public int ObterTotalDeRegistros()
+        {
+            var total = _dataBase._conexao.Table<Expedicao>().Count();
+
+            if (total > 0)
+                return total;
+
+            return 0;
+        }
+
         public void Adicionar(Expedicao entidade)
         {
             throw new NotImplementedException();
