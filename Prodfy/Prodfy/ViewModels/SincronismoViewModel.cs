@@ -9,80 +9,99 @@ namespace Prodfy.ViewModels
     public class SincronismoViewModel : BaseViewModel
     {
         readonly DadosSincronismoService dadosSincronismo = new DadosSincronismoService();
-        //private readonly Sincronismo _sincronismo = null;
-        private UserRepository _userRepository;
+        private readonly Sincronismo _sincronismo = null;        
         private User user = null;
+
+        private UserRepository userRepository;
+        private AtividadeRepository atividadeRepository;
+        private InventarioRepository inventarioRepository;
+        private PerdaRepository perdaRepository;
+        private HistoricoRepository historicoRepository;
+        private EvolucaoRepository evolucaoRepository;
+        private OcorrenciaRepository ocorrenciaRepository;
+        private MedicaoRepository medicaoRepository;
+        private ExpedicaoRepository expedicaoRepository;
 
         public SincronismoViewModel()
         {
-            _userRepository = new UserRepository();
+            userRepository = new UserRepository();
+            atividadeRepository =  new AtividadeRepository ();
+            inventarioRepository = new InventarioRepository();
+            perdaRepository = new PerdaRepository();
+            historicoRepository = new HistoricoRepository();
+            evolucaoRepository  = new EvolucaoRepository();
+            ocorrenciaRepository = new OcorrenciaRepository();
+            medicaoRepository = new MedicaoRepository();
+            expedicaoRepository = new ExpedicaoRepository();
 
-            user = CarregarDadosSincronismo();
+            _sincronismo = CarregarDadosSincronismo();
         }
 
         public string DhtLastSincr
         {
-            get { return user.dht_last_sincr = "Não Sincronizado!"; }
+            get { return _sincronismo.dht_last_sincr = "Não Sincronizado!"; }
             set
             {
-                if (user == null)
+                if (_sincronismo == null)
                 {
                     return;
                 }
-                user.dht_last_sincr = value; OnPropertyChanged();
+                _sincronismo.dht_last_sincr = value; OnPropertyChanged();
             }
         }
 
         public int? IndAtv
         {
-            get { return user?.ind_atv; }
-            set { user.ind_atv = value; OnPropertyChanged(); }
+            get { return _sincronismo?.ind_atv; }
+            set { _sincronismo.ind_atv = value; OnPropertyChanged(); }
         }
         
         public int? IndInv
         {
-            get { return user?.ind_inv; }
-            set { user.ind_inv = value; OnPropertyChanged(); }
+            get { return _sincronismo?.ind_inv; }
+            set { _sincronismo.ind_inv = value; OnPropertyChanged(); }
         }
 
         public int? IndPer
         {
-            get { return user?.ind_per; }
-            set { user.ind_per = value; OnPropertyChanged(); }
+            get { return _sincronismo?.ind_per; }
+            set { _sincronismo.ind_per = value; OnPropertyChanged(); }
         }
-
        
         public int? IndHist
         {            
-            get { return user?.ind_hist; }
-            set { user.ind_hist = value; OnPropertyChanged(); }
+            get { return _sincronismo?.ind_hist; }
+            set { _sincronismo.ind_hist = value; OnPropertyChanged(); }
         }
-
        
         public int? IndEvo
         {
-            get { return user?.ind_evo; }
-            set { user.ind_evo = value; OnPropertyChanged(); }
+            get { return _sincronismo?.ind_evo; }
+            set { _sincronismo.ind_evo = value; OnPropertyChanged(); }
+        }
+        
+        public int? IndOco
+        {
+            get { return _sincronismo?.ind_oco; }
+            set { _sincronismo.ind_oco = value; OnPropertyChanged(); }
         }
 
-        //Falta propriedade referente ao campo Medições.
-       
         public int? IndMnt
         {
-            get { return user?.ind_mnt; }
-            set { user.ind_mnt = value; OnPropertyChanged(); }
+            get { return _sincronismo?.ind_mnt; }
+            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
         }
         
         public int? IndExp
         {
-            get { return user?.ind_mnt; }
-            set { user.ind_mnt = value; OnPropertyChanged(); }
+            get { return _sincronismo?.ind_mnt; }
+            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
         }
         
         public int? IndIdent
         {
-            get { return user?.ind_mnt; }
-            set { user.ind_mnt = value; OnPropertyChanged(); }
+            get { return _sincronismo?.ind_mnt; }
+            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
         }       
 
         private Command _sincronizarCommand;
@@ -91,7 +110,7 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteSincronizarCommand()
         {            
-            var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(_userRepository.ObterDados().app_key, _userRepository.ObterDados().lang);            
+            var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(userRepository.ObterDados().app_key, userRepository.ObterDados().lang);            
 
             user = new User
             {
@@ -105,27 +124,26 @@ namespace Prodfy.ViewModels
                 ind_atv = _dadosSincronismo.ind_atv,
                 uso_liberado = _dadosSincronismo.uso_liberado
             };
-            _userRepository.Editar(user);            
+            userRepository.Editar(user);            
         }
 
-        private User CarregarDadosSincronismo()
+        private Sincronismo CarregarDadosSincronismo()
         {
-            var dadosSincronismo = _userRepository.ObterDados();
+            var dadosUser = userRepository.ObterDados();
 
             if (dadosSincronismo != null)
-            {                
-                var sincronismo = new User
+            {
+                var sincronismo = new Sincronismo
                 {
-                    ind_ident = dadosSincronismo.ind_ident,
-                    ind_inv = dadosSincronismo.ind_inv,
-                    ind_per = dadosSincronismo.ind_per,
-                    ind_hist = dadosSincronismo.ind_hist,
-                    ind_evo = dadosSincronismo.ind_evo,
-                    ind_mnt = dadosSincronismo.ind_mnt,
-                    ind_exp = dadosSincronismo.ind_exp,
-                    ind_atv = dadosSincronismo.ind_atv,
-                    uso_liberado = dadosSincronismo.uso_liberado,
-                    dht_last_sincr = dadosSincronismo.dht_last_sincr
+                    ind_atv = atividadeRepository.ObterTotalDeRegistros(),
+                    ind_inv = inventarioRepository.ObterTotalDeRegistros(),
+                    ind_per = perdaRepository.ObterTotalDeRegistros(),
+                    ind_hist = historicoRepository.ObterTotalDeRegistros(),
+                    ind_evo = evolucaoRepository.ObterTotalDeRegistros(),
+                    ind_oco = ocorrenciaRepository.ObterTotalDeRegistros(),
+                    ind_mnt = medicaoRepository.ObterTotalDeRegistros(),
+                    ind_exp = expedicaoRepository.ObterTotalDeRegistros(),                    
+                    dht_last_sincr = dadosUser.dht_last_sincr
                 };                
                 return sincronismo;
             }

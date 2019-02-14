@@ -65,14 +65,14 @@
                     <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="7" Text="Expedições:" HorizontalTextAlignment="End" />
 
                     <!--Labels Dados -->
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="0" Text="{Binding IndAtv}" />
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="1" Text="{Binding IndInv}" />
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="2" Text="{Binding IndPer}" />
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="3" Text="{Binding IndHist}" />
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="4" Text="{Binding IndEvo}" />
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="5" Text="0" />
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="6" Text="{Binding IndMnt}" />
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="7" Text="{Binding IndExp}" />
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="7" Text="{Binding IndAtv}" />  <!-- Atividades -->
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="0" Text="{Binding IndInv}" />  <!-- Invetários -->
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="1" Text="{Binding IndPer}" />  <!-- Perdas -->
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="2" Text="{Binding IndHist}" /> <!-- Histórico -->
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="3" Text="{Binding IndEvo}" />  <!-- Evoluçôes -->
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="4" Text="{Binding IndOco}" />  <!-- Ocorrências -->
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="5" Text="{Binding IndMnt}" />  <!-- Medições -->
+                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="6" Text="{Binding IndExp}" />  <!-- Expedições -->
                 </Grid>
                 
                 <Button Style="{StaticResource styleButton}"

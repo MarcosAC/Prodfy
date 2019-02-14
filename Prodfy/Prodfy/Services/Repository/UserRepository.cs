@@ -74,5 +74,10 @@ namespace Prodfy.Services.Repository
         {
             throw new NotImplementedException();
         }
+
+        public int ObterTotalDeRegistros()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
