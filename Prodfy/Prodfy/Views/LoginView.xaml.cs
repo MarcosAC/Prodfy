@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Prodfy.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,12 +10,17 @@ namespace Prodfy.Views
         public LoginView()
         {
             InitializeComponent();
+
             NavigationPage.SetHasNavigationBar(this, false);
+
+            BindingContext = new LoginViewModel();
         }
 
-        private void OnClick_Entrar(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            App.Current.MainPage.Navigation.PushAsync(new SincronismoView());
+            base.OnAppearing();
+
+            ((LoginViewModel)BindingContext).RefreshCommand.Execute(null);
         }
     }
 }
