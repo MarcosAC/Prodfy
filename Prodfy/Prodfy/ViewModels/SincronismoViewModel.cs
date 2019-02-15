@@ -1,6 +1,7 @@
 ﻿using Prodfy.Models;
 using Prodfy.Services.API;
 using Prodfy.Services.Repository;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -9,7 +10,7 @@ namespace Prodfy.ViewModels
     public class SincronismoViewModel : BaseViewModel
     {
         readonly DadosSincronismoService dadosSincronismo = new DadosSincronismoService();
-        private readonly Sincronismo _sincronismo = null;        
+        private Sincronismo sincronismo = null;        
         private User user = null;
 
         private UserRepository userRepository;
@@ -20,7 +21,7 @@ namespace Prodfy.ViewModels
         private EvolucaoRepository evolucaoRepository;
         private OcorrenciaRepository ocorrenciaRepository;
         private MedicaoRepository medicaoRepository;
-        private ExpedicaoRepository expedicaoRepository;
+        private ExpedicaoRepository expedicaoRepository;        
 
         public SincronismoViewModel()
         {
@@ -33,76 +34,31 @@ namespace Prodfy.ViewModels
             ocorrenciaRepository = new OcorrenciaRepository();
             medicaoRepository = new MedicaoRepository();
             expedicaoRepository = new ExpedicaoRepository();
-
-            _sincronismo = CarregarDadosSincronismo();
         }
 
-        public string DhtLastSincr
-        {
-            get { return _sincronismo.dht_last_sincr = "Não Sincronizado!"; }
-            set
-            {
-                if (_sincronismo == null)
-                {
-                    return;
-                }
-                _sincronismo.dht_last_sincr = value; OnPropertyChanged();
-            }
-        }
+        //public string DhtLastSincr
+        //{
+        //    get { return sincronismo.dht_last_sincr = "Não Sincronizado!"; }
+        //    set
+        //    {
+        //        if (sincronismo == null)
+        //        {
+        //            return;
+        //        }
+        //        sincronismo.dht_last_sincr = value; OnPropertyChanged();
+        //    }
+        //}
 
-        public int? IndAtv
-        {
-            get { return _sincronismo?.ind_atv; }
-            set { _sincronismo.ind_atv = value; OnPropertyChanged(); }
-        }
-        
-        public int? IndInv
-        {
-            get { return _sincronismo?.ind_inv; }
-            set { _sincronismo.ind_inv = value; OnPropertyChanged(); }
-        }
-
-        public int? IndPer
-        {
-            get { return _sincronismo?.ind_per; }
-            set { _sincronismo.ind_per = value; OnPropertyChanged(); }
-        }
-       
-        public int? IndHist
-        {            
-            get { return _sincronismo?.ind_hist; }
-            set { _sincronismo.ind_hist = value; OnPropertyChanged(); }
-        }
-       
-        public int? IndEvo
-        {
-            get { return _sincronismo?.ind_evo; }
-            set { _sincronismo.ind_evo = value; OnPropertyChanged(); }
-        }
-        
-        public int? IndOco
-        {
-            get { return _sincronismo?.ind_oco; }
-            set { _sincronismo.ind_oco = value; OnPropertyChanged(); }
-        }
-
-        public int? IndMnt
-        {
-            get { return _sincronismo?.ind_mnt; }
-            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
-        }
-        
-        public int? IndExp
-        {
-            get { return _sincronismo?.ind_mnt; }
-            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
-        }
-        
-        public int? IndIdent
-        {
-            get { return _sincronismo?.ind_mnt; }
-            set { _sincronismo.ind_mnt = value; OnPropertyChanged(); }
-        }       
+        public string DhtLastSincr { get => "Não Sincronizado!"; }
+        public int? IndAtv { get => sincronismo?.ind_atv; }
+        public int? IndInv { get => sincronismo?.ind_inv; }
+        public int? IndPer { get => sincronismo?.ind_per; }
+        public int? IndHist { get => sincronismo?.ind_hist; }
+        public int? IndEvo { get => sincronismo?.ind_evo; }
+        public int? IndOco { get => sincronismo?.ind_oco; }
+        public int? IndMnt { get => sincronismo?.ind_mnt; }
+        public int? IndExp { get => sincronismo?.ind_mnt; }
+        public int? IndIdent { get => sincronismo?.ind_mnt; }
 
         private Command _sincronizarCommand;
         public Command SincronizarCommand =>
@@ -127,27 +83,99 @@ namespace Prodfy.ViewModels
             userRepository.Editar(user);            
         }
 
-        private Sincronismo CarregarDadosSincronismo()
-        {
-            var dadosUser = userRepository.ObterDados();
+        private Command _RefreshCommand;
+        public Command RefreshCommand => _RefreshCommand ?? (_RefreshCommand = new Command(async () => await RefreshCommandExecute()));
 
-            if (dadosSincronismo != null)
+        private async Task RefreshCommandExecute()
+        {
+            await Task.FromResult<object>(null);
+
+            RefreshCommand.ChangeCanExecute();
+
+            try
             {
-                var sincronismo = new Sincronismo
+                var dadosUser = userRepository.ObterDados();
+
+                if (dadosSincronismo != null)
                 {
-                    ind_atv = atividadeRepository.ObterTotalDeRegistros(),
-                    ind_inv = inventarioRepository.ObterTotalDeRegistros(),
-                    ind_per = perdaRepository.ObterTotalDeRegistros(),
-                    ind_hist = historicoRepository.ObterTotalDeRegistros(),
-                    ind_evo = evolucaoRepository.ObterTotalDeRegistros(),
-                    ind_oco = ocorrenciaRepository.ObterTotalDeRegistros(),
-                    ind_mnt = medicaoRepository.ObterTotalDeRegistros(),
-                    ind_exp = expedicaoRepository.ObterTotalDeRegistros(),                    
-                    dht_last_sincr = dadosUser.dht_last_sincr
-                };                
-                return sincronismo;
+                    sincronismo = new Sincronismo
+                    {
+                        ind_atv = atividadeRepository.ObterTotalDeRegistros(),
+                        ind_inv = inventarioRepository.ObterTotalDeRegistros(),
+                        ind_per = perdaRepository.ObterTotalDeRegistros(),
+                        ind_hist = historicoRepository.ObterTotalDeRegistros(),
+                        ind_evo = evolucaoRepository.ObterTotalDeRegistros(),
+                        ind_oco = ocorrenciaRepository.ObterTotalDeRegistros(),
+                        ind_mnt = medicaoRepository.ObterTotalDeRegistros(),
+                        ind_exp = expedicaoRepository.ObterTotalDeRegistros(),
+                        dht_last_sincr = dadosUser.dht_last_sincr
+                    };
+
+                    OnPropertyChanged(nameof(IndAtv));
+                    OnPropertyChanged(nameof(IndInv));
+                    OnPropertyChanged(nameof(IndPer));
+                    OnPropertyChanged(nameof(IndHist));
+                    OnPropertyChanged(nameof(IndEvo));
+                    OnPropertyChanged(nameof(IndOco));
+                    OnPropertyChanged(nameof(IndMnt));
+                    OnPropertyChanged(nameof(IndExp));
+                    OnPropertyChanged(nameof(IndIdent));
+                    OnPropertyChanged(nameof(DhtLastSincr));
+                }                            
             }
-            return null;
+            catch (Exception)
+            {
+                return;
+            }
         }
+        //private User DataUltimaSincrinismo()
+        //{
+        //    try
+        //    {
+        //        var dataSincronismo = userRepository.ObterDados();
+
+        //        if (dataSincronismo.dht_last_sincr != null)
+        //        {
+        //            var sincronismo = new User
+        //            {                        
+        //                dht_last_sincr = dataSincronismo.dht_last_sincr
+        //            };
+        //        }
+
+        //        return user;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return null;
+        //    }
+        //}
+
+        //private Sincronismo CarregarDadosSincronismo()
+        //{
+        //    try
+        //    {
+        //        var dadosUser = userRepository.ObterDados();
+
+        //        if (dadosSincronismo != null)
+        //        {
+        //            var sincronismo = new Sincronismo
+        //            {
+        //                ind_atv = atividadeRepository.ObterTotalDeRegistros(),
+        //                ind_inv = inventarioRepository.ObterTotalDeRegistros(),
+        //                ind_per = perdaRepository.ObterTotalDeRegistros(),
+        //                ind_hist = historicoRepository.ObterTotalDeRegistros(),
+        //                ind_evo = evolucaoRepository.ObterTotalDeRegistros(),
+        //                ind_oco = ocorrenciaRepository.ObterTotalDeRegistros(),
+        //                ind_mnt = medicaoRepository.ObterTotalDeRegistros(),
+        //                ind_exp = expedicaoRepository.ObterTotalDeRegistros(),
+        //                dht_last_sincr = dadosUser.dht_last_sincr
+        //            };
+        //        }
+        //    }
+        //    catch (System.Exception)
+        //    {
+        //        return;
+        //    }
+        //}
     }
 }

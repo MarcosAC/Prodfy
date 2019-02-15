@@ -41,12 +41,12 @@
         <StackLayout Orientation="Horizontal" BackgroundColor="LightGray" Padding="5">
             
             <!--Início-->
-            <StackLayout HorizontalOptions="FillAndExpand">                
+            <StackLayout HorizontalOptions="FillAndExpand">
                 <Label x:Name="lblIconeInicio" 
                        Style="{StaticResource MudancaDeCor}" 
                        Text="&#xf015;" 
                        TextColor="Gray">
-                    
+
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
                     </Label.FontFamily>
@@ -79,9 +79,9 @@
                        Text="Funções" 
                        TextColor="Gray" />
 
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnTapped_Funcoes" />
-                </StackLayout.GestureRecognizers>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTapped_Funcoes" />
+                    </StackLayout.GestureRecognizers>
             </StackLayout>
 
             <!--Sincronia-->
@@ -101,9 +101,9 @@
                        Text="Sincronia" 
                        TextColor="Gray" />
 
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnTapped_Sincronia" />
-                </StackLayout.GestureRecognizers>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTapped_Sincronia" />
+                    </StackLayout.GestureRecognizers>
             </StackLayout>
 
             <!--Ajustes-->
@@ -124,7 +124,7 @@
                        TextColor="Gray" />
 
                 <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="OnTapped_Ajustes" />
+                        <TapGestureRecognizer Tapped="OnTapped_Ajustes" />
                 </StackLayout.GestureRecognizers>
             </StackLayout>
         </StackLayout>

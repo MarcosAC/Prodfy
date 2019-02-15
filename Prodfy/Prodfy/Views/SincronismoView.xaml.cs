@@ -15,5 +15,12 @@ namespace Prodfy.Views
 
             BindingContext = new SincronismoViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            ((SincronismoViewModel)BindingContext).RefreshCommand.Execute(null);
+        }
     }
 }
