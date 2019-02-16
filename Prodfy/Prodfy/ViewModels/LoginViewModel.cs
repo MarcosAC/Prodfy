@@ -9,22 +9,44 @@ namespace Prodfy.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         private readonly UserRepository userRepository;
-        private User dadosLogin = null;
+
+        private User dadosLogin = null;                
 
         public LoginViewModel()
         {
             userRepository = new UserRepository();
         }
 
+        private bool _logado;
+        public bool Logado { get => _logado = VerificarUsuarioLogado(); }
+
+        private string _senha;
+        public string Senha
+        {
+            get => _senha;
+            set => SetProperty(ref _senha, value);
+        }
+
         public string DispNum { get => dadosLogin?.disp_num; }
         public string Nome { get => dadosLogin?.nome; }
+        public string Empresa { get => dadosLogin?.nome; }
+
+        private bool VerificarUsuarioLogado()
+        {
+            if (dadosLogin?.senha != null)
+                if (Senha == dadosLogin?.senha)
+                    return true;
+
+            return false;              
+        }
 
         private Command _loginCommand;
         public Command LoginCommand =>
             _loginCommand ?? (_loginCommand = new Command(async () => await ExecuteLoginCommand()));
-
+        
         private Task ExecuteLoginCommand()
         {
+            // ToDo Botão Login //
             throw new NotImplementedException();
         }
 
@@ -46,12 +68,17 @@ namespace Prodfy.ViewModels
                     dadosLogin = new User
                     {
                         disp_num = dadosUsuario.disp_num,
-                        nome = dadosUsuario.nome
+                        nome = dadosUsuario.nome,
+                        senha = dadosLogin.senha
                     };
 
                     OnPropertyChanged(nameof(DispNum));
                     OnPropertyChanged(nameof(Nome));
+                    OnPropertyChanged(nameof(Empresa));
+                    OnPropertyChanged(nameof(Senha));                    
                 }
+
+                VerificarUsuarioLogado();
             }
             catch (Exception)
             {

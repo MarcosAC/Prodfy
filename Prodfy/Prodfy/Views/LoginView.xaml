@@ -9,31 +9,74 @@
             <StackLayout Style="{StaticResource baseStyleStackLayout}">
                 <Image Style="{StaticResource ImagemFundo}" />
 
+                <!-- Numero Dispositivo -->
                 <Label Style="{StaticResource styleLabelTitulo}" 
                        Text="DISPOSITIVO:"
                        Margin="0,30,0,0" />
-
                 <Label Style="{StaticResource styleLabelTexto}" Text="{Binding DispNum}" />
 
-                <Label Style="{StaticResource styleLabelTitulo}" Text="USUÁRIO:" />
-
+                <!-- Usuário -->
+                <Label Style="{StaticResource styleLabelTitulo}" Text="USUÁRIO:" />                
                 <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Nome}" />
+                
+                <!-- Empresa -->
+                <Label Style="{StaticResource styleLabelTitulo}" Text="EMPRESA:" IsVisible="False">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Logado}" Value="True">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
 
-                <Label Style="{StaticResource styleLabelTitulo}" Text="SENHA:" />
+                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Empresa}" IsVisible="False">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Logado}" Value="True">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <!---->
 
-                <Entry Placeholder="senha de acesso"
+                <!-- Senha -->
+                <Label Style="{StaticResource styleLabelTitulo}" Text="SENHA:" IsVisible="True">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Logado}" Value="True">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
+                <Entry Placeholder="senha de acesso" 
                        PlaceholderColor="LightGray"
+                       Text="{Binding Senha}"
                        HorizontalTextAlignment="Center"
                        BackgroundColor="White" 
-                       Margin="0,0,0,15" />
+                       Margin="0,0,0,15" 
+                       IsVisible="True">
+                    
+                    <Entry.Triggers>
+                        <DataTrigger TargetType="Entry" Binding="{Binding Logado}" Value="True">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Entry.Triggers>
+                </Entry>
+                <!---->
 
                 <Button Style="{StaticResource styleButton}" 
                         Text="Entrar" 
-                        Command="{Binding}"/>
+                        Command="{Binding}" 
+                        IsVisible="True">
+
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding Logado}" Value="True">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
             </StackLayout>
-            <!--<StackLayout BackgroundColor="Black" VerticalOptions="EndAndExpand">-->
+            
                 <control:MenuItem VerticalOptions="EndAndExpand"/>
-            <!--</StackLayout>-->
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
