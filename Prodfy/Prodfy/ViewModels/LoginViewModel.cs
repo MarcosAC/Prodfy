@@ -1,6 +1,7 @@
 ﻿using Prodfy.Models;
 using Prodfy.Services.Repository;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -29,7 +30,7 @@ namespace Prodfy.ViewModels
 
         public string DispNum { get => dadosLogin?.disp_num; }
         public string Nome { get => dadosLogin?.nome; }
-        public string Empresa { get => dadosLogin?.nome; }
+        public string Empresa { get => dadosLogin?.empresa; }
 
         private bool VerificarUsuarioLogado()
         {
@@ -69,7 +70,8 @@ namespace Prodfy.ViewModels
                     {
                         disp_num = dadosUsuario.disp_num,
                         nome = dadosUsuario.nome,
-                        senha = dadosLogin.senha
+                        empresa = dadosUsuario.empresa,
+                        senha = dadosUsuario.senha                        
                     };
 
                     OnPropertyChanged(nameof(DispNum));
@@ -80,9 +82,9 @@ namespace Prodfy.ViewModels
 
                 VerificarUsuarioLogado();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return;
+                Debug.Write("Erro -> ", ex.ToString());
             }
         }
     }
