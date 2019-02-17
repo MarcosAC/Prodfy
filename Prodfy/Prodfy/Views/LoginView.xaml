@@ -65,7 +65,7 @@
 
                 <Button Style="{StaticResource styleButton}" 
                         Text="Entrar" 
-                        Command="{Binding}" 
+                        Command="{Binding LoginCommand}" 
                         IsVisible="True">
 
                     <Button.Triggers>

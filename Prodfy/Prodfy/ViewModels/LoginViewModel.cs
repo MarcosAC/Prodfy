@@ -43,12 +43,11 @@ namespace Prodfy.ViewModels
 
         private Command _loginCommand;
         public Command LoginCommand =>
-            _loginCommand ?? (_loginCommand = new Command(async () => await ExecuteLoginCommand()));
+            _loginCommand ?? (_loginCommand = new Command(() => ExecuteLoginCommand()));
         
-        private Task ExecuteLoginCommand()
+        private async void ExecuteLoginCommand()
         {
-            // ToDo Botão Login //
-            throw new NotImplementedException();
+            await RefreshCommandExecute();            
         }
 
         private Command _RefreshCommand;
@@ -76,11 +75,15 @@ namespace Prodfy.ViewModels
 
                     OnPropertyChanged(nameof(DispNum));
                     OnPropertyChanged(nameof(Nome));
-                    OnPropertyChanged(nameof(Empresa));
-                    OnPropertyChanged(nameof(Senha));                    
+                    OnPropertyChanged(nameof(Senha));
                 }
 
-                VerificarUsuarioLogado();
+                if (VerificarUsuarioLogado())
+                {
+                    OnPropertyChanged(nameof(Empresa));
+                    OnPropertyChanged(nameof(Senha));
+                    OnPropertyChanged(nameof(Logado));
+                }
             }
             catch (Exception ex)
             {
