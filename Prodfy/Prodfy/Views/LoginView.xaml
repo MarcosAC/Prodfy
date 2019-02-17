@@ -50,6 +50,7 @@
                 <Entry Placeholder="senha de acesso" 
                        PlaceholderColor="LightGray"
                        Text="{Binding Senha}"
+                       IsPassword="True"
                        HorizontalTextAlignment="Center"
                        BackgroundColor="White" 
                        Margin="0,0,0,15" 
