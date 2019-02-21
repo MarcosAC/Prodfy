@@ -74,11 +74,11 @@
                     <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="5" Text="{Binding IndMnt}" />  <!-- Medições -->
                     <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="6" Text="{Binding IndExp}" />  <!-- Expedições -->
                 </Grid>
-                
+
                 <Button Style="{StaticResource styleButton}"
                         Text="Sincronizar"
-                        Margin="0,15,0,15"
-                        Command="{Binding SincronizarCommand}" />
+                        Margin="0,15,0,15"                        
+                        Command="{Binding SincronizarCommand}" />                
 
                 <Label Style="{StaticResource styleBaseLabel}" Text="Atenção: O dispositivo deve estar conectado a uma rede WIFI com acesso a internet!" />
             </StackLayout>

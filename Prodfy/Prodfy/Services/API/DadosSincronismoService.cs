@@ -60,5 +60,40 @@ namespace Prodfy.Services.API
             }
             return null;
         }
+
+        public async void UploadDadosParaSincronisar(string appKey, string idioma)
+        {
+            HttpClient request = new HttpClient
+            {
+                BaseAddress = new Uri(Contantes.BASE_URL)
+            };
+
+            string dadosParaUpload = "{" + '"' + "contagem" + '"' + ": []" + "," +
+                                           '"' + "atividade" + '"' + ": []" + "," +
+                                           '"' + "inventario" + '"' + ": []" + "," +
+                                           '"' + "perda" + '"' + ": []" + "," +
+                                           '"' + "historico" + '"' + ": []" + "," +
+                                           '"' + "evolucao" + '"' + ": []" + "," +
+                                           '"' + "ocorrencia" + '"' + ": []" + "," +
+                                           '"' + "medicao" + '"' + ": []" + "," +
+                                           '"' + "expedicao" + '"' + ": []" + "," + "}";
+
+            FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
+                new KeyValuePair<string, string>("l", idioma),
+                new KeyValuePair<string, string>("a", "U"),
+                new KeyValuePair<string, string>("k", appKey),
+                new KeyValuePair<string, string>("d", dadosParaUpload)
+            });
+
+            try
+            {
+                HttpResponseMessage response = await request.PostAsync(Contantes.BASE_URL, parametros);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

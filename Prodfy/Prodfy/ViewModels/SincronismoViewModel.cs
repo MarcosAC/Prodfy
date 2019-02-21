@@ -1,6 +1,8 @@
 ﻿using Prodfy.Models;
 using Prodfy.Services.API;
+using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
+using Prodfy.Utils;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -9,8 +11,11 @@ namespace Prodfy.ViewModels
 {
     public class SincronismoViewModel : BaseViewModel
     {
+        private readonly IDialogService _dialogService;
+
         readonly DadosSincronismoService dadosSincronismo = new DadosSincronismoService();
-        private Sincronismo sincronismo = null;        
+
+        private Sincronismo sincronismo = null;
         private User user = null;
 
         private UserRepository userRepository;
@@ -21,33 +26,24 @@ namespace Prodfy.ViewModels
         private EvolucaoRepository evolucaoRepository;
         private OcorrenciaRepository ocorrenciaRepository;
         private MedicaoRepository medicaoRepository;
-        private ExpedicaoRepository expedicaoRepository;        
+        private ExpedicaoRepository expedicaoRepository;
 
         public SincronismoViewModel()
         {
+            _dialogService = new DialogService();
+
             userRepository = new UserRepository();
-            atividadeRepository =  new AtividadeRepository ();
+            atividadeRepository = new AtividadeRepository();
             inventarioRepository = new InventarioRepository();
             perdaRepository = new PerdaRepository();
             historicoRepository = new HistoricoRepository();
-            evolucaoRepository  = new EvolucaoRepository();
+            evolucaoRepository = new EvolucaoRepository();
             ocorrenciaRepository = new OcorrenciaRepository();
             medicaoRepository = new MedicaoRepository();
             expedicaoRepository = new ExpedicaoRepository();
-        }
 
-        //public string DhtLastSincr
-        //{
-        //    get { return sincronismo.dht_last_sincr = "Não Sincronizado!"; }
-        //    set
-        //    {
-        //        if (sincronismo == null)
-        //        {
-        //            return;
-        //        }
-        //        sincronismo.dht_last_sincr = value; OnPropertyChanged();
-        //    }
-        //}
+            SincronizarCommand = new Command(ExecuteSincronizarCommand, CanExecuteSincronizarCommand);
+        }
 
         public string DhtLastSincr { get => "Não Sincronizado!"; }
         public int? IndAtv { get => sincronismo?.ind_atv; }
@@ -60,27 +56,54 @@ namespace Prodfy.ViewModels
         public int? IndExp { get => sincronismo?.ind_mnt; }
         public int? IndIdent { get => sincronismo?.ind_mnt; }
 
-        private Command _sincronizarCommand;
-        public Command SincronizarCommand =>
-            _sincronizarCommand ?? (_sincronizarCommand = new Command(async () => await ExecuteSincronizarCommand()));
+        private bool _logado;
+        public bool Logado
+        {
+            get { return _logado; }
+            set { SetProperty(ref _logado, value); SincronizarCommand.ChangeCanExecute(); }
+        }
 
-        private async Task ExecuteSincronizarCommand()
-        {            
-            var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(userRepository.ObterDados().app_key, userRepository.ObterDados().lang);            
+        private bool VerificarUsuarioLogado()
+        {
+            if (user?.senha != null)
+                if (user?.senha == user?.senha)
+                    return true;
 
-            user = new User
+            return false;
+        }
+
+        public Command SincronizarCommand { get; }
+
+        private bool CanExecuteSincronizarCommand()
+        {
+            return VerificarUsuarioLogado() == true;
+        }
+
+        private async void ExecuteSincronizarCommand()
+        {
+            if (VerificaConexaoInternet.VerificaConexao())
             {
-                ind_ident = _dadosSincronismo.ind_ident,
-                ind_inv = _dadosSincronismo.ind_inv,
-                ind_per = _dadosSincronismo.ind_per,
-                ind_hist = _dadosSincronismo.ind_hist,
-                ind_evo = _dadosSincronismo.ind_evo,
-                ind_mnt = _dadosSincronismo.ind_mnt,
-                ind_exp = _dadosSincronismo.ind_exp,
-                ind_atv = _dadosSincronismo.ind_atv,
-                uso_liberado = _dadosSincronismo.uso_liberado
-            };
-            userRepository.Editar(user);            
+                // UploadDados();
+                var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(userRepository.ObterDados().app_key, userRepository.ObterDados().lang);
+
+                user = new User
+                {
+                    ind_ident = _dadosSincronismo.ind_ident,
+                    ind_inv = _dadosSincronismo.ind_inv,
+                    ind_per = _dadosSincronismo.ind_per,
+                    ind_hist = _dadosSincronismo.ind_hist,
+                    ind_evo = _dadosSincronismo.ind_evo,
+                    ind_mnt = _dadosSincronismo.ind_mnt,
+                    ind_exp = _dadosSincronismo.ind_exp,
+                    ind_atv = _dadosSincronismo.ind_atv,
+                    uso_liberado = _dadosSincronismo.uso_liberado
+                };
+                userRepository.Editar(user);
+            }
+            else
+            {
+                await _dialogService.AlertAsync("Erro", "Sem conexão com a internet!", "Ok");
+            }
         }
 
         private Command _RefreshCommand;
@@ -90,7 +113,7 @@ namespace Prodfy.ViewModels
         {
             await Task.FromResult<object>(null);
 
-            RefreshCommand.ChangeCanExecute();
+            RefreshCommand.ChangeCanExecute();            
 
             try
             {
@@ -121,13 +144,52 @@ namespace Prodfy.ViewModels
                     OnPropertyChanged(nameof(IndExp));
                     OnPropertyChanged(nameof(IndIdent));
                     OnPropertyChanged(nameof(DhtLastSincr));
-                }                            
+                }
             }
             catch (Exception)
             {
                 return;
             }
         }
+
+        private void UploadDados()
+        {
+            bool executarSincronismo = false;
+
+            string[] contagem = { };
+            string[] perda = { };
+            string[] hist = { };
+            string[] evo = { };
+            string[] oco = { };
+            string[] med = { };
+            string[] exp = { };
+            string[] atv = { };
+
+            string[][] dadosSincronismo = new string[][] { contagem, perda, hist, evo, oco, med, exp, atv };
+
+            if (atividadeRepository.ObterTotalDeRegistros() > 0)
+            {
+                executarSincronismo = true;
+                var dados = atividadeRepository.ObterTodos();
+
+                Atividade dadosAtividade;
+
+                foreach (var item in dados)
+                {
+                    dadosAtividade = new Atividade
+                    {
+                        disp_Id = item.disp_Id,
+                        colaborador_id = item.colaborador_id,
+                        lista_atv_id = item.lista_atv_id,
+                        data_inicio = item.data_inicio,
+                        data_fim = item.data_fim,
+                        obs = item.obs
+                    };
+                }
+            }
+
+        }
+
         //private User DataUltimaSincrinismo()
         //{
         //    try
@@ -179,3 +241,8 @@ namespace Prodfy.ViewModels
         //}
     }
 }
+
+
+
+
+
