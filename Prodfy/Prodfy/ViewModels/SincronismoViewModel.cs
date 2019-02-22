@@ -18,6 +18,8 @@ namespace Prodfy.ViewModels
         private Sincronismo sincronismo = null;
         private User user = null;
 
+        #region Implementação Repositorios
+
         private UserRepository userRepository;
         private AtividadeRepository atividadeRepository;
         private InventarioRepository inventarioRepository;
@@ -27,6 +29,8 @@ namespace Prodfy.ViewModels
         private OcorrenciaRepository ocorrenciaRepository;
         private MedicaoRepository medicaoRepository;
         private ExpedicaoRepository expedicaoRepository;
+
+        #endregion
 
         public SincronismoViewModel()
         {
@@ -45,6 +49,8 @@ namespace Prodfy.ViewModels
             SincronizarCommand = new Command(ExecuteSincronizarCommand, CanExecuteSincronizarCommand);
         }
 
+        #region Propriedades
+
         public string DhtLastSincr { get => "Não Sincronizado!"; }
         public int? IndAtv { get => sincronismo?.ind_atv; }
         public int? IndInv { get => sincronismo?.ind_inv; }
@@ -56,23 +62,27 @@ namespace Prodfy.ViewModels
         public int? IndExp { get => sincronismo?.ind_mnt; }
         public int? IndIdent { get => sincronismo?.ind_mnt; }
 
+        #endregion
+
         private bool _logado;
         public bool Logado
         {
             get { return _logado; }
             set { SetProperty(ref _logado, value); SincronizarCommand.ChangeCanExecute(); }
-        }
+        }                
+
+        public Command SincronizarCommand { get; }
 
         private bool VerificarUsuarioLogado()
         {
-            if (user?.senha != null)
-                if (user?.senha == user?.senha)
+            var dadosUser = userRepository.ObterDados();
+
+            if (dadosUser?.senha != null)
+                if (dadosUser?.senha == dadosUser?.senha)
                     return true;
 
             return false;
         }
-
-        public Command SincronizarCommand { get; }
 
         private bool CanExecuteSincronizarCommand()
         {
@@ -81,9 +91,11 @@ namespace Prodfy.ViewModels
 
         private async void ExecuteSincronizarCommand()
         {
+            UploadDados();
+
             if (VerificaConexaoInternet.VerificaConexao())
             {
-                // UploadDados();
+                UploadDados();
                 var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(userRepository.ObterDados().app_key, userRepository.ObterDados().lang);
 
                 user = new User
@@ -104,6 +116,7 @@ namespace Prodfy.ViewModels
             {
                 await _dialogService.AlertAsync("Erro", "Sem conexão com a internet!", "Ok");
             }
+            //await _dialogService.AlertAsync("Erro", "Sem conexão com a internet!", "Ok");
         }
 
         private Command _RefreshCommand;
@@ -167,25 +180,30 @@ namespace Prodfy.ViewModels
 
             string[][] dadosSincronismo = new string[][] { contagem, perda, hist, evo, oco, med, exp, atv };
 
-            if (atividadeRepository.ObterTotalDeRegistros() > 0)
+            if (atividadeRepository.ObterTotalDeRegistros() >= 0)
             {
                 executarSincronismo = true;
                 var dados = atividadeRepository.ObterTodos();
 
-                Atividade dadosAtividade;
+                //Atividade dadosAtividade;
 
-                foreach (var item in dados)
-                {
-                    dadosAtividade = new Atividade
-                    {
-                        disp_Id = item.disp_Id,
-                        colaborador_id = item.colaborador_id,
-                        lista_atv_id = item.lista_atv_id,
-                        data_inicio = item.data_inicio,
-                        data_fim = item.data_fim,
-                        obs = item.obs
-                    };
-                }
+                //foreach (var item in dados)
+                //{
+                //    dadosAtividade = new Atividade
+                //    {
+                //        disp_Id = item.disp_Id,
+                //        colaborador_id = item.colaborador_id,
+                //        lista_atv_id = item.lista_atv_id,
+                //        data_inicio = item.data_inicio,
+                //        data_fim = item.data_fim,
+                //        obs = item.obs
+                //    };
+                //}
+
+                string[] arrayTemporario = { dados.ToString() };
+
+                dadosSincronismo[7] = arrayTemporario;
+                
             }
 
         }

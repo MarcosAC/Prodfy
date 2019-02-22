@@ -47,12 +47,18 @@ namespace Prodfy.Services.Repository
 
         public Atividade ObterDados()
         {
-            throw new NotImplementedException();
+            if (_dataBase._conexao.Table<Atividade>().Count() > 0)
+            {
+                var dadosAtividade = _dataBase._conexao.Table<Atividade>().FirstOrDefault();
+                return dadosAtividade;
+            }
+
+            return null;
         }
 
         public List<Atividade> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _dataBase._conexao.Table<Atividade>().OrderBy(a => a.idAtividade).ToList();
         }
     }
 }
