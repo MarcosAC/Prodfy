@@ -6,6 +6,7 @@ using Prodfy.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -170,65 +171,46 @@ namespace Prodfy.ViewModels
         {
             bool executarSincronismo = false;
 
-            //string[] contagem = { };
-            //string[] perda = { };
-            //string[] hist = { };
-            //string[] evo = { };
-            //string[] oco = { };
-            //string[] med = { };
-            //string[] exp = { };
-            //string[] atv = { };
+            List<Contagem> dadosContagem = new List<Contagem>();
+            List<Perda> dadosPerda = new List<Perda>();
+            List<Historico> dadosHistorico = new List<Historico>();
+            List<Evolucao> dadosEvolucao = new List<Evolucao>();
+            List<Monit_Ocorr> dadosOcorrencias = new List<Monit_Ocorr>();
+            List<Monit_Med> dadosMedicao = new List<Monit_Med>();
+            List<Expedicao> dadosExpedicao = new List<Expedicao>();
+            List<Atividade> dadosAtividade = new List<Atividade>();
 
-            if (atividadeRepository.ObterTotalDeRegistros() > 0)
+            ArrayList dadosSincronismo = new ArrayList();
+            
+            if (dadosContagem.Count() > 0)
             {
                 executarSincronismo = true;
 
-               // var dados = atividadeRepository.ObterTodos();                
-
-                List<Contagem> dadosContagem = new List<Contagem>();
-                List<Perda> dadosPerda = new List<Perda>();
-                List<Historico> dadosHistorico = new List<Historico>();
-                List<Evolucao> dadosEvolucao = new List<Evolucao>();
-                List<Monit_Ocorr> dadosOcorrencias = new List<Monit_Ocorr>();
-                List<Monit_Med> dadosMedicao = new List<Monit_Med>();
-                List<Expedicao> dadosExpedicao = new List<Expedicao>();
-                List<Atividade> dadosAtividade = new List<Atividade>();
-
-                ArrayList dados = new ArrayList
-                {
-                    dadosContagem,
-                    dadosPerda,
-                    dadosHistorico,
-                    dadosEvolucao,
-                    dadosOcorrencias,
-                    dadosMedicao,
-                    dadosExpedicao,
-                    dadosAtividade
-                };
-
-                ArrayList dadosSincronismo = new ArrayList();
-
-                foreach (var item in dados)
-                {                    
-                    dadosSincronismo.Add(item);
-                }
-
-                #region Dados list para teste
-                //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
-                //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
-                //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
-
-                //dadosPreda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });
-                //dadosPreda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });
-                //dadosPreda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });                
-
-                //dadosAtividade.Add(new Atividade() { disp_Id = "01", colaborador_id = "01", lista_atv_id = "01", data_inicio = "01/01/2019", data_fim = "30/01/2019", obs = "Deu certo:D!!!" });
-                //dadosAtividade.Add(new Atividade() { disp_Id = "02", colaborador_id = "02", lista_atv_id = "02", data_inicio = "01/02/2019", data_fim = "30/03/2019", obs = "Deu certo:D!!!" });
-                //dadosAtividade.Add(new Atividade() { disp_Id = "03", colaborador_id = "03", lista_atv_id = "03", data_inicio = "01/03/2019", data_fim = "30/04/2019", obs = "Deu certo:D!!!" });
-                //dadosAtividade.Add(new Atividade() { disp_Id = "04", colaborador_id = "04", lista_atv_id = "04", data_inicio = "01/04/2019", data_fim = "30/05/2019", obs = "Deu certo:D!!!" });
-                //dadosAtividade.Add(new Atividade() { disp_Id = "05", colaborador_id = "05", lista_atv_id = "05", data_inicio = "01/06/2019", data_fim = "30/07/2019", obs = "Deu certo:D!!!" }); 
-                #endregion
+                dadosSincronismo.Add(dadosContagem);                
             }
+
+            if (dadosPerda.Count() > 0)
+            {
+                executarSincronismo = true;
+
+                dadosSincronismo.Add(dadosPerda);
+            }
+
+            #region Dados list para teste
+            //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
+            //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
+            //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
+
+            //dadosPreda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });
+            //dadosPreda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });
+            //dadosPreda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });                
+
+            //dadosAtividade.Add(new Atividade() { disp_Id = "01", colaborador_id = "01", lista_atv_id = "01", data_inicio = "01/01/2019", data_fim = "30/01/2019", obs = "Deu certo:D!!!" });
+            //dadosAtividade.Add(new Atividade() { disp_Id = "02", colaborador_id = "02", lista_atv_id = "02", data_inicio = "01/02/2019", data_fim = "30/03/2019", obs = "Deu certo:D!!!" });
+            //dadosAtividade.Add(new Atividade() { disp_Id = "03", colaborador_id = "03", lista_atv_id = "03", data_inicio = "01/03/2019", data_fim = "30/04/2019", obs = "Deu certo:D!!!" });
+            //dadosAtividade.Add(new Atividade() { disp_Id = "04", colaborador_id = "04", lista_atv_id = "04", data_inicio = "01/04/2019", data_fim = "30/05/2019", obs = "Deu certo:D!!!" });
+            //dadosAtividade.Add(new Atividade() { disp_Id = "05", colaborador_id = "05", lista_atv_id = "05", data_inicio = "01/06/2019", data_fim = "30/07/2019", obs = "Deu certo:D!!!" }); 
+            #endregion
         }
 
         //private User DataUltimaSincrinismo()
