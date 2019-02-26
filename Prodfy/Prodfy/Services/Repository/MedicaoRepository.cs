@@ -52,7 +52,7 @@ namespace Prodfy.Services.Repository
 
         public List<Monit_Med> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _dataBase._conexao.Table<Monit_Med>().OrderBy(m => m.idMonit_Med).ToList();
         }
     }
 }

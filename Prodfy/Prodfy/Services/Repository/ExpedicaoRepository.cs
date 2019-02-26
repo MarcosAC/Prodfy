@@ -52,7 +52,7 @@ namespace Prodfy.Services.Repository
 
         public List<Expedicao> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _dataBase._conexao.Table<Expedicao>().OrderBy(e => e.idExpedicao).ToList();
         }
     }
 }

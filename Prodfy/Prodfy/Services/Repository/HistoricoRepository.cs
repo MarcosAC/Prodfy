@@ -52,7 +52,7 @@ namespace Prodfy.Services.Repository
 
         public List<Historico> ObterTodos()
         {
-            throw new NotImplementedException();
+            return _dataBase._conexao.Table<Historico>().OrderBy(h => h.idHistorico).ToList();
         }
     }
 }

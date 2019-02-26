@@ -98,7 +98,7 @@ namespace Prodfy.ViewModels
 
             if (VerificaConexaoInternet.VerificaConexao())
             {
-                UploadDados();
+                var dados = UploadDados();
                 var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(userRepository.ObterDados().app_key, userRepository.ObterDados().lang);
 
                 user = new User
@@ -167,9 +167,11 @@ namespace Prodfy.ViewModels
             }
         }
 
-        private void UploadDados()
+        private ArrayList UploadDados()
         {
             bool executarSincronismo = false;
+
+            #region Listas do Indicadores
 
             List<Contagem> dadosContagem = new List<Contagem>();
             List<Perda> dadosPerda = new List<Perda>();
@@ -180,21 +182,84 @@ namespace Prodfy.ViewModels
             List<Expedicao> dadosExpedicao = new List<Expedicao>();
             List<Atividade> dadosAtividade = new List<Atividade>();
 
+            #endregion
+
             ArrayList dadosSincronismo = new ArrayList();
-            
-            if (dadosContagem.Count() > 0)
+
+            // dadosContagem = Inventários
+            if (inventarioRepository.ObterTodos().Count() >= 0) 
             {
                 executarSincronismo = true;
+
+                dadosContagem = inventarioRepository.ObterTodos();
 
                 dadosSincronismo.Add(dadosContagem);                
             }
 
-            if (dadosPerda.Count() > 0)
+            if (perdaRepository.ObterTodos().Count() >= 0)
             {
                 executarSincronismo = true;
 
+                dadosPerda = perdaRepository.ObterTodos();
+
                 dadosSincronismo.Add(dadosPerda);
             }
+
+            if (historicoRepository.ObterTodos().Count() >= 0)
+            {
+                executarSincronismo = true;
+
+                dadosHistorico = historicoRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosHistorico);
+            }
+
+            if (evolucaoRepository.ObterTodos().Count() >= 0)
+            {
+                executarSincronismo = true;
+
+                dadosEvolucao = evolucaoRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosEvolucao);
+            }
+
+            if (ocorrenciaRepository.ObterTodos().Count() >= 0)
+            {
+                executarSincronismo = true;
+
+                dadosOcorrencias = ocorrenciaRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosOcorrencias);
+            }
+
+            if (medicaoRepository.ObterTodos().Count() >= 0)
+            {
+                executarSincronismo = true;
+
+                dadosMedicao = medicaoRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosMedicao);
+            }
+
+            if (expedicaoRepository.ObterTodos().Count() >= 0)
+            {
+                executarSincronismo = true;
+
+                dadosExpedicao = expedicaoRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosExpedicao);
+            }
+
+            if (atividadeRepository.ObterTodos().Count() >= 0)
+            {
+                executarSincronismo = true;
+
+                dadosAtividade = atividadeRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosAtividade);
+            }
+
+            return dadosSincronismo;
 
             #region Dados list para teste
             //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
