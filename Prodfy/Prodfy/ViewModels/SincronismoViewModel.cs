@@ -98,7 +98,7 @@ namespace Prodfy.ViewModels
 
             if (VerificaConexaoInternet.VerificaConexao())
             {
-                if (UploadDados().Count >= 0)
+                if (UploadDados().Count > 0)
                 {
                     executarSincronismo = true;
 
@@ -181,56 +181,56 @@ namespace Prodfy.ViewModels
 
             #region Verifica se existe dados nas tabelas de indicadores
             // dadosContagem = Inventários
-            if (inventarioRepository.ObterTodos().Count() >= 0)
+            if (inventarioRepository.ObterTodos().Count() > 0)
             {
                 dadosContagem = inventarioRepository.ObterTodos();
 
                 dadosSincronismo.Add(dadosContagem);
             }
 
-            if (perdaRepository.ObterTodos().Count() >= 0)
+            if (perdaRepository.ObterTodos().Count() > 0)
             {
                 dadosPerda = perdaRepository.ObterTodos();
 
                 dadosSincronismo.Add(dadosPerda);
             }
 
-            if (historicoRepository.ObterTodos().Count() >= 0)
+            if (historicoRepository.ObterTodos().Count() > 0)
             {
                 dadosHistorico = historicoRepository.ObterTodos();
 
                 dadosSincronismo.Add(dadosHistorico);
             }
 
-            if (evolucaoRepository.ObterTodos().Count() >= 0)
+            if (evolucaoRepository.ObterTodos().Count() > 0)
             {
                 dadosEvolucao = evolucaoRepository.ObterTodos();
 
                 dadosSincronismo.Add(dadosEvolucao);
             }
 
-            if (ocorrenciaRepository.ObterTodos().Count() >= 0)
+            if (ocorrenciaRepository.ObterTodos().Count() > 0)
             {
                 dadosOcorrencias = ocorrenciaRepository.ObterTodos();
 
                 dadosSincronismo.Add(dadosOcorrencias);
             }
 
-            if (medicaoRepository.ObterTodos().Count() >= 0)
+            if (medicaoRepository.ObterTodos().Count() > 0)
             {
                 dadosMedicao = medicaoRepository.ObterTodos();
 
                 dadosSincronismo.Add(dadosMedicao);
             }
 
-            if (expedicaoRepository.ObterTodos().Count() >= 0)
+            if (expedicaoRepository.ObterTodos().Count() > 0)
             {
                 dadosExpedicao = expedicaoRepository.ObterTodos();
 
                 dadosSincronismo.Add(dadosExpedicao);
             }
 
-            if (atividadeRepository.ObterTodos().Count() >= 0)
+            if (atividadeRepository.ObterTodos().Count() > 0)
             {
                 dadosAtividade = atividadeRepository.ObterTodos();
 
