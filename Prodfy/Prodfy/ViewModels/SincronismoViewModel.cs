@@ -94,11 +94,21 @@ namespace Prodfy.ViewModels
 
         private async void ExecuteSincronizarCommand()
         {
-            UploadDados();
+            bool executarSincronismo = false;
 
             if (VerificaConexaoInternet.VerificaConexao())
             {
-                var dados = UploadDados();
+                if (UploadDados().Count >= 0)
+                {
+                    executarSincronismo = true;
+
+                    dadosSincronismo.UploadDadosParaSincronisar(userRepository.ObterDados().app_key, userRepository.ObterDados().lang, UploadDados());
+                }
+                else
+                {
+                    return;
+                }
+
                 var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(userRepository.ObterDados().app_key, userRepository.ObterDados().lang);
 
                 user = new User
@@ -119,6 +129,116 @@ namespace Prodfy.ViewModels
             {
                 await _dialogService.AlertAsync("Erro", "Sem conexão com a internet!", "Ok");
             }
+        }
+
+        private ArrayList UploadDados()
+        {
+            #region Listas do Indicadores
+
+            List<Contagem> dadosContagem = new List<Contagem>();
+            List<Perda> dadosPerda = new List<Perda>();
+            List<Historico> dadosHistorico = new List<Historico>();
+            List<Evolucao> dadosEvolucao = new List<Evolucao>();
+            List<Monit_Ocorr> dadosOcorrencias = new List<Monit_Ocorr>();
+            List<Monit_Med> dadosMedicao = new List<Monit_Med>();
+            List<Expedicao> dadosExpedicao = new List<Expedicao>();
+            List<Atividade> dadosAtividade = new List<Atividade>();
+
+            #endregion
+
+            ArrayList dadosSincronismo = new ArrayList();
+
+            #region Dados para teste
+            //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
+            //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
+            //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
+
+            //dadosPerda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });
+            //dadosPerda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });
+            //dadosPerda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });
+
+            //dadosAtividade.Add(new Atividade() { disp_Id = "01", colaborador_id = "01", lista_atv_id = "01", data_inicio = "01/01/2019", data_fim = "30/01/2019", obs = "Deu certo:D!!!" });
+            //dadosAtividade.Add(new Atividade() { disp_Id = "02", colaborador_id = "02", lista_atv_id = "02", data_inicio = "01/02/2019", data_fim = "30/03/2019", obs = "Deu certo:D!!!" });
+            //dadosAtividade.Add(new Atividade() { disp_Id = "03", colaborador_id = "03", lista_atv_id = "03", data_inicio = "01/03/2019", data_fim = "30/04/2019", obs = "Deu certo:D!!!" });
+            //dadosAtividade.Add(new Atividade() { disp_Id = "04", colaborador_id = "04", lista_atv_id = "04", data_inicio = "01/04/2019", data_fim = "30/05/2019", obs = "Deu certo:D!!!" });
+            //dadosAtividade.Add(new Atividade() { disp_Id = "05", colaborador_id = "05", lista_atv_id = "05", data_inicio = "01/06/2019", data_fim = "30/07/2019", obs = "Deu certo:D!!!" });
+
+            //if (dadosContagem.Count() > 0)
+            //{
+            //    dadosSincronismo.Add(dadosContagem);
+            //}
+
+            //if (dadosPerda.Count() >0)
+            //{
+            //    dadosSincronismo.Add(dadosPerda);
+            //}
+
+            //if (dadosAtividade.Count() > 0)
+            //{
+            //    dadosSincronismo.Add(dadosAtividade);
+            //}
+            #endregion
+
+            #region Verifica se existe dados nas tabelas de indicadores
+            // dadosContagem = Inventários
+            if (inventarioRepository.ObterTodos().Count() >= 0)
+            {
+                dadosContagem = inventarioRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosContagem);
+            }
+
+            if (perdaRepository.ObterTodos().Count() >= 0)
+            {
+                dadosPerda = perdaRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosPerda);
+            }
+
+            if (historicoRepository.ObterTodos().Count() >= 0)
+            {
+                dadosHistorico = historicoRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosHistorico);
+            }
+
+            if (evolucaoRepository.ObterTodos().Count() >= 0)
+            {
+                dadosEvolucao = evolucaoRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosEvolucao);
+            }
+
+            if (ocorrenciaRepository.ObterTodos().Count() >= 0)
+            {
+                dadosOcorrencias = ocorrenciaRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosOcorrencias);
+            }
+
+            if (medicaoRepository.ObterTodos().Count() >= 0)
+            {
+                dadosMedicao = medicaoRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosMedicao);
+            }
+
+            if (expedicaoRepository.ObterTodos().Count() >= 0)
+            {
+                dadosExpedicao = expedicaoRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosExpedicao);
+            }
+
+            if (atividadeRepository.ObterTodos().Count() >= 0)
+            {
+                dadosAtividade = atividadeRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosAtividade);
+            }
+            #endregion
+
+            return dadosSincronismo;
         }
 
         private Command _RefreshCommand;
@@ -166,118 +286,7 @@ namespace Prodfy.ViewModels
                 return;
             }
         }
-
-        private ArrayList UploadDados()
-        {
-            bool executarSincronismo = false;
-
-            #region Listas do Indicadores
-
-            List<Contagem> dadosContagem = new List<Contagem>();
-            List<Perda> dadosPerda = new List<Perda>();
-            List<Historico> dadosHistorico = new List<Historico>();
-            List<Evolucao> dadosEvolucao = new List<Evolucao>();
-            List<Monit_Ocorr> dadosOcorrencias = new List<Monit_Ocorr>();
-            List<Monit_Med> dadosMedicao = new List<Monit_Med>();
-            List<Expedicao> dadosExpedicao = new List<Expedicao>();
-            List<Atividade> dadosAtividade = new List<Atividade>();
-
-            #endregion
-
-            ArrayList dadosSincronismo = new ArrayList();
-
-            // dadosContagem = Inventários
-            if (inventarioRepository.ObterTodos().Count() >= 0) 
-            {
-                executarSincronismo = true;
-
-                dadosContagem = inventarioRepository.ObterTodos();
-
-                dadosSincronismo.Add(dadosContagem);                
-            }
-
-            if (perdaRepository.ObterTodos().Count() >= 0)
-            {
-                executarSincronismo = true;
-
-                dadosPerda = perdaRepository.ObterTodos();
-
-                dadosSincronismo.Add(dadosPerda);
-            }
-
-            if (historicoRepository.ObterTodos().Count() >= 0)
-            {
-                executarSincronismo = true;
-
-                dadosHistorico = historicoRepository.ObterTodos();
-
-                dadosSincronismo.Add(dadosHistorico);
-            }
-
-            if (evolucaoRepository.ObterTodos().Count() >= 0)
-            {
-                executarSincronismo = true;
-
-                dadosEvolucao = evolucaoRepository.ObterTodos();
-
-                dadosSincronismo.Add(dadosEvolucao);
-            }
-
-            if (ocorrenciaRepository.ObterTodos().Count() >= 0)
-            {
-                executarSincronismo = true;
-
-                dadosOcorrencias = ocorrenciaRepository.ObterTodos();
-
-                dadosSincronismo.Add(dadosOcorrencias);
-            }
-
-            if (medicaoRepository.ObterTodos().Count() >= 0)
-            {
-                executarSincronismo = true;
-
-                dadosMedicao = medicaoRepository.ObterTodos();
-
-                dadosSincronismo.Add(dadosMedicao);
-            }
-
-            if (expedicaoRepository.ObterTodos().Count() >= 0)
-            {
-                executarSincronismo = true;
-
-                dadosExpedicao = expedicaoRepository.ObterTodos();
-
-                dadosSincronismo.Add(dadosExpedicao);
-            }
-
-            if (atividadeRepository.ObterTodos().Count() >= 0)
-            {
-                executarSincronismo = true;
-
-                dadosAtividade = atividadeRepository.ObterTodos();
-
-                dadosSincronismo.Add(dadosAtividade);
-            }
-
-            return dadosSincronismo;
-
-            #region Dados list para teste
-            //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
-            //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
-            //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
-
-            //dadosPreda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });
-            //dadosPreda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });
-            //dadosPreda.Add(new Perda() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", motivo_id = "Tabela Perdas" });                
-
-            //dadosAtividade.Add(new Atividade() { disp_Id = "01", colaborador_id = "01", lista_atv_id = "01", data_inicio = "01/01/2019", data_fim = "30/01/2019", obs = "Deu certo:D!!!" });
-            //dadosAtividade.Add(new Atividade() { disp_Id = "02", colaborador_id = "02", lista_atv_id = "02", data_inicio = "01/02/2019", data_fim = "30/03/2019", obs = "Deu certo:D!!!" });
-            //dadosAtividade.Add(new Atividade() { disp_Id = "03", colaborador_id = "03", lista_atv_id = "03", data_inicio = "01/03/2019", data_fim = "30/04/2019", obs = "Deu certo:D!!!" });
-            //dadosAtividade.Add(new Atividade() { disp_Id = "04", colaborador_id = "04", lista_atv_id = "04", data_inicio = "01/04/2019", data_fim = "30/05/2019", obs = "Deu certo:D!!!" });
-            //dadosAtividade.Add(new Atividade() { disp_Id = "05", colaborador_id = "05", lista_atv_id = "05", data_inicio = "01/06/2019", data_fim = "30/07/2019", obs = "Deu certo:D!!!" }); 
-            #endregion
-        }
-
+        
         //private User DataUltimaSincrinismo()
         //{
         //    try

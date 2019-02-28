@@ -3,6 +3,7 @@ using Prodfy.Helpers;
 using Prodfy.Models;
 using Prodfy.Services.Dialog;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -61,22 +62,16 @@ namespace Prodfy.Services.API
             return null;
         }
 
-        public async void UploadDadosParaSincronisar(string appKey, string idioma)
+        public async void UploadDadosParaSincronisar(string appKey, string idioma, ArrayList dadosSincrismo)
         {
             HttpClient request = new HttpClient
             {
                 BaseAddress = new Uri(Contantes.BASE_URL)
             };
 
-            string dadosParaUpload = "{" + '"' + "contagem" + '"' + ": []" + "," +
-                                           '"' + "atividade" + '"' + ": []" + "," +
-                                           '"' + "inventario" + '"' + ": []" + "," +
-                                           '"' + "perda" + '"' + ": []" + "," +
-                                           '"' + "historico" + '"' + ": []" + "," +
-                                           '"' + "evolucao" + '"' + ": []" + "," +
-                                           '"' + "ocorrencia" + '"' + ": []" + "," +
-                                           '"' + "medicao" + '"' + ": []" + "," +
-                                           '"' + "expedicao" + '"' + ": []" + "," + "}";
+            string dados = JsonConvert.SerializeObject(dadosSincrismo, Formatting.Indented); 
+
+            string dadosParaUpload = "{" + dados + "}";            
 
             FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("l", idioma),
