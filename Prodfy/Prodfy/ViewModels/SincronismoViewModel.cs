@@ -149,7 +149,7 @@ namespace Prodfy.ViewModels
             ArrayList dadosSincronismo = new ArrayList();
 
             #region Dados para teste
-            //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
+            //dadosContagem.Add(new Contagem() { idContagem= 01,  disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo", ponto_controle_id = "01", estagio_id = "01", data_selecao = "01/03/2019", data_inicio = "01/03/2019", data_fim = "03/03/2019", data_estaq = "03/03/2019", colab_estaq_id = "01", colab_sel_id = "6000", qualidade_id = "01", latitude = "010203", longitude = "010203", last_update = "03/03/2019", ind_sinc  = 1});
             //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
             //dadosContagem.Add(new Contagem() { disp_id = "01", lote_id = "02", muda_id = "03", qtde = "10", proc = "Deu certo" });
 
@@ -168,7 +168,7 @@ namespace Prodfy.ViewModels
             //    dadosSincronismo.Add(dadosContagem);
             //}
 
-            //if (dadosPerda.Count() >0)
+            //if (dadosPerda.Count() > 0)
             //{
             //    dadosSincronismo.Add(dadosPerda);
             //}

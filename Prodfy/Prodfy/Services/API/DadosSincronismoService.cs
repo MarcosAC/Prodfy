@@ -75,7 +75,7 @@ namespace Prodfy.Services.API
 
             FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("l", idioma),
-                new KeyValuePair<string, string>("a", "U"),
+                new KeyValuePair<string, string>("a", "u"),
                 new KeyValuePair<string, string>("k", appKey),
                 new KeyValuePair<string, string>("d", dadosParaUpload)
             });
@@ -83,6 +83,8 @@ namespace Prodfy.Services.API
             try
             {
                 HttpResponseMessage response = await request.PostAsync(Contantes.BASE_URL, parametros);
+
+                var conteudoResponse = await response.Content.ReadAsStringAsync();
             }
             catch (Exception)
             {
