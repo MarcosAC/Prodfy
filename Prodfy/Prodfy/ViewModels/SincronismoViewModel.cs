@@ -52,7 +52,7 @@ namespace Prodfy.ViewModels
             SincronizarCommand = new Command(ExecuteSincronizarCommand, CanExecuteSincronizarCommand);
         }
 
-        #region Propriedades
+        #region Propriedades sincronismo
 
         public string DhtLastSincr { get => "Não Sincronizado!"; }
         public int? IndAtv { get => sincronismo?.ind_atv; }
@@ -94,36 +94,30 @@ namespace Prodfy.ViewModels
 
         private async void ExecuteSincronizarCommand()
         {
-            bool executarSincronismo = false;
-
             if (VerificaConexaoInternet.VerificaConexao())
             {
                 if (UploadDados().Count > 0)
                 {
-                    executarSincronismo = true;
-
                     dadosSincronismo.UploadDadosParaSincronisar(userRepository.ObterDados().app_key, userRepository.ObterDados().lang, UploadDados());
                 }
                 else
                 {
-                    return;
-                }
+                    var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(userRepository.ObterDados().app_key, userRepository.ObterDados().lang);
 
-                var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(userRepository.ObterDados().app_key, userRepository.ObterDados().lang);
-
-                user = new User
-                {
-                    ind_ident = _dadosSincronismo.ind_ident,
-                    ind_inv = _dadosSincronismo.ind_inv,
-                    ind_per = _dadosSincronismo.ind_per,
-                    ind_hist = _dadosSincronismo.ind_hist,
-                    ind_evo = _dadosSincronismo.ind_evo,
-                    ind_mnt = _dadosSincronismo.ind_mnt,
-                    ind_exp = _dadosSincronismo.ind_exp,
-                    ind_atv = _dadosSincronismo.ind_atv,
-                    uso_liberado = _dadosSincronismo.uso_liberado
-                };
-                userRepository.Editar(user);
+                    user = new User
+                    {
+                        ind_ident = _dadosSincronismo.ind_ident,
+                        ind_inv = _dadosSincronismo.ind_inv,
+                        ind_per = _dadosSincronismo.ind_per,
+                        ind_hist = _dadosSincronismo.ind_hist,
+                        ind_evo = _dadosSincronismo.ind_evo,
+                        ind_mnt = _dadosSincronismo.ind_mnt,
+                        ind_exp = _dadosSincronismo.ind_exp,
+                        ind_atv = _dadosSincronismo.ind_atv,
+                        uso_liberado = _dadosSincronismo.uso_liberado
+                    };
+                    userRepository.Editar(user);
+                }                
             }
             else
             {
@@ -180,6 +174,7 @@ namespace Prodfy.ViewModels
             #endregion
 
             #region Verifica se existe dados nas tabelas de indicadores
+
             // dadosContagem = Inventários
             if (inventarioRepository.ObterTodos().Count() > 0)
             {
@@ -236,6 +231,7 @@ namespace Prodfy.ViewModels
 
                 dadosSincronismo.Add(dadosAtividade);
             }
+
             #endregion
 
             return dadosSincronismo;
