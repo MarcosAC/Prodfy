@@ -43,14 +43,14 @@ namespace Prodfy.Services.API
 
                     var sincronismo = new Sincronismo
                     {
-                        ind_ident = dadosSincronismo?.ind_ident,
-                        ind_inv = dadosSincronismo?.ind_inv,
-                        ind_per = dadosSincronismo?.ind_per,
-                        ind_hist = dadosSincronismo?.ind_hist,
-                        ind_evo = dadosSincronismo?.ind_evo,
-                        ind_mnt  = dadosSincronismo?.ind_mnt,
-                        ind_exp = dadosSincronismo?.ind_exp,
-                        ind_atv = dadosSincronismo?.ind_atv
+                        ind_ident = dadosSincronismo.ind_ident,
+                        ind_inv = dadosSincronismo.ind_inv,
+                        ind_per = dadosSincronismo.ind_per,
+                        ind_hist = dadosSincronismo.ind_hist,
+                        ind_evo = dadosSincronismo.ind_evo,
+                        ind_mnt  = dadosSincronismo.ind_mnt,
+                        ind_exp = dadosSincronismo.ind_exp,
+                        ind_atv = dadosSincronismo.ind_atv
                     };
                     return sincronismo;
                 }
@@ -62,7 +62,7 @@ namespace Prodfy.Services.API
             return null;
         }
 
-        public async void UploadDadosParaSincronisar(string appKey, string idioma, ArrayList dadosSincrismo)
+        public async Task<Sincronismo> UploadDadosParaSincronisar(string appKey, string idioma, ArrayList dadosSincrismo)
         {
             HttpClient request = new HttpClient
             {
@@ -84,13 +84,31 @@ namespace Prodfy.Services.API
             {
                 HttpResponseMessage response = await request.PostAsync(Contantes.BASE_URL, parametros);
 
-                var conteudoResponse = await response.Content.ReadAsStringAsync();
+                if (response.IsSuccessStatusCode)
+                {
+                    var conteudoResponse = await response.Content.ReadAsStringAsync();
+
+                    var dadosResponse = JsonConvert.DeserializeObject<Sincronismo>(conteudoResponse);                    
+
+                    switch (dadosResponse.sinc_stat)
+                    {
+                        case 0:
+                            await _dialogService.AlertAsync("Erro", dadosResponse.sinc_msg, "Ok");                            
+                            break;
+                        case 1:
+                            await _dialogService.AlertAsync("Sucesso!", dadosResponse.sinc_msg, "Ok");                            
+                            break;
+                    }
+
+                    return dadosResponse;
+                }
             }
             catch (Exception)
             {
-
-                throw;
+                await _dialogService.AlertAsync("Erro", "Erro de sincronização.", "Ok");
             }
+
+            return null;
         }
     }
 }
