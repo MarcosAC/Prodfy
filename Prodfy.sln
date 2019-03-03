@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prodfy.Android", "Prodfy\Prodfy.Android\Prodfy.Android.csproj", "{464040F2-3103-4991-8E87-FC5A4E12B859}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prodfy", "Prodfy\Prodfy\Prodfy.csproj", "{43D5CEF4-773F-4C3E-BE41-EF27E945FC20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prodfy", "Prodfy\Prodfy\Prodfy.csproj", "{43D5CEF4-773F-4C3E-BE41-EF27E945FC20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

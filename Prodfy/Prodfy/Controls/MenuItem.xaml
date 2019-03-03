@@ -80,7 +80,7 @@
                        TextColor="Gray" />
 
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnTapped_Funcoes" />
+                        <TapGestureRecognizer Tapped="OnTapped_Funcoes" />                      
                     </StackLayout.GestureRecognizers>
             </StackLayout>
 

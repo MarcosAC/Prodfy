@@ -35,9 +35,9 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public void Deletar(Evolucao entidade)
+        public void Deletar()
         {
-            throw new NotImplementedException();
+            _dataBase._conexao.Execute("Delete From Evolucao");
         }
 
         public void Editar(Evolucao entidade)

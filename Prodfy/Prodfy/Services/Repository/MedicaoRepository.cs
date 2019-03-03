@@ -35,9 +35,9 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public void Deletar(Monit_Med entidade)
+        public void Deletar()
         {
-            throw new NotImplementedException();
+            _dataBase._conexao.Execute("Delete From Monit_Med");
         }
 
         public void Editar(Monit_Med entidade)

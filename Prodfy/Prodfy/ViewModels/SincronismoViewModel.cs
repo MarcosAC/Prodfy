@@ -101,30 +101,40 @@ namespace Prodfy.ViewModels
                     //await dadosSincronismo.UploadDadosParaSincronisar(userRepository.ObterDados().app_key, userRepository.ObterDados().lang, UploadDados());
 
                     var dadosResponse = await dadosSincronismo.UploadDadosParaSincronisar(userRepository.ObterDados().app_key, userRepository.ObterDados().lang, UploadDados());
-                    
-                    //if (dadosResponse.ind_atv >= 0)  // Atividade
-                    //    return;
 
-                    //if (dadosResponse.ind_evo >= 0) // Evolução
-                    //    return;
+                    if (dadosResponse.ind_atv != null)  // Atividade
+                    {
+                        if (dadosResponse.ind_atv == 0)
+                        {
 
-                    //if (dadosResponse.ind_exp >= 0) // Expedição
-                    //    return;
+                        }
+                        else if (dadosResponse.ind_atv == 1)
+                        {
+                            atividadeRepository.Deletar();
+                        }
+                        return;
+                    }                    
 
-                    //if (dadosResponse.ind_hist >= 0) // Historico
-                    //    return;
+                    if (dadosResponse.ind_evo >= 0) // Evolução
+                        return;
 
-                    //if (dadosResponse.ind_inv >= 0) // Inventario
-                    //    return;
+                    if (dadosResponse.ind_exp >= 0) // Expedição
+                        return;
 
-                    //if (dadosResponse.ind_mnt >= 0) // Mediçã0
-                    //    return;
+                    if (dadosResponse.ind_hist >= 0) // Historico
+                        return;
 
-                    //if (dadosResponse.ind_oco >= 0) // Ocorrencia
-                    //    return;
+                    if (dadosResponse.ind_inv >= 0) // Inventario
+                        return;
 
-                    //if (dadosResponse.ind_per >= 0) // Perda
-                    //    return;
+                    if (dadosResponse.ind_mnt >= 0) // Mediçã0
+                        return;
+
+                    if (dadosResponse.ind_oco >= 0) // Ocorrencia
+                        return;
+
+                    if (dadosResponse.ind_per >= 0) // Perda
+                        return;
                 }
                 else
                 {
