@@ -44,13 +44,13 @@ namespace Prodfy.Services.API
                     var sincronismo = new Sincronismo
                     {
                         ind_ident = dadosSincronismo.ind_ident,
-                        ind_inv = dadosSincronismo.ind_inv,
-                        ind_per = dadosSincronismo.ind_per,
-                        ind_hist = dadosSincronismo.ind_hist,
+                        ind_atv = dadosSincronismo.ind_atv,
                         ind_evo = dadosSincronismo.ind_evo,
-                        ind_mnt  = dadosSincronismo.ind_mnt,
                         ind_exp = dadosSincronismo.ind_exp,
-                        ind_atv = dadosSincronismo.ind_atv
+                        ind_hist = dadosSincronismo.ind_hist,
+                        ind_inv = dadosSincronismo.ind_inv,
+                        ind_mnt = dadosSincronismo.ind_mnt,
+                        ind_per = dadosSincronismo.ind_per
                     };
                     return sincronismo;
                 }
@@ -96,7 +96,7 @@ namespace Prodfy.Services.API
                             await _dialogService.AlertAsync("Erro", dadosResponse.sinc_msg, "Ok");                            
                             break;
                         case 1:
-                            await _dialogService.AlertAsync("Sucesso!", dadosResponse.sinc_msg, "Ok");                            
+                            await _dialogService.AlertAsync("Sincronia", dadosResponse.sinc_msg, "Ok");                            
                             break;
                     }
 

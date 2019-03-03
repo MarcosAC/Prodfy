@@ -98,43 +98,55 @@ namespace Prodfy.ViewModels
             {
                 if (UploadDados().Count >= 0)
                 {
-                    //await dadosSincronismo.UploadDadosParaSincronisar(userRepository.ObterDados().app_key, userRepository.ObterDados().lang, UploadDados());
-
                     var dadosResponse = await dadosSincronismo.UploadDadosParaSincronisar(userRepository.ObterDados().app_key, userRepository.ObterDados().lang, UploadDados());
 
-                    if (dadosResponse.ind_atv != null)  // Atividade
+                    if (dadosResponse.ind_atv != null) // Atividade
                     {
-                        if (dadosResponse.ind_atv == 0)
-                        {
-
-                        }
-                        else if (dadosResponse.ind_atv == 1)
-                        {
+                        if (dadosResponse.ind_atv == 1)
                             atividadeRepository.Deletar();
-                        }
-                        return;
                     }                    
 
-                    if (dadosResponse.ind_evo >= 0) // Evolução
-                        return;
+                    if (dadosResponse.ind_evo != null) // Evolução
+                    {
+                        if (dadosResponse.ind_evo == 1)
+                            evolucaoRepository.Deletar();
+                    }
 
-                    if (dadosResponse.ind_exp >= 0) // Expedição
-                        return;
+                    if (dadosResponse.ind_exp != null) // Expedição
+                    {
+                        if (dadosResponse.ind_exp == 1)
+                            expedicaoRepository.Deletar();
+                    }
 
-                    if (dadosResponse.ind_hist >= 0) // Historico
-                        return;
+                    if (dadosResponse.ind_hist != null) // Historico
+                    {
+                        if (dadosResponse.ind_hist == 1)
+                            historicoRepository.Deletar();
+                    }
 
-                    if (dadosResponse.ind_inv >= 0) // Inventario
-                        return;
+                    if (dadosResponse.ind_inv != null) // Inventario
+                    {
+                        if (dadosResponse.ind_inv == 1)
+                            inventarioRepository.Deletar();
+                    }
 
-                    if (dadosResponse.ind_mnt >= 0) // Mediçã0
-                        return;
+                    if (dadosResponse.ind_mnt != null) // Mediçã0
+                    {
+                        if (dadosResponse.ind_mnt == 1)
+                            medicaoRepository.Deletar();
+                    }
 
-                    if (dadosResponse.ind_oco >= 0) // Ocorrencia
-                        return;
+                    if (dadosResponse.ind_oco != null) // Ocorrencia
+                    {
+                        if (dadosResponse.ind_oco == 1)
+                            ocorrenciaRepository.Deletar();
+                    }
 
-                    if (dadosResponse.ind_per >= 0) // Perda
-                        return;
+                    if (dadosResponse.ind_per != null) // Perda
+                    {
+                        if (dadosResponse.ind_per == 1)
+                            perdaRepository.Deletar();
+                    }
                 }
                 else
                 {
