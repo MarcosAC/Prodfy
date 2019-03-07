@@ -15,19 +15,19 @@ namespace Prodfy.Views
 
             // BindingContext = new FuncoesViewModel();
 
-            VerificarUsuarioLogado();
+           // VerificarUsuarioLogado();
 
         }
 
-        private bool VerificarUsuarioLogado()
-        {
-            var usuarioLogado = Login.VerificaLogin;
+        //private bool VerificarUsuarioLogado()
+        //{
+        //    var usuarioLogado = Login.VerificaLogin;
 
-            if (usuarioLogado.UsuarioEstaLogado())
-                return true;
+        //    if (usuarioLogado.UsuarioEstaLogado())
+        //        return true;
 
-            return false;
-        }
+        //    return false;
+        //}
 
         private void OnClicked_Identificação(object sender, System.EventArgs e)
         {

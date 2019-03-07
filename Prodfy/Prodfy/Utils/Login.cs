@@ -1,30 +1,41 @@
-﻿using Prodfy.Services.Repository;
+﻿using Prodfy.Services.Dialog;
+using Prodfy.Services.Repository;
+using System.Threading.Tasks;
 
 namespace Prodfy.Utils
 {
-    public static class Login
+    public class Login
     {
-        public static VerificaLogin VerificaLogin { get; }
-    }
+        //public static VerificaLogin VerificaLogin { get; }
+        //private readonly IDialogService dialogService;
 
-    public class VerificaLogin
-    {
-        private UserRepository userRepository;
+        //private UserRepository userRepository;
 
-        public VerificaLogin()
+        //public Login()
+        //{
+        //    //dialogService = new DialogService();
+
+        //    //userRepository = new UserRepository();
+        //}
+
+        public static bool UsuarioEstaLogado(/*string senha = null*/)
         {
-            userRepository = new UserRepository();
-        }
+            UserRepository userRepository = new UserRepository();
 
-        public bool UsuarioEstaLogado()
-        {
             var dadosUser = userRepository.ObterDados();
 
-            if (dadosUser?.senha != null)
-                if (dadosUser?.senha == dadosUser?.senha)
-                    return true;
+            if (dadosUser?.sinc_stat == 1)
+                return true;
 
             return false;
+
+            //if (dadosUser?.sinc_stat == 1)
+            //{
+            //    if (dadosUser?.senha == senha)                
+            //        return true;
+            //    else                
+            //        await dialogService.AlertAsync("Login", "Senha inválida!", "Ok");                             
+            //}
         }
     }
 }
