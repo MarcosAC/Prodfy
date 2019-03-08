@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using Prodfy.Utils;
+using Prodfy.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Views
@@ -10,7 +12,22 @@ namespace Prodfy.Views
 		{
 			InitializeComponent ();
             NavigationPage.SetHasNavigationBar(this, false);
-		}
+
+            // BindingContext = new FuncoesViewModel();
+
+           // VerificarUsuarioLogado();
+
+        }
+
+        //private bool VerificarUsuarioLogado()
+        //{
+        //    var usuarioLogado = Login.VerificaLogin;
+
+        //    if (usuarioLogado.UsuarioEstaLogado())
+        //        return true;
+
+        //    return false;
+        //}
 
         private void OnClicked_Identificação(object sender, System.EventArgs e)
         {

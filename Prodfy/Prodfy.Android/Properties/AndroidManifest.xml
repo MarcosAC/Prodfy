@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0.0" package="com.companyname" android:installLocation="preferExternal" android:versionCode="2">
+=======
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="1.0" package="com.companyname" android:installLocation="preferExternal" android:versionCode="2">
+>>>>>>> 93b0ea1155dd64378566e93c5bd1de8bcb73b29c
 	<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="27" />
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
