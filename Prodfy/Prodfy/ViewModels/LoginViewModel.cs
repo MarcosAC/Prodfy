@@ -1,5 +1,6 @@
 ﻿using Prodfy.Models;
 using Prodfy.Services.Repository;
+using Prodfy.Utils;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace Prodfy.ViewModels
         }
 
         private bool _logado;
-        public bool Logado { get => _logado = VerificarUsuarioLogado(); }
+        public bool Logado { get => _logado = Login.UsuarioEstaLogado(); }
 
         private string _senha;
         public string Senha
