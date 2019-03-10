@@ -20,7 +20,7 @@ namespace Prodfy.ViewModels
         }
 
         private bool _logado;
-        public bool Logado { get => _logado = Login.UsuarioEstaLogado(); }
+        public bool Logado { get => _logado = VerificarUsuarioLogado(); }
 
         private string _senha;
         public string Senha
@@ -35,8 +35,9 @@ namespace Prodfy.ViewModels
 
         private bool VerificarUsuarioLogado()
         {
-            if (dadosLogin?.senha != null)
-                if (Senha == dadosLogin?.senha)
+            if (Login.UsuarioEstaLogado())
+                if (dadosLogin?.senha != null)
+                    if (Senha == dadosLogin?.senha)
                     return true;
 
             return false;              

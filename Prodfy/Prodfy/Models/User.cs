@@ -28,7 +28,7 @@ namespace Prodfy.Models
         public int? ind_atv { get; set; }
         public int? uso_liberado { get; set; }
         public string dht_last_sincr { get; set; }
-        public int sinc_stat { get; set; }
+        public int? sinc_stat { get; set; }
         public string sinc_msg { get; set; }
     }
 }
