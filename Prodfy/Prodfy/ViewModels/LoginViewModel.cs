@@ -1,4 +1,5 @@
 ﻿using Prodfy.Models;
+using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
 using Prodfy.Utils;
 using System;
@@ -11,16 +12,21 @@ namespace Prodfy.ViewModels
     public class LoginViewModel : BaseViewModel
     {
         private readonly UserRepository userRepository;
+        private readonly IDialogService dialogService;
 
-        private User dadosLogin = null;                
+        private User dadosLogin = null;
+
+        readonly bool estaLogado = Login.UsuarioEstaLogado();
 
         public LoginViewModel()
         {
             userRepository = new UserRepository();
+
+            dialogService = new DialogService();
         }
 
         private bool _logado;
-        public bool Logado { get => _logado = VerificarUsuarioLogado(); }
+        public bool Logado { get => _logado = estaLogado; }
 
         private string _senha;
         public string Senha
@@ -35,12 +41,21 @@ namespace Prodfy.ViewModels
 
         private bool VerificarUsuarioLogado()
         {
-            if (Login.UsuarioEstaLogado())
-                if (dadosLogin?.senha != null)
-                    if (Senha == dadosLogin?.senha)
-                    return true;
+            if (estaLogado)
+            {
+                switch (dadosLogin?.senha != null)
+                {
+                    case true:
+                        if (Senha == dadosLogin?.senha)
+                            return true;
+                        break;
 
-            return false;              
+                    case false:
+                        // if (estaLogado)
+                        return estaLogado;
+                }
+            }
+            return false;
         }
 
         private Command _loginCommand;
@@ -49,7 +64,17 @@ namespace Prodfy.ViewModels
         
         private async void ExecuteLoginCommand()
         {
-            await RefreshCommandExecute();            
+            //await RefreshCommandExecute();
+
+            if (Senha != null)
+            {
+                if (dadosLogin?.senha == Senha)
+                    await RefreshCommandExecute();
+            }
+            else
+            {
+                await dialogService.AlertAsync("Login", "Senha inválida!", "Ok");
+            }
         }
 
         private Command _RefreshCommand;
@@ -80,7 +105,7 @@ namespace Prodfy.ViewModels
                     OnPropertyChanged(nameof(Senha));
                 }
 
-                if (VerificarUsuarioLogado())
+                if (estaLogado)
                 {
                     OnPropertyChanged(nameof(Empresa));
                     OnPropertyChanged(nameof(Senha));
