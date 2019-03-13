@@ -14,19 +14,19 @@ namespace Prodfy.ViewModels
         private readonly UserRepository userRepository;
         private readonly IDialogService dialogService;
 
-        private User dadosLogin = null;
-
-        readonly bool estaLogado = Login.UsuarioEstaLogado();
+        private User dadosLogin = null;        
 
         public LoginViewModel()
         {
             userRepository = new UserRepository();
 
             dialogService = new DialogService();
+
+            //estaLogado = Login.UsuarioEstaLogado();
         }
 
         private bool _logado;
-        public bool Logado { get => _logado = estaLogado; }
+        public bool Logado { get => _logado = VerificarUsuarioLogado(); }
 
         private string _senha;
         public string Senha
@@ -37,26 +37,7 @@ namespace Prodfy.ViewModels
 
         public string DispNum { get => dadosLogin?.disp_num; }
         public string Nome { get => dadosLogin?.nome; }
-        public string Empresa { get => dadosLogin?.empresa; }
-
-        private bool VerificarUsuarioLogado()
-        {
-            if (estaLogado)
-            {
-                switch (dadosLogin?.senha != null)
-                {
-                    case true:
-                        if (Senha == dadosLogin?.senha)
-                            return true;
-                        break;
-
-                    case false:
-                        // if (estaLogado)
-                        return estaLogado;
-                }
-            }
-            return false;
-        }
+        public string Empresa { get => dadosLogin?.empresa; }        
 
         private Command _loginCommand;
         public Command LoginCommand =>
@@ -70,6 +51,8 @@ namespace Prodfy.ViewModels
             {
                 if (dadosLogin?.senha == Senha)
                     await RefreshCommandExecute();
+                else
+                    await dialogService.AlertAsync("Login", "Senha inválida!", "Ok");
             }
             else
             {
@@ -105,17 +88,69 @@ namespace Prodfy.ViewModels
                     OnPropertyChanged(nameof(Senha));
                 }
 
-                if (estaLogado)
+                if (Senha != null)
                 {
-                    OnPropertyChanged(nameof(Empresa));
-                    OnPropertyChanged(nameof(Senha));
-                    OnPropertyChanged(nameof(Logado));
+                    if (Senha == dadosLogin?.senha)
+                    {
+                        OnPropertyChanged(nameof(Empresa));
+                        OnPropertyChanged(nameof(Senha));
+                        OnPropertyChanged(nameof(Logado));
+                    }
                 }
+                
+                //if (Logado)
+                //{
+                //    OnPropertyChanged(nameof(Empresa));
+                //    OnPropertyChanged(nameof(Senha));
+                //    OnPropertyChanged(nameof(Logado));
+                //}
             }
             catch (Exception ex)
             {
                 Debug.Write("Erro -> ", ex.ToString());
             }
+        }
+
+        private bool VerificarUsuarioLogado()
+        {
+            bool estaLogado = Login.UsuarioEstaLogado();
+
+            if (estaLogado)
+            {
+                //if (dadosLogin?.senha != null)
+                //{
+                    //if (senha != null)
+                    //{
+                    //    if (senha == dadoslogin?.senha)
+                    //    {
+                    //        return true;
+                    //    }
+                    //    else
+                    //    {
+                    //        return false;
+                    //    }
+                    //}
+                    //else if (senha == dadoslogin?.senha)
+                    //{
+                    //    return false;
+                    //}
+                //}
+                return estaLogado;                
+            }
+            return false;
+
+            //switch (dadosLogin?.senha != null)
+            //{
+            //    case true:
+            //        if (Senha == dadosLogin?.senha)
+            //            // quando carrega pagina novamente da falso pois a senha não foi digitada.
+            //            return true;
+            //        break;
+
+            //    case false:
+            //        // if (estaLogado)
+            //        return true;
+            //}
         }
     }
 }
