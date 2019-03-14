@@ -23,7 +23,7 @@
                 <!-- Empresa -->
                 <Label Style="{StaticResource styleLabelTitulo}" Text="EMPRESA:" IsVisible="False">
                     <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding IsVisibleLblEmpresa}" Value="True">
+                        <DataTrigger TargetType="Label" Binding="{Binding Logado}" Value="True">
                             <Setter Property="IsVisible" Value="True" />
                         </DataTrigger>
                     </Label.Triggers>
@@ -31,7 +31,7 @@
 
                 <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Empresa}" IsVisible="False">
                     <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding IsVisibleNomeEmpresa}" Value="True">
+                        <DataTrigger TargetType="Label" Binding="{Binding Logado}" Value="True">
                             <Setter Property="IsVisible" Value="True" />
                         </DataTrigger>
                     </Label.Triggers>

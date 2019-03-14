@@ -1,7 +1,6 @@
 ﻿using Prodfy.Models;
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
-using Prodfy.Utils;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -16,8 +15,6 @@ namespace Prodfy.ViewModels
 
         private User dadosLogin = null;
 
-        bool isRefresh = false;
-
         bool estaLogado = false;
 
         public LoginViewModel()
@@ -25,18 +22,10 @@ namespace Prodfy.ViewModels
             userRepository = new UserRepository();
 
             dialogService = new DialogService();
-
-            //estaLogado = Login.UsuarioEstaLogado();
         }
 
         private bool _logado;
         public bool Logado { get => _logado = estaLogado; }
-
-        private bool _isVisibleLblEmpresa;
-        public bool IsVisibleLblEmpresa { get => _isVisibleLblEmpresa = estaLogado; }
-
-        private bool _isVisibleNomeEmpresa;
-        public bool IsVisibleNomeEmpresa { get => _isVisibleNomeEmpresa = estaLogado; }
 
         private string _senha;
         public string Senha
@@ -55,8 +44,6 @@ namespace Prodfy.ViewModels
         
         private async void ExecuteLoginCommand()
         {
-            //await RefreshCommandExecute();
-
             if (Senha != null)
             {
                 var dadosUsuario = userRepository.ObterDados();
@@ -73,22 +60,14 @@ namespace Prodfy.ViewModels
                             nome = dadosUsuario.nome,
                             empresa = dadosUsuario.empresa,
                             senha = dadosUsuario.senha
-                        };
+                        };                        
 
                         OnPropertyChanged(nameof(DispNum));
                         OnPropertyChanged(nameof(Nome));
 
-                        if (estaLogado)
-                        {
-                            OnPropertyChanged(nameof(Logado));
-                            OnPropertyChanged(nameof(IsVisibleLblEmpresa));
-                            OnPropertyChanged(nameof(IsVisibleNomeEmpresa));
-                            OnPropertyChanged(nameof(Empresa));
-                        }
-                    }
-                    //isRefresh = true;
-                    //await RefreshCommandExecute();
-                   // estaLogado = false;
+                        OnPropertyChanged(nameof(Empresa));
+                        OnPropertyChanged(nameof(Logado));
+                    }                    
                 }
                 else
                 {
@@ -124,34 +103,24 @@ namespace Prodfy.ViewModels
                     };
 
                     OnPropertyChanged(nameof(DispNum));
-                    OnPropertyChanged(nameof(Nome));
+                    OnPropertyChanged(nameof(Nome));                   
 
-                    if (estaLogado)
+                    if (estaLogado == false)
                     {
-                        
-                            OnPropertyChanged(nameof(IsVisibleLblEmpresa));
-                            OnPropertyChanged(nameof(IsVisibleNomeEmpresa));
+                        if (dadosUsuario?.senha == Senha)
+                        {
+                            estaLogado = true;
+
                             OnPropertyChanged(nameof(Empresa));
-                                                                                             
-                    }   
-                    //else
-                    //{
-                    //    estaLogado = true;
-                    //    OnPropertyChanged(nameof(Logado));
-                    //}
+                            OnPropertyChanged(nameof(Logado));
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Debug.Write("Erro -> ", ex.ToString());
             }            
-        }
-
-        private bool VerificarUsuarioLogado()
-        {
-            bool estaLogado = Login.UsuarioEstaLogado();
-
-            return estaLogado;            
         }
     }
 }
