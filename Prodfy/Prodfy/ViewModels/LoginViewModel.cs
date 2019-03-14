@@ -12,10 +12,8 @@ namespace Prodfy.ViewModels
     {
         private readonly UserRepository userRepository;
         private readonly IDialogService dialogService;
-
         private User dadosLogin = null;
-
-        bool estaLogado = false;
+        private bool estaLogado = false;
 
         public LoginViewModel()
         {
