@@ -17,9 +17,9 @@
                 <Label Style="{StaticResource styleLabelTexto}" Text="{Binding DispNum}" />
 
                 <!-- Usuário -->
-                <Label Style="{StaticResource styleLabelTitulo}" Text="USUÁRIO:" />                
+                <Label Style="{StaticResource styleLabelTitulo}" Text="USUÁRIO:" />
                 <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Nome}" />
-                
+
                 <!-- Empresa -->
                 <Label Style="{StaticResource styleLabelTitulo}" Text="EMPRESA:" IsVisible="False">
                     <Label.Triggers>
@@ -55,7 +55,7 @@
                        BackgroundColor="White" 
                        Margin="0,0,0,15" 
                        IsVisible="True">
-                    
+
                     <Entry.Triggers>
                         <DataTrigger TargetType="Entry" Binding="{Binding Logado}" Value="True">
                             <Setter Property="IsVisible" Value="False" />
@@ -64,7 +64,7 @@
                 </Entry>
                 <!---->
 
-                <Button Style="{StaticResource styleButton}" 
+                <!--<Button Style="{StaticResource styleButton}" 
                         Text="Entrar" 
                         Command="{Binding LoginCommand}" 
                         IsVisible="True">
@@ -74,7 +74,19 @@
                             <Setter Property="IsVisible" Value="False" />
                         </DataTrigger>
                     </Button.Triggers>
-                </Button>
+                </Button>-->
+
+                <control:CustomButton Style="{StaticResource styleButton}"
+                                      Text="Entrar"
+                                      Command="{Binding LoginCommand}"
+                                      IsVisible="True">
+
+                    <control:CustomButton.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding Logado}" Value="True">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </control:CustomButton.Triggers>                    
+                </control:CustomButton>                
             </StackLayout>
             
                 <control:MenuItem VerticalOptions="EndAndExpand"/>
