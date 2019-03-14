@@ -25,8 +25,8 @@
             <Label Style="{StaticResource styleBaseLabel}" Text="Link de Conexão Principal:" />
             <Entry Style="{StaticResource styleEntryFormulario}" />
 
-            <Button Style="{StaticResource styleButton}" 
-                    Text="Salvar" x:Name="btnConexao" Clicked="OnClicked_btnConexao" />
+            <control:CustomButton Style="{StaticResource styleButton}" 
+                                  Text="Salvar" x:Name="btnConexao" Clicked="OnClicked_btnConexao" />
 
             <Label Style="{StaticResource styleBaseLabel}" 
                    Text="ATENÇÃO: Só altere o valor atual quando orientado pela equipe técnica Prodfy."

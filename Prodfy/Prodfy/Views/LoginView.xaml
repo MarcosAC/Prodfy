@@ -64,20 +64,8 @@
                 </Entry>
                 <!---->
 
-                <!--<Button Style="{StaticResource styleButton}" 
-                        Text="Entrar" 
-                        Command="{Binding LoginCommand}" 
-                        IsVisible="True">
-
-                    <Button.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding Logado}" Value="True">
-                            <Setter Property="IsVisible" Value="False" />
-                        </DataTrigger>
-                    </Button.Triggers>
-                </Button>-->
-
                 <control:CustomButton Style="{StaticResource styleButton}"
-                                      Text="Entrar"
+                                      Text="ENTRAR"
                                       Command="{Binding LoginCommand}"
                                       IsVisible="True">
 

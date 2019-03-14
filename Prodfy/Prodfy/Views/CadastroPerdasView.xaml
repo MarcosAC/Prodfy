@@ -28,8 +28,8 @@
                 <Picker Style="{StaticResource stylePickerFormulario}" />                
 
                 <StackLayout Orientation="Horizontal">
-                    <Button Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
-                    <Button Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+                    <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
+                    <control:CustomButton Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.DispositivoView"
              BackgroundImage="splash_bg4.png">
 
@@ -53,7 +54,7 @@
                 <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Empresa}" HorizontalTextAlignment="Center" />
             </StackLayout>
 
-            <Button Text="Ler QRCode" Style="{StaticResource styleButton}" Command="{Binding LeitorQRCommand}" />
+            <control:CustomButton Text="Ler QRCode" Style="{StaticResource styleButton}" Command="{Binding LeitorQRCommand}" />
 
             <Label Style="{StaticResource styleBaseLabel}" Text="Obs: Dispositovo deve estar cadastrado no Portal Prodfy." />
         </StackLayout>

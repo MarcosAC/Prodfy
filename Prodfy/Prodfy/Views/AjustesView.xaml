@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.AjustesView"
              BackgroundImage="splash_bg2.png">
     
@@ -19,21 +20,21 @@
                 </Label.FontFamily>
             </Label>
 
-            <Button Style="{StaticResource styleButton}"
-                    Text="Dispositivos"
-                    Command="{Binding IrPaginaDispositivo}" />
+            <control:CustomButton Style="{StaticResource styleButton}"
+                                  Text="Dispositivos"
+                                  Command="{Binding IrPaginaDispositivo}" />
 
-            <Button Style="{StaticResource styleButton}" 
-                    Text="Sobre"
-                    Command="{Binding IrPaginaSobre}" />
+            <control:CustomButton Style="{StaticResource styleButton}" 
+                                  Text="Sobre"
+                                  Command="{Binding IrPaginaSobre}" />
 
-            <Button Style="{StaticResource styleButton}" 
-                    Text="Conexão" 
-                    Command="{Binding IrPaginaConexao}" />
+            <control:CustomButton Style="{StaticResource styleButton}" 
+                                  Text="Conexão" 
+                                  Command="{Binding IrPaginaConexao}" />
 
-            <Button Style="{StaticResource styleButton}" 
-                    Text="Exportar Dados"
-                    Command="{Binding IrPaginaExportarDados}" />
+            <control:CustomButton Style="{StaticResource styleButton}" 
+                                  Text="Exportar Dados"
+                                  Command="{Binding IrPaginaExportarDados}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

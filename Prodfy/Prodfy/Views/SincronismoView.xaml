@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.SincronismoView"
              BackgroundImage="splash_bg2.png">
 
@@ -75,10 +76,15 @@
                     <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="6" Text="{Binding IndExp}" />  <!-- Expedições -->
                 </Grid>
 
-                <Button Style="{StaticResource styleButton}"
+                <!--<Button Style="{StaticResource styleButton}"
                         Text="Sincronizar"
                         Margin="0,15,0,15"                        
-                        Command="{Binding SincronizarCommand}" />                
+                        Command="{Binding SincronizarCommand}" />-->
+
+                <control:CustomButton Style="{StaticResource styleButton}"
+                                      Text="Sincronizar"
+                                      Margin="0,15,0,15"
+                                      Command="{Binding SincronizarCommand}" />
 
                 <Label Style="{StaticResource styleBaseLabel}" Text="Atenção: O dispositivo deve estar conectado a uma rede WIFI com acesso a internet!" />
             </StackLayout>

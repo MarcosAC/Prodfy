@@ -43,8 +43,8 @@
                 <Entry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Expedida Sem Tubete:" />
                 <Entry Style="{StaticResource styleEntryFormulario}" />
-                
-                <Button Style="{StaticResource styleButton}" BackgroundColor="#5d1497" Text="Calcular Quantidade" />
+
+                <control:CustomButton Style="{StaticResource styleButton}" BackgroundColor="#5d1497" Text="Calcular Quantidade" />
 
                 <StackLayout Orientation="Horizontal" 
                              HorizontalOptions="Fill" 
@@ -65,8 +65,8 @@
                 <Editor Style="{StaticResource styleEditorFormulario}" />
 
                 <StackLayout Orientation="Horizontal">
-                    <Button Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
-                    <Button Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+                    <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
+                    <control:CustomButton Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>

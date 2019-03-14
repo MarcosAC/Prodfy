@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.FuncoesView"
              BackgroundImage="splash_bg2.png">
     <ContentPage.Content>
@@ -13,70 +14,70 @@
                        Margin="0,15,0,15"
                        IsEnabled="False" />
 
-                <Button Style="{StaticResource styleButton}" 
-                        x:Name="btnIdentificação"
-                        Text="Identificação"  
-                        Clicked="OnClicked_Identificação" 
-                        IsEnabled="False" />
+                <control:CustomButton Style="{StaticResource styleButton}" 
+                                      x:Name="btnIdentificação"
+                                      Text="Identificação"  
+                                      Clicked="OnClicked_Identificação" 
+                                      IsEnabled="False" />
 
-                <Button Style="{StaticResource styleButton}" 
-                        x:Name="btnAtividade"
-                        Text="Atividade Realizada"
-                        Clicked="OnClicked_Atividade" 
-                        IsEnabled="False" />
+                <control:CustomButton Style="{StaticResource styleButton}" 
+                                      x:Name="btnAtividade"
+                                      Text="Atividade Realizada"
+                                      Clicked="OnClicked_Atividade" 
+                                      IsEnabled="False" />
 
-                <Button Style="{StaticResource styleButton}"
-                        x:Name="btnInventario"
-                        Text="Inventário"
-                        Clicked="OnClicked_Inventario"
-                        IsEnabled="False" />
+                <control:CustomButton Style="{StaticResource styleButton}"
+                                      x:Name="btnInventario"
+                                      Text="Inventário"
+                                      Clicked="OnClicked_Inventario"
+                                      IsEnabled="False" />
 
-                <Button Style="{StaticResource styleButton}" 
-                        x:Name="btnPerdas"
-                        Text="Perdas"
-                        Clicked="OnClicked_Perdas" 
-                        IsEnabled="False" />
+                <control:CustomButton Style="{StaticResource styleButton}" 
+                                      x:Name="btnPerdas"
+                                      Text="Perdas"
+                                      Clicked="OnClicked_Perdas" 
+                                      IsEnabled="False" />
 
-                <Button Style="{StaticResource styleButton}" 
-                        x:Name="btnHistorico"
-                        Text="Histórico"
-                        Clicked="OnClicked_btnHistorico"
-                        IsEnabled="False" />
+                <control:CustomButton Style="{StaticResource styleButton}" 
+                                      x:Name="btnHistorico"
+                                      Text="Histórico"
+                                      Clicked="OnClicked_btnHistorico"
+                                      IsEnabled="False" />
 
-                <Button Style="{StaticResource styleButton}" 
-                        x:Name="btnEvolucao"
-                        Text="Evolução de Lote"
-                        Clicked="OnClicked_Evolucao"
-                        IsEnabled="False" />
+                <control:CustomButton Style="{StaticResource styleButton}" 
+                                      x:Name="btnEvolucao"
+                                      Text="Evolução de Lote"
+                                      Clicked="OnClicked_Evolucao"
+                                      IsEnabled="False" />
 
-                <Button Style="{StaticResource styleButton}"
-                        x:Name="btnExpedicao"
-                        Text="Expedição"
-                        Clicked="OnClicked_Expedicao"
-                        IsEnabled="False" />
+                <control:CustomButton Style="{StaticResource styleButton}"
+                                      x:Name="btnExpedicao"
+                                      Text="Expedição"
+                                      Clicked="OnClicked_Expedicao"
+                                      IsEnabled="False" />
 
                 <Label Style="{StaticResource styleLabelTitulo}" 
                        Text="Monitoramento:" 
                        Margin="0,15,0,15"
                        IsEnabled="False" />
 
-                <Button Style="{StaticResource styleButton}"
-                        x:Name="btnLocalizacao"
-                        Text="Localização"
-                        Clicked="OnClicked_btnLocalizacao" 
-                        IsEnabled="False" />
+                <control:CustomButton Style="{StaticResource styleButton}"
+                                      x:Name="btnLocalizacao"
+                                      Text="Localização"
+                                      Clicked="OnClicked_btnLocalizacao" 
+                                      IsEnabled="False" />
 
-                <Button Style="{StaticResource styleButton}" 
-                        x:Name="btnOcorrencia"
-                        Text="Ocorrência"
-                        Clicked="OnClicked_Ocorrencia"
-                        IsEnabled="False" />
+                <control:CustomButton Style="{StaticResource styleButton}" 
+                                      x:Name="btnOcorrencia"
+                                      Text="Ocorrência"
+                                      Clicked="OnClicked_Ocorrencia"
+                                      IsEnabled="False" />
 
-                <Button Style="{StaticResource styleButton}"
-                        x:Name="btnMedicao"
-                        Text="Medição"
-                        Clicked="OnClicked_btnMedicao"
-                        IsEnabled="False" />
+                <control:CustomButton Style="{StaticResource styleButton}"
+                                      x:Name="btnMedicao"
+                                      Text="Medição"
+                                      Clicked="OnClicked_btnMedicao"
+                                      IsEnabled="False" />
             </StackLayout>
         </ScrollView>        
     </ContentPage.Content>

@@ -25,17 +25,18 @@
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Estaquiada:" VerticalOptions="Center"/>
                     <Label Style="{StaticResource styleLabelFormulario}" Text="400" VerticalOptions="Center" />
 
-                    <Button Style="{StaticResource styleButton}" 
-                            WidthRequest="40"
-                            HeightRequest="40"
-                            Text="&#xf002;"
-                            FontSize="16"
-                            BackgroundColor="#007aff"                             
-                            HorizontalOptions="EndAndExpand">
-                        <Button.FontFamily>
+                    <control:CustomButton Style="{StaticResource styleButton}"
+                                          WidthRequest="40"
+                                          HeightRequest="40"
+                                          Text="&#xf002;"
+                                          FontSize="16"
+                                          BackgroundColor="#007aff"       
+                                          HorizontalOptions="EndAndExpand">
+                        <control:CustomButton.FontFamily>
                             <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
-                        </Button.FontFamily>
-                    </Button>
+                        </control:CustomButton.FontFamily>
+                    </control:CustomButton>
+                    
                 </StackLayout>          
                
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Estaqueamento - Colaborador:" />
@@ -59,8 +60,8 @@
                 <Picker Style="{StaticResource stylePickerFormulario}" />
 
                 <StackLayout Orientation="Horizontal">
-                    <Button Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
-                    <Button Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+                    <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
+                    <control:CustomButton Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>        
