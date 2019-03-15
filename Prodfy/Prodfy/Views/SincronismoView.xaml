@@ -17,77 +17,85 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Style="{StaticResource baseStyleStackLayout}">
-                
-                <Image Style="{StaticResource ImagemFundo}" />
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Style="{StaticResource baseStyleStackLayout}">
 
-                <Label Text="&#xf1eb;"
+                    <Image Style="{StaticResource ImagemFundo}" />
+
+                    <Label Text="&#xf1eb;"
                        FontSize="100" 
                        TextColor="#206805"
                        HorizontalOptions="Center"
                        Margin="0,20,0,20">
 
-                    <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
-                    </Label.FontFamily>
-                </Label>
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
+                        </Label.FontFamily>
+                    </Label>
 
-                <Label Style="{StaticResource styleBaseLabel}"
+                    <Label Style="{StaticResource styleBaseLabel}"
                        Text="{Binding DhtLastSincr}" 
                        FontSize="Large"
                        HorizontalOptions="Center" />
-                
-                <Grid HorizontalOptions="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition  Width="auto" />
-                        <ColumnDefinition  Width="auto" />
-                    </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
+                    <Grid HorizontalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition  Width="auto" />
+                            <ColumnDefinition  Width="auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <!--Labels Campos -->
-                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="0" Text="Atividades:" HorizontalTextAlignment="End" />
-                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="1" Text="Invetários:" HorizontalTextAlignment="End" />
-                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="2" Text="Perdas:" HorizontalTextAlignment="End" />
-                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="3" Text="Histórico:" HorizontalTextAlignment="End" />
-                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="4" Text="Evoluçôes:" HorizontalTextAlignment="End" />
-                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="5" Text="Ocorrências:" HorizontalTextAlignment="End" />
-                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="6" Text="Medições:" HorizontalTextAlignment="End" />
-                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="7" Text="Expedições:" HorizontalTextAlignment="End" />
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
 
-                    <!--Labels Dados -->
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="7" Text="{Binding IndAtv}" />  <!-- Atividades -->
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="0" Text="{Binding IndInv}" />  <!-- Invetários -->
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="1" Text="{Binding IndPer}" />  <!-- Perdas -->
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="2" Text="{Binding IndHist}" /> <!-- Histórico -->
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="3" Text="{Binding IndEvo}" />  <!-- Evoluçôes -->
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="4" Text="{Binding IndOco}" />  <!-- Ocorrências -->
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="5" Text="{Binding IndMnt}" />  <!-- Medições -->
-                    <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="6" Text="{Binding IndExp}" />  <!-- Expedições -->
-                </Grid>
+                        <!--Labels Campos -->
+                        <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="0" Text="Atividades:" HorizontalTextAlignment="End" />
+                        <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="1" Text="Invetários:" HorizontalTextAlignment="End" />
+                        <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="2" Text="Perdas:" HorizontalTextAlignment="End" />
+                        <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="3" Text="Histórico:" HorizontalTextAlignment="End" />
+                        <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="4" Text="Evoluçôes:" HorizontalTextAlignment="End" />
+                        <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="5" Text="Ocorrências:" HorizontalTextAlignment="End" />
+                        <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="6" Text="Medições:" HorizontalTextAlignment="End" />
+                        <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="7" Text="Expedições:" HorizontalTextAlignment="End" />
 
-                <!--<Button Style="{StaticResource styleButton}"
-                        Text="Sincronizar"
-                        Margin="0,15,0,15"                        
-                        Command="{Binding SincronizarCommand}" />-->
+                        <!--Labels Dados -->
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="7" Text="{Binding IndAtv}" />
+                        <!-- Atividades -->
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="0" Text="{Binding IndInv}" />
+                        <!-- Invetários -->
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="1" Text="{Binding IndPer}" />
+                        <!-- Perdas -->
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="2" Text="{Binding IndHist}" />
+                        <!-- Histórico -->
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="3" Text="{Binding IndEvo}" />
+                        <!-- Evoluçôes -->
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="4" Text="{Binding IndOco}" />
+                        <!-- Ocorrências -->
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="5" Text="{Binding IndMnt}" />
+                        <!-- Medições -->
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="6" Text="{Binding IndExp}" />
+                        <!-- Expedições -->
+                    </Grid>
 
-                <control:CustomButton Style="{StaticResource styleButton}"
+                    <control:CustomButton Style="{StaticResource styleButton}"
                                       Text="Sincronizar"
                                       Margin="0,15,0,15"
                                       Command="{Binding SincronizarCommand}" />
 
-                <Label Style="{StaticResource styleBaseLabel}" Text="Atenção: O dispositivo deve estar conectado a uma rede WIFI com acesso a internet!" />
-            </StackLayout>
-        </ScrollView>        
+                    <Label Style="{StaticResource styleBaseLabel}" Text="Atenção: O dispositivo deve estar conectado a uma rede WIFI com acesso a internet!" />
+                </StackLayout>
+            </ScrollView>
+
+            <control:MenuItem VerticalOptions="EndAndExpand"/>
+            
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -4,6 +4,7 @@
              xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.LoginView"
              BackgroundImage="splash_bg2.png">
+    
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Style="{StaticResource baseStyleStackLayout}">
