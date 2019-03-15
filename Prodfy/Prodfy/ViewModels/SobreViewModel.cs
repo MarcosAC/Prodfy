@@ -13,7 +13,12 @@ namespace Prodfy.ViewModels
         public SobreViewModel()
         {
             _navigationService = new NavigationService();
-        }        
+        }
+
+        private Command _navegacaoCommand;
+        public Command NavegacaoCommand => _navegacaoCommand ?? (_navegacaoCommand = new Command(async () => await ExecuteNavegacaoCommand()));
+
+        private async Task ExecuteNavegacaoCommand() => await _navigationService.PopAsync();
 
         private Command _irTherWebView;
         public Command IrTherWebView =>
