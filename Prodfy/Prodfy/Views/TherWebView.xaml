@@ -2,8 +2,28 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prodfy.Views.TherWebView">
-    
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,15,0">
+            <!--Botão Voltar-->
+            <Label Style="{StaticResource styleBotaoVoltar}" Text="&#xf104;">
+
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Label Text="Sobre"
+                   FontSize="20" 
+                   TextColor="White"  
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="Center" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <ContentPage.Content>
-        <WebView x:Name="therWebView" />
+        <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="Aqua" VerticalOptions="FillAndExpand">
+            <WebView x:Name="therWebView" HorizontalOptions="FillAndExpand" BackgroundColor="Aqua" VerticalOptions="FillAndExpand" />            
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

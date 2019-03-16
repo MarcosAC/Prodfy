@@ -10,9 +10,9 @@ namespace Prodfy.Views
 		{
 			InitializeComponent ();
 
-            NavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasBackButton(this, false);            
 
             therWebView.Source = "file:///android_asset/" + nomePagina;            
-		}
+        }
     }
 }
