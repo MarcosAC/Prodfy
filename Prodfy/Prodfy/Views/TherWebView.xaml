@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:Prodfy.Controls"
-             x:Class="Prodfy.Views.TherWebView">
+             x:Class="Prodfy.Views.TherWebView"
+             BackgroundImage="splash_bg4.png">
 
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,15,0">
@@ -22,10 +23,7 @@
         </StackLayout>
     </NavigationPage.TitleView>
 
-    <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="Aqua" VerticalOptions="FillAndExpand">
-            <!--<WebView x:Name="therWebView" HorizontalOptions="FillAndExpand" BackgroundColor="Aqua" VerticalOptions="FillAndExpand" />-->
-            <control:CustomWebView x:Name="therWebView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-        </StackLayout>
+    <ContentPage.Content>       
+            <control:CustomWebView x:Name="therWebView" />
     </ContentPage.Content>
 </ContentPage>
