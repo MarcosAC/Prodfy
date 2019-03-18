@@ -15,7 +15,7 @@
                 </Label.GestureRecognizers>
             </Label>
 
-            <Label Text="Sobre"
+            <Label Text= "{Binding Title}"
                    FontSize="20" 
                    TextColor="White"  
                    HorizontalOptions="CenterAndExpand"
@@ -23,7 +23,7 @@
         </StackLayout>
     </NavigationPage.TitleView>
 
-    <ContentPage.Content>       
-            <control:CustomWebView x:Name="therWebView" />
+    <ContentPage.Content>
+        <control:CustomWebView x:Name="therWebView" Source="{Binding ArquivoHtml}" />
     </ContentPage.Content>
 </ContentPage>
