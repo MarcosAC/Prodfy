@@ -5,17 +5,15 @@ using Xamarin.Forms.Xaml;
 namespace Prodfy.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TherWebView : ContentPage
+	public partial class AjudaView : ContentPage
 	{
-		public TherWebView (string url)
+		public AjudaView (string url = null)
 		{
 			InitializeComponent ();
 
             NavigationPage.SetHasBackButton(this, false);
 
-            BindingContext = new TherWebViewModel(url);
-
-            therWebView.Source = url;            
+            BindingContext = new AjudaViewModel(url);
         }
-    }
+	}
 }

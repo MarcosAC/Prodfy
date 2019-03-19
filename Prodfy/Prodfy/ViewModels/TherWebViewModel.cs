@@ -8,18 +8,18 @@ namespace Prodfy.ViewModels
     {
         private readonly INavigationService _navigationService;
 
-        public TherWebViewModel(string nomePagina)
+        public TherWebViewModel(string titulo)
         {
-            Title = Titulo(nomePagina);
+            Title = Titulo(titulo);
 
             _navigationService = new NavigationService();         
         }
 
-        private string _arquivoHtml;
-        public string ArquivoHtml
+        private string _url;
+        public string Url
         {
-            get => _arquivoHtml;
-            set => SetProperty(ref _arquivoHtml, value);
+            get => _url;
+            set => SetProperty(ref _url, value);
         }        
 
         private Command _navegacaoCommand;
@@ -27,11 +27,11 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteNavegacaoCommand() => await _navigationService.PopAsync();
 
-        private string Titulo(string nomePagina)
+        private string Titulo(string titulo)
         {
-            switch (nomePagina)
+            switch (titulo)
             {
-                case "ajuda.htm":
+                case "https://www.prodfy.com.br/plantas/ajuda/manual_app_ios.htm":
                     return "AjudaFAQ";
                 case "contato.htm":
                     return "Contato";                    

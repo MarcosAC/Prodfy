@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:Prodfy.Controls"
+             xmlns:local="clr-namespace:Prodfy.Views"
              x:Class="Prodfy.Views.TherWebView"
              BackgroundImage="splash_bg4.png">
 
@@ -24,6 +25,6 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <control:CustomWebView x:Name="therWebView" Source="{Binding ArquivoHtml}" />
+        <control:CustomWebView x:Name="therWebView" Source="{Binding Url}" />
     </ContentPage.Content>
 </ContentPage>

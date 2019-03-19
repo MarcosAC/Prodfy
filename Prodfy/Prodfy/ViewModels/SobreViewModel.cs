@@ -29,7 +29,7 @@ namespace Prodfy.ViewModels
             switch (nomePagina)
             {
                 case "AjudaFAQ":
-                    await _navigationService.PushAsync(new TherWebView("ajuda.htm"));
+                    await _navigationService.PushAsync(new AjudaView());
                     break;
                 case "Contato":
                     await _navigationService.PushAsync(new TherWebView("contato.htm"));
