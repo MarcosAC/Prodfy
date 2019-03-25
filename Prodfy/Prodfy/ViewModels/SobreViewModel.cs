@@ -32,7 +32,7 @@ namespace Prodfy.ViewModels
                     await _navigationService.PushAsync(new AjudaView());
                     break;
                 case "Contato":
-                    await _navigationService.PushAsync(new TherWebView("contato.htm"));
+                    await _navigationService.PushAsync(new ContatoView());
                     break;
                 case "TermosUso":
                     await _navigationService.PushAsync(new TherWebView("termos.htm"));

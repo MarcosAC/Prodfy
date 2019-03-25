@@ -26,6 +26,6 @@ namespace Prodfy.ViewModels
         public Command IrPaginaAjudaCommand =>
             _irPaginaAjudaCommand ?? (_irPaginaAjudaCommand = new Command<string>(async u => await ExecuteIrPaginaAjudaCommand(u)));
 
-        private async Task ExecuteIrPaginaAjudaCommand(string url) => await _navigationService.PushAsync(new TherWebView(url));        
+        private async Task ExecuteIrPaginaAjudaCommand(string url) => await _navigationService.PushAsync(new TherWebView(url));
     }
 }

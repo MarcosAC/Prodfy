@@ -33,7 +33,7 @@ namespace Prodfy.ViewModels
             {
                 case "https://www.prodfy.com.br/plantas/ajuda/manual_app_ios.htm":
                     return "AjudaFAQ";
-                case "contato.htm":
+                case "https://www.prodfy.com.br":
                     return "Contato";                    
                 case "termos.htm":
                     return "Termos de Uso";

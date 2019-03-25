@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Prodfy.Views.AjudaView"
+             x:Class="Prodfy.Views.ContatoView"
              BackgroundImage="splash_bg4.png">
 
     <NavigationPage.TitleView>
@@ -21,11 +21,11 @@
                    VerticalOptions="Center" />
         </StackLayout>
     </NavigationPage.TitleView>
-    
+
     <ContentPage.Content>
-       <StackLayout Style="{StaticResource baseStyleStackLayout}">
+        <StackLayout Style="{StaticResource baseStyleStackLayout}">
             <StackLayout HorizontalOptions="Center">
-                <Label Text="&#xf059;"
+                <Label Text="&#xf086;"
                        FontSize="70" 
                        TextColor="#206805"
                        HorizontalOptions="Center"
@@ -36,20 +36,43 @@
                     </Label.FontFamily>
                 </Label>
 
-                <Label Text="Manual de Utilização On-Line:" FontSize="Medium" FontAttributes="Bold" />
-
-                <Label Text="Clique Aqui Para Acessar" 
+                <Label Text="E-Mail:" FontSize="Medium" FontAttributes="Bold" />                
+                <Label Text="contato@thersistemas.com.br" 
                        FontSize="Medium" 
                        FontAttributes="Bold" 
                        TextColor="Blue" 
                        TextDecorations="Underline">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding IrPaginaAjudaCommand}" />
+                        <TapGestureRecognizer Command="{Binding EnviarEmailCommand}" />
                     </Label.GestureRecognizers>
-                    
                 </Label>
+
+                <Label Text="Web Site:" FontSize="Medium" FontAttributes="Bold" />
+                <Label Text="https://www.prodfy.com.br" 
+                       FontSize="Medium" 
+                       FontAttributes="Bold" 
+                       TextColor="Blue" 
+                       TextDecorations="Underline">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding IrPaginaSiteCommand}" 
+                                              CommandParameter="https://www.prodfy.com.br" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Text="Telefone Fixo:" FontSize="Medium" FontAttributes="Bold" />
+                <Label Text="55-31-3885-2424" FontSize="Medium" FontAttributes="Bold" />
+                <Label Text="WhatsApp:" FontSize="Medium" FontAttributes="Bold" />
+                <Label Text="55-31-9-9947-4426" FontSize="Medium" FontAttributes="Bold" />
+                <Label Text="Endereço:" FontSize="Medium" FontAttributes="Bold" />
+                <Label Text="Av Oraida Mendes de Castro, 6000, Sala 23
+                             Bairro Novo Silvestre Viçosa - MG
+                             CEP 36.570-000" 
+                       FontSize="Medium" 
+                       FontAttributes="Bold" />
+                
             </StackLayout>
         </StackLayout>
-  </ContentPage.Content>
+    </ContentPage.Content>
 </ContentPage>
