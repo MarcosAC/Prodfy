@@ -23,29 +23,26 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-       <StackLayout Style="{StaticResource baseStyleStackLayout}">
+       <StackLayout>
             <StackLayout HorizontalOptions="Center">
-                <Label Text="&#xf059;"
-                       FontSize="70" 
-                       TextColor="#206805"
-                       HorizontalOptions="Center"
-                       Margin="0,20,0,20">
+                <Label Style="{StaticResource styleIconeTelasSobre}" Text="&#xf059;">
 
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
                     </Label.FontFamily>
                 </Label>
 
-                <Label Text="Manual de Utilização On-Line:" FontSize="Medium" FontAttributes="Bold" />
+                <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="Manual de Utilização On-Line:" />
 
                 <Label Text="Clique Aqui Para Acessar" 
-                       FontSize="Medium" 
+                       FontSize="16"
                        FontAttributes="Bold" 
                        TextColor="Blue" 
                        TextDecorations="Underline">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding IrPaginaAjudaCommand}" />
+                        <TapGestureRecognizer Command="{Binding IrPaginaAjudaCommand}"
+                                              CommandParameter="https://www.prodfy.com.br/plantas/ajuda/manual_app_ios.htm"/>
                     </Label.GestureRecognizers>
                     
                 </Label>

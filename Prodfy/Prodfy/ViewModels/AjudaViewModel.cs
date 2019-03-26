@@ -11,7 +11,7 @@ namespace Prodfy.ViewModels
 
         public AjudaViewModel(string url)
         {
-            Title = "AjudaFAQ";
+            Title = "Ajuda";
 
             _navigationService = new NavigationService();
         }

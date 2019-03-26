@@ -32,7 +32,7 @@ namespace Prodfy.ViewModels
             switch (titulo)
             {
                 case "https://www.prodfy.com.br/plantas/ajuda/manual_app_ios.htm":
-                    return "AjudaFAQ";
+                    return "Ajuda";
                 case "https://www.prodfy.com.br":
                     return "Contato";                    
                 case "termos.htm":
