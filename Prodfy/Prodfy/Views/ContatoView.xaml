@@ -5,7 +5,7 @@
              BackgroundImage="splash_bg4.png">
 
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,15,0">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0">
             <!--Botão Voltar-->
             <Label Style="{StaticResource styleBotaoVoltar}" Text="&#xf104;">
 
@@ -23,55 +23,59 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource baseStyleStackLayout}">
+        <StackLayout>
             <StackLayout HorizontalOptions="Center">
-                <Label Text="&#xf086;"
-                       FontSize="70" 
-                       TextColor="#206805"
-                       HorizontalOptions="Center"
-                       Margin="0,20,0,20">
+                <Label Style="{StaticResource styleIconeTelasSobre}" Text="&#xf086;">
 
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
                     </Label.FontFamily>
                 </Label>
 
-                <Label Text="E-Mail:" FontSize="Medium" FontAttributes="Bold" />                
-                <Label Text="contato@thersistemas.com.br" 
-                       FontSize="Medium" 
-                       FontAttributes="Bold" 
-                       TextColor="Blue" 
-                       TextDecorations="Underline">
+                <StackLayout Margin="0,0,0,15">
+                    <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="E-Mail:" />
+                    <Label Text="contato@thersistemas.com.br" 
+                           FontSize="18"
+                           TextColor="Blue" 
+                           TextDecorations="Underline">
 
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding EnviarEmailCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EnviarEmailCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
 
-                <Label Text="Web Site:" FontSize="Medium" FontAttributes="Bold" />
-                <Label Text="https://www.prodfy.com.br" 
-                       FontSize="Medium" 
-                       FontAttributes="Bold" 
-                       TextColor="Blue" 
-                       TextDecorations="Underline">
+                <StackLayout Margin="0,0,0,15">
+                    <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="Web Site:" />
 
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding IrPaginaSiteCommand}" 
-                                              CommandParameter="https://www.prodfy.com.br" />
-                    </Label.GestureRecognizers>
-                </Label>
+                    <Label Text="https://www.prodfy.com.br" 
+                           FontSize="16"
+                           TextColor="Blue" 
+                           TextDecorations="Underline">
 
-                <Label Text="Telefone Fixo:" FontSize="Medium" FontAttributes="Bold" />
-                <Label Text="55-31-3885-2424" FontSize="Medium" FontAttributes="Bold" />
-                <Label Text="WhatsApp:" FontSize="Medium" FontAttributes="Bold" />
-                <Label Text="55-31-9-9947-4426" FontSize="Medium" FontAttributes="Bold" />
-                <Label Text="Endereço:" FontSize="Medium" FontAttributes="Bold" />
-                <Label Text="Av Oraida Mendes de Castro, 6000, Sala 23
-                             Bairro Novo Silvestre Viçosa - MG
-                             CEP 36.570-000" 
-                       FontSize="Medium" 
-                       FontAttributes="Bold" />
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IrPaginaSiteCommand}" 
+                                                  CommandParameter="https://www.prodfy.com.br" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <StackLayout Margin="0,0,0,15">
+                    <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="Telefone Fixo:" />
+                    <Label Style ="{StaticResource styleLabelFormulario}" Text="+55-31-3885-2424" />
+                </StackLayout>
+
+                <StackLayout Margin="0,0,0,15">
+                    <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="WhatsApp:" />
+                    <Label Style ="{StaticResource styleLabelFormulario}" Text="+55-31-9-9947-4426" />                    
+                </StackLayout>
                 
+                <StackLayout>
+                    <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="Endereço:" />
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="Av Oraida Mendes de Castro, 6000, Sala 23" />
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="Bairro Novo Silvestre - Viçosa - MG" />
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="CEP 36.570-000" />
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
