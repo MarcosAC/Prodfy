@@ -15,7 +15,7 @@ namespace Prodfy.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            ZXing.Mobile.MobileBarcodeScanner.Initialize(Application);
+            ZXing.Mobile.MobileBarcodeScanner.Initialize(Application);            
             LoadApplication(new App());
         }
 

@@ -5,17 +5,15 @@ using Xamarin.Forms.Xaml;
 namespace Prodfy.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TherWebView : ContentPage
+	public partial class SobreView : ContentPage
 	{
-		public TherWebView (string url)
+		public SobreView ()
 		{
 			InitializeComponent ();
 
             NavigationPage.SetHasBackButton(this, false);
 
-            BindingContext = new TherWebViewModel(url);
-
-            therWebView.Source = "file:///android_asset/" + url;            
-        }
-    }
+            BindingContext = new SobreViewModel();
+		}
+	}
 }
