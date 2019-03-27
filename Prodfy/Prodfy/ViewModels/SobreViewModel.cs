@@ -29,16 +29,16 @@ namespace Prodfy.ViewModels
             switch (nomePagina)
             {
                 case "AjudaFAQ":
-                    //await _navigationService.PushAsync(new AjudaView());
+                    await _navigationService.PushAsync(new TherWebView("ajuda.htm"));
                     break;
                 case "Contato":
-                    await _navigationService.PushAsync(new ContatoView());
+                    await _navigationService.PushAsync(new TherWebView("contato.htm"));
                     break;
                 case "TermosUso":
                     await _navigationService.PushAsync(new TherWebView("termos.htm"));
                     break;
                 case "PoliticaPrivacidade":
-                   // await _navigationService.PushAsync(new PoliticaDePrivacidadeView());
+                    await _navigationService.PushAsync(new TherWebView("politica.htm"));
                     break;
             }
         }

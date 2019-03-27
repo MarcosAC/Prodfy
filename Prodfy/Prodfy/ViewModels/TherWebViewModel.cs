@@ -13,14 +13,7 @@ namespace Prodfy.ViewModels
             Title = Titulo(titulo);
 
             _navigationService = new NavigationService();         
-        }
-
-        private string _url;
-        public string Url
-        {
-            get => _url;
-            set => SetProperty(ref _url, value);
-        }        
+        }    
 
         private Command _navegacaoCommand;
         public Command NavegacaoCommand => _navegacaoCommand ?? (_navegacaoCommand = new Command(async () => await ExecuteNavegacaoCommand()));
@@ -31,9 +24,9 @@ namespace Prodfy.ViewModels
         {
             switch (titulo)
             {
-                case "https://www.prodfy.com.br/plantas/ajuda/manual_app_ios.htm":
+                case "ajuda.htm":
                     return "Ajuda";
-                case "https://www.prodfy.com.br":
+                case "contato.htm":
                     return "Contato";                    
                 case "termos.htm":
                     return "Termos de Uso";

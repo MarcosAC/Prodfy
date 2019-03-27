@@ -30,8 +30,8 @@
             <StackLayout Margin="0,15,0,0">
                 <control:CustomButton Style="{StaticResource styleButton}"
                                       Text="Ajuda/FAQ"
-                                      Command="{Binding IrTherWebView}" 
-                                      CommandParameter="AjudaFAQ"/>
+                                      Command="{Binding IrTherWebView}"
+                                      CommandParameter="AjudaFAQ" />
 
                 <control:CustomButton Style="{StaticResource styleButton}" 
                                       Text="Contato"

@@ -22,7 +22,7 @@
 
             <StackLayout HorizontalOptions="CenterAndExpand"
                          VerticalOptions="Center" 
-                         Margin="20,0,20,0">
+                         Margin="15,0,15,0">
 
                 <Label x:Name="titulo" 
                        Text="" 

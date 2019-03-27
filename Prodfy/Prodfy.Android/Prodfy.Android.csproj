@@ -159,13 +159,13 @@
     <AndroidAsset Include="Assets\termos.htm" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\ajuda.htm" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\politica.htm" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\contato.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\ajuda.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

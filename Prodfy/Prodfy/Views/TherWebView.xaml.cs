@@ -7,15 +7,15 @@ namespace Prodfy.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TherWebView : ContentPage
 	{
-		public TherWebView (string url)
+		public TherWebView (string paginaHtml)
 		{
 			InitializeComponent ();
 
             NavigationPage.SetHasBackButton(this, false);
 
-            BindingContext = new TherWebViewModel(url);
+            BindingContext = new TherWebViewModel(paginaHtml);
 
-            therWebView.Source = "file:///android_asset/" + url;            
+            therWebView.Source = "file:///android_asset/" + paginaHtml;            
         }
     }
 }
