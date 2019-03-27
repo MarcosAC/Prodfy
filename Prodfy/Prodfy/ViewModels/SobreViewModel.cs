@@ -38,7 +38,7 @@ namespace Prodfy.ViewModels
                     await _navigationService.PushAsync(new TherWebView("termos.htm"));
                     break;
                 case "PoliticaPrivacidade":
-                    await _navigationService.PushAsync(new TherWebView("politica.htm"));
+                    await _navigationService.PushAsync(new PoliticaDePrivacidadeView());
                     break;
             }
         }
