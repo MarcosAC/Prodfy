@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="BaseUrl.cs" />
     <Compile Include="BD\ConexaoBancoDados.cs" />
+    <Compile Include="Effects\LabelShadowEffect.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\CustomButtonRenderer.cs" />
     <Compile Include="Renderers\CustomEntryRenderer.cs" />
@@ -153,9 +154,6 @@
     <AndroidResource Include="Resources\drawable\qrcode.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\logo_ther.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\termos.htm" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +164,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\ajuda.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\logo_TherSistemas.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

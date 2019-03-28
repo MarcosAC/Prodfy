@@ -4,7 +4,7 @@
              xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.SobreView"
              BackgroundImage="splash_bg2.png">
-
+    
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,15,0">
             <!--Botão Voltar-->
@@ -27,7 +27,7 @@
         <StackLayout Style="{StaticResource baseStyleStackLayout}">
             <Image Style="{StaticResource ImagemFundo}" />
 
-            <StackLayout Margin="0,15,0,0">
+            <StackLayout Margin="0,15,0,15">
                 <control:CustomButton Style="{StaticResource styleButton}"
                                       Text="Ajuda/FAQ"
                                       Command="{Binding IrTherWebView}"
@@ -50,14 +50,28 @@
                                       CommandParameter="PoliticaPrivacidade" />
             </StackLayout>
 
-            <Label Style="{StaticResource styleBaseLabel}" Text="Versão: 6.03.02" TextColor="ForestGreen" VerticalOptions="End" />
-            
-            <Image Source="logo_ther.png" VerticalOptions="End" />
-            
+            <Label Style="{StaticResource styleBaseLabel}" 
+                   Text="Versão: 6.03.02" 
+                   TextColor="ForestGreen" 
+                   VerticalOptions="End" />
+
+            <Image Source="logo_TherSistemas.png" VerticalOptions="End" Margin="0,15,0,15" WidthRequest="220" HeightRequest="58" />
+
             <Label Style="{StaticResource styleBaseLabel}" 
                    Text="2019 - Ther Sistemas Inovadores Todos os Direitos Reservados" 
                    TextColor="White" 
-                   VerticalOptions="End" />
+                   VerticalOptions="End">
+
+                <Label.Effects>
+                    <control:ShadowEffect Radius="5" DistanceX="5" DistanceY="5">
+                        <control:ShadowEffect.Color>
+                            <OnPlatform x:TypeArguments="Color">                                
+                                <On Platform="Android" Value="Black" />                                
+                            </OnPlatform>
+                        </control:ShadowEffect.Color>                        
+                    </control:ShadowEffect>                    
+                </Label.Effects>
+            </Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
