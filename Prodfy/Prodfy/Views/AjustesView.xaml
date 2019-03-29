@@ -36,10 +36,7 @@
                 <control:CustomButton Style="{StaticResource styleButton}" 
                                   Text="Exportar Dados"
                                   Command="{Binding IrPaginaExportarDados}" />
-            </StackLayout>
-
-            <control:MenuItem VerticalOptions="EndAndExpand" />
-            
+            </StackLayout>            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

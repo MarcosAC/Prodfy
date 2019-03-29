@@ -76,10 +76,7 @@
                         </DataTrigger>
                     </control:CustomButton.Triggers>                    
                 </control:CustomButton>                
-            </StackLayout>       
-            
-                <control:MenuItem VerticalOptions="EndAndExpand" />   
-            
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

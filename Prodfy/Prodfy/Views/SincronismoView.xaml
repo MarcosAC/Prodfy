@@ -93,10 +93,6 @@
                     <Label Style="{StaticResource styleBaseLabel}" Text="Atenção: O dispositivo deve estar conectado a uma rede WIFI com acesso a internet!" />
                 </StackLayout>
             </ScrollView>
-
-          <control:MenuItem />
-
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

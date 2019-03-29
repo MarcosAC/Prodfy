@@ -82,9 +82,6 @@
                                       IsEnabled="False" />
                 </StackLayout>
             </ScrollView>
-
-            <control:MenuItem />
-            
         </StackLayout>        
     </ContentPage.Content>
 </ContentPage>
