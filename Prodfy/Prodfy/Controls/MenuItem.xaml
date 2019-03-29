@@ -36,16 +36,16 @@
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
-    
+
     <ContentView.Content>
         <StackLayout Orientation="Horizontal" BackgroundColor="LightGray" Padding="5">
             
             <!--Início-->
             <StackLayout HorizontalOptions="FillAndExpand">
                 <Label x:Name="lblIconeInicio" 
-                       Style="{StaticResource MudancaDeCor}" 
+                       Style="{StaticResource MudancaDeCor}"
                        Text="&#xf015;" 
-                       TextColor="Gray">
+                       TextColor="{Binding CorTextoBotao}">
 
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
@@ -53,9 +53,9 @@
                 </Label>
 
                 <Label x:Name="lblInicio" 
-                       Style="{StaticResource MudancaDeCor}" 
+                       Style="{StaticResource MudancaDeCor}"
                        Text="Início" 
-                       TextColor="Gray" />
+                       TextColor="{Binding CorTextoBotao}" />
 
                 <StackLayout.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapped_Inicio" />
@@ -65,9 +65,9 @@
             <!--Funções-->
             <StackLayout HorizontalOptions="FillAndExpand">
                 <Label x:Name="lblIconeFuncoes" 
-                       Style="{StaticResource MudancaDeCor}" 
+                       Style="{StaticResource MudancaDeCor}"
                        Text="&#xf06c;"
-                       TextColor="Gray">
+                       TextColor="{Binding CorTextoBotao}">
                     
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
@@ -75,9 +75,9 @@
                 </Label>
 
                 <Label x:Name="lblFuncoes" 
-                       Style="{StaticResource MudancaDeCor}" 
+                       Style="{StaticResource MudancaDeCor}"
                        Text="Funções" 
-                       TextColor="Gray" />
+                       TextColor="{Binding CorTextoBotao}" />
 
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnTapped_Funcoes" />                      
@@ -87,10 +87,10 @@
             <!--Sincronia-->
             <StackLayout HorizontalOptions="FillAndExpand">
                 <Label x:Name="lblIconeSincronia" 
-                       Style="{StaticResource MudancaDeCor}" 
+                      Style="{StaticResource MudancaDeCor}"
                        Text="&#xf1eb;" 
-                       TextColor="Gray">
-                    
+                       TextColor="{Binding CorTextoBotao}">
+
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
                     </Label.FontFamily>
@@ -99,7 +99,7 @@
                 <Label x:Name="lblSincronia" 
                        Style="{StaticResource MudancaDeCor}" 
                        Text="Sincronia" 
-                       TextColor="Gray" />
+                       TextColor="{Binding CorTextoBotao}" />
 
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnTapped_Sincronia" />
@@ -107,11 +107,12 @@
             </StackLayout>
 
             <!--Ajustes-->
+            
             <StackLayout HorizontalOptions="FillAndExpand">
                 <Label x:Name="lblIconeAjustes" 
-                       Style="{StaticResource MudancaDeCor}" 
+                       Style="{StaticResource MudancaDeCor}"
                        Text="&#xf013;"
-                       TextColor="Gray">
+                       TextColor="{Binding CorTextoBotao}">
                     
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Solid" />
@@ -121,7 +122,7 @@
                 <Label x:Name="lblAjustes" 
                        Style="{StaticResource MudancaDeCor}"
                        Text="Ajustes" 
-                       TextColor="Gray" />
+                       TextColor="{Binding CorTextoBotao}" />
 
                 <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnTapped_Ajustes" />

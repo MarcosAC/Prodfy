@@ -38,7 +38,7 @@
                                   Command="{Binding IrPaginaExportarDados}" />
             </StackLayout>
 
-            <control:MenuItem VerticalOptions="EndAndExpand"/>
+            <control:MenuItem VerticalOptions="EndAndExpand" />
             
         </StackLayout>
     </ContentPage.Content>

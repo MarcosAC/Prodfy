@@ -13,14 +13,14 @@ namespace Prodfy.Views
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            BindingContext = new LoginViewModel();
+            BindingContext = new LoginViewModel();           
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            ((LoginViewModel)BindingContext).RefreshCommand.Execute(null);
+            ((LoginViewModel)BindingContext).RefreshCommand.Execute(null);            
         }
     }
 }

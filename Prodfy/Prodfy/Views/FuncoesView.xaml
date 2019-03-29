@@ -83,7 +83,7 @@
                 </StackLayout>
             </ScrollView>
 
-            <control:MenuItem VerticalOptions="EndAndExpand"/>
+            <control:MenuItem />
             
         </StackLayout>        
     </ContentPage.Content>

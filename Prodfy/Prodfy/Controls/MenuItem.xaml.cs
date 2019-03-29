@@ -7,9 +7,10 @@ namespace Prodfy.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MenuItem : ContentView
-	{
+    {
         string tapped = string.Empty;
         bool isValid = false;
+        bool paginaCarregada = false;
 
         public MenuItem ()
 		{
@@ -20,7 +21,7 @@ namespace Prodfy.Controls
 
         private void GoToState(bool isValid, string tapped)
         {
-            string visualState = isValid ? "Valid" : "Normal";            
+            string visualState = isValid ? "Valid" : "Normal";
 
             if (tapped == "inicio")
             {
@@ -79,11 +80,16 @@ namespace Prodfy.Controls
         {
             App.Current.MainPage.Navigation.PushAsync(new LoginView());
 
-            if (e != null)
+            paginaCarregada = true;
+
+            if (paginaCarregada)
             {
-                string tapped = "inicio";
-                isValid = true;
-                GoToState(isValid, tapped);
+                if (e != null)
+                {
+                    string tapped = "inicio";
+                    isValid = true;
+                    GoToState(isValid, tapped);
+                }
             }
         }
 
