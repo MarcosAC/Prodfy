@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<control:BottomNavTabPage xmlns="http://xamarin.com/schemas/2014/forms"
+<control:BottomNavTabPage xmlns="http://xamarin.com/schemas/2014/forms"                          
                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                           xmlns:control="clr-namespace:Prodfy.Controls"
+                          xmlns:views="clr-namespace:Prodfy.Views" 
+                          xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"                          
+                          android:TabbedPage.ToolbarPlacement="Bottom"
+                          android:TabbedPage.BarSelectedItemColor="#3383F1"
+                          android:TabbedPage.BarItemColor="Gray"
+                          BarBackgroundColor="LightGray"
                           x:Class="Prodfy.Views.InicioView">
-  <!--Pages can be added as references or inline-->
-  <ContentPage Title="Tab 1" />
-  <ContentPage Title="Tab 2" />
-  <ContentPage Title="Tab 3" />
-  <ContentPage Title="Tab 4" />
+
+    <views:LoginView Title="Início" Icon="home.png" />
+    <views:FuncoesView Title="Funções" Icon="leaf.png" />
+    <views:SincronismoView Title="Sincronia" Icon="wifi.png" />
+    <views:AjustesView Title="Ajustes" Icon="cog.png" />
 </control:BottomNavTabPage>

@@ -1,4 +1,5 @@
 ﻿using Prodfy.Controls;
+using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +12,9 @@ namespace Prodfy.Views
         {
             InitializeComponent();
 
-            On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+            //On<Xamarin.Forms.PlatformConfiguration.Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
+
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }
