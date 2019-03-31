@@ -48,8 +48,6 @@ namespace Prodfy.ViewModels
             ocorrenciaRepository = new OcorrenciaRepository();
             medicaoRepository = new MedicaoRepository();
             expedicaoRepository = new ExpedicaoRepository();
-
-            SincronizarCommand = new Command(ExecuteSincronizarCommand, CanExecuteSincronizarCommand);
         }
 
         #region Propriedades sincronismo
@@ -65,32 +63,16 @@ namespace Prodfy.ViewModels
         public int? IndExp { get => sincronismo?.ind_mnt; }
         public int? IndIdent { get => sincronismo?.ind_mnt; }
 
-        #endregion
-
-        private bool _logado;
-        public bool Logado
-        {
-            get { return _logado; }
-            set { SetProperty(ref _logado, value); SincronizarCommand.ChangeCanExecute(); }
-        }                
-
-        public Command SincronizarCommand { get; }
-
-        private bool VerificarUsuarioLogado()
-        {
-            var dadosUser = userRepository.ObterDados();
-
-            if (dadosUser?.senha != null)
-                if (dadosUser?.senha == dadosUser?.senha)
-                    return true;
-
-            return false;
-        }
+        #endregion 
 
         private bool CanExecuteSincronizarCommand()
         {
-            return VerificarUsuarioLogado() == true;
+            return LoginViewModel.estaLogado;
         }
+
+        private Command _sincronozarCommand;
+        public Command SincronizarCommand =>
+            _sincronozarCommand ?? (_sincronozarCommand = new Command(ExecuteSincronizarCommand, CanExecuteSincronizarCommand));
 
         private async void ExecuteSincronizarCommand()
         {
@@ -292,7 +274,7 @@ namespace Prodfy.ViewModels
         {
             await Task.FromResult<object>(null);
 
-            RefreshCommand.ChangeCanExecute();            
+            SincronizarCommand.ChangeCanExecute();
 
             try
             {
@@ -324,6 +306,10 @@ namespace Prodfy.ViewModels
                     OnPropertyChanged(nameof(IndIdent));
                     OnPropertyChanged(nameof(DhtLastSincr));
                 }
+                else
+                {
+                    return;
+                }                
             }
             catch (Exception)
             {
