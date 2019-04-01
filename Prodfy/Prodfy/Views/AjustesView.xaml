@@ -7,36 +7,38 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Style="{StaticResource baseStyleStackLayout}">
-                <Image Style="{StaticResource ImagemFundo}" />
+            <ScrollView>
+                <StackLayout Style="{StaticResource baseStyleStackLayout}">
+                    <Image Style="{StaticResource ImagemFundo}" />
 
-                <Label Text="&#xf085;"
-                   FontSize="100" 
-                   TextColor="ForestGreen"
-                   HorizontalOptions="Center"
-                   Margin="0,20,0,20">
+                    <Label Text="&#xf085;"
+                       FontSize="100" 
+                       TextColor="ForestGreen"
+                       HorizontalOptions="Center"
+                       Margin="0,20,0,20">
 
-                    <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
-                    </Label.FontFamily>
-                </Label>
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
+                        </Label.FontFamily>
+                    </Label>
 
-                <control:CustomButton Style="{StaticResource styleButton}"
-                                  Text="Dispositivos"
-                                  Command="{Binding IrPaginaDispositivo}" />
+                    <control:CustomButton Style="{StaticResource styleButton}"
+                                      Text="Dispositivos"
+                                      Command="{Binding IrPaginaDispositivo}" />
 
-                <control:CustomButton Style="{StaticResource styleButton}" 
-                                  Text="Sobre"
-                                  Command="{Binding IrPaginaSobre}" />
+                    <control:CustomButton Style="{StaticResource styleButton}" 
+                                      Text="Sobre"
+                                      Command="{Binding IrPaginaSobre}" />
 
-                <control:CustomButton Style="{StaticResource styleButton}" 
-                                  Text="Conexão" 
-                                  Command="{Binding IrPaginaConexao}" />
+                    <control:CustomButton Style="{StaticResource styleButton}" 
+                                      Text="Conexão" 
+                                      Command="{Binding IrPaginaConexao}" />
 
-                <control:CustomButton Style="{StaticResource styleButton}" 
-                                  Text="Exportar Dados"
-                                  Command="{Binding IrPaginaExportarDados}" />
-            </StackLayout>            
+                    <control:CustomButton Style="{StaticResource styleButton}" 
+                                      Text="Exportar Dados"
+                                      Command="{Binding IrPaginaExportarDados}" />
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
