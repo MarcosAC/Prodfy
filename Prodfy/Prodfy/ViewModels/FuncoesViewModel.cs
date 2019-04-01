@@ -1,5 +1,6 @@
-﻿using Prodfy.Services.Repository;
-using System;
+﻿using Prodfy.Services;
+using Prodfy.Services.Repository;
+using Prodfy.Views;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -7,128 +8,127 @@ namespace Prodfy.ViewModels
 {
     public class FuncoesViewModel : BaseViewModel
     {
-        private UserRepository userRepository;       
+        private readonly INavigationService _navigationService;
+
+        private UserRepository userRepository;
 
         public FuncoesViewModel()
         {
+            _navigationService = new NavigationService();
+
             userRepository = new UserRepository();
-
-            //HabilitarBotoesCommand = new Command();
-        }
-
-        private bool VerificarUsuarioLogado()
-        {
-            var dadosUser = userRepository.ObterDados();
-
-            if (dadosUser?.senha != null)
-                if (dadosUser?.senha == dadosUser?.senha)
-                    return true;
-
-            return false;
         }
 
         private bool CanExecuteCommand()
         {
-            return VerificarUsuarioLogado() == true;
+            return LoginViewModel.estaLogado;
         }
-
-        private bool _logado;
-        public bool Logado
-        {
-            get { return _logado; }
-            set { SetProperty(ref _logado, value); HabilitarBotoesCommand.ChangeCanExecute(); }
-        }
-
-        public Command HabilitarBotoesCommand { get; }
 
         private Command _irPaginaIdentificacaoCommand;
         public Command IrPaginaIdentificacaoCommand =>
-            _irPaginaIdentificacaoCommand ?? (_irPaginaIdentificacaoCommand = new Command(async () => await ExecuteIrPaginaIdentificacaoCommand()));
+            _irPaginaIdentificacaoCommand ?? (_irPaginaIdentificacaoCommand = new Command(ExecuteIrPaginaIdentificacaoCommand, CanExecuteCommand));
 
-        private Task ExecuteIrPaginaIdentificacaoCommand()
+        private async void ExecuteIrPaginaIdentificacaoCommand()
         {
-            throw new NotImplementedException();
+            await _navigationService.PushAsync(new IdentificacaoView());
         }
 
         private Command _irPaginaAtividadeCommand;
         public Command IrPaginaAtividadeCommand =>
-            _irPaginaAtividadeCommand ?? (_irPaginaAtividadeCommand = new Command(async () => await ExecuteIrPaginaAtividadeCommand()));
+            _irPaginaAtividadeCommand ?? (_irPaginaAtividadeCommand = new Command(async () => await ExecuteIrPaginaAtividadeCommand(), CanExecuteCommand));
 
-        private Task ExecuteIrPaginaAtividadeCommand()
+        private async Task ExecuteIrPaginaAtividadeCommand()
         {
-            throw new NotImplementedException();
+            await _navigationService.PushAsync(new CadastroAtividadeView());
         }
 
         private Command _irPaginaInventarioCommand;
         public Command IrPaginaInventarioCommand =>
-            _irPaginaInventarioCommand ?? (_irPaginaInventarioCommand = new Command(async () => await ExecuteIrPaginaInventarioCommand()));
+            _irPaginaInventarioCommand ?? (_irPaginaInventarioCommand = new Command(async () => await ExecuteIrPaginaInventarioCommand(), CanExecuteCommand));
 
-        private Task ExecuteIrPaginaInventarioCommand()
+        private async Task ExecuteIrPaginaInventarioCommand()
         {
-            throw new NotImplementedException();
+            await _navigationService.PushAsync(new CadastroInventarioView());
         }
 
         private Command _irPaginaPerdasCommand;
         public Command IrPagianaPerdasCommand =>
-            _irPaginaPerdasCommand ?? (_irPaginaPerdasCommand = new Command(async () => await ExecuteIrPaginaPerdasComand()));
+            _irPaginaPerdasCommand ?? (_irPaginaPerdasCommand = new Command(async () => await ExecuteIrPaginaPerdasComand(), CanExecuteCommand));
 
-        private Task ExecuteIrPaginaPerdasComand()
+        private async Task ExecuteIrPaginaPerdasComand()
         {
-            throw new NotImplementedException();
+            await _navigationService.PushAsync(new CadastroPerdasView());
         }
 
         private Command _irPaginaHistoricoCommand;
         public Command IrPaginaHistoricoCommand =>
-            _irPaginaHistoricoCommand ?? (_irPaginaHistoricoCommand = new Command(async () => await ExecuteIrPaginaHistoricoCommand()));
+            _irPaginaHistoricoCommand ?? (_irPaginaHistoricoCommand = new Command(async () => await ExecuteIrPaginaHistoricoCommand(), CanExecuteCommand));
 
-        private Task ExecuteIrPaginaHistoricoCommand()
+        private async Task ExecuteIrPaginaHistoricoCommand()
         {
-            throw new NotImplementedException();
+            await _navigationService.PushAsync(new CadastroHistoricoView());
         }
 
         private Command _irPaginaLoteCommand;
         public Command IrPaginaLoteCommand =>
-            _irPaginaLoteCommand ?? (_irPaginaLoteCommand = new Command(async () => await ExecuteIrPaginaLoteCommand()));
+            _irPaginaLoteCommand ?? (_irPaginaLoteCommand = new Command(async () => await ExecuteIrPaginaLoteCommand(), CanExecuteCommand));
 
-        private Task ExecuteIrPaginaLoteCommand()
+        private async Task ExecuteIrPaginaLoteCommand()
         {
-            throw new NotImplementedException();
+            await _navigationService.PushAsync(new CadastroEvolucaoLoteView());
         }
 
         private Command _irPaginaExpedicaoCommand;
         public Command IrPaginaExpedicaoCommand =>
-            _irPaginaExpedicaoCommand ?? (_irPaginaExpedicaoCommand = new Command(async () => await ExecuteIrPaginaExpedicaoCommand()));
+            _irPaginaExpedicaoCommand ?? (_irPaginaExpedicaoCommand = new Command(async () => await ExecuteIrPaginaExpedicaoCommand(), CanExecuteCommand));
 
-        private Task ExecuteIrPaginaExpedicaoCommand()
+        private async Task ExecuteIrPaginaExpedicaoCommand()
         {
-            throw new NotImplementedException();
+            await _navigationService.PushAsync(new CadastroExpedicaoView());
         }
 
         private Command _irPaginaLocalizacaoCommand;
         public Command IrPaginaLocalizacaoCommand =>
-            _irPaginaLocalizacaoCommand ?? (_irPaginaLocalizacaoCommand = new Command(async () => await ExecuteIrPaginaLocalizacaoCommand()));
+            _irPaginaLocalizacaoCommand ?? (_irPaginaLocalizacaoCommand = new Command(async () => await ExecuteIrPaginaLocalizacaoCommand(), CanExecuteCommand));
 
-        private Task ExecuteIrPaginaLocalizacaoCommand()
+        private async Task ExecuteIrPaginaLocalizacaoCommand()
         {
-            throw new NotImplementedException();
+            await _navigationService.PushAsync(new LocalizacaoView());
         }
 
         private Command _irPaginaOcorrenciaCommand;
         public Command IrPaginaOcorrenciaCommand =>
-            _irPaginaOcorrenciaCommand ?? (_irPaginaOcorrenciaCommand = new Command(async () => await ExecuteIrPaginaOcorrenciaCommand()));
+            _irPaginaOcorrenciaCommand ?? (_irPaginaOcorrenciaCommand = new Command(async () => await ExecuteIrPaginaOcorrenciaCommand(), CanExecuteCommand));
 
-        private Task ExecuteIrPaginaOcorrenciaCommand()
+        private async Task ExecuteIrPaginaOcorrenciaCommand()
         {
-            throw new NotImplementedException();
+            await _navigationService.PushAsync(new CadastroOcorrencia());
         }
 
         private Command _irPaginaMedicaoCommand;
         public Command IrPaginaMedicaoCommand =>
-            _irPaginaMedicaoCommand ?? (_irPaginaMedicaoCommand = new Command(async () => await ExecuteIrPaginaMedicaoCommand()));
+            _irPaginaMedicaoCommand ?? (_irPaginaMedicaoCommand = new Command(async () => await ExecuteIrPaginaMedicaoCommand(), CanExecuteCommand));
 
-        private Task ExecuteIrPaginaMedicaoCommand()
+        private async Task ExecuteIrPaginaMedicaoCommand()
         {
-            throw new NotImplementedException();
+            await _navigationService.PushAsync(new CadastroMedicaoView());
+        }
+
+        private Command _refreshCommand;
+        public Command RefreshCommand => _refreshCommand ?? (_refreshCommand = new Command(RefresCommandExecute));
+
+        private void RefresCommandExecute()
+        {
+            IrPaginaIdentificacaoCommand.ChangeCanExecute();
+            IrPaginaAtividadeCommand.ChangeCanExecute();
+            IrPaginaInventarioCommand.ChangeCanExecute();
+            IrPagianaPerdasCommand.ChangeCanExecute();
+            IrPaginaHistoricoCommand.ChangeCanExecute();
+            IrPaginaLoteCommand.ChangeCanExecute();
+            IrPaginaExpedicaoCommand.ChangeCanExecute();
+            IrPaginaLocalizacaoCommand.ChangeCanExecute();
+            IrPaginaOcorrenciaCommand.ChangeCanExecute();
+            IrPaginaMedicaoCommand.ChangeCanExecute();
         }
     }
 }
