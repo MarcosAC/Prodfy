@@ -76,83 +76,90 @@ namespace Prodfy.ViewModels
 
         private async void ExecuteSincronizarCommand()
         {
-            if (VerificaConexaoInternet.VerificaConexao())
+            IsBusy = true;
+            try
             {
-                if (UploadDados().Count >= 0)
+                if (VerificaConexaoInternet.VerificaConexao())
                 {
-                    var dadosResponse = await dadosSincronismo.UploadDadosParaSincronisar(userRepository.ObterDados().app_key, userRepository.ObterDados().lang, UploadDados());
-
-                    if (dadosResponse.ind_atv != null) // Atividade
+                    if (UploadDados().Count >= 0)
                     {
-                        if (dadosResponse.ind_atv == 1)
-                            atividadeRepository.Deletar();
-                    }                    
+                        var dadosResponse = await dadosSincronismo.UploadDadosParaSincronisar(userRepository.ObterDados().app_key, userRepository.ObterDados().lang, UploadDados());
 
-                    if (dadosResponse.ind_evo != null) // Evolução
-                    {
-                        if (dadosResponse.ind_evo == 1)
-                            evolucaoRepository.Deletar();
+                        if (dadosResponse.ind_atv != null) // Atividade
+                        {
+                            if (dadosResponse.ind_atv == 1)
+                                atividadeRepository.Deletar();
+                        }
+
+                        if (dadosResponse.ind_evo != null) // Evolução
+                        {
+                            if (dadosResponse.ind_evo == 1)
+                                evolucaoRepository.Deletar();
+                        }
+
+                        if (dadosResponse.ind_exp != null) // Expedição
+                        {
+                            if (dadosResponse.ind_exp == 1)
+                                expedicaoRepository.Deletar();
+                        }
+
+                        if (dadosResponse.ind_hist != null) // Historico
+                        {
+                            if (dadosResponse.ind_hist == 1)
+                                historicoRepository.Deletar();
+                        }
+
+                        if (dadosResponse.ind_inv != null) // Inventario
+                        {
+                            if (dadosResponse.ind_inv == 1)
+                                inventarioRepository.Deletar();
+                        }
+
+                        if (dadosResponse.ind_mnt != null) // Mediçã0
+                        {
+                            if (dadosResponse.ind_mnt == 1)
+                                medicaoRepository.Deletar();
+                        }
+
+                        if (dadosResponse.ind_oco != null) // Ocorrencia
+                        {
+                            if (dadosResponse.ind_oco == 1)
+                                ocorrenciaRepository.Deletar();
+                        }
+
+                        if (dadosResponse.ind_per != null) // Perda
+                        {
+                            if (dadosResponse.ind_per == 1)
+                                perdaRepository.Deletar();
+                        }
                     }
-
-                    if (dadosResponse.ind_exp != null) // Expedição
+                    else
                     {
-                        if (dadosResponse.ind_exp == 1)
-                            expedicaoRepository.Deletar();
-                    }
+                        var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(userRepository.ObterDados().app_key, userRepository.ObterDados().lang);
 
-                    if (dadosResponse.ind_hist != null) // Historico
-                    {
-                        if (dadosResponse.ind_hist == 1)
-                            historicoRepository.Deletar();
-                    }
-
-                    if (dadosResponse.ind_inv != null) // Inventario
-                    {
-                        if (dadosResponse.ind_inv == 1)
-                            inventarioRepository.Deletar();
-                    }
-
-                    if (dadosResponse.ind_mnt != null) // Mediçã0
-                    {
-                        if (dadosResponse.ind_mnt == 1)
-                            medicaoRepository.Deletar();
-                    }
-
-                    if (dadosResponse.ind_oco != null) // Ocorrencia
-                    {
-                        if (dadosResponse.ind_oco == 1)
-                            ocorrenciaRepository.Deletar();
-                    }
-
-                    if (dadosResponse.ind_per != null) // Perda
-                    {
-                        if (dadosResponse.ind_per == 1)
-                            perdaRepository.Deletar();
+                        user = new User
+                        {
+                            ind_ident = _dadosSincronismo.ind_ident,
+                            ind_inv = _dadosSincronismo.ind_inv,
+                            ind_per = _dadosSincronismo.ind_per,
+                            ind_hist = _dadosSincronismo.ind_hist,
+                            ind_evo = _dadosSincronismo.ind_evo,
+                            ind_mnt = _dadosSincronismo.ind_mnt,
+                            ind_exp = _dadosSincronismo.ind_exp,
+                            ind_atv = _dadosSincronismo.ind_atv,
+                            uso_liberado = _dadosSincronismo.uso_liberado
+                        };
+                        userRepository.Editar(user);
                     }
                 }
-                else
-                {
-                    var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(userRepository.ObterDados().app_key, userRepository.ObterDados().lang);
-
-                    user = new User
-                    {
-                        ind_ident = _dadosSincronismo.ind_ident,
-                        ind_inv = _dadosSincronismo.ind_inv,
-                        ind_per = _dadosSincronismo.ind_per,
-                        ind_hist = _dadosSincronismo.ind_hist,
-                        ind_evo = _dadosSincronismo.ind_evo,
-                        ind_mnt = _dadosSincronismo.ind_mnt,
-                        ind_exp = _dadosSincronismo.ind_exp,
-                        ind_atv = _dadosSincronismo.ind_atv,
-                        uso_liberado = _dadosSincronismo.uso_liberado
-                    };
-                    userRepository.Editar(user);
-                }                
+                
             }
-            else
+            catch (Exception)
             {
                 await _dialogService.AlertAsync("Erro", "Sem conexão com a internet!", "Ok");
             }
+
+            IsBusy = false;
         }
 
         private ArrayList UploadDados()
