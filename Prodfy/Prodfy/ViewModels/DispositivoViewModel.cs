@@ -45,9 +45,10 @@ namespace Prodfy.ViewModels
         {
             if (VerificaConexaoInternet.VerificaConexao())
             {
-                bool configuracaoAceita = await _dialogService.AlertAsync("Dispositivo", 
-                                                                          "Ao configurar o dispositivo todos os dados não sincronizados serão descartados. Confirma?", 
-                                                                          "Sim", "Não");
+                bool configuracaoAceita = await _dialogService.AlertAsync
+                                               ("Dispositivo", 
+                                                "Ao configurar o dispositivo todos os dados não sincronizados serão descartados. Confirma?", 
+                                                "Sim", "Não");
                 if (configuracaoAceita)
                 {                    
                     _userRepository.DeletarTodasTabelas();
@@ -97,11 +98,11 @@ namespace Prodfy.ViewModels
 
                             IsBusy = false;                            
 
-                            await _dialogService.AlertAsync("Sincronizar", "Sincronização realizada com sucesso!", "Ok");
+                            await _dialogService.AlertAsync("Configuração", "Configuração básica recebida com sucesso!", "Ok");
                         }
                         catch (Exception)
                         {
-                            await _dialogService.AlertAsync("Sincronizar", "Erro ao sincronizar!", "Ok");
+                            await _dialogService.AlertAsync("Configuração", "Erro ao configurar!", "Ok");
                         }                       
                     }
                 }                
