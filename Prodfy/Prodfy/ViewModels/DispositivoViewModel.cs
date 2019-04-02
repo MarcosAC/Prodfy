@@ -79,8 +79,6 @@ namespace Prodfy.ViewModels
                         {
                             IsBusy = true;
 
-                            await Task.Delay(3000);
-
                             _dadosUsuario = ConfiguracaoDispositivoService.ObterDadosConfiguracaoDispositivo(dadosQR.appKey, dadosQR.idioma);
 
                             _userRepository.Adicionar(_dadosUsuario);
