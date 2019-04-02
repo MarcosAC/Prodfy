@@ -24,39 +24,46 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource baseStyleStackLayout}">
-            
-            <StackLayout HorizontalOptions="Center">
-                <Label Text="&#xf3cd;"
+        <AbsoluteLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"                               
+                               Color="DarkGreen" 
+                               AbsoluteLayout.LayoutBounds="0.5,0.5,50,50" 
+                               AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <StackLayout Style="{StaticResource baseStyleStackLayout}">
+                <StackLayout HorizontalOptions="Center">
+                    <Label Text="&#xf3cd;"
                        FontSize="100" 
                        TextColor="#206805"
                        HorizontalOptions="Center"
                        Margin="0,20,0,20">
 
-                    <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
-                    </Label.FontFamily>
-                </Label>
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
+                        </Label.FontFamily>
+                    </Label>
 
-                <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Dispositivo:" TextColor="Black" HorizontalTextAlignment="Center" />
-                <Label x:Name="label" Style="{StaticResource styleLabelTexto}" Text="{Binding NumeroDispositivo}" HorizontalTextAlignment="Center">
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference label}, Path=Text.Length}" Value="0">
-                            <Setter Property="Text" Value="-" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
+                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Dispositivo:" TextColor="Black" HorizontalTextAlignment="Center" />
+                    <Label x:Name="label" Style="{StaticResource styleLabelTexto}" Text="{Binding NumeroDispositivo}" HorizontalTextAlignment="Center">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference label}, Path=Text.Length}" Value="0">
+                                <Setter Property="Text" Value="-" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
 
-                <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Usuário:" TextColor="Black" HorizontalTextAlignment="Center" />
-                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Usuario}" HorizontalTextAlignment="Center"/>
-                
-                <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Empresa:" TextColor="Black" HorizontalTextAlignment="Center" />
-                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Empresa}" HorizontalTextAlignment="Center" />
+                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Usuário:" TextColor="Black" HorizontalTextAlignment="Center" />
+                    <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Usuario}" HorizontalTextAlignment="Center"/>
+
+                    <Label Style="{StaticResource styleLabelCamposSincronizar}" Text="Empresa:" TextColor="Black" HorizontalTextAlignment="Center" />
+                    <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Empresa}" HorizontalTextAlignment="Center" />
+                </StackLayout>
+
+                <control:CustomButton Text="Ler QRCode" Style="{StaticResource styleButton}" Command="{Binding LeitorQRCommand}" />
+
+                <Label Style="{StaticResource styleBaseLabel}" Text="Obs: Dispositovo deve estar cadastrado no Portal Prodfy." />
             </StackLayout>
-
-            <control:CustomButton Text="Ler QRCode" Style="{StaticResource styleButton}" Command="{Binding LeitorQRCommand}" />
-
-            <Label Style="{StaticResource styleBaseLabel}" Text="Obs: Dispositovo deve estar cadastrado no Portal Prodfy." />
-        </StackLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

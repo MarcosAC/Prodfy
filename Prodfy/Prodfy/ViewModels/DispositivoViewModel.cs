@@ -56,7 +56,8 @@ namespace Prodfy.ViewModels
                      *  ToDo - Refatarar leitor de QR
                      *  Criar uma variável que recebe os dados 
                      *  lidos da classe de leitor de QR.
-                     */
+                     */                    
+
                     var scanner = new ZXing.Mobile.MobileBarcodeScanner();
                     var result = await scanner.Scan();
 
@@ -69,25 +70,42 @@ namespace Prodfy.ViewModels
                             appKey = resultadoQR[0],
                             idioma = resultadoQR[2]
                         };
-                    /**********************************************************/
 
-                        _dadosUsuario = ConfiguracaoDispositivoService.ObterDadosConfiguracaoDispositivo(dadosQR.appKey, dadosQR.idioma);
+                        scanner.Cancel(); //=> Faz parte do scanner de QR.
 
-                        _userRepository.Adicionar(_dadosUsuario);
+                        /**********************************************************/
 
-                        _dadosUsuario = new User
+                        try
                         {
-                            idUser = _dadosUsuario.idUser,
-                            disp_num = _dadosUsuario.disp_num,
-                            nome = _dadosUsuario.nome,
-                            empresa = _dadosUsuario.empresa
-                        };
+                            IsBusy = true;
 
-                        OnPropertyChanged(nameof(NumeroDispositivo));
-                        OnPropertyChanged(nameof(Usuario));
-                        OnPropertyChanged(nameof(Empresa));
+                            await Task.Delay(3000);
+
+                            _dadosUsuario = ConfiguracaoDispositivoService.ObterDadosConfiguracaoDispositivo(dadosQR.appKey, dadosQR.idioma);
+
+                            _userRepository.Adicionar(_dadosUsuario);
+
+                            _dadosUsuario = new User
+                            {
+                                idUser = _dadosUsuario.idUser,
+                                disp_num = _dadosUsuario.disp_num,
+                                nome = _dadosUsuario.nome,
+                                empresa = _dadosUsuario.empresa
+                            };
+
+                            OnPropertyChanged(nameof(NumeroDispositivo));
+                            OnPropertyChanged(nameof(Usuario));
+                            OnPropertyChanged(nameof(Empresa));
+
+                            IsBusy = false;                            
+
+                            await _dialogService.AlertAsync("Sincronizar", "Sincronização realizada com sucesso!", "Ok");
+                        }
+                        catch (Exception)
+                        {
+                            await _dialogService.AlertAsync("Sincronizar", "Erro ao sincronizar!", "Ok");
+                        }                       
                     }
-                    scanner.Cancel(); //=> Faz parte do scanner de QR.
                 }                
             }
             else
