@@ -39,7 +39,7 @@ namespace Prodfy.Services.API
                 if (response.IsSuccessStatusCode)
                 {
                     var conteudoResponse = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                    var dadosSincronismo = JsonConvert.DeserializeObject<User>(conteudoResponse);
+                    var dadosSincronismo = JsonConvert.DeserializeObject<Sincronismo>(conteudoResponse);
 
                     var sincronismo = new Sincronismo
                     {
@@ -50,7 +50,8 @@ namespace Prodfy.Services.API
                         ind_hist = dadosSincronismo.ind_hist,
                         ind_inv = dadosSincronismo.ind_inv,
                         ind_mnt = dadosSincronismo.ind_mnt,
-                        ind_per = dadosSincronismo.ind_per
+                        ind_per = dadosSincronismo.ind_per,
+                        sinc_date = dadosSincronismo.sinc_date
                     };
                     return sincronismo;
                 }

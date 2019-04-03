@@ -22,7 +22,7 @@
         public int? ind_mnt { get; set; } // Mediçã0
         public int? ind_exp { get; set; } // Expedição        
         public int? uso_liberado { get; set; }
-        public string dht_last_sincr { get; set; }
+        //public string dht_last_sincr { get; set; }
 
         //public Produto[] produto { get; set; }
         //public Objetivo[] objetivo { get; set; }
