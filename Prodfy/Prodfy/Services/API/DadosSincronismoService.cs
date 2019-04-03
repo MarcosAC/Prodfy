@@ -43,6 +43,7 @@ namespace Prodfy.Services.API
 
                     var sincronismo = new Sincronismo
                     {
+                        sinc_date = dadosSincronismo.sinc_date,
                         ind_ident = dadosSincronismo.ind_ident,
                         ind_atv = dadosSincronismo.ind_atv,
                         ind_evo = dadosSincronismo.ind_evo,
@@ -50,8 +51,7 @@ namespace Prodfy.Services.API
                         ind_hist = dadosSincronismo.ind_hist,
                         ind_inv = dadosSincronismo.ind_inv,
                         ind_mnt = dadosSincronismo.ind_mnt,
-                        ind_per = dadosSincronismo.ind_per,
-                        sinc_date = dadosSincronismo.sinc_date
+                        ind_per = dadosSincronismo.ind_per                        
                     };
                     return sincronismo;
                 }

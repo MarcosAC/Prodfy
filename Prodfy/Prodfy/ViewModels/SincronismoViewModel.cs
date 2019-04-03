@@ -165,7 +165,7 @@ namespace Prodfy.ViewModels
                             ind_mnt = _dadosSincronismo.ind_mnt,
                             ind_exp = _dadosSincronismo.ind_exp,
                             ind_atv = _dadosSincronismo.ind_atv,
-                            dht_last_sincr = _dadosSincronismo.sinc_date,
+                            dth_last_sincr = _dadosSincronismo.sinc_date,
                             uso_liberado = _dadosSincronismo.uso_liberado
                         };
                         userRepository.Editar(user);
@@ -317,7 +317,7 @@ namespace Prodfy.ViewModels
                         ind_oco = ocorrenciaRepository.ObterTotalDeRegistros(),
                         ind_mnt = medicaoRepository.ObterTotalDeRegistros(),
                         ind_exp = expedicaoRepository.ObterTotalDeRegistros(),
-                        sinc_date = dadosUser.dht_last_sincr
+                        sinc_date = dadosUser.dth_last_sincr
                     };
 
                     OnPropertyChanged(nameof(IndAtv));
@@ -330,9 +330,9 @@ namespace Prodfy.ViewModels
                     OnPropertyChanged(nameof(IndExp));
                     OnPropertyChanged(nameof(IndIdent));
 
-                    if (dadosUser.dht_last_sincr != null)
+                    if (dadosUser.dth_last_sincr != null)
                     {
-                        estaSincronizado = dadosUser.dht_last_sincr;
+                        estaSincronizado = dadosUser.dth_last_sincr;
                         OnPropertyChanged(nameof(DhtLastSincr));
                     }                    
                 }
