@@ -14,14 +14,13 @@ namespace Prodfy.ViewModels
 {
     public class SincronismoViewModel : BaseViewModel
     {
-        private readonly IDialogService _dialogService;
-
-        DadosSincronismoService dadosSincronismo = new DadosSincronismoService();
-
         private Sincronismo sincronismo = null;
         private User user = null;
         private string dataSincronizacao = "Não Sincronizado!";
-        private bool estaSincronizado = false;
+
+        private readonly IDialogService _dialogService;
+
+        DadosSincronismoService dadosSincronismo = new DadosSincronismoService();
 
         #region Implementação Repositorios
 
@@ -168,7 +167,6 @@ namespace Prodfy.ViewModels
                             dth_last_sincr = _dadosSincronismo.sinc_date
                         };
                         userRepository.Editar(user);
-                        estaSincronizado = true;
                         await RefreshCommandExecute();
                     }
                 }
@@ -331,11 +329,8 @@ namespace Prodfy.ViewModels
                     OnPropertyChanged(nameof(IndExp));
                     OnPropertyChanged(nameof(IndIdent));
 
-                    if (estaSincronizado)
-                    {
-                        dataSincronizacao = dadosUser.dth_last_sincr;
-                        OnPropertyChanged(nameof(DhtLastSincr));
-                    }
+                    dataSincronizacao = dadosUser.dth_last_sincr;
+                    OnPropertyChanged(nameof(DhtLastSincr));
                 }
                 else
                 {
@@ -347,56 +342,6 @@ namespace Prodfy.ViewModels
                 return;
             }
         }
-        
-        //private User DataUltimaSincrinismo()
-        //{
-        //    try
-        //    {
-        //        var dataSincronismo = userRepository.ObterDados();
-
-        //        if (dataSincronismo.dht_last_sincr != null)
-        //        {
-        //            var sincronismo = new User
-        //            {                        
-        //                dht_last_sincr = dataSincronismo.dht_last_sincr
-        //            };
-        //        }
-
-        //        return user;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return null;
-        //    }
-        //}
-
-        //private Sincronismo CarregarDadosSincronismo()
-        //{
-        //    try
-        //    {
-        //        var dadosUser = userRepository.ObterDados();
-
-        //        if (dadosSincronismo != null)
-        //        {
-        //            var sincronismo = new Sincronismo
-        //            {
-        //                ind_atv = atividadeRepository.ObterTotalDeRegistros(),
-        //                ind_inv = inventarioRepository.ObterTotalDeRegistros(),
-        //                ind_per = perdaRepository.ObterTotalDeRegistros(),
-        //                ind_hist = historicoRepository.ObterTotalDeRegistros(),
-        //                ind_evo = evolucaoRepository.ObterTotalDeRegistros(),
-        //                ind_oco = ocorrenciaRepository.ObterTotalDeRegistros(),
-        //                ind_mnt = medicaoRepository.ObterTotalDeRegistros(),
-        //                ind_exp = expedicaoRepository.ObterTotalDeRegistros(),
-        //                dht_last_sincr = dadosUser.dht_last_sincr
-        //            };
-        //        }
-        //    }
-        //    catch (System.Exception)
-        //    {
-        //        return;
-        //    }
-        //}
     }
 }
 
