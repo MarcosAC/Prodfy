@@ -23,20 +23,20 @@
                     </Label>
 
                     <control:CustomButton Style="{StaticResource styleButton}"
-                                      Text="Dispositivos"
-                                      Command="{Binding IrPaginaDispositivo}" />
+                                          Text="Dispositivo"
+                                          Command="{Binding IrPaginaDispositivo}" />
 
                     <control:CustomButton Style="{StaticResource styleButton}" 
-                                      Text="Sobre"
-                                      Command="{Binding IrPaginaSobre}" />
+                                          Text="Sobre"
+                                          Command="{Binding IrPaginaSobre}" />
 
                     <control:CustomButton Style="{StaticResource styleButton}" 
-                                      Text="Conexão" 
-                                      Command="{Binding IrPaginaConexao}" />
+                                          Text="Conexão" 
+                                          Command="{Binding IrPaginaConexao}" />
 
                     <control:CustomButton Style="{StaticResource styleButton}" 
-                                      Text="Exportar Dados"
-                                      Command="{Binding IrPaginaExportarDados}" />
+                                          Text="Exportar Dados"
+                                          Command="{Binding IrPaginaExportarDados}" />
                 </StackLayout>
             </ScrollView>
         </StackLayout>
