@@ -10,27 +10,29 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource baseStyleStackLayout}">
-            <Label Text="&#xf0c2;"
+        <ScrollView>
+            <StackLayout Style="{StaticResource baseStyleStackLayout}">
+                <Label Text="&#xf0c2;"
                    FontSize="100" 
                    TextColor="#206805"
                    HorizontalOptions="Center"
                    Margin="0,20,0,20">
 
-                <Label.FontFamily>
-                    <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
-                </Label.FontFamily>
-            </Label>
-            
-            <Label Style="{StaticResource styleBaseLabel}" Text="Link de Conexão Principal:" />
-            <Entry Style="{StaticResource styleEntryFormulario}" />
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
+                    </Label.FontFamily>
+                </Label>
 
-            <control:CustomButton Style="{StaticResource styleButton}" 
+                <Label Style="{StaticResource styleBaseLabel}" Text="Link de Conexão Principal:" />
+                <Entry Style="{StaticResource styleEntryFormulario}" />
+
+                <control:CustomButton Style="{StaticResource styleButton}" 
                                   Text="Salvar" x:Name="btnConexao" Clicked="OnClicked_btnConexao" />
 
-            <Label Style="{StaticResource styleBaseLabel}" 
+                <Label Style="{StaticResource styleBaseLabel}" 
                    Text="ATENÇÃO: Só altere o valor atual quando orientado pela equipe técnica Prodfy."
                    Margin="0,20,0,0" />
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>        
     </ContentPage.Content>
 </ContentPage>

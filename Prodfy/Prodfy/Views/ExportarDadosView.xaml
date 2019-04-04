@@ -10,24 +10,26 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource baseStyleStackLayout}">
-            <Label Text="&#xf382;"
+        <ScrollView>
+            <StackLayout Style="{StaticResource baseStyleStackLayout}">
+                <Label Text="&#xf382;"
                    FontSize="100" 
                    TextColor="#206805"
                    HorizontalOptions="Center"
                    Margin="0,20,0,20">
 
-                <Label.FontFamily>
-                    <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
-                </Label.FontFamily>
-            </Label>
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
+                    </Label.FontFamily>
+                </Label>
 
-            <Label Style="{StaticResource styleBaseLabel}" Text="Script de Exportação de Dados:" />
-            <Editor Style="{StaticResource styleEditorFormulario}" />
-            
-            <Label Style="{StaticResource styleBaseLabel}" 
+                <Label Style="{StaticResource styleBaseLabel}" Text="Script de Exportação de Dados:" />
+                <Editor Style="{StaticResource styleEditorFormulario}" />
+
+                <Label Style="{StaticResource styleBaseLabel}" 
                    Text="ATENÇÃO: Copie o texto acima e cole no painel de exportação de dados no portal Prodify Plantas."
                    Margin="0,20,0,0" />
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>        
     </ContentPage.Content>
 </ContentPage>
