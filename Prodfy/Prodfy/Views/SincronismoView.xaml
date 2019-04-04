@@ -67,7 +67,7 @@
                         <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="1" Text="Invetários:" HorizontalTextAlignment="End" />
                         <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="2" Text="Perdas:" HorizontalTextAlignment="End" />
                         <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="3" Text="Histórico:" HorizontalTextAlignment="End" />
-                        <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="4" Text="Evoluçôes:" HorizontalTextAlignment="End" />
+                        <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="4" Text="Evoluções:" HorizontalTextAlignment="End" />
                         <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="5" Text="Ocorrências:" HorizontalTextAlignment="End" />
                         <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="6" Text="Medições:" HorizontalTextAlignment="End" />
                         <Label Style="{StaticResource styleLabelCamposSincronizar}" Grid.Column="0" Grid.Row="7" Text="Expedições:" HorizontalTextAlignment="End" />

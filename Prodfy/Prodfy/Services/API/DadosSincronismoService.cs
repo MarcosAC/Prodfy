@@ -43,6 +43,13 @@ namespace Prodfy.Services.API
 
                     var sincronismo = new Sincronismo
                     {
+                        disp_num = dadosSincronismo.disp_num,
+                        senha = dadosSincronismo.senha,
+                        nome = dadosSincronismo.nome,
+                        sobrenome = dadosSincronismo.sobrenome,
+                        empresa = dadosSincronismo.empresa,
+                        autosinc = dadosSincronismo.autosinc,
+                        autosinc_time = dadosSincronismo.autosinc_time,
                         sinc_date = dadosSincronismo.sinc_date,
                         ind_ident = dadosSincronismo.ind_ident,
                         ind_atv = dadosSincronismo.ind_atv,

@@ -29,7 +29,7 @@ namespace Prodfy.Services.Repository
                
         public void Deletar()
         {
-            _dataBase._conexao.Execute("Delete From User"); ;
+            _dataBase._conexao.Execute("Delete From User");
         }
 
         public void Editar(User user)
@@ -48,7 +48,7 @@ namespace Prodfy.Services.Repository
         {
             if (_dataBase._conexao.Table<User>().Count() > 0)
             {
-                var dadosUsuario = _dataBase._conexao.Table<User>().FirstOrDefault();
+                var dadosUsuario = _dataBase._conexao.Table<User>().First();
                 return dadosUsuario;
             }
 

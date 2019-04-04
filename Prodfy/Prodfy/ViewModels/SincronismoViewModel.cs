@@ -16,11 +16,12 @@ namespace Prodfy.ViewModels
     {
         private readonly IDialogService _dialogService;
 
-        readonly DadosSincronismoService dadosSincronismo = new DadosSincronismoService();
+        DadosSincronismoService dadosSincronismo = new DadosSincronismoService();
 
         private Sincronismo sincronismo = null;
         private User user = null;
-        public string estaSincronizado = "Não Sincronizado!";
+        private string dataSincronizacao = "Não Sincronizado!";
+        private bool estaSincronizado = false;
 
         #region Implementação Repositorios
 
@@ -52,24 +53,9 @@ namespace Prodfy.ViewModels
         }
 
         #region Propriedades sincronismo
-
-        //private string _dhtLastSincr;
-        //public string DhtLastSincr { get => _dhtLastSincr = estaSincronizado; }
-        //{
-        //    get => "Não Sincronizado!";
-        //    set
-        //    {
-        //        if (DhtLastSincr == null)
-        //        {
-        //            //SetProperty(ref _dhtLastSincr, value);
-        //            OnPropertyChanged(nameof(DhtLastSincr));
-        //        }                
-        //    }
-
-
-        //}
+       
         private string _dhtLastSincr;
-        public string DhtLastSincr { get => _dhtLastSincr = estaSincronizado; }
+        public string DhtLastSincr { get => _dhtLastSincr = dataSincronizacao; }
 
         public int? IndAtv { get => sincronismo?.ind_atv; }
         public int? IndInv { get => sincronismo?.ind_inv; }
@@ -95,11 +81,12 @@ namespace Prodfy.ViewModels
         private async void ExecuteSincronizarCommand()
         {
             IsBusy = true;
+
             try
             {
                 if (VerificaConexaoInternet.VerificaConexao())
                 {
-                    if (UploadDados().Count > 0)
+                    if (UploadDados().Count >= 0)
                     {
                         var dadosResponse = await dadosSincronismo.UploadDadosParaSincronisar(userRepository.ObterDados().app_key, userRepository.ObterDados().lang, UploadDados());
 
@@ -150,13 +137,25 @@ namespace Prodfy.ViewModels
                             if (dadosResponse.ind_per == 1)
                                 perdaRepository.Deletar();
                         }
-                    }
-                    else
-                    {
-                        var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(userRepository.ObterDados().app_key, userRepository.ObterDados().lang);
+
+                        var dadosUser = userRepository.ObterDados();
+
+                        var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(dadosUser.app_key, dadosUser.lang);
 
                         user = new User
                         {
+                            disp_id = dadosUser.disp_id,
+                            idUser = dadosUser.idUser,
+                            sinc_url = dadosUser.sinc_url,
+                            lang = dadosUser.lang,
+                            app_key = dadosUser.app_key,
+                            disp_num = _dadosSincronismo.disp_num,
+                            senha = _dadosSincronismo.senha,
+                            nome = _dadosSincronismo.nome,
+                            sobrenome = _dadosSincronismo.sobrenome,
+                            empresa = _dadosSincronismo.empresa,
+                            autosinc = _dadosSincronismo.autosinc,
+                            autosinc_time = _dadosSincronismo.autosinc_time,
                             ind_ident = _dadosSincronismo.ind_ident,
                             ind_inv = _dadosSincronismo.ind_inv,
                             ind_per = _dadosSincronismo.ind_per,
@@ -165,12 +164,14 @@ namespace Prodfy.ViewModels
                             ind_mnt = _dadosSincronismo.ind_mnt,
                             ind_exp = _dadosSincronismo.ind_exp,
                             ind_atv = _dadosSincronismo.ind_atv,
-                            dth_last_sincr = _dadosSincronismo.sinc_date,
-                            uso_liberado = _dadosSincronismo.uso_liberado
+                            uso_liberado = _dadosSincronismo.uso_liberado,
+                            dth_last_sincr = _dadosSincronismo.sinc_date
                         };
                         userRepository.Editar(user);
+                        estaSincronizado = true;
+                        await RefreshCommandExecute();
                     }
-                }                
+                }
             }
             catch (Exception)
             {
@@ -305,7 +306,7 @@ namespace Prodfy.ViewModels
             {
                 var dadosUser = userRepository.ObterDados();
 
-                if (dadosSincronismo != null)
+                if (dadosUser != null)
                 {
                     sincronismo = new Sincronismo
                     {
@@ -330,16 +331,16 @@ namespace Prodfy.ViewModels
                     OnPropertyChanged(nameof(IndExp));
                     OnPropertyChanged(nameof(IndIdent));
 
-                    if (dadosUser.dth_last_sincr != null)
+                    if (estaSincronizado)
                     {
-                        estaSincronizado = dadosUser.dth_last_sincr;
+                        dataSincronizacao = dadosUser.dth_last_sincr;
                         OnPropertyChanged(nameof(DhtLastSincr));
-                    }                    
+                    }
                 }
                 else
                 {
                     return;
-                }                
+                }
             }
             catch (Exception)
             {
