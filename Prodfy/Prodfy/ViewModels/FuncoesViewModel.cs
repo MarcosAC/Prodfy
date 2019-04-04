@@ -21,7 +21,12 @@ namespace Prodfy.ViewModels
 
         private bool CanExecuteCommand()
         {
-            return LoginViewModel.estaLogado;
+            var dataSincronismo = userRepository.ObterDados();
+
+            if (LoginViewModel.estaLogado && dataSincronismo.dth_last_sincr != null)
+                return true;
+
+            return false;
         }
 
         private Command _irPaginaIdentificacaoCommand;
