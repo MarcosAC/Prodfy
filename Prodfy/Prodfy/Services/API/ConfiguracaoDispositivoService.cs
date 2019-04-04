@@ -59,8 +59,7 @@ namespace Prodfy.Services.API
                                 ind_exp = dadosDispositivo.ind_exp,
                                 ind_atv = dadosDispositivo.ind_atv,
                                 uso_liberado = dadosDispositivo.uso_liberado,
-                                sinc_stat = dadosDispositivo.sinc_stat,
-                                dth_last_sincr = dadosDispositivo.dth_last_sincr,
+                                sinc_stat = dadosDispositivo.sinc_stat
                             };                            
                             return user;
                     }
