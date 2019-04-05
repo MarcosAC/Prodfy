@@ -6,7 +6,32 @@
              BackgroundImage="splash_bg2.png">
     
     <NavigationPage.TitleView>
-        <control:CustomTitleView Titulo="Expedição" Icone2="&#xf029;" />
+        <StackLayout Orientation="Horizontal" Padding="0,0,20,0">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                <!--Botão Voltar-->
+                <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Text="Expedição" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" />
+
+                <Label Style="{StaticResource styleBotaoTitleView}" 
+                       Text="&#xf029;"
+                       HorizontalOptions="End">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </StackLayout>
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
@@ -25,15 +50,15 @@
 
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" 
-                             HorizontalOptions="Fill" 
-                             Margin="0,0,0,10">
+                                 HorizontalOptions="Fill" 
+                                 Margin="0,0,0,10">
                         <Label Style="{StaticResource styleLabelFormulario}" Text="Estaquiamento:" VerticalOptions="Center"/>
                         <Label Style="{StaticResource styleLabelFormulario}" Text="01/01/2018" VerticalOptions="Center" />
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal" 
-                             HorizontalOptions="Fill" 
-                             Margin="0,0,0,10">
+                                 HorizontalOptions="Fill" 
+                                 Margin="0,0,0,10">
                         <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Disponível:" VerticalOptions="Center"/>
                         <Label Style="{StaticResource styleLabelFormulario}" Text="400 / 400" VerticalOptions="Center" />
                     </StackLayout>

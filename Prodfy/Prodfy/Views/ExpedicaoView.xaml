@@ -1,12 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.ExpedicaoView"
              BackgroundImage="splash_bg2.png">
     
     <NavigationPage.TitleView>
-        <control:CustomTitleView Titulo="Expedição" Icone2="&#xf029;" />
+        <StackLayout Orientation="Horizontal" Padding="0,0,20,0">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                <!--Botão Voltar-->
+                <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Text="Expedição" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" />
+
+                <Label Style="{StaticResource styleBotaoTitleView}" 
+                       Text="&#xf029;"
+                       HorizontalOptions="End">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </StackLayout>
     </NavigationPage.TitleView>
 
     <ContentPage.Content>

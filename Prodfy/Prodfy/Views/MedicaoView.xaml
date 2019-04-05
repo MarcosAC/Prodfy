@@ -1,12 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.MedicaoView"
              BackgroundImage="splash_bg2.png">
     
-    <NavigationPage.TitleView>
-        <control:CustomTitleView Titulo="Medições" Icone1="&#xf029;" Icone2="&#xf055;" />
+    <NavigationPage.TitleView>        
+        <StackLayout Orientation="Horizontal" Padding="0,0,20,0">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                <!--Botão Voltar-->
+                <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Text="Medições" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" />
+
+                <Label Style="{StaticResource styleBotaoTitleView}" 
+                       Text="&#xf029;"
+                       HorizontalOptions="End">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Style="{StaticResource styleBotaoTitleView}" 
+                       Text="&#xf055;"
+                       Margin="10,0,0,0"
+                       HorizontalOptions="End">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </StackLayout>
     </NavigationPage.TitleView>
 
     <ContentPage.Content>

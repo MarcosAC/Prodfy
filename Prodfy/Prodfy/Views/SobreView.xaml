@@ -4,23 +4,26 @@
              xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.SobreView"
              BackgroundImage="splash_bg2.png">
-    
-    <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0,0,15,0">
-            <!--Botão Voltar-->
-            <Label Style="{StaticResource styleBotaoVoltar}" Text="&#xf104;">
 
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
-                </Label.GestureRecognizers>
-            </Label>
-            
-            <Label Text="Sobre"
-                   FontSize="20" 
-                   TextColor="White"  
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="Center" />
-        </StackLayout>
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" Padding="0,0,20,0">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <!--Botão Voltar-->
+                <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <!-- Titulo -->
+                <Label Text="Sobre" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+        </StackLayout>        
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
@@ -30,38 +33,42 @@
 
                 <StackLayout Margin="0,15,0,15">
                     <control:CustomButton Style="{StaticResource styleButton}"
-                                      Text="Ajuda/FAQ"
-                                      Command="{Binding IrTherWebView}"
-                                      CommandParameter="AjudaFAQ" />
+                                          Text="Ajuda/FAQ"
+                                          Command="{Binding IrTherWebView}"
+                                          CommandParameter="AjudaFAQ" />
 
                     <control:CustomButton Style="{StaticResource styleButton}" 
-                                      Text="Contato"
-                                      Command="{Binding IrTherWebView}"
-                                      CommandParameter="Contato" />
+                                          Text="Contato"
+                                          Command="{Binding IrTherWebView}"
+                                          CommandParameter="Contato" />
 
                     <control:CustomButton Style="{StaticResource styleButton}" 
-                                      Text="Termos de Uso"
-                                      Command="{Binding IrTherWebView}"
-                                      CommandParameter="TermosUso" />
+                                          Text="Termos de Uso"
+                                          Command="{Binding IrTherWebView}"
+                                          CommandParameter="TermosUso" />
 
 
                     <control:CustomButton Style="{StaticResource styleButton}"
-                                      Text="Política de Privacidade" 
-                                      Command="{Binding IrTherWebView}" 
-                                      CommandParameter="PoliticaPrivacidade" />
+                                          Text="Política de Privacidade" 
+                                          Command="{Binding IrTherWebView}" 
+                                          CommandParameter="PoliticaPrivacidade" />
                 </StackLayout>
 
                 <Label Style="{StaticResource styleBaseLabel}" 
-                   Text="Versão: 6.03.02" 
-                   TextColor="ForestGreen" 
-                   VerticalOptions="End" />
+                       Text="Versão: 6.03.02" 
+                       TextColor="ForestGreen" 
+                       VerticalOptions="End" />
 
-                <Image Source="logo_TherSistemas.png" VerticalOptions="End" Margin="0,15,0,15" WidthRequest="220" HeightRequest="58" />
+                <Image Source="logo_TherSistemas.png" 
+                       VerticalOptions="End" 
+                       Margin="0,15,0,15" 
+                       WidthRequest="220" 
+                       HeightRequest="58" />
 
                 <Label Style="{StaticResource styleBaseLabel}" 
-                   Text="2019 - Ther Sistemas Inovadores Todos os Direitos Reservados" 
-                   TextColor="White" 
-                   VerticalOptions="End">
+                       Text="2019 - Ther Sistemas Inovadores Todos os Direitos Reservados" 
+                       TextColor="White" 
+                       VerticalOptions="End">
 
                     <Label.Effects>
                         <control:ShadowEffect Radius="5" DistanceX="5" DistanceY="5">

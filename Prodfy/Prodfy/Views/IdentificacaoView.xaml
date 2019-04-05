@@ -5,25 +5,32 @@
              BackgroundImage="splash_bg4.png">
     
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal">
-            <!--Botão Voltar-->
-            <Label Style="{StaticResource styleBotaoVoltar}" Text="&#xf104;" >
+        <StackLayout Orientation="Horizontal" Padding="0,0,20,0">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                <!--Botão Voltar-->
+                <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
 
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
-                </Label.GestureRecognizers>
-            </Label>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TitleViewBotaoVoltarCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
 
-            <Label Style="{StaticResource styleTituloTitleView}" Text="Identificação" />
-            
-            <!--Botão LerQR-->
-            <Label Style="{StaticResource styleLabelIcones}" Text="&#xf029;">
+                <Label Text="Identificação" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" />
 
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding LeitorQRCommand}" />
-                </Label.GestureRecognizers>
-            </Label>
-        </StackLayout>
+                <Label Style="{StaticResource styleBotaoTitleView}" 
+                       Text="&#xf029;"
+                       HorizontalOptions="End">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LeitorQRCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </StackLayout>        
     </NavigationPage.TitleView>
 
     <ContentPage.Content>

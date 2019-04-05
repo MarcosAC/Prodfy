@@ -6,20 +6,22 @@
              BackgroundImage="splash_bg4.png">
 
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-            <!--Botão Voltar-->
-            <Label Style="{StaticResource styleBotaoVoltar}" Text="&#xf104;" >
+        <StackLayout Orientation="Horizontal" Padding="0,0,20,0">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                <!--Botão Voltar-->
+                <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
 
-                <Label.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
-                </Label.GestureRecognizers>
-            </Label>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
 
-            <Label Text="{Binding Title}"
-                   FontSize="20" 
-                   TextColor="White"  
-                   HorizontalOptions="Center" 
-                   VerticalOptions="Center" Margin="95,0,0,0" />            
+                <Label Text="{Binding Title}" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" />
+            </StackLayout>
         </StackLayout>
     </NavigationPage.TitleView>
     

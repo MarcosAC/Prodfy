@@ -6,7 +6,42 @@
              BackgroundImage="splash_bg2.png">
 
     <NavigationPage.TitleView>
-        <control:CustomTitleView Titulo="Perdas" Icone1="&#xf029;" Icone2="&#xf055;" />
+        <StackLayout Orientation="Horizontal" Padding="0,0,20,0">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <!--Botão Voltar-->
+                <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Text="Perdas" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" />
+
+                <Label Style="{StaticResource styleBotaoTitleView}" 
+                       Text="&#xf055;"
+                       HorizontalOptions="End">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Style="{StaticResource styleBotaoTitleView}" 
+                       Text="&#xf029;"
+                       Margin="10,0,0,0"
+                       HorizontalOptions="End">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </StackLayout>
     </NavigationPage.TitleView>
     
     <ContentPage.Content>

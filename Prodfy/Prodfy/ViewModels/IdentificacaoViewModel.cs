@@ -13,10 +13,11 @@ namespace Prodfy.ViewModels
             _navigationService = new NavigationService();
         }
 
-        private Command _navegacaoCommand;
-        public Command NavegacaoCommand => _navegacaoCommand ?? (_navegacaoCommand = new Command(async () => await ExecuteNavegacaoCommand()));
+        private Command _titleViewBotaoVoltarCommand;
+        public Command TitleViewBotaoVoltarCommand => 
+            _titleViewBotaoVoltarCommand ?? (_titleViewBotaoVoltarCommand = new Command(async () => await ExecuteTitleViewBotaoVoltarCommand()));
 
-        private async Task ExecuteNavegacaoCommand() => await _navigationService.PopAsync();
+        private async Task ExecuteTitleViewBotaoVoltarCommand() => await _navigationService.PopAsync();
 
         private Command _leitorQRCommand;
         public Command LeitorQRCommand => _leitorQRCommand ?? (_leitorQRCommand = new Command(async () => await ExecuteLeitorQRCommand()));

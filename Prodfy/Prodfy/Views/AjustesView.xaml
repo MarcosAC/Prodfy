@@ -12,10 +12,10 @@
                     <Image Style="{StaticResource ImagemFundo}" />
 
                     <Label Text="&#xf085;"
-                       FontSize="100" 
-                       TextColor="ForestGreen"
-                       HorizontalOptions="Center"
-                       Margin="0,20,0,20">
+                           FontSize="100" 
+                           TextColor="ForestGreen"
+                           HorizontalOptions="Center"
+                           Margin="0,20,0,20">
 
                         <Label.FontFamily>
                             <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
