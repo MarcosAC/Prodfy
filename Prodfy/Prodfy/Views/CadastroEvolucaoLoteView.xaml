@@ -58,9 +58,9 @@
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data Estaqueamento:" />
                 <Picker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Total de Mudas:" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Quantidade:" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data Seleção:" />
                 <Picker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data Início:" />

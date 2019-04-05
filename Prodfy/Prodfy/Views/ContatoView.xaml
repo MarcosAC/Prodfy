@@ -16,10 +16,10 @@
                 </Label>
 
                 <Label Text="{Binding Title}" 
-                   FontSize="20" 
-                   TextColor="White" 
-                   HorizontalOptions="CenterAndExpand" 
-                   VerticalOptions="CenterAndExpand" />
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" />
             </StackLayout>
         </StackLayout>
     </NavigationPage.TitleView>

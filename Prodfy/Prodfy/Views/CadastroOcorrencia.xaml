@@ -42,9 +42,9 @@
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Monitoramento:" />
                 <Picker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Nº Tratamento:" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Nº Repetição:" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Descrição (100):" />
                 <Editor Style="{StaticResource styleEditorFormulario}" />
                 

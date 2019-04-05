@@ -46,6 +46,7 @@
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="FontSize" Value="Medium" />
                 <Setter Property="BackgroundColor" Value="ForestGreen" />
+                <Setter Property="CornerRadius" Value="10" />
             </Style>
 
             <!-- Styles Formulário -->

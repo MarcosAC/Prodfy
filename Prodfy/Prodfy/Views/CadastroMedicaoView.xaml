@@ -44,15 +44,15 @@
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Código Árvore:" />
                 <Picker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Altura (m):" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="CAP (cm):" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Folha Diagonal:" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Folha Lateral:" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Folha na Coluna:" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Descrição (250):" />
                 <Editor Style="{StaticResource styleEditorFormulario}" />
 

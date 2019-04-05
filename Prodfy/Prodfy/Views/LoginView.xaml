@@ -48,21 +48,21 @@
                     </Label.Triggers>
                 </Label>
 
-                <Entry Placeholder="senha de acesso" 
-                       PlaceholderColor="LightGray"
-                       Text="{Binding Senha}"
-                       IsPassword="True"
-                       HorizontalTextAlignment="Center"
-                       BackgroundColor="White" 
-                       Margin="0,0,0,15" 
-                       IsVisible="True">
+                <control:CustomEntry Placeholder="senha de acesso" 
+                                     PlaceholderColor="LightGray"
+                                     Text="{Binding Senha}"
+                                     IsPassword="True"
+                                     HorizontalTextAlignment="Center"
+                                     BackgroundColor="White" 
+                                     Margin="0,0,0,15" 
+                                     IsVisible="True">
 
                     <Entry.Triggers>
                         <DataTrigger TargetType="Entry" Binding="{Binding Logado}" Value="True">
                             <Setter Property="IsVisible" Value="False" />
                         </DataTrigger>
                     </Entry.Triggers>
-                </Entry>
+                </control:CustomEntry>
                 <!---->
 
                 <control:CustomButton Style="{StaticResource styleButton}"

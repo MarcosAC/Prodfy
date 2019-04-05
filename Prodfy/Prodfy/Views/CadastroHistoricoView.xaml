@@ -42,7 +42,7 @@
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
                 <Picker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Título: (154)" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />                
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />                
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Texto: (1924)" />
                 <Editor Style="{StaticResource styleEditorFormulario}" />                
 
