@@ -55,7 +55,8 @@
                                      HorizontalTextAlignment="Center"
                                      BackgroundColor="White" 
                                      Margin="0,0,0,15" 
-                                     IsVisible="True">
+                                     IsVisible="True"
+                                     control:CornerRadiusEffect.CornerRadius="5">
 
                     <Entry.Triggers>
                         <DataTrigger TargetType="Entry" Binding="{Binding Logado}" Value="True">

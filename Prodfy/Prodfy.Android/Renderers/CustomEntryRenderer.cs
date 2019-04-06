@@ -20,9 +20,9 @@ namespace Prodfy.Droid.Renderers
 
             if (Control != null)
             {
-                //Control.Background = Context.GetDrawable(Resource.Drawable.RoundedEntry);               
+                //Control.Background = Context.GetDrawable(Resource.Drawable.RoundedCorner);
+                RoundedCorner();
                 BorderLessBotton();
-                BorderEntry();
             }
         }
 
@@ -31,14 +31,13 @@ namespace Prodfy.Droid.Renderers
             Control.Background = new ColorDrawable(Android.Graphics.Color.Transparent);
         }
 
-        private void BorderEntry()
+        private void RoundedCorner()
         {
             GradientDrawable gd = new GradientDrawable();
-            gd.SetColor(Android.Graphics.Color.White);
-            gd.SetShape(ShapeType.Rectangle);
-            gd.SetCornerRadius(10);
-            gd.SetStroke(4, Android.Graphics.Color.White);
-            Control.SetBackground(gd);
+            // increase or decrease to changes the corner 
+            gd.SetCornerRadius(30);
+            Control.Background = gd;
+            Control.Background = Context.GetDrawable(Resource.Drawable.RoundedCorner);
         }
     }
 }

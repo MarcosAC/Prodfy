@@ -3042,7 +3042,7 @@ namespace Prodfy.Droid
 			public const int qrcode = 2130837810;
 			
 			// aapt resource value: 0x7f020133
-			public const int RoundedEntry = 2130837811;
+			public const int RoundedCorner = 2130837811;
 			
 			// aapt resource value: 0x7f020134
 			public const int splash_bg2 = 2130837812;
