@@ -3,5 +3,5 @@
 	<uses-sdk android:minSdkVersion="10" android:targetSdkVersion="27" />
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<application android:label="Prodfy.Android"></application>
+	<application android:label="Prodfy.Android" android:allowBackup="false"></application>
 </manifest>
