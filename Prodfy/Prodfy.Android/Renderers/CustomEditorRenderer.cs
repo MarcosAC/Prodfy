@@ -5,18 +5,18 @@ using Prodfy.Droid.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(CustomEntry), typeof(CustomEntryRenderer))]
+[assembly: ExportRenderer(typeof(CustomEditor), typeof(CustomEditorRenderer))]
 namespace Prodfy.Droid.Renderers
 {
-    public class CustomEntryRenderer : EntryRenderer
+    public class CustomEditorRenderer : EditorRenderer
     {
-        public CustomEntryRenderer(Context context) : base(context)
+        public CustomEditorRenderer(Context context) : base(context)
         {
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Editor> e)
         {
-            base.OnElementChanged(e);                           
+            base.OnElementChanged(e);
 
             if (Control != null)
                 Control.Background = new ColorDrawable(Android.Graphics.Color.Transparent);
