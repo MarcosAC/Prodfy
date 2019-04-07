@@ -38,15 +38,15 @@
         <ScrollView>
             <StackLayout Style="{StaticResource baseStyleStackLayout}">
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Ponto de Controle:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Estágio:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Seleção - Data:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
 
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" 
@@ -65,9 +65,9 @@
                 </StackLayout>                
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Expedida Com Tubete:" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Qtde Expedida Sem Tubete:" />
-                <Entry Style="{StaticResource styleEntryFormulario}" />
+                <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
 
                 <control:CustomButton Style="{StaticResource styleButton}" BackgroundColor="#5d1497" Text="Calcular Quantidade" />
 
@@ -79,15 +79,15 @@
                 </StackLayout>
 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Colaborador:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data Início:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data Fim:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Destinação:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Observação:(1000)" />
-                <Editor Style="{StaticResource styleEditorFormulario}" />
+                <control:CustomEditor Style="{StaticResource styleEditorFormulario}" />
 
                 <StackLayout Orientation="Horizontal">
                     <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />

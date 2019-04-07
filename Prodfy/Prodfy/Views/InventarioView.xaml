@@ -36,9 +36,9 @@
 
     <ContentPage.Content>        
         <StackLayout>
-            <control:BarraPesquisa />
-            <StackLayout Style="{StaticResource baseStyleStackLayout}">
-            </StackLayout>
+            <Frame Style="{StaticResource styleFrameSearchBar}">
+                <control:CustomSearchBar Style="{StaticResource styleSearchBar}" />
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

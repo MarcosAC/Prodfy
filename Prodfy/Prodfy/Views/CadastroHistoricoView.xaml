@@ -38,13 +38,13 @@
         <!--<ScrollView>-->
             <StackLayout Padding="20,10,20,20">
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Título: (154)" />
                 <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />                
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Texto: (1924)" />
-                <Editor Style="{StaticResource styleEditorFormulario}" />                
+                <control:CustomEditor Style="{StaticResource styleEditorFormulario}" />                
 
                 <StackLayout Orientation="Horizontal">
                 <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />

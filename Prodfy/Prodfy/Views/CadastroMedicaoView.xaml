@@ -38,11 +38,11 @@
         <ScrollView>
             <StackLayout Style="{StaticResource baseStyleStackLayout}">
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Monitoramento:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Código Árvore:" />
-                <Picker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Altura (m):" />
                 <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="CAP (cm):" />
@@ -54,7 +54,7 @@
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Folha na Coluna:" />
                 <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Descrição (250):" />
-                <Editor Style="{StaticResource styleEditorFormulario}" />
+                <control:CustomEditor Style="{StaticResource styleEditorFormulario}" />
 
                 <StackLayout Orientation="Horizontal">
                     <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />

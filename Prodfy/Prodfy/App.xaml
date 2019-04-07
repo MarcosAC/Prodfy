@@ -98,7 +98,7 @@
             </Style>            
 
             <Style TargetType="Label" x:Key="styleBotaoTitleView" BasedOn="{StaticResource FonteIcone}">
-                <Setter Property="FontSize" Value="36" />
+                <Setter Property="FontSize" Value="30" />
                 <Setter Property="TextColor" Value="White" />
             </Style>
 
@@ -130,6 +130,19 @@
                 <Setter Property="TextColor" Value="#206805" />
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="Margin" Value="0,20,0,20" />
+            </Style>
+            
+            <!-- Style SearchBar -->
+            <Style TargetType="SearchBar" x:Key="styleSearchBar">
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="control:CornerRadiusEffect.CornerRadius" Value="5" />
+            </Style>
+
+            <Style TargetType="Frame" x:Key="styleFrameSearchBar">
+                <Setter Property="BackgroundColor" Value="#206805" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="Padding" Value="5" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

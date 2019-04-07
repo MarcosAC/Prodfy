@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.ExportarDadosView"
              BackgroundImage="splash_bg4.png">
 
@@ -39,7 +40,7 @@
                 </Label>
 
                 <Label Style="{StaticResource styleBaseLabel}" Text="Script de Exportação de Dados:" />
-                <Editor Style="{StaticResource styleEditorFormulario}" />
+                <control:CustomEditor Style="{StaticResource styleEditorFormulario}" />
 
                 <Label Style="{StaticResource styleBaseLabel}" 
                        Text="ATENÇÃO: Copie o texto acima e cole no painel de exportação de dados no portal Prodify Plantas."
