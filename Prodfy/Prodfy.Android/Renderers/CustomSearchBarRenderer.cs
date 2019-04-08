@@ -1,5 +1,5 @@
 ﻿using Android.Content;
-using Android.Graphics.Drawables;
+using Android.Widget;
 using Prodfy.Controls;
 using Prodfy.Droid.Renderers;
 using Xamarin.Forms;
@@ -18,8 +18,14 @@ namespace Prodfy.Droid.Renderers
         {
             base.OnElementChanged(e);
 
-            if (Control != null)
-            Control.Background = new ColorDrawable(Android.Graphics.Color.Transparent);            
+            if (e.OldElement == null)
+            {
+                LinearLayout linearLayout = this.Control.GetChildAt(0) as LinearLayout;
+                linearLayout = linearLayout.GetChildAt(2) as LinearLayout;
+                linearLayout = linearLayout.GetChildAt(1) as LinearLayout;
+
+                linearLayout.Background = null; //removes underline            
+            }
         }
     }
 }
