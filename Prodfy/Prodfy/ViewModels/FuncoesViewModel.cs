@@ -107,7 +107,7 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteIrPaginaOcorrenciaCommand()
         {
-            await _navigationService.PushAsync(new CadastroOcorrencia());
+            await _navigationService.PushAsync(new CadastroOcorrenciaView());
         }
 
         private Command _irPaginaMedicaoCommand;

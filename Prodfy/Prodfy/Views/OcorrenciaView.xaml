@@ -47,7 +47,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Frame Style="{StaticResource styleFrameSearchBar}">
-                <control:CustomSearchBar Placeholder="filtrar pelo nome do colaborador" />
+                <control:CustomSearchBar Style="{StaticResource styleSearchBar}" Placeholder="filtrar pelo nome do colaborador" />
             </Frame>
         </StackLayout>
     </ContentPage.Content>

@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace Prodfy.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CadastroOcorrencia : ContentPage
+	public partial class CadastroOcorrenciaView : ContentPage
 	{
-		public CadastroOcorrencia ()
+		public CadastroOcorrenciaView ()
 		{
 			InitializeComponent ();
             NavigationPage.SetHasBackButton(this, false);

@@ -15,7 +15,7 @@ namespace Prodfy
             HotReloader.Current.Start(this);
 #endif
 
-            MainPage = new NavigationPage(new InicioView())
+            MainPage = new NavigationPage(new EvolucaoLoteView())
             {
                 BarBackgroundColor = Color.FromHex("#206805")
             };

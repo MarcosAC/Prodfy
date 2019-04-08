@@ -26,6 +26,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\CadastroOcorrenciaView.xaml.cs">
+      <DependentUpon>CadastroOcorrenciaView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -69,7 +72,7 @@
     <EmbeddedResource Update="Views\CadastroMedicaoView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CadastroOcorrencia.xaml">
+    <EmbeddedResource Update="Views\CadastroOcorrenciaView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CadastroPerdasView.xaml">
