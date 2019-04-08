@@ -332,7 +332,7 @@ namespace Prodfy.ViewModels
                     string[] temp = dadosUser.dth_last_sincr.Split(' ');
                     string[] temp2 = temp[0].Split('-');
 
-                    dataSincronizacao = temp2[2] + "/" + temp2[2] + "/" + temp2[0] + " " + temp[1]; 
+                    dataSincronizacao = temp2[2] + "/" + temp2[1] + "/" + temp2[0] + " " + temp[1]; 
                     OnPropertyChanged(nameof(DhtLastSincr));
                 }
                 else
