@@ -19,10 +19,10 @@
                     <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Identificação"
                                           Command="{Binding IrPaginaIdentificacaoCommand}" />
-
+                    
                     <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Atividade Realizada" 
-                                          Command="{Binding IrPaginaAtividadeCommand}" />
+                                          Command="{Binding IrPaginaAtividadeCommand}" IsEnabled="False"/>
 
                     <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Inventário"

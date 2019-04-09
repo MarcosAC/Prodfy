@@ -11,9 +11,9 @@ namespace Prodfy
         {
             InitializeComponent();
 
-#if DEBUG
-            HotReloader.Current.Start(this);
-#endif
+//#if DEBUG
+//            HotReloader.Current.Start(this);
+//#endif
 
             MainPage = new NavigationPage(new InicioView())
             {
