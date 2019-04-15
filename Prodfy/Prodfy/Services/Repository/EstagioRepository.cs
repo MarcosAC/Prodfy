@@ -5,14 +5,14 @@ using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class MonitCodArvRespository : IRepository<Monit_Cod_Arv>
+    public class EstagioRepository : IRepository<Estagio>
     {
-        public void Adicionar(Monit_Cod_Arv entidade)
+        public void Adicionar(Estagio entidade)
         {
             throw new NotImplementedException();
         }
 
-        public TableQuery<Monit_Cod_Arv> AsQueryable()
+        public TableQuery<Estagio> AsQueryable()
         {
             throw new NotImplementedException();
         }
@@ -22,17 +22,17 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public void Editar(Monit_Cod_Arv entidade)
+        public void Editar(Estagio entidade)
         {
             throw new NotImplementedException();
         }
 
-        public Monit_Cod_Arv ObterDados()
+        public Estagio ObterDados()
         {
             throw new NotImplementedException();
         }
 
-        public List<Monit_Cod_Arv> ObterTodos()
+        public List<Estagio> ObterTodos()
         {
             throw new NotImplementedException();
         }
