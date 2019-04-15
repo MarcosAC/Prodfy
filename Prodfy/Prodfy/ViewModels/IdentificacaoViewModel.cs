@@ -4,6 +4,9 @@ using Xamarin.Forms;
 using Xamarin.Essentials;
 using System.Linq;
 using Prodfy.Services.Dialog;
+using Prodfy.Services.Repository;
+using System;
+using Prodfy.Models;
 
 namespace Prodfy.ViewModels
 {
@@ -12,10 +15,16 @@ namespace Prodfy.ViewModels
         private readonly INavigationService navigationService;
         private readonly IDialogService dialogService;
 
+        private readonly LoteRepository loteRepositorio;
+        private readonly ProdutoRepository produtoRepositorio;
+
         public IdentificacaoViewModel()
         {
             navigationService = new NavigationService();
             dialogService = new DialogService();
+
+            loteRepositorio = new LoteRepository();
+            produtoRepositorio = new ProdutoRepository();
 
             CapturarCoordenadasGPS();
         }
@@ -51,6 +60,15 @@ namespace Prodfy.ViewModels
                     return;
                 }
 
+                /*
+                 A sequencia do QR novo é a seguinte: 
+                 lote_codigo|muda_id|qtde|data_estaq|band_dens|ponto_controle_id|estagio_id|colab_id|livre|tipo_etiqueta|
+
+                A sequencia do QR em produção:
+                 lote_codigo|muda_id|qtde|data_estaq|band_dens|ponto_controle_id|estagio_id|colab_id|                
+                 
+                 */
+
                 var dadosQR = new
                 {
                     qrLoteCod = resultadoQR[0],
@@ -59,13 +77,27 @@ namespace Prodfy.ViewModels
                     qrDataEstaq = resultadoQR[3],
                     qrDensidade = resultadoQR[4],
                     qrPontoControle = resultadoQR[5],
-                    qrEstagio = resultadoQR[5],
+                    qrEstagioId = resultadoQR[6],
+                    qrColaboradorId = resultadoQR[7]
+                    //qrLivre = resultadoQR[8],
                     //qrTipoEtiqueta = resultadoQR[9]
                 };
 
-                //scanner.Cancel();
+                var infoLote = produtoRepositorio.ObterDados(dadosQR.qrLoteCod);
 
-                await App.Current.MainPage.DisplayAlert("Valor", $"Leitura do codigo: {result.Text}", "OK");
+                /*if (qrTipoEtiqueta == null || qrTipoEtiqueta != 1)
+                {
+                    await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
+                }*/
+
+                //var infoLote = loteRepositorio.ObterTodos(dadosQR.qrLoteCod);
+
+                //if (infoLote.idLote == 0)
+                //{
+                //    await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
+                //}
+
+                await dialogService.AlertAsync("Valor", $"Leitura do codigo: {result.Text}", "OK");
 
                 IsBusy = false;
             }
