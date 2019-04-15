@@ -22,25 +22,25 @@
         public int? ind_mnt { get; set; } // Mediçã0
         public int? ind_exp { get; set; } // Expedição        
         public int? uso_liberado { get; set; }
-        //public string dht_last_sincr { get; set; }
+        //public string dht_last_sincr { get; set; } 
 
-        //public Produto[] produto { get; set; }
-        //public Objetivo[] objetivo { get; set; }
-        //public Ponto_Controle[] ponto_controle { get; set; }
-        //public Estagio[] estagio { get; set; }
-        //public Muda[] muda { get; set; }
-        //public Lote[] lote { get; set; }
-        //public Perda_Motivo[] perda_motivo { get; set; }
-        //public Monit[] monit { get; set; }
-        //public Monit_Cod_Arv[] monit_cod_arv { get; set; }
-        //public Monit_Parcela[] monit_parcela { get; set; }
-        //public Colaborador[] colaborador { get; set; }
-        //public Lista_Atv[] lista_atv { get; set; }
-        //public Qualidade[] qualidade { get; set; }
-        //public Exped_Dest[] exped_dest { get; set; }
-        //public Lote_Evolucao[] lote_evolucao { get; set; }
-        //public Lote_Inventario[] lote_inventario { get; set; }
-        //public Estaq[] estaq { get; set; }
+        public Produto[] produto { get; set; }
+        public Objetivo[] objetivo { get; set; }
+        public Ponto_Controle[] ponto_controle { get; set; }
+        public Estagio[] estagio { get; set; }
+        public Muda[] muda { get; set; }
+        public Lote[] lote { get; set; }
+        public Perda_Motivo[] perda_motivo { get; set; }
+        public Monit[] monit { get; set; }
+        public Monit_Cod_Arv[] monit_cod_arv { get; set; }
+        public Monit_Parcela[] monit_parcela { get; set; }
+        public Colaborador[] colaborador { get; set; }
+        public Lista_Atv[] lista_atv { get; set; }
+        public Qualidade[] qualidade { get; set; }
+        public Exped_Dest[] exped_dest { get; set; }
+        public Lote_Evolucao[] lote_evolucao { get; set; }
+        public Lote_Inventario[] lote_inventario { get; set; }
+        public Estaq[] estaq { get; set; }
 
         //public class Produto
         //{

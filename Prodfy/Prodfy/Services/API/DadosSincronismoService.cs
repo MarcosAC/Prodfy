@@ -58,8 +58,26 @@ namespace Prodfy.Services.API
                         ind_hist = dadosSincronismo.ind_hist,
                         ind_inv = dadosSincronismo.ind_inv,
                         ind_mnt = dadosSincronismo.ind_mnt,
-                        ind_per = dadosSincronismo.ind_per                        
+                        ind_per = dadosSincronismo.ind_per,
+                        produto = dadosSincronismo.produto,
+                        objetivo = dadosSincronismo.objetivo,
+                        ponto_controle = dadosSincronismo.ponto_controle,
+                        estagio = dadosSincronismo.estagio,
+                        muda = dadosSincronismo.muda,
+                        lote = dadosSincronismo.lote,
+                        perda_motivo = dadosSincronismo.perda_motivo,
+                        monit = dadosSincronismo.monit,
+                        monit_cod_arv = dadosSincronismo.monit_cod_arv,
+                        monit_parcela = dadosSincronismo.monit_parcela,
+                        colaborador = dadosSincronismo.colaborador,
+                        lista_atv = dadosSincronismo.lista_atv,
+                        qualidade = dadosSincronismo.qualidade,
+                        exped_dest = dadosSincronismo.exped_dest,
+                        lote_evolucao = dadosSincronismo.lote_evolucao,
+                        lote_inventario = dadosSincronismo.lote_inventario,
+                        estaq = dadosSincronismo.estaq
                     };
+
                     return sincronismo;
                 }
             }

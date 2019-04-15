@@ -16,6 +16,24 @@ namespace Prodfy.ViewModels
     {
         private Sincronismo sincronismo = null;
         private User user = null;
+        private Produto produto = null;
+        private Objetivo objetivo = null;
+        private Ponto_Controle ponto_controle = null;
+        private Estagio estagio = null;
+        private Muda muda = null;
+        private Lote lote = null;
+        private Perda_Motivo perda_motivo = null;
+        private Monit monit = null;
+        private Monit_Cod_Arv monit_cod_arv = null;
+        private Monit_Parcela monit_parcela = null;
+        private Colaborador colaborador = null;
+        private Lista_Atv lista_atv = null;
+        private Qualidade qualidade = null;
+        private Exped_Dest exped_dest = null;
+        private Lote_Evolucao lote_evolucao = null;
+        private Lote_Inventario lote_inventario = null;
+        private Estaq estaq = null;
+
         private string dataSincronizacao = "Não Sincronizado!";
 
         private readonly IDialogService _dialogService;
@@ -165,6 +183,11 @@ namespace Prodfy.ViewModels
                             ind_atv = _dadosSincronismo.ind_atv,
                             uso_liberado = _dadosSincronismo.uso_liberado,
                             dth_last_sincr = _dadosSincronismo.sinc_date
+                        };
+
+                        produto = new Produto
+                        {
+
                         };
                         userRepository.Editar(user);
                         await RefreshCommandExecute();

@@ -10,7 +10,7 @@ namespace Prodfy
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new IdentificacaoView())
+            MainPage = new NavigationPage(new InicioView())
             {
                 BarBackgroundColor = Color.FromHex("#206805")
             };
