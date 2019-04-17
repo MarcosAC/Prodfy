@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class LoteInventarioRepository : IRepository<Lote_Inventario>
     {
-        public void Adicionar(Lote_Inventario entidade)
+        private DataBase dataBase;
+
+        public LoteInventarioRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Lote_Inventario lote_Inventario)
+        {
+            try
+            {
+                dataBase._conexao.Insert(lote_Inventario);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Lote_Inventario> AsQueryable()

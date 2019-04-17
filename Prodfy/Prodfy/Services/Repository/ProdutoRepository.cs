@@ -3,7 +3,6 @@ using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Prodfy.Services.Repository
 {
@@ -47,9 +46,16 @@ namespace Prodfy.Services.Repository
             return dados;
         }
 
-        public void Adicionar(Produto entidade)
+        public void Adicionar(Produto produto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dataBase._conexao.Insert(produto);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Produto> AsQueryable()

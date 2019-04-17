@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class QualidadeRepository : IRepository<Qualidade>
     {
-        public void Adicionar(Qualidade entidade)
+        private DataBase dataBase;
+
+        public QualidadeRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Qualidade qualidade)
+        {
+            try
+            {
+                dataBase._conexao.Insert(qualidade);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Qualidade> AsQueryable()

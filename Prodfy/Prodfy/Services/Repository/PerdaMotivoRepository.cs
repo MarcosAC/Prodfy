@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class PerdaMotivoRepository : IRepository<Perda_Motivo>
     {
-        public void Adicionar(Perda_Motivo entidade)
+        private DataBase dataBase;
+
+        public PerdaMotivoRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Perda_Motivo perda_Motivo)
+        {
+            try
+            {
+                dataBase._conexao.Insert(perda_Motivo);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Perda_Motivo> AsQueryable()

@@ -114,17 +114,7 @@ namespace Prodfy.Services.API
                 {
                     var conteudoResponse = await response.Content.ReadAsStringAsync();
 
-                    var dadosResponse = JsonConvert.DeserializeObject<Sincronismo>(conteudoResponse);                    
-
-                    switch (dadosResponse.sinc_stat)
-                    {
-                        case 0:
-                            await _dialogService.AlertAsync("Erro", dadosResponse.sinc_msg, "Ok");                            
-                            break;
-                        case 1:
-                            await _dialogService.AlertAsync("Sincronia", dadosResponse.sinc_msg, "Ok");                            
-                            break;
-                    }
+                    var dadosResponse = JsonConvert.DeserializeObject<Sincronismo>(conteudoResponse);
 
                     return dadosResponse;
                 }

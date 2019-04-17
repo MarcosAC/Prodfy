@@ -11,6 +11,6 @@ namespace Prodfy.Models
         public string titulo { get; set; }
         public string descr { get; set; }        
         public string last_update { get; set; }
-        public string ind_sinc { get; set; }
+        public int ind_sinc { get; set; }
     }
 }

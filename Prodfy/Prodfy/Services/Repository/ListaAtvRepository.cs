@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class ListaAtvRepository : IRepository<Lista_Atv>
     {
-        public void Adicionar(Lista_Atv entidade)
+        private DataBase dataBase;
+
+        public ListaAtvRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Lista_Atv lista_Atv)
+        {
+            try
+            {
+                dataBase._conexao.Insert(lista_Atv);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Lista_Atv> AsQueryable()

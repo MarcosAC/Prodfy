@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class PontoControleRepository : IRepository<Ponto_Controle>
     {
-        public void Adicionar(Ponto_Controle entidade)
+        private DataBase dataBase;
+
+        public PontoControleRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Ponto_Controle ponto_Controle)
+        {
+            try
+            {
+                dataBase._conexao.Insert(ponto_Controle);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Ponto_Controle> AsQueryable()

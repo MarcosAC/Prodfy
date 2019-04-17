@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class ObjetivoRepository : IRepository<Objetivo>
     {
-        public void Adicionar(Objetivo entidade)
+        private DataBase dataBase;
+
+        public ObjetivoRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Objetivo objetivo)
+        {
+            try
+            {
+                dataBase._conexao.Insert(objetivo);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Objetivo> AsQueryable()

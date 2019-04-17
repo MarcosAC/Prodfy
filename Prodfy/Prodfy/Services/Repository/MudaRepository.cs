@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class MudaRepository : IRepository<Muda>
     {
-        public void Adicionar(Muda entidade)
+        private DataBase dataBase;
+
+        public MudaRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Muda muda)
+        {
+            try
+            {
+                dataBase._conexao.Insert(muda);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Muda> AsQueryable()
@@ -29,12 +44,14 @@ namespace Prodfy.Services.Repository
 
         public Muda ObterDados()
         {
-            throw new NotImplementedException();
+            var dadosMuda = dataBase._conexao.Table<Muda>().FirstOrDefault();
+            return dadosMuda;
         }
 
         public List<Muda> ObterTodos()
         {
-            throw new NotImplementedException();
+            var listaMuda = dataBase._conexao.Table<Muda>().ToList();
+            return listaMuda;
         }
 
         public int ObterTotalDeRegistros()

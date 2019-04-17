@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class ColaboradorRepository : IRepository<Colaborador>
     {
-        public void Adicionar(Colaborador entidade)
+        private DataBase dataBase;
+
+        public ColaboradorRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Colaborador colaborador)
+        {
+            try
+            {
+                dataBase._conexao.Insert(colaborador);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Colaborador> AsQueryable()

@@ -8,16 +8,16 @@ namespace Prodfy.Services.Repository
 {
     public class MonitCodArvRepository : IRepository<Monit_Cod_Arv>
     {
-        private DataBase _dataBase;
+        private DataBase dataBase;
 
         public MonitCodArvRepository()
         {
-            _dataBase = new DataBase();
+            dataBase = new DataBase();
         }
 
         public int ObterTotalDeRegistros()
         {
-            var totalRegistro = _dataBase._conexao.Table<Monit_Cod_Arv>().Count();
+            var totalRegistro = dataBase._conexao.Table<Monit_Cod_Arv>().Count();
 
             if (totalRegistro > 0)
                 return totalRegistro;
@@ -25,9 +25,16 @@ namespace Prodfy.Services.Repository
             return 0;
         }
 
-        public void Adicionar(Monit_Cod_Arv entidade)
+        public void Adicionar(Monit_Cod_Arv monit_Cod_Arv)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dataBase._conexao.Insert(monit_Cod_Arv);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Monit_Cod_Arv> AsQueryable()

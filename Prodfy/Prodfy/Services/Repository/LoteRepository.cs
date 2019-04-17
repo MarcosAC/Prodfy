@@ -8,16 +8,16 @@ namespace Prodfy.Services.Repository
 {
     public class LoteRepository : IRepository<Lote>
     {
-        private DataBase _dataBase;
+        private DataBase dataBase;
 
         public LoteRepository()
         {
-            _dataBase = new DataBase();
+            dataBase = new DataBase();
         }
 
         public int ObterTotalDeRegistros()
         {
-            var totalRegistro = _dataBase._conexao.Table<Lote>().Count();
+            var totalRegistro = dataBase._conexao.Table<Lote>().Count();
 
             if (totalRegistro > 0)
                 return totalRegistro;
@@ -27,7 +27,7 @@ namespace Prodfy.Services.Repository
 
         public void ObterDados(string id)
         {
-            var dados = _dataBase._conexao.Execute("SELECT " +
+            var dados = dataBase._conexao.Execute("SELECT " +
                                                         "L.lote_id, L.codigo, L.objetivo, L.cliente, P.titulo " +
                                                    "FROM " +
                                                         "Lote L " +
@@ -62,14 +62,21 @@ namespace Prodfy.Services.Repository
 
         }
 
-        public void Adicionar(Lote entidade)
+        public void Adicionar(Lote lote)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dataBase._conexao.Insert(lote);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Lote> AsQueryable()
         {
-            var dados = _dataBase._conexao.Table<Lote>();
+            var dados = dataBase._conexao.Table<Lote>();
             return dados;
         }
 

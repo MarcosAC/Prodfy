@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class EstagioRepository : IRepository<Estagio>
     {
-        public void Adicionar(Estagio entidade)
+        private DataBase dataBase;
+
+        public EstagioRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Estagio estagio)
+        {
+            try
+            {
+                dataBase._conexao.Insert(estagio);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Estagio> AsQueryable()

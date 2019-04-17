@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class LoteEvolucaoRepository : IRepository<Lote_Evolucao>
     {
-        public void Adicionar(Lote_Evolucao entidade)
+        private DataBase dataBase;
+
+        public LoteEvolucaoRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Lote_Evolucao lote_Evolucao)
+        {
+            try
+            {
+                dataBase._conexao.Insert(lote_Evolucao);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Lote_Evolucao> AsQueryable()

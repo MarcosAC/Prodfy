@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class MonitParcelaRepository : IRepository<Monit_Parcela>
     {
-        public void Adicionar(Monit_Parcela entidade)
+        private DataBase dataBase;
+
+        public MonitParcelaRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Monit_Parcela monit_Parcela)
+        {
+            try
+            {
+                dataBase._conexao.Insert(monit_Parcela);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Monit_Parcela> AsQueryable()

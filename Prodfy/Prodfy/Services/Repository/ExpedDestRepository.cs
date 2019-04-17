@@ -1,4 +1,5 @@
-﻿using Prodfy.Models;
+﻿using Prodfy.Helpers;
+using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,23 @@ namespace Prodfy.Services.Repository
 {
     public class ExpedDestRepository : IRepository<Exped_Dest>
     {
-        public void Adicionar(Exped_Dest entidade)
+        private DataBase dataBase;
+
+        public ExpedDestRepository()
         {
-            throw new NotImplementedException();
+            dataBase = new DataBase();
+        }
+
+        public void Adicionar(Exped_Dest exped_Dest)
+        {
+            try
+            {
+                dataBase._conexao.Insert(exped_Dest);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Exped_Dest> AsQueryable()
