@@ -3,6 +3,8 @@ using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace Prodfy.Services.Repository
 {
@@ -34,16 +36,26 @@ namespace Prodfy.Services.Repository
                                "ON " +
                                     "P.produto_id = L.produto_id " +
                                "WHERE " +
-                                    "L.lote_id = " + "'" + id  + "'" +
-                               " LIMIT 1";
+                                    "L.codigo = " + "'" + id + "'" + "";
 
-            //string selectStr = "SELECT * FROM Lote";
+            try
+            {
+               
+                
 
-            //var dados = dataBase._conexao.Execute(selectStr).ToString();
+                var dados = dataBase._conexao.Execute(selectStr);
 
-            var dados = dataBase._conexao.Execute(selectStr).ToString();
+                
+                
+                //return dados;
+            }
+            catch (Exception ex)
+            {
 
-            return dados;
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
+
+            return null;
         }
 
         public void Adicionar(Produto produto)

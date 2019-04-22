@@ -83,7 +83,7 @@ namespace Prodfy.ViewModels
                     //qrTipoEtiqueta = resultadoQR[9]
                 };
 
-                var infoLote = produtoRepositorio.ObterDados(dadosQR.qrLoteCod);
+                var infoLote = loteRepositorio.ObterDados(dadosQR.qrLoteCod);
 
                 /*if (qrTipoEtiqueta == null || qrTipoEtiqueta != 1)
                 {

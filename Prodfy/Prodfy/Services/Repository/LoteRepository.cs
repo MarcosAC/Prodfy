@@ -3,6 +3,7 @@ using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Prodfy.Services.Repository
 {
@@ -25,41 +26,73 @@ namespace Prodfy.Services.Repository
             return 0;
         }
 
-        public void ObterDados(string id)
+        public string ObterDados(string id)
         {
-            var dados = dataBase._conexao.Execute("SELECT " +
-                                                        "L.lote_id, L.codigo, L.objetivo, L.cliente, P.titulo " +
-                                                   "FROM " +
-                                                        "Lote L " +
-                                                   "LEFT JOIN " +
-                                                        "Produto P " +
-                                                   "ON " +
-                                                        "P.produto_id = L.produto_id " +
-                                                   "WHERE " +
-                                                        "L.lote_id = " + id + 
-                                                   "LIMIT 1");
 
+            string selectStr = "SELECT " +
+                                    "L.lote_id, L.codigo, L.objetivo, L.cliente, P.titulo " +
+                               "FROM " +
+                                    "Lote L " +
+                               "LEFT JOIN " +
+                                    "Produto P " +
+                               "ON " +
+                                    "P.produto_id = L.produto_id " +
+                               "WHERE " +
+                                    "L.codigo = " + "'" + id + "'" + "";
+
+            //var dados = dataBase._conexao.Query<LoteInfo>(selectStr);
+
+            var dadosLote = dataBase._conexao.Query<Lote>("select * from Lote");
+            List<Lote> listaLotes = new List<Lote>();
+
+            foreach (var item in dadosLote)
+            {
+                listaLotes.Add(item);
+            }
+
+            var dadosProduto = dataBase._conexao.Query<Produto>("select * from Produto");
+            List<Produto> listaProdutos = new List<Produto>();
+
+            foreach (var item in dadosProduto)
+            {
+                listaProdutos.Add(item);
+            }
+
+            //L.lote_id, L.codigo, L.objetivo, L.cliente, P.titulo
+            var query = from L in listaLotes
+                        join P in listaProdutos on L.produto_id equals P.produto_id into gj
+                        from subInfo in gj.DefaultIfEmpty()
+                        where L.codigo == id
+                        select new {
+                                    L.lote_id,
+                                    L.codigo,
+                                    L.objetivo,
+                                    L.cliente,
+                                     subInfo.titulo
+                                   };
 
             
-            //var dadosLote = new
-            //{
-            //    id = dados.,
-            //    codigo = item.lote_id,
-            //    _cliente = item.cliente
-            //};
 
-            //foreach (var item in dados)
-            //{
-            //    var dadosLote = new
-            //    {
-            //        id = item.idLote,
-            //        codigo = item.lote_id,
-            //        _cliente = item.cliente
-            //    };
-            //}
+            foreach (var item in query)
+            {
+                var loteInfo = new 
+                {
+                    item.lote_id,
+                    item.codigo,
+                    item.objetivo,
+                    item.cliente,
+                    produto = item.titulo
+                };
 
-            //return null;
+                return loteInfo.ToString();
+            }
 
+            return null;
+        }
+
+        public void ListaLotes()
+        {
+            var listaLotes = dataBase._conexao.Query<Lote>("Select * From Lote");
         }
 
         public void Adicionar(Lote lote)
