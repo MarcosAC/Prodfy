@@ -28,20 +28,6 @@ namespace Prodfy.Services.Repository
 
         public string ObterDados(string id)
         {
-
-            string selectStr = "SELECT " +
-                                    "L.lote_id, L.codigo, L.objetivo, L.cliente, P.titulo " +
-                               "FROM " +
-                                    "Lote L " +
-                               "LEFT JOIN " +
-                                    "Produto P " +
-                               "ON " +
-                                    "P.produto_id = L.produto_id " +
-                               "WHERE " +
-                                    "L.codigo = " + "'" + id + "'" + "";
-
-            //var dados = dataBase._conexao.Query<LoteInfo>(selectStr);
-
             var dadosLote = dataBase._conexao.Query<Lote>("select * from Lote");
             List<Lote> listaLotes = new List<Lote>();
 
@@ -57,21 +43,18 @@ namespace Prodfy.Services.Repository
             {
                 listaProdutos.Add(item);
             }
-
-            //L.lote_id, L.codigo, L.objetivo, L.cliente, P.titulo
-            var query = from L in listaLotes
-                        join P in listaProdutos on L.produto_id equals P.produto_id into gj
-                        from subInfo in gj.DefaultIfEmpty()
-                        where L.codigo == id
-                        select new {
-                                    L.lote_id,
-                                    L.codigo,
-                                    L.objetivo,
-                                    L.cliente,
-                                     subInfo.titulo
-                                   };
-
             
+            var query = from lote in listaLotes
+                        join produto in listaProdutos on lote.produto_id equals produto.produto_id into gj
+                        from produto in gj.DefaultIfEmpty()
+                        where lote.codigo == id
+                        select new {
+                                        lote.lote_id,
+                                        lote.codigo,
+                                        lote.objetivo,
+                                        lote.cliente,
+                                        produto.titulo
+                                   };
 
             foreach (var item in query)
             {
@@ -84,7 +67,18 @@ namespace Prodfy.Services.Repository
                     produto = item.titulo
                 };
 
-                return loteInfo.ToString();
+                string ret = string.Empty;
+
+                if (!string.IsNullOrEmpty(loteInfo.lote_id))
+                {
+                    ret = $"1||{loteInfo.lote_id}|{loteInfo.codigo}|{loteInfo.objetivo}|{loteInfo.cliente}|{loteInfo.produto}|";                    
+                }
+                else
+                {
+                    ret = "0|Registro não encontrado!|";
+                }
+
+                return ret;
             }
 
             return null;

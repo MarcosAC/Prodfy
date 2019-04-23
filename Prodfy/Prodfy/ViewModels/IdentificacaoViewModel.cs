@@ -1,12 +1,10 @@
 ﻿using Prodfy.Services;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Essentials;
-using System.Linq;
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
-using System;
-using Prodfy.Models;
+using System.Linq;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace Prodfy.ViewModels
 {
@@ -61,12 +59,11 @@ namespace Prodfy.ViewModels
                 }
 
                 /*
-                 A sequencia do QR novo é a seguinte: 
-                 lote_codigo|muda_id|qtde|data_estaq|band_dens|ponto_controle_id|estagio_id|colab_id|livre|tipo_etiqueta|
+                    A sequencia do QR novo é a seguinte: 
+                    lote_codigo|muda_id|qtde|data_estaq|band_dens|ponto_controle_id|estagio_id|colab_id|livre|tipo_etiqueta|
 
-                A sequencia do QR em produção:
-                 lote_codigo|muda_id|qtde|data_estaq|band_dens|ponto_controle_id|estagio_id|colab_id|                
-                 
+                    A sequencia do QR em produção:
+                    lote_codigo|muda_id|qtde|data_estaq|band_dens|ponto_controle_id|estagio_id|colab_id|  
                  */
 
                 var dadosQR = new
@@ -79,27 +76,25 @@ namespace Prodfy.ViewModels
                     qrPontoControle = resultadoQR[5],
                     qrEstagioId = resultadoQR[6],
                     qrColaboradorId = resultadoQR[7]
-                    //qrLivre = resultadoQR[8],
-                    //qrTipoEtiqueta = resultadoQR[9]
+
+                    /* Nova Versão
+                     * qrLivre = resultadoQR[8],
+                     * qrTipoEtiqueta = resultadoQR[9]
+                     */
                 };
+                //string ret = $"{dadosQR}";
 
-                var infoLote = loteRepositorio.ObterDados(dadosQR.qrLoteCod);
-
-                /*if (qrTipoEtiqueta == null || qrTipoEtiqueta != 1)
-                {
-                    await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
-                }*/
-
-                //var infoLote = loteRepositorio.ObterTodos(dadosQR.qrLoteCod);
-
-                //if (infoLote.idLote == 0)
-                //{
-                //    await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
-                //}
-
-                await dialogService.AlertAsync("Valor", $"Leitura do codigo: {result.Text}", "OK");
+                ObterInformacoesLote(dadosQR.qrLoteCod);
 
                 IsBusy = false;
+
+                /* Nova Versão
+                   if (qrTipoEtiqueta == null || qrTipoEtiqueta != 1)
+                   {
+                       await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
+                       return;
+                   }
+                */
             }
         }
 
@@ -107,6 +102,26 @@ namespace Prodfy.ViewModels
         {
             var request = new GeolocationRequest(GeolocationAccuracy.High);
             var localizacao = Geolocation.GetLocationAsync(request);
+        }  
+        
+        private async void ObterInformacoesLote(string dadosQR)
+        {
+            var temp = loteRepositorio.ObterDados(dadosQR);
+            var infoLote = temp.Split('|');
+
+            if (infoLote[0] == "0")
+            {
+                await dialogService.AlertAsync("Etiqueta QR", "Lote indicado no QR inexistente! Sincronize o dispositivo.", "Ok");
+                return;
+            }
+
+            var stat = infoLote[0];
+            var msg = infoLote[1];
+            var info_lote_id = infoLote[2];
+            var info_lote_codigo = infoLote[3];
+            var info_lote_objetivo = infoLote[4];
+            var info_lote_cliente = infoLote[5];
+            var info_lote_produto = infoLote[6];
         }
     }
 }
