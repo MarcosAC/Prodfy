@@ -26,22 +26,22 @@ namespace Prodfy.Services.Repository
             return 0;
         }
 
-        public string ObterDados(string id)
+        public string ObterInformacoes(string id)
         {
             var dadosLote = dataBase._conexao.Query<Lote>("select * from Lote");
             List<Lote> listaLotes = new List<Lote>();
 
-            foreach (var item in dadosLote)
+            for (int i = 0; i < dadosLote.Count; i++)
             {
-                listaLotes.Add(item);
+                listaLotes.Add(dadosLote[i]);
             }
 
             var dadosProduto = dataBase._conexao.Query<Produto>("select * from Produto");
             List<Produto> listaProdutos = new List<Produto>();
 
-            foreach (var item in dadosProduto)
+            for (int i = 0; i < dadosProduto.Count; i++)
             {
-                listaProdutos.Add(item);
+                listaProdutos.Add(dadosProduto[i]);
             }
             
             var query = from lote in listaLotes
@@ -56,32 +56,29 @@ namespace Prodfy.Services.Repository
                                         produto.titulo
                                    };
 
-            foreach (var item in query)
+            var dadosLoteInfo = query.FirstOrDefault();
+
+            var loteInfo = new
             {
-                var loteInfo = new 
-                {
-                    item.lote_id,
-                    item.codigo,
-                    item.objetivo,
-                    item.cliente,
-                    produto = item.titulo
-                };
+                dadosLoteInfo.lote_id,
+                dadosLoteInfo.codigo,
+                dadosLoteInfo.objetivo,
+                dadosLoteInfo.cliente,
+                produto = dadosLoteInfo.titulo
+            };
 
-                string ret = string.Empty;
+            string ret = string.Empty;
 
-                if (!string.IsNullOrEmpty(loteInfo.lote_id))
-                {
-                    ret = $"1||{loteInfo.lote_id}|{loteInfo.codigo}|{loteInfo.objetivo}|{loteInfo.cliente}|{loteInfo.produto}|";                    
-                }
-                else
-                {
-                    ret = "0|Registro não encontrado!|";
-                }
-
-                return ret;
+            if (!string.IsNullOrEmpty(loteInfo.lote_id))
+            {
+                ret = $"1||{loteInfo.lote_id}|{loteInfo.codigo}|{loteInfo.objetivo}|{loteInfo.cliente}|{loteInfo.produto}|";
+            }
+            else
+            {
+                ret = "0|Registro não encontrado!|";
             }
 
-            return null;
+            return ret;
         }
 
         public void ListaLotes()

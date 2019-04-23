@@ -77,24 +77,25 @@ namespace Prodfy.ViewModels
                     qrEstagioId = resultadoQR[6],
                     qrColaboradorId = resultadoQR[7]
 
+                    #region Nova Versão
                     /* Nova Versão
                      * qrLivre = resultadoQR[8],
                      * qrTipoEtiqueta = resultadoQR[9]
                      */
+                    #endregion
                 };
-                //string ret = $"{dadosQR}";
+
+                #region Nova Versão
+                //if (qrTipoEtiqueta == null || qrTipoEtiqueta != 1)
+                //   {
+                //       await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
+                //       return;
+                //   }
+                #endregion
 
                 ObterInformacoesLote(dadosQR.qrLoteCod);
 
                 IsBusy = false;
-
-                /* Nova Versão
-                   if (qrTipoEtiqueta == null || qrTipoEtiqueta != 1)
-                   {
-                       await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
-                       return;
-                   }
-                */
             }
         }
 
@@ -106,7 +107,7 @@ namespace Prodfy.ViewModels
         
         private async void ObterInformacoesLote(string dadosQR)
         {
-            var temp = loteRepositorio.ObterDados(dadosQR);
+            var temp = loteRepositorio.ObterInformacoes(dadosQR);
             var infoLote = temp.Split('|');
 
             if (infoLote[0] == "0")
