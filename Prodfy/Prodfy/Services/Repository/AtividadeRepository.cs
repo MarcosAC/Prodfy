@@ -60,5 +60,10 @@ namespace Prodfy.Services.Repository
         {
             return _dataBase._conexao.Table<Atividade>().OrderBy(a => a.idAtividade).ToList();
         }
+
+        public string ObterInformacoesParaIdentificacao(string codigo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

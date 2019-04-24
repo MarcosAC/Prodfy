@@ -3,8 +3,6 @@ using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 
 namespace Prodfy.Services.Repository
 {
@@ -16,48 +14,7 @@ namespace Prodfy.Services.Repository
         {
             dataBase = new DataBase();
         }
-
-        public string ObterDados(string id)
-        {
-            //var ret = "";
-            ////var oSTAT = ""
-            //var oID = "";
-            //var oCODIGO = "";
-            //var oOBJETIVO = "";
-            //var oCLIENTE = "";
-            //var oPRODUTO = "";
-
-            string selectStr = "SELECT " +
-                                    "L.lote_id, L.codigo, L.objetivo, L.cliente, P.titulo " +
-                               "FROM " +
-                                    "Lote L " +
-                               "LEFT JOIN " +
-                                    "Produto P " +
-                               "ON " +
-                                    "P.produto_id = L.produto_id " +
-                               "WHERE " +
-                                    "L.codigo = " + "'" + id + "'" + "";
-
-            try
-            {
-               
-                
-
-                var dados = dataBase._conexao.Execute(selectStr);
-
-                
-                
-                //return dados;
-            }
-            catch (Exception ex)
-            {
-
-                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
-            }
-
-            return null;
-        }
-
+        
         public void Adicionar(Produto produto)
         {
             try
@@ -96,6 +53,11 @@ namespace Prodfy.Services.Repository
         }
 
         public int ObterTotalDeRegistros()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ObterInformacoesParaIdentificacao(string codigo)
         {
             throw new NotImplementedException();
         }

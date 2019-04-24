@@ -54,5 +54,10 @@ namespace Prodfy.Services.Repository
         {
             return _dataBase._conexao.Table<Monit_Ocorr>().OrderBy(o => o.idMonit_Ocorr).ToList();
         }
+
+        public string ObterInformacoesParaIdentificacao(string codigo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

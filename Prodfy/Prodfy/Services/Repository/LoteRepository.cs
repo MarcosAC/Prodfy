@@ -26,7 +26,7 @@ namespace Prodfy.Services.Repository
             return 0;
         }
 
-        public string ObterInformacoes(string id)
+        public string ObterInformacoesParaIdentificacao(string codigo)
         {
             var dadosLote = dataBase._conexao.Query<Lote>("select * from Lote");
             List<Lote> listaLotes = new List<Lote>();
@@ -43,18 +43,19 @@ namespace Prodfy.Services.Repository
             {
                 listaProdutos.Add(dadosProduto[i]);
             }
-            
+
             var query = from lote in listaLotes
                         join produto in listaProdutos on lote.produto_id equals produto.produto_id into gj
                         from produto in gj.DefaultIfEmpty()
-                        where lote.codigo == id
-                        select new {
-                                        lote.lote_id,
-                                        lote.codigo,
-                                        lote.objetivo,
-                                        lote.cliente,
-                                        produto.titulo
-                                   };
+                        where lote.codigo == codigo
+                        select new
+                        {
+                            lote.lote_id,
+                            lote.codigo,
+                            lote.objetivo,
+                            lote.cliente,
+                            produto.titulo
+                        };
 
             var dadosLoteInfo = query.FirstOrDefault();
 
@@ -122,6 +123,6 @@ namespace Prodfy.Services.Repository
         public List<Lote> ObterTodos()
         {
             throw new NotImplementedException();
-        }        
+        }     
     }
 }

@@ -48,6 +48,11 @@ namespace Prodfy.Services.Repository
             return dadosMuda;
         }
 
+        public string ObterInformacoesParaIdentificacao(string codigo)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Muda> ObterTodos()
         {
             var listaMuda = dataBase._conexao.Table<Muda>().ToList();

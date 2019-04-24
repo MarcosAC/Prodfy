@@ -60,6 +60,11 @@ namespace Prodfy.Services.Repository
         public List<Monit_Cod_Arv> ObterTodos()
         {
             throw new NotImplementedException();
-        }        
+        }
+
+        public string ObterInformacoesParaIdentificacao(string codigo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

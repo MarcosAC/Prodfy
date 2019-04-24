@@ -107,7 +107,7 @@ namespace Prodfy.ViewModels
         
         private async void ObterInformacoesLote(string dadosQR)
         {
-            var temp = loteRepositorio.ObterInformacoes(dadosQR);
+            var temp = loteRepositorio.ObterInformacoesParaIdentificacao(dadosQR);
             var infoLote = temp.Split('|');
 
             if (infoLote[0] == "0")

@@ -32,6 +32,11 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
+        public string ObterInformacoesParaIdentificacao(string codigo)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Monit_Cod_Arv> ObterTodos()
         {
             throw new NotImplementedException();
