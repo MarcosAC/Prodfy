@@ -47,6 +47,11 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
+        public Monit_Parcela ObterDadosPorId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public string ObterInformacoesParaIdentificacao(string codigo)
         {
             throw new NotImplementedException();

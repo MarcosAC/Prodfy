@@ -84,5 +84,10 @@ namespace Prodfy.Services.Repository
         {
             throw new NotImplementedException();
         }
+
+        public User ObterDadosPorId(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

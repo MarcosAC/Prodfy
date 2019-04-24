@@ -9,7 +9,8 @@ namespace Prodfy.Services.Repository
         void Deletar();
         void Editar(T entidade);
         string ObterInformacoesParaIdentificacao(string codigo);
-        T ObterDados();        
+        T ObterDados();
+        T ObterDadosPorId(string id);
         List<T> ObterTodos();
         TableQuery<T> AsQueryable();
         int ObterTotalDeRegistros();

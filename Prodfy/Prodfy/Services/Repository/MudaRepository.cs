@@ -48,9 +48,55 @@ namespace Prodfy.Services.Repository
             return dadosMuda;
         }
 
+        public Muda ObterDadosPorId(string id)
+        {
+            var dadosMuda = dataBase._conexao.Table<Muda>().FirstOrDefault(m => m.muda_id == id);
+            return dadosMuda;
+        }
+
         public string ObterInformacoesParaIdentificacao(string codigo)
         {
-            throw new NotImplementedException();
+            var dadosMuda = ObterDadosPorId(codigo);
+
+            var mudaInfo = new
+            {
+                dadosMuda.muda_id,
+                dadosMuda.nome_interno,
+                dadosMuda.nome,
+                dadosMuda.especie_nome_comum,
+                dadosMuda.especie_nome_especie,
+                dadosMuda.especie_nome_cientifico,
+                dadosMuda.origem,
+                dadosMuda.viveiro,
+                dadosMuda.canaletao,
+                dadosMuda.linha,
+                dadosMuda.coluna,
+                dadosMuda.qtde
+            };
+
+            string ret = string.Empty;
+
+            if (!string.IsNullOrEmpty(mudaInfo.muda_id))
+            {
+                ret = $"1||{mudaInfo.muda_id}|" +
+                      $"{mudaInfo.nome_interno}|" +
+                      $"{mudaInfo.nome}|" +
+                      $"{mudaInfo.especie_nome_comum}|" +
+                      $"{mudaInfo.especie_nome_especie}|" +
+                      $"{mudaInfo.especie_nome_cientifico}|" +
+                      $"{mudaInfo.origem}|" +
+                      $"{mudaInfo.viveiro}|" +
+                      $"{mudaInfo.canaletao}|" +
+                      $"{mudaInfo.linha}|" +
+                      $"{mudaInfo.coluna}|" +
+                      $"{mudaInfo.qtde}|";
+            }
+            else
+            {
+                ret = "0|Registro não encontrado!|";
+            }
+
+            return ret;
         }
 
         public List<Muda> ObterTodos()

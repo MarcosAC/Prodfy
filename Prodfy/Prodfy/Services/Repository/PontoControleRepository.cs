@@ -47,6 +47,11 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
+        public Ponto_Controle ObterDadosPorId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public string ObterInformacoesParaIdentificacao(string codigo)
         {
             throw new NotImplementedException();

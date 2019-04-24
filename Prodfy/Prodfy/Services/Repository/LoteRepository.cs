@@ -123,6 +123,11 @@ namespace Prodfy.Services.Repository
         public List<Lote> ObterTodos()
         {
             throw new NotImplementedException();
-        }     
+        }
+
+        public Lote ObterDadosPorId(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

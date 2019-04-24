@@ -66,5 +66,10 @@ namespace Prodfy.Services.Repository
         {
             throw new NotImplementedException();
         }
+
+        public Monit_Cod_Arv ObterDadosPorId(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -59,5 +59,10 @@ namespace Prodfy.Services.Repository
         {
             throw new NotImplementedException();
         }
+
+        public Contagem ObterDadosPorId(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

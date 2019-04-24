@@ -59,5 +59,10 @@ namespace Prodfy.Services.Repository
         {
             throw new NotImplementedException();
         }
+
+        public Monit_Ocorr ObterDadosPorId(string id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
