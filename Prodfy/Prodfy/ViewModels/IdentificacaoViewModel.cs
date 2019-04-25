@@ -14,6 +14,7 @@ namespace Prodfy.ViewModels
         private readonly IDialogService dialogService;
 
         private readonly LoteRepository loteRepositorio;
+        private readonly MudaRepository mudaRepository;
         private readonly ProdutoRepository produtoRepositorio;
 
         public IdentificacaoViewModel()
@@ -22,6 +23,7 @@ namespace Prodfy.ViewModels
             dialogService = new DialogService();
 
             loteRepositorio = new LoteRepository();
+            mudaRepository = new MudaRepository();
             produtoRepositorio = new ProdutoRepository();
 
             CapturarCoordenadasGPS();
@@ -123,6 +125,29 @@ namespace Prodfy.ViewModels
             var info_lote_objetivo = infoLote[4];
             var info_lote_cliente = infoLote[5];
             var info_lote_produto = infoLote[6];
+        }
+
+        private async void ObterInformacoesMuda(string dadosQR)
+        {
+            var temp = mudaRepository.ObterInformacoesParaIdentificacao(dadosQR);
+            var infoMuda = temp.Split('|');
+
+            if (infoMuda[0] == "0")
+            {
+                await dialogService.AlertAsync("Etiqueta QR", "Muda indicada no QR inexistente! Sincronize o dispositivo.", "Ok");
+                return;
+            }
+
+            var info_muda_id = infoMuda[2];
+            var info_muda_nome_interno = infoMuda[3];
+            var info_muda_nome = infoMuda[4];
+            var info_muda_especie = infoMuda[5];
+            var info_muda_origem = infoMuda[8];
+            var info_muda_viveiro = infoMuda[9];
+            var info_muda_canaletao = infoMuda[10];
+            var info_muda_linha = infoMuda[11];
+            var info_muda_coluna = infoMuda[12];
+            var info_muda_qtde = infoMuda[13];
         }
     }
 }
