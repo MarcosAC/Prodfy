@@ -54,9 +54,9 @@ namespace Prodfy.Services.Repository
             return dadosMuda;
         }
 
-        public string ObterInformacoesParaIdentificacao(string codigo)
+        public string ObterInformacoesParaIdentificacao(string mudaId)
         {
-            var dadosMuda = ObterDadosPorId(codigo);
+            var dadosMuda = dataBase._conexao.Table<Muda>().FirstOrDefault(m => m.muda_id == mudaId);
 
             var mudaInfo = new
             {

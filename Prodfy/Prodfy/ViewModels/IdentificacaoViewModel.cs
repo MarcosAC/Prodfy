@@ -96,6 +96,7 @@ namespace Prodfy.ViewModels
                 #endregion
 
                 ObterInformacoesLote(dadosQR.qrLoteCod);
+                ObterInformacoesMuda(dadosQR.qrMudaId);
 
                 IsBusy = false;
             }
