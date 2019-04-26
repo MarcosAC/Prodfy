@@ -1,4 +1,5 @@
-﻿using Prodfy.Services;
+﻿using Prodfy.Helpers;
+using Prodfy.Services;
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace Prodfy.ViewModels
         private readonly MudaRepository mudaRepository;
         private readonly ProdutoRepository produtoRepositorio;
 
+        private readonly AuxLib auxLib;
+
         public IdentificacaoViewModel()
         {
             navigationService = new NavigationService();
@@ -25,6 +28,8 @@ namespace Prodfy.ViewModels
             loteRepositorio = new LoteRepository();
             mudaRepository = new MudaRepository();
             produtoRepositorio = new ProdutoRepository();
+
+            auxLib = new AuxLib();
 
             CapturarCoordenadasGPS();
         }
@@ -149,6 +154,6 @@ namespace Prodfy.ViewModels
             var info_muda_linha = infoMuda[11];
             var info_muda_coluna = infoMuda[12];
             var info_muda_qtde = infoMuda[13];
-        }
+        }        
     }
 }
