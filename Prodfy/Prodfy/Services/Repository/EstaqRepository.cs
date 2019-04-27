@@ -40,9 +40,16 @@ namespace Prodfy.Services.Repository
 
         public async Task<List<Estaq>> ListaDadosEstaqueamento(string loteId, string mudaId, string dataEstaq)
         {
+            string query = "SELECT " +
+                             "lote_id, lote, muda_id, muda, data_estaq, qtde, qualidade_id, qualidade, colab_estaq_id, colab_estaq " +
+                           "FROM Estaq " +
+                           "WHERE lote_id = " + "'" + 215 + "'" +
+                           " AND muda_id = " + "'" + 3707 + "'" +
+                           " AND data_estaq = " + "'" + 2018/11/01 + "'" +
+                           " ORDER BY lote, muda, data_estaq";
             try
             {
-                return dataBase._conexao.Query<Estaq>("SELECT lote_id, lote, muda_id, muda, data_estaq, qtde, qualidade_id, qualidade, colab_estaq_id, Acolab_estaq FROM Estaq WHERE lote_id = " + loteId + " AND muda_id = " + mudaId + " AND data_estaq = " + dataEstaq + " ORDER BY lote, muda, data_estaq"); ;
+                var dados =  dataBase._conexao.Query<Estaq>(query);
             }
             catch (Exception erro)
             {
