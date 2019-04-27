@@ -17,6 +17,7 @@ namespace Prodfy.ViewModels
         private readonly LoteRepository loteRepositorio;
         private readonly MudaRepository mudaRepository;
         private readonly ProdutoRepository produtoRepositorio;
+        private readonly EstaqRepository estaqRepository;
 
         private readonly AuxLib auxLib;
 
@@ -28,6 +29,7 @@ namespace Prodfy.ViewModels
             loteRepositorio = new LoteRepository();
             mudaRepository = new MudaRepository();
             produtoRepositorio = new ProdutoRepository();
+            estaqRepository = new EstaqRepository();
 
             auxLib = new AuxLib();
 
@@ -102,6 +104,7 @@ namespace Prodfy.ViewModels
 
                 ObterInformacoesLote(dadosQR.qrLoteCod);
                 ObterInformacoesMuda(dadosQR.qrMudaId);
+                ListaDatasEstaqueamentoColaborador(dadosQR.qrLoteCod, dadosQR.qrMudaId, dadosQR.qrDataEstaq);
 
                 IsBusy = false;
             }
@@ -111,8 +114,8 @@ namespace Prodfy.ViewModels
         {
             var request = new GeolocationRequest(GeolocationAccuracy.High);
             var localizacao = Geolocation.GetLocationAsync(request);
-        }  
-        
+        }
+
         private async void ObterInformacoesLote(string dadosQR)
         {
             var temp = loteRepositorio.ObterInformacoesParaIdentificacao(dadosQR);
@@ -134,7 +137,7 @@ namespace Prodfy.ViewModels
         }
 
         private async void ObterInformacoesMuda(string dadosQR)
-        {
+        {            
             var temp = mudaRepository.ObterInformacoesParaIdentificacao(dadosQR);
             var infoMuda = temp.Split('|');
 
@@ -154,6 +157,11 @@ namespace Prodfy.ViewModels
             var info_muda_linha = infoMuda[11];
             var info_muda_coluna = infoMuda[12];
             var info_muda_qtde = infoMuda[13];
-        }        
+        }  
+        
+        private void ListaDatasEstaqueamentoColaborador(string loteId, string mudaId, string dataEstaq)
+        {
+            var listaEstaqueamento = estaqRepository.ListaDadosEstaqueamento(loteId, mudaId, dataEstaq);
+        }
     }
 }

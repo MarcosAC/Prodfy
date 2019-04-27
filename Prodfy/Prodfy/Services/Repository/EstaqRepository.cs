@@ -1,8 +1,10 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
+using Prodfy.Services.Dialog;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Prodfy.Services.Repository
 {
@@ -10,9 +12,13 @@ namespace Prodfy.Services.Repository
     {
         private DataBase dataBase;
 
+        private readonly IDialogService dialogService;
+
         public EstaqRepository()
         {
             dataBase = new DataBase();
+
+            dialogService = new DialogService();
         }
 
         public void Adicionar(Estaq estaq)
@@ -29,7 +35,22 @@ namespace Prodfy.Services.Repository
 
         public TableQuery<Estaq> AsQueryable()
         {
-            throw new NotImplementedException();
+            return dataBase._conexao.Table<Estaq>();
+        }
+
+        public async Task<List<Estaq>> ListaDadosEstaqueamento(string loteId, string mudaId, string dataEstaq)
+        {
+            try
+            {
+                return dataBase._conexao.Query<Estaq>("SELECT lote_id, lote, muda_id, muda, data_estaq, qtde, qualidade_id, qualidade, colab_estaq_id, Acolab_estaq FROM Estaq WHERE lote_id = " + loteId + " AND muda_id = " + mudaId + " AND data_estaq = " + dataEstaq + " ORDER BY lote, muda, data_estaq"); ;
+            }
+            catch (Exception erro)
+            {
+                await dialogService.AlertAsync("Erro", erro.ToString(), "Ok");
+            }
+
+            return null;
+            
         }
 
         public void Deletar()
