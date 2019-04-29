@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace Prodfy.Models
 {
@@ -7,13 +8,13 @@ namespace Prodfy.Models
     {
         [PrimaryKey, AutoIncrement]
         public int idMonit_Ocorr { get; set; }
-        public string disp_id { get; set; }
-        public string monit_id { get; set; }
-        public string data { get; set; }
-        public string rep { get; set; }
-        public string trat { get; set; }
+        public int disp_id { get; set; }
+        public int monit_id { get; set; }
+        public DateTime data { get; set; }
+        public int rep { get; set; }
+        public int trat { get; set; }
         public string descr { get; set; }
-        public string last_update { get; set; }
+        public DateTime last_update { get; set; }
         public int ind_sinc { get; set; }
     }
 }

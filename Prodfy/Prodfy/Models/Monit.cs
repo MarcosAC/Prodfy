@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace Prodfy.Models
 {
@@ -7,17 +8,17 @@ namespace Prodfy.Models
     {
         [PrimaryKey, AutoIncrement]
         public int idMonit { get; set; }
-        public string monit_id { get; set; }
+        public int monit_id { get; set; }
         public string codigo { get; set; }
-        public string produto_id { get; set; }
-        public string objetivo_id { get; set; }
-        public string data_plantio { get; set; }
-        public string esp_linha { get; set; }
-        public string esp_plantas { get; set; }
+        public int produto_id { get; set; }
+        public int objetivo_id { get; set; }
+        public DateTime data_plantio { get; set; }
+        public decimal esp_linha { get; set; }
+        public decimal esp_plantas { get; set; }
         public string projeto { get; set; }
         public string talhao { get; set; }
-        public string num_trat { get; set; }
-        public string num_rep { get; set; }
+        public int num_trat { get; set; }
+        public int num_rep { get; set; }
         public string pi_lat_g { get; set; }
         public string pi_lat_m { get; set; }
         public string pi_lat_s { get; set; }
@@ -28,7 +29,7 @@ namespace Prodfy.Models
         public string pi_lng_s { get; set; }
         public string pi_lng_d { get; set; }
         public string pi_lng { get; set; }        
-        public string last_update { get; set; }
+        public DateTime last_update { get; set; }
         public int ind_sinc { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace Prodfy.Models
 {
@@ -7,9 +8,9 @@ namespace Prodfy.Models
     {
         [PrimaryKey, AutoIncrement]
         public int idPerda_Motivo { get; set; }
-        public string perda_motivo_id { get; set; }
+        public int perda_motivo_id { get; set; }
         public string motivo { get; set; }        
-        public string last_update { get; set; }
+        public DateTime last_update { get; set; }
         public int ind_sinc { get; set; }
     }
 }

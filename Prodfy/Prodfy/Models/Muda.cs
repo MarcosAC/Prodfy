@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace Prodfy.Models
 {
@@ -7,7 +8,7 @@ namespace Prodfy.Models
     {
         [PrimaryKey, AutoIncrement]
         public int idMuda { get; set; }
-        public string muda_id{ get; set; }
+        public int muda_id{ get; set; }
         public string nome_interno { get; set; }
         public string nome { get; set; }
         public string especie_nome_comum { get; set; }
@@ -19,7 +20,7 @@ namespace Prodfy.Models
         public string linha { get; set; }
         public string coluna { get; set; }
         public string qtde { get; set; }
-        public string last_update { get; set; }
+        public DateTime last_update { get; set; }
         public int ind_sinc { get; set; }
     }
 }

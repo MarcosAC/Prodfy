@@ -8,7 +8,7 @@ namespace Prodfy.Models
     {
         [PrimaryKey, AutoIncrement]
         public int idColaborador { get; set; }
-        public string colaborador_id { get; set; }
+        public int colaborador_id { get; set; }
         public string nome_interno { get; set; }
         public string nome { get; set; }
         public DateTime last_update { get; set; }

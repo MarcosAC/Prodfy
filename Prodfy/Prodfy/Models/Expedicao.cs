@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 
 namespace Prodfy.Models
 {
@@ -7,25 +8,25 @@ namespace Prodfy.Models
     {
         [PrimaryKey, AutoIncrement]
         public int idExpedicao { get; set; }
-        public string disp_id { get; set; }        
-        public string lote_id { get; set; }
-        public string ponto_controle_id { get; set; }
-        public string estagio_id { get; set; }
-        public string muda_id { get; set; }
-        public string data_selecao { get; set; }
-        public string data_estaq { get; set; }
-        public string qtde_estaq { get; set; }
-        public string qtde_com_tubete { get; set; }
-        public string qtde_sem_tubete { get; set; }
-        public string qtde { get; set; }
-        public string colaborador_id { get; set; }
-        public string data_inicio { get; set; }
-        public string data_fim { get; set; }
-        public string exped_dest_id { get; set; }
+        public int disp_id { get; set; }        
+        public int lote_id { get; set; }
+        public int ponto_controle_id { get; set; }
+        public int estagio_id { get; set; }
+        public int muda_id { get; set; }
+        public DateTime data_selecao { get; set; }
+        public DateTime data_estaq { get; set; }
+        public int qtde_estaq { get; set; }
+        public int qtde_com_tubete { get; set; }
+        public int qtde_sem_tubete { get; set; }
+        public int qtde { get; set; }
+        public int colaborador_id { get; set; }
+        public DateTime data_inicio { get; set; }
+        public DateTime data_fim { get; set; }
+        public int exped_dest_id { get; set; }
         public string obs { get; set; }        
         public string latitude { get; set; }
         public string longitude { get; set; }
-        public string last_update { get; set; }
+        public DateTime last_update { get; set; }
         public int ind_sinc { get; set; }
     }
 }

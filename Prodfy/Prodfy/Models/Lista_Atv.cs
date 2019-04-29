@@ -11,8 +11,8 @@ namespace Prodfy.Models
         public string codigo { get; set; }
         public string titulo { get; set; }
         public string drescr { get; set; }
-        public string media_exec { get; set; }        
-        public string definicao { get; set; }
+        public int media_exec { get; set; }        
+        public int definicao { get; set; }
         public string last_update { get; set; }
         public int ind_sinc { get; set; }
     }
