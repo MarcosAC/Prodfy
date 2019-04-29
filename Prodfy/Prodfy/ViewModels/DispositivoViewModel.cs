@@ -29,7 +29,7 @@ namespace Prodfy.ViewModels
             _userRepository = new UserRepository();            
         }
 
-        public string NumeroDispositivo { get => _dadosUsuario?.disp_num; }
+        public int? NumeroDispositivo { get => _dadosUsuario?.disp_num; }
         public string Usuario { get => _dadosUsuario?.nome; }
         public string Empresa { get => _dadosUsuario?.empresa; }
 

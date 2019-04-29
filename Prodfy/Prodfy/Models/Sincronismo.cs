@@ -1,17 +1,19 @@
-﻿namespace Prodfy.Models
+﻿using System;
+
+namespace Prodfy.Models
 {
     public class Sincronismo
     {
         public int sinc_stat { get; set; }
         public string sinc_msg { get; set; }
-        public string sinc_date { get; set; }
-        public string disp_num { get; set; }
+        public DateTime sinc_date { get; set; }
+        public int disp_num { get; set; }
         public string senha { get; set; }
         public string nome { get; set; }
         public string sobrenome { get; set; }
         public string empresa { get; set; }
         public int? autosinc { get; set; }
-        public string autosinc_time { get; set; }
+        public int? autosinc_time { get; set; }
         public int? ind_ident { get; set; }
         public int? ind_atv { get; set; } // Atividade
         public int? ind_inv { get; set; } // Inventario

@@ -746,10 +746,11 @@ namespace Prodfy.ViewModels
                     OnPropertyChanged(nameof(IndExp));
                     OnPropertyChanged(nameof(IndIdent));
 
-                    string[] temp = dadosUser.dth_last_sincr.Split(' ');
-                    string[] temp2 = temp[0].Split('-');
+                    //string[] temp = dadosUser.dth_last_sincr.Split(' ');
+                    //string[] temp2 = temp[0].Split('-');
 
-                    dataSincronizacao = temp2[2] + "/" + temp2[1] + "/" + temp2[0] + " " + temp[1]; 
+                    //dataSincronizacao = temp2[2] + "/" + temp2[1] + "/" + temp2[0] + " " + temp[1]; 
+                    dataSincronizacao = dadosUser.dth_last_sincr.ToString("dd/MM/yyyy");
                     OnPropertyChanged(nameof(DhtLastSincr));
                 }
                 else

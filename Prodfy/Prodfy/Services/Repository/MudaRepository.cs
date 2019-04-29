@@ -48,13 +48,18 @@ namespace Prodfy.Services.Repository
             return dadosMuda;
         }
 
-        public Muda ObterDadosPorId(string id)
+        public Muda ObterDadosPorId(int id)
         {
             var dadosMuda = dataBase._conexao.Table<Muda>().FirstOrDefault(m => m.muda_id == id);
             return dadosMuda;
         }
 
-        public string ObterInformacoesParaIdentificacao(string mudaId)
+        public Muda ObterDadosPorId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ObterInformacoesParaIdentificacao(int mudaId)
         {
             var dadosMuda = dataBase._conexao.Table<Muda>().FirstOrDefault(m => m.muda_id == mudaId);
 
@@ -76,7 +81,7 @@ namespace Prodfy.Services.Repository
 
             string ret = string.Empty;
 
-            if (!string.IsNullOrEmpty(mudaInfo.muda_id))
+            if (mudaInfo.muda_id != 0)
             {
                 ret = $"1||{mudaInfo.muda_id}|" +
                       $"{mudaInfo.nome_interno}|" +
@@ -97,6 +102,11 @@ namespace Prodfy.Services.Repository
             }
 
             return ret;
+        }
+
+        public string ObterInformacoesParaIdentificacao(string codigo)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Muda> ObterTodos()

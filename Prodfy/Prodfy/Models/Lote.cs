@@ -9,7 +9,7 @@ namespace Prodfy.Models
         [PrimaryKey, AutoIncrement]
         public int idLote{ get; set; }
         public int lote_id { get; set; }
-        public string produto_id { get; set; }
+        public int produto_id { get; set; }
         public string codigo { get; set; }
         public string objetivo { get; set; }
         public string cliente { get; set; }        

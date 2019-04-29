@@ -70,7 +70,7 @@ namespace Prodfy.Services.Repository
 
             string ret = string.Empty;
 
-            if (!string.IsNullOrEmpty(loteInfo.lote_id))
+            if (loteInfo.lote_id != 0)
             {
                 ret = $"1||{loteInfo.lote_id}|{loteInfo.codigo}|{loteInfo.objetivo}|{loteInfo.cliente}|{loteInfo.produto}|";
             }

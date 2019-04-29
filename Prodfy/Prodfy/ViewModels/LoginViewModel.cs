@@ -32,7 +32,7 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _senha, value);
         }
 
-        public string DispNum { get => dadosLogin?.disp_num; }
+        public int? DispNum { get => dadosLogin?.disp_num; }
         public string Nome { get => dadosLogin?.nome; }
         public string Empresa { get => dadosLogin?.empresa; }        
 
