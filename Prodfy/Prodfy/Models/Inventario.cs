@@ -3,31 +3,34 @@ using System;
 
 namespace Prodfy.Models
 {
-    [Table("Expedicao")]
-    public class Expedicao
+    [Table("Inventario")]
+    public class Inventario
     {
-        [PrimaryKey, AutoIncrement]
-        public int idExpedicao { get; set; }
-        public int disp_id { get; set; }        
+        public int idInventario { get; set; }
+        public int disp_id { get; set; }
+
+        [MaxLength(1)]
+        public string lanc { get; set; }
+        [MaxLength(1)]
+        public string modo { get; set; }
+
         public int lote_id { get; set; }
+        public int ponto_controle_ori_id { get; set; }
+        public int estagio_ori_id { get; set; }
+        public int qualidade_ori_id { get; set; }
         public int ponto_controle_id { get; set; }
         public int estagio_id { get; set; }
         public int muda_id { get; set; }
-        public int qualidade_id { get; set; }
         public DateTime data_estaq { get; set; }
+        public int colab_estaq_id { get; set; }
         public DateTime data_selecao { get; set; }
-        public int qtde_estaq { get; set; }
-        public int qtde_disp { get; set; }
-        public int qtde_com_tubete { get; set; }
-        public int qtde_sem_tubete { get; set; }
+        public int colab_selecao_id { get; set; }
+        public int qualidade_id { get; set; }
         public int qtde { get; set; }
-        public int colaborador_id { get; set; }
-        public int exped_dest_id { get; set; }
+        public int qtde_amostragem { get; set; }
         public DateTime data_inicio { get; set; }
-        public DateTime data_fim { get; set; }        
+        public DateTime data_fim { get; set; }
 
-        [MaxLength(100)]
-        public string obs { get; set; }
         [MaxLength(20)]
         public string latitude { get; set; }
         [MaxLength(20)]

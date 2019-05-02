@@ -300,7 +300,7 @@ namespace Prodfy.ViewModels
                                     titulo = _dadosSincronismo.estagio[i].titulo,
                                     maturacao = _dadosSincronismo.estagio[i].maturacao,
                                     unidade = _dadosSincronismo.estagio[i].unidade,
-                                    matauracao_seg = _dadosSincronismo.estagio[i].matauracao_seg,
+                                    maturacao_seg = _dadosSincronismo.estagio[i].maturacao_seg,
                                     ind_alertas = _dadosSincronismo.estagio[i].ind_alertas,
                                     last_update = _dadosSincronismo.estagio[i].last_update,
                                     ind_sinc = int.Parse(_dadosSincronismo.estagio[i].ind_sinc.ToString())

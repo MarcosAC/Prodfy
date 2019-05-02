@@ -13,7 +13,10 @@ namespace Prodfy.Models
         public DateTime data { get; set; }
         public int rep { get; set; }
         public int trat { get; set; }
+
+        [MaxLength(100)]
         public string descr { get; set; }
+
         public DateTime last_update { get; set; }
         public int ind_sinc { get; set; }
     }

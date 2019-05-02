@@ -3,25 +3,28 @@ using System;
 
 namespace Prodfy.Models
 {
-    [Table("Lote_Inventario")]
-    public class Lote_Inventario
+    [Table("Inv_Item")]
+    public class Inv_Item
     {
-        [PrimaryKey, AutoIncrement]
-        public int idLote_Inventario { get; set; }
-        public int lote_inventario_id { get; set; }
+        public int idInv_Item { get; set; }
+        public int inv_item_id { get; set; }
         public int lote_id { get; set; }
+        public int ponto_controle_id { get; set; }
+        public int estagio_id { get; set; }
         public int muda_id { get; set; }
         public DateTime data_estaq { get; set; }
-        public DateTime data_selecao { get; set; }
-        public int qtde { get; set; }
         public int colab_estaq_id { get; set; }
-        public string colab_estaq { get; set; }
+        public DateTime data_selecao { get; set; }
         public int colab_selecao_id { get; set; }
-        public string colab_selecao { get; set; }
         public int qualidade_id { get; set; }
-        public string qualidade { get; set; }
+        public DateTime data_inicio { get; set; }
+        public DateTime data_fim { get; set; }
+
+        [MaxLength(20)]
         public string latitude { get; set; }
+        [MaxLength(20)]
         public string longitude { get; set; }
+
         public DateTime last_update { get; set; }
         public int ind_sinc { get; set; }
     }

@@ -12,7 +12,10 @@ namespace Prodfy.Models
         public int lista_atv_id { get; set; }
         public DateTime data_inicio { get; set; }
         public DateTime data_fim { get; set; }
+
+        [MaxLength(500)]
         public string obs { get; set; }
+
         public DateTime last_update { get; set; }
         public int ind_sinc { get; set; }
     }
