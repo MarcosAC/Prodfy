@@ -100,7 +100,7 @@ namespace Prodfy.ViewModels
         private bool CanExecuteFuncaoEvolucaoCommand()
         {
             if (CanExecuteCommand())
-                if (user.ind_evo == 1)
+                if (user.ind_inv == 1)
                     return true;
 
             return false;

@@ -31,8 +31,6 @@ namespace Prodfy.ViewModels
         private Lista_Atv lista_atv = null;
         private Qualidade qualidade = null;
         private Exped_Dest exped_dest = null;
-        private Lote_Evolucao lote_evolucao = null;
-        private Lote_Inventario lote_inventario = null;
         private Estaq estaq = null;
         #endregion
 
@@ -49,7 +47,6 @@ namespace Prodfy.ViewModels
         private InventarioRepository inventarioRepository;
         private PerdaRepository perdaRepository;
         private HistoricoRepository historicoRepository;
-        private EvolucaoRepository evolucaoRepository;
         private OcorrenciaRepository ocorrenciaRepository;
         private MedicaoRepository medicaoRepository;
         private ExpedicaoRepository expedicaoRepository;
@@ -67,8 +64,6 @@ namespace Prodfy.ViewModels
         private ListaAtvRepository listaAtvRepository;
         private QualidadeRepository qualidadeRepository;
         private ExpedDestRepository expedDestRepository;
-        private LoteEvolucaoRepository loteEvolucaoRepository;
-        private LoteInventarioRepository loteInventarioRepository;
         private EstaqRepository estaqRepository;
 
         #endregion
@@ -82,7 +77,6 @@ namespace Prodfy.ViewModels
             inventarioRepository = new InventarioRepository();
             perdaRepository = new PerdaRepository();
             historicoRepository = new HistoricoRepository();
-            evolucaoRepository = new EvolucaoRepository();
             ocorrenciaRepository = new OcorrenciaRepository();
             medicaoRepository = new MedicaoRepository();
             expedicaoRepository = new ExpedicaoRepository();
@@ -100,8 +94,6 @@ namespace Prodfy.ViewModels
             listaAtvRepository = new ListaAtvRepository();
             qualidadeRepository = new QualidadeRepository();
             expedDestRepository = new ExpedDestRepository();
-            loteEvolucaoRepository = new LoteEvolucaoRepository();
-            loteInventarioRepository = new LoteInventarioRepository();
             estaqRepository = new EstaqRepository();
         }
 
@@ -170,7 +162,6 @@ namespace Prodfy.ViewModels
                                 ind_inv = _dadosSincronismo.ind_inv,
                                 ind_per = _dadosSincronismo.ind_per,
                                 ind_hist = _dadosSincronismo.ind_hist,
-                                ind_evo = _dadosSincronismo.ind_evo,
                                 ind_mnt = _dadosSincronismo.ind_mnt,
                                 ind_exp = _dadosSincronismo.ind_exp,
                                 ind_atv = _dadosSincronismo.ind_atv,
@@ -188,12 +179,6 @@ namespace Prodfy.ViewModels
                             {
                                 if (dadosResponse.ind_atv == 1)
                                     atividadeRepository.Deletar();
-                            }
-
-                            if (dadosResponse.ind_evo != null) // Evolução
-                            {
-                                if (dadosResponse.ind_evo == 1)
-                                    evolucaoRepository.Deletar();
                             }
 
                             if (dadosResponse.ind_exp != null) // Expedição
@@ -498,58 +483,7 @@ namespace Prodfy.ViewModels
                                 };
 
                                 expedDestRepository.Adicionar(exped_dest);
-                            }
-
-                            // Lote_Evolucao
-                            for (int i = 0; i < _dadosSincronismo.lote_evolucao.Length; i++)
-                            {
-                                lote_evolucao = new Lote_Evolucao
-                                {
-                                    idLote_Evolucao = int.Parse(_dadosSincronismo.lote_evolucao[i].idLote_Evolucao.ToString()),
-                                    lote_evolucao_id = _dadosSincronismo.lote_evolucao[i].lote_evolucao_id,
-                                    lote_id = _dadosSincronismo.lote_evolucao[i].lote_id,
-                                    ponto_controle_id = _dadosSincronismo.lote_evolucao[i].ponto_controle_id,
-                                    estagio_id = _dadosSincronismo.lote_evolucao[i].estagio_id,
-                                    muda_id = _dadosSincronismo.lote_evolucao[i].muda_id,
-                                    data_estaq = _dadosSincronismo.lote_evolucao[i].data_estaq,
-                                    data_selecao = _dadosSincronismo.lote_evolucao[i].data_selecao,
-                                    data_inicio = _dadosSincronismo.lote_evolucao[i].data_inicio,
-                                    data_fim = _dadosSincronismo.lote_evolucao[i].data_fim,
-                                    qtde_total = _dadosSincronismo.lote_evolucao[i].qtde_total,
-                                    qtde = _dadosSincronismo.lote_evolucao[i].qtde,
-                                    last_update = _dadosSincronismo.lote_evolucao[i].last_update,
-                                    ind_sinc = int.Parse(_dadosSincronismo.lote_evolucao[i].ind_sinc.ToString())
-                                };
-
-                                loteEvolucaoRepository.Adicionar(lote_evolucao);
-                            }
-
-                            // Lote_Inventario
-                            for (int i = 0; i < _dadosSincronismo.lote_inventario.Length; i++)
-                            {
-                                lote_inventario = new Lote_Inventario
-                                {
-                                    idLote_Inventario = int.Parse(_dadosSincronismo.lote_inventario[i].idLote_Inventario.ToString()),
-                                    lote_inventario_id = _dadosSincronismo.lote_inventario[i].lote_inventario_id,
-                                    lote_id = _dadosSincronismo.lote_inventario[i].lote_id,
-                                    muda_id = _dadosSincronismo.lote_inventario[i].muda_id,
-                                    data_estaq = _dadosSincronismo.lote_inventario[i].data_estaq,
-                                    data_selecao = _dadosSincronismo.lote_inventario[i].data_selecao,
-                                    qtde = _dadosSincronismo.lote_inventario[i].qtde,
-                                    colab_estaq_id = _dadosSincronismo.lote_inventario[i].colab_estaq_id,
-                                    colab_estaq = _dadosSincronismo.lote_inventario[i].colab_estaq,
-                                    colab_selecao_id = _dadosSincronismo.lote_inventario[i].colab_selecao_id,
-                                    colab_selecao = _dadosSincronismo.lote_inventario[i].colab_selecao,
-                                    qualidade_id = _dadosSincronismo.lote_inventario[i].qualidade_id,
-                                    qualidade = _dadosSincronismo.lote_inventario[i].qualidade,
-                                    latitude = _dadosSincronismo.lote_inventario[i].latitude,
-                                    longitude = _dadosSincronismo.lote_inventario[i].longitude,
-                                    last_update = _dadosSincronismo.lote_inventario[i].last_update,
-                                    ind_sinc = int.Parse(_dadosSincronismo.lote_inventario[i].ind_sinc.ToString())
-                                };
-
-                                loteInventarioRepository.Adicionar(lote_inventario);
-                            }
+                            }                            
 
                             // Estaq
                             for (int i = 0; i < _dadosSincronismo.estaq.Length; i++)
@@ -557,7 +491,6 @@ namespace Prodfy.ViewModels
                                 estaq = new Estaq
                                 {
                                     idEstaq = int.Parse(_dadosSincronismo.estaq[i].idEstaq.ToString()),
-                                    lote_inventario_id = _dadosSincronismo.estaq[i].lote_inventario_id,
                                     lote_id = _dadosSincronismo.estaq[i].lote_id,
                                     lote = _dadosSincronismo.estaq[i].lote,
                                     muda_id = _dadosSincronismo.estaq[i].muda_id,
@@ -600,10 +533,9 @@ namespace Prodfy.ViewModels
         {
             #region Listas do Indicadores
 
-            List<Contagem> dadosContagem = new List<Contagem>();
+            List<Inventario> dadosInventario = new List<Inventario>();
             List<Perda> dadosPerda = new List<Perda>();
             List<Historico> dadosHistorico = new List<Historico>();
-            List<Evolucao> dadosEvolucao = new List<Evolucao>();
             List<Monit_Ocorr> dadosOcorrencias = new List<Monit_Ocorr>();
             List<Monit_Med> dadosMedicao = new List<Monit_Med>();
             List<Expedicao> dadosExpedicao = new List<Expedicao>();
@@ -649,9 +581,9 @@ namespace Prodfy.ViewModels
             // dadosContagem = Inventários
             if (inventarioRepository.ObterTodos().Count() > 0)
             {
-                dadosContagem = inventarioRepository.ObterTodos();
+                dadosInventario = inventarioRepository.ObterTodos();
 
-                dadosSincronismo.Add(dadosContagem);
+                dadosSincronismo.Add(dadosInventario);
             }
 
             if (perdaRepository.ObterTodos().Count() > 0)
@@ -666,13 +598,6 @@ namespace Prodfy.ViewModels
                 dadosHistorico = historicoRepository.ObterTodos();
 
                 dadosSincronismo.Add(dadosHistorico);
-            }
-
-            if (evolucaoRepository.ObterTodos().Count() > 0)
-            {
-                dadosEvolucao = evolucaoRepository.ObterTodos();
-
-                dadosSincronismo.Add(dadosEvolucao);
             }
 
             if (ocorrenciaRepository.ObterTodos().Count() > 0)
@@ -729,7 +654,6 @@ namespace Prodfy.ViewModels
                         ind_inv = inventarioRepository.ObterTotalDeRegistros(),
                         ind_per = perdaRepository.ObterTotalDeRegistros(),
                         ind_hist = historicoRepository.ObterTotalDeRegistros(),
-                        ind_evo = evolucaoRepository.ObterTotalDeRegistros(),
                         ind_oco = ocorrenciaRepository.ObterTotalDeRegistros(),
                         ind_mnt = medicaoRepository.ObterTotalDeRegistros(),
                         ind_exp = expedicaoRepository.ObterTotalDeRegistros(),

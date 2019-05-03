@@ -17,7 +17,7 @@ namespace Prodfy.Services.Repository
 
         public int ObterTotalDeRegistros()
         {
-            var total = _dataBase._conexao.Table<Evolucao>().Count();
+            var total = _dataBase._conexao.Table<Inventario>().Count();
 
             if (total > 0)
                 return total;

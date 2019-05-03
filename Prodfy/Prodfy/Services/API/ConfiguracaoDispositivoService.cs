@@ -54,7 +54,6 @@ namespace Prodfy.Services.API
                                 ind_inv = dadosDispositivo.ind_inv,
                                 ind_per = dadosDispositivo.ind_per,
                                 ind_hist = dadosDispositivo.ind_hist,
-                                ind_evo = dadosDispositivo.ind_evo,
                                 ind_mnt = dadosDispositivo.ind_mnt,
                                 ind_exp = dadosDispositivo.ind_exp,
                                 ind_atv = dadosDispositivo.ind_atv,

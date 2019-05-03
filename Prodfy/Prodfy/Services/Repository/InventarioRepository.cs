@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class InventarioRepository : IRepository<Contagem>
+    public class InventarioRepository : IRepository<Inventario>
     {
         private DataBase _dataBase;
 
@@ -17,7 +17,7 @@ namespace Prodfy.Services.Repository
 
         public int ObterTotalDeRegistros()
         {
-            var total = _dataBase._conexao.Table<Contagem>().Count();
+            var total = _dataBase._conexao.Table<Inventario>().Count();
 
             if (total > 0)
                 return total;
@@ -25,12 +25,12 @@ namespace Prodfy.Services.Repository
             return 0;
         }
 
-        public void Adicionar(Contagem entidade)
+        public void Adicionar(Inventario entidade)
         {
             throw new NotImplementedException();
         }
 
-        public TableQuery<Contagem> AsQueryable()
+        public TableQuery<Inventario> AsQueryable()
         {
             throw new NotImplementedException();
         }
@@ -40,19 +40,19 @@ namespace Prodfy.Services.Repository
             _dataBase._conexao.Execute("Delete From Contagem"); ;
         }
 
-        public void Editar(Contagem entidade)
+        public void Editar(Inventario entidade)
         {
             throw new NotImplementedException();
         }
 
-        public Contagem ObterDados()
+        public Inventario ObterDados()
         {
             throw new NotImplementedException();
         }
 
-        public List<Contagem> ObterTodos()
+        public List<Inventario> ObterTodos()
         {
-            return _dataBase._conexao.Table<Contagem>().OrderBy(c => c.idContagem).ToList();
+            return _dataBase._conexao.Table<Inventario>().OrderBy(i => i.idInventario).ToList();
         }
 
         public string ObterInformacoesParaIdentificacao(string codigo)
@@ -60,7 +60,7 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public Contagem ObterDadosPorId(string id)
+        public Inventario ObterDadosPorId(string id)
         {
             throw new NotImplementedException();
         }

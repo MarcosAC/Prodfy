@@ -73,8 +73,6 @@ namespace Prodfy.Services.API
                         lista_atv = dadosSincronismo.lista_atv,
                         qualidade = dadosSincronismo.qualidade,
                         exped_dest = dadosSincronismo.exped_dest,
-                        lote_evolucao = dadosSincronismo.lote_evolucao,
-                        lote_inventario = dadosSincronismo.lote_inventario,
                         estaq = dadosSincronismo.estaq
                     };
 

@@ -40,8 +40,6 @@ namespace Prodfy.Models
         public Lista_Atv[] lista_atv { get; set; }
         public Qualidade[] qualidade { get; set; }
         public Exped_Dest[] exped_dest { get; set; }
-        public Lote_Evolucao[] lote_evolucao { get; set; }
-        public Lote_Inventario[] lote_inventario { get; set; }
         public Estaq[] estaq { get; set; }
 
         //public class Produto
