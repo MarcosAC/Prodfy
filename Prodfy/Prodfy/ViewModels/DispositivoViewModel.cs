@@ -84,13 +84,13 @@ namespace Prodfy.ViewModels
 
                             _userRepository.Adicionar(_dadosUsuario);
 
-                            _dadosUsuario = new User
-                            {
-                                idUser = _dadosUsuario.idUser,
-                                disp_num = _dadosUsuario.disp_num,
-                                nome = _dadosUsuario.nome,
-                                empresa = _dadosUsuario.empresa
-                            };
+                            //_dadosUsuario = new User
+                            //{
+                            //    idUser = _dadosUsuario.idUser,
+                            //    disp_num = _dadosUsuario.disp_num,
+                            //    nome = _dadosUsuario.nome,
+                            //    empresa = _dadosUsuario.empresa
+                            //};
 
                             OnPropertyChanged(nameof(NumeroDispositivo));
                             OnPropertyChanged(nameof(Usuario));

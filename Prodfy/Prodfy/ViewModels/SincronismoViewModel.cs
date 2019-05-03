@@ -47,8 +47,10 @@ namespace Prodfy.ViewModels
         private InventarioRepository inventarioRepository;
         private PerdaRepository perdaRepository;
         private HistoricoRepository historicoRepository;
-        private OcorrenciaRepository ocorrenciaRepository;
         private MedicaoRepository medicaoRepository;
+        // incluir repositorio inv
+        // incluir repositorio inv_evo
+        // incluir repositorio inv_item
         private ExpedicaoRepository expedicaoRepository;
         private ProdutoRepository produtoRepository;
         private ObjetivoRepository objetivoRepository;
@@ -60,9 +62,12 @@ namespace Prodfy.ViewModels
         private MonitRepository monitRepository;
         private MonitCodArvRepository monitCodArvRepository;
         private MonitParcelaRepository monitParcelaRepository;
+        private MovimentacaoRepository movimentacaoRepository;
         private ColaboradorRepository colaboradorRepository;
         private ListaAtvRepository listaAtvRepository;
         private QualidadeRepository qualidadeRepository;
+        // incluir repositorio expedicao
+        // incluir repositorio expedido
         private ExpedDestRepository expedDestRepository;
         private EstaqRepository estaqRepository;
 
@@ -77,7 +82,6 @@ namespace Prodfy.ViewModels
             inventarioRepository = new InventarioRepository();
             perdaRepository = new PerdaRepository();
             historicoRepository = new HistoricoRepository();
-            ocorrenciaRepository = new OcorrenciaRepository();
             medicaoRepository = new MedicaoRepository();
             expedicaoRepository = new ExpedicaoRepository();
             produtoRepository = new ProdutoRepository();
@@ -106,8 +110,8 @@ namespace Prodfy.ViewModels
         public int? IndInv { get => sincronismo?.ind_inv; }
         public int? IndPer { get => sincronismo?.ind_per; }
         public int? IndHist { get => sincronismo?.ind_hist; }
-        public int? IndEvo { get => sincronismo?.ind_evo; }
-        public int? IndOco { get => sincronismo?.ind_oco; }
+        public int? IndEvo { get => sincronismo?.ind_mnt; }
+        //public int? IndOco { get => sincronismo?.ind_oco; }
         public int? IndMnt { get => sincronismo?.ind_mnt; }
         public int? IndExp { get => sincronismo?.ind_mnt; }
         public int? IndIdent { get => sincronismo?.ind_mnt; }        
@@ -160,6 +164,7 @@ namespace Prodfy.ViewModels
                                 autosinc_time = _dadosSincronismo.autosinc_time,
                                 ind_ident = _dadosSincronismo.ind_ident,
                                 ind_inv = _dadosSincronismo.ind_inv,
+                                ind_mov = _dadosSincronismo.ind_mov,
                                 ind_per = _dadosSincronismo.ind_per,
                                 ind_hist = _dadosSincronismo.ind_hist,
                                 ind_mnt = _dadosSincronismo.ind_mnt,
@@ -199,16 +204,16 @@ namespace Prodfy.ViewModels
                                     inventarioRepository.Deletar();
                             }
 
-                            if (dadosResponse.ind_mnt != null) // Mediçã0
+                            if (dadosResponse.ind_mnt != null) // Medição
                             {
                                 if (dadosResponse.ind_mnt == 1)
                                     medicaoRepository.Deletar();
                             }
 
-                            if (dadosResponse.ind_oco != null) // Ocorrencia
+                            if (dadosResponse.ind_mov != null) // Movimentação
                             {
-                                if (dadosResponse.ind_oco == 1)
-                                    ocorrenciaRepository.Deletar();
+                                if (dadosResponse.ind_mov == 1)
+                                    movimentacaoRepository.Deletar();
                             }
 
                             if (dadosResponse.ind_per != null) // Perda
@@ -577,8 +582,7 @@ namespace Prodfy.ViewModels
             #endregion
 
             #region Verifica se existe dados nas tabelas de indicadores
-
-            // dadosContagem = Inventários
+                        
             if (inventarioRepository.ObterTodos().Count() > 0)
             {
                 dadosInventario = inventarioRepository.ObterTodos();
@@ -598,14 +602,7 @@ namespace Prodfy.ViewModels
                 dadosHistorico = historicoRepository.ObterTodos();
 
                 dadosSincronismo.Add(dadosHistorico);
-            }
-
-            if (ocorrenciaRepository.ObterTodos().Count() > 0)
-            {
-                dadosOcorrencias = ocorrenciaRepository.ObterTodos();
-
-                dadosSincronismo.Add(dadosOcorrencias);
-            }
+            }            
 
             if (medicaoRepository.ObterTodos().Count() > 0)
             {
@@ -654,7 +651,6 @@ namespace Prodfy.ViewModels
                         ind_inv = inventarioRepository.ObterTotalDeRegistros(),
                         ind_per = perdaRepository.ObterTotalDeRegistros(),
                         ind_hist = historicoRepository.ObterTotalDeRegistros(),
-                        ind_oco = ocorrenciaRepository.ObterTotalDeRegistros(),
                         ind_mnt = medicaoRepository.ObterTotalDeRegistros(),
                         ind_exp = expedicaoRepository.ObterTotalDeRegistros(),
                         sinc_date = dadosUser.dth_last_sincr
@@ -665,7 +661,6 @@ namespace Prodfy.ViewModels
                     OnPropertyChanged(nameof(IndPer));
                     OnPropertyChanged(nameof(IndHist));
                     OnPropertyChanged(nameof(IndEvo));
-                    OnPropertyChanged(nameof(IndOco));
                     OnPropertyChanged(nameof(IndMnt));
                     OnPropertyChanged(nameof(IndExp));
                     OnPropertyChanged(nameof(IndIdent));
