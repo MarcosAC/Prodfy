@@ -34,7 +34,7 @@ namespace Prodfy.Models
         public int? ind_inv { get; set; }
         public int? ind_mov { get; set; }
         public int? ind_per { get; set; }
-        public int? ind_hist { get; set; }        
+        public int? ind_hist { get; set; }
         public int? ind_mnt { get; set; }
         public int? ind_exp { get; set; }
         public int? ind_atv { get; set; }

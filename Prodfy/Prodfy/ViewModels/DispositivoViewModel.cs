@@ -68,8 +68,8 @@ namespace Prodfy.ViewModels
 
                         var dadosQR = new
                         {
-                            qrLoteCod = resultadoQR[0],
-                            qrMudaId = resultadoQR[2]
+                            qrKey = resultadoQR[0],
+                            qrLang = resultadoQR[2]
                         };
 
                         scanner.Cancel(); //=> Faz parte do scanner de QR.
@@ -80,7 +80,7 @@ namespace Prodfy.ViewModels
                         {
                             IsBusy = true;
 
-                            _dadosUsuario = ConfiguracaoDispositivoService.ObterDadosConfiguracaoDispositivo(dadosQR.qrLoteCod, dadosQR.qrMudaId);
+                            _dadosUsuario = ConfiguracaoDispositivoService.ObterDadosConfiguracaoDispositivo(dadosQR.qrKey, dadosQR.qrLang);
 
                             _userRepository.Adicionar(_dadosUsuario);
 
