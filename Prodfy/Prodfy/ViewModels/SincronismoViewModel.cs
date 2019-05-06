@@ -47,10 +47,9 @@ namespace Prodfy.ViewModels
         private InventarioRepository inventarioRepository;
         private PerdaRepository perdaRepository;
         private HistoricoRepository historicoRepository;
+        private MovimentacaoRepository movimentacaoRepository;
+        private OcorrenciaRepository ocorrenciaRepository;
         private MedicaoRepository medicaoRepository;
-        // incluir repositorio inv
-        // incluir repositorio inv_evo
-        // incluir repositorio inv_item
         private ExpedicaoRepository expedicaoRepository;
         private ProdutoRepository produtoRepository;
         private ObjetivoRepository objetivoRepository;
@@ -61,13 +60,10 @@ namespace Prodfy.ViewModels
         private PerdaMotivoRepository perdaMotivoRepository;
         private MonitRepository monitRepository;
         private MonitCodArvRepository monitCodArvRepository;
-        private MonitParcelaRepository monitParcelaRepository;
-        private MovimentacaoRepository movimentacaoRepository;
+        private MonitParcelaRepository monitParcelaRepository;        
         private ColaboradorRepository colaboradorRepository;
         private ListaAtvRepository listaAtvRepository;
         private QualidadeRepository qualidadeRepository;
-        // incluir repositorio expedicao
-        // incluir repositorio expedido
         private ExpedDestRepository expedDestRepository;
         private EstaqRepository estaqRepository;
 
@@ -82,6 +78,8 @@ namespace Prodfy.ViewModels
             inventarioRepository = new InventarioRepository();
             perdaRepository = new PerdaRepository();
             historicoRepository = new HistoricoRepository();
+            movimentacaoRepository = new MovimentacaoRepository();
+            ocorrenciaRepository = new OcorrenciaRepository();
             medicaoRepository = new MedicaoRepository();
             expedicaoRepository = new ExpedicaoRepository();
             produtoRepository = new ProdutoRepository();
@@ -110,13 +108,13 @@ namespace Prodfy.ViewModels
         public int? IndInv { get => sincronismo?.ind_inv; }
         public int? IndPer { get => sincronismo?.ind_per; }
         public int? IndHist { get => sincronismo?.ind_hist; }
-        public int? IndEvo { get => sincronismo?.ind_mnt; }
-        //public int? IndOco { get => sincronismo?.ind_oco; }
+        public int? IndMov { get => sincronismo?.ind_mov; }
+        public int? IndOco { get => sincronismo?.ind_oco; }
         public int? IndMnt { get => sincronismo?.ind_mnt; }
         public int? IndExp { get => sincronismo?.ind_mnt; }
-        public int? IndIdent { get => sincronismo?.ind_mnt; }        
+        public int? IndIdent { get => sincronismo?.ind_mnt; }
 
-        #endregion 
+        #endregion
 
         private bool CanExecuteSincronizarCommand()
         {
@@ -164,9 +162,9 @@ namespace Prodfy.ViewModels
                                 autosinc_time = _dadosSincronismo.autosinc_time,
                                 ind_ident = _dadosSincronismo.ind_ident,
                                 ind_inv = _dadosSincronismo.ind_inv,
-                                ind_mov = _dadosSincronismo.ind_mov,
                                 ind_per = _dadosSincronismo.ind_per,
                                 ind_hist = _dadosSincronismo.ind_hist,
+                                ind_mov = _dadosSincronismo.ind_mov,
                                 ind_mnt = _dadosSincronismo.ind_mnt,
                                 ind_exp = _dadosSincronismo.ind_exp,
                                 ind_atv = _dadosSincronismo.ind_atv,
@@ -184,6 +182,12 @@ namespace Prodfy.ViewModels
                             {
                                 if (dadosResponse.ind_atv == 1)
                                     atividadeRepository.Deletar();
+                            }
+
+                            if (dadosResponse.ind_mov != null) // Evolução
+                            {
+                                if (dadosResponse.ind_mov == 1)
+                                    movimentacaoRepository.Deletar();
                             }
 
                             if (dadosResponse.ind_exp != null) // Expedição
@@ -210,10 +214,10 @@ namespace Prodfy.ViewModels
                                     medicaoRepository.Deletar();
                             }
 
-                            if (dadosResponse.ind_mov != null) // Movimentação
+                            if (dadosResponse.ind_oco != null) // Ocorrencia
                             {
-                                if (dadosResponse.ind_mov == 1)
-                                    movimentacaoRepository.Deletar();
+                                if (dadosResponse.ind_oco == 1)
+                                    ocorrenciaRepository.Deletar();
                             }
 
                             if (dadosResponse.ind_per != null) // Perda
@@ -488,7 +492,7 @@ namespace Prodfy.ViewModels
                                 };
 
                                 expedDestRepository.Adicionar(exped_dest);
-                            }                            
+                            }
 
                             // Estaq
                             for (int i = 0; i < _dadosSincronismo.estaq.Length; i++)
@@ -541,6 +545,7 @@ namespace Prodfy.ViewModels
             List<Inventario> dadosInventario = new List<Inventario>();
             List<Perda> dadosPerda = new List<Perda>();
             List<Historico> dadosHistorico = new List<Historico>();
+            List<Movimentacao> dadosMovimentacao = new List<Movimentacao>();
             List<Monit_Ocorr> dadosOcorrencias = new List<Monit_Ocorr>();
             List<Monit_Med> dadosMedicao = new List<Monit_Med>();
             List<Expedicao> dadosExpedicao = new List<Expedicao>();
@@ -602,7 +607,21 @@ namespace Prodfy.ViewModels
                 dadosHistorico = historicoRepository.ObterTodos();
 
                 dadosSincronismo.Add(dadosHistorico);
-            }            
+            }
+
+            if (movimentacaoRepository.ObterTodos().Count() > 0)
+            {
+                dadosMovimentacao = movimentacaoRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosMovimentacao);
+            }
+
+            if (ocorrenciaRepository.ObterTodos().Count() > 0)
+            {
+                dadosOcorrencias = ocorrenciaRepository.ObterTodos();
+
+                dadosSincronismo.Add(dadosOcorrencias);
+            }
 
             if (medicaoRepository.ObterTodos().Count() > 0)
             {
@@ -651,6 +670,8 @@ namespace Prodfy.ViewModels
                         ind_inv = inventarioRepository.ObterTotalDeRegistros(),
                         ind_per = perdaRepository.ObterTotalDeRegistros(),
                         ind_hist = historicoRepository.ObterTotalDeRegistros(),
+                        ind_mov = movimentacaoRepository.ObterTotalDeRegistros(),
+                        ind_oco = ocorrenciaRepository.ObterTotalDeRegistros(),
                         ind_mnt = medicaoRepository.ObterTotalDeRegistros(),
                         ind_exp = expedicaoRepository.ObterTotalDeRegistros(),
                         sinc_date = dadosUser.dth_last_sincr
@@ -660,16 +681,13 @@ namespace Prodfy.ViewModels
                     OnPropertyChanged(nameof(IndInv));
                     OnPropertyChanged(nameof(IndPer));
                     OnPropertyChanged(nameof(IndHist));
-                    OnPropertyChanged(nameof(IndEvo));
+                    OnPropertyChanged(nameof(IndMov));
+                    OnPropertyChanged(nameof(IndOco));
                     OnPropertyChanged(nameof(IndMnt));
                     OnPropertyChanged(nameof(IndExp));
                     OnPropertyChanged(nameof(IndIdent));
 
-                    //string[] temp = dadosUser.dth_last_sincr.Split(' ');
-                    //string[] temp2 = temp[0].Split('-');
-
-                    //dataSincronizacao = temp2[2] + "/" + temp2[1] + "/" + temp2[0] + " " + temp[1]; 
-                    dataSincronizacao = dadosUser.dth_last_sincr.ToString("dd/MM/yyyy");
+                    dataSincronizacao = dadosUser.dth_last_sincr.ToString("dd/MM/yyyy HH:mm:ss");
                     OnPropertyChanged(nameof(DhtLastSincr));
                 }
                 else

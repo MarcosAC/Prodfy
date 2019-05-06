@@ -18,10 +18,11 @@ namespace Prodfy.Models
         public int? ind_atv { get; set; } // Atividade
         public int? ind_inv { get; set; } // Inventario
         public int? ind_per { get; set; } // Perda
-        public int? ind_mov { get; set; } // Movimentacao
         public int? ind_hist { get; set; } // Historico
+        public int? ind_mov { get; set; } // Movimentação
+        public int? ind_oco { get; set; } // Ocorrencia
         public int? ind_mnt { get; set; } // Medição
-        public int? ind_exp { get; set; } // Expedição        
+        public int? ind_exp { get; set; } // Expedição          
         public int? uso_liberado { get; set; }
         public DateTime dht_last_sincr { get; set; } 
 
