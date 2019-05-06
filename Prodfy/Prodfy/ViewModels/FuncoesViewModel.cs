@@ -61,6 +61,15 @@ namespace Prodfy.ViewModels
             return false;
         }
 
+        private bool CanExecuteFuncaoEstoqueViveiroCommand()
+        {
+            if (CanExecuteCommand())
+                if (user.ind_atv == 1)
+                    return true;
+
+            return false;
+        }
+
         private bool CanExecuteFuncaoAtividadeCommand()
         {            
             if (CanExecuteCommand())
@@ -71,6 +80,15 @@ namespace Prodfy.ViewModels
         }
 
         private bool CanExecuteFuncaoInventarioCommand()
+        {
+            if (CanExecuteCommand())
+                if (user.ind_inv == 1)
+                    return true;
+
+            return false;
+        }
+
+        private bool CanExecuteFuncaoMovimentacaoCommand()
         {
             if (CanExecuteCommand())
                 if (user.ind_inv == 1)
@@ -95,16 +113,7 @@ namespace Prodfy.ViewModels
                     return true;
 
             return false;
-        }
-
-        private bool CanExecuteFuncaoEvolucaoCommand()
-        {
-            if (CanExecuteCommand())
-                if (user.ind_inv == 1)
-                    return true;
-
-            return false;
-        }
+        }        
 
         private bool CanExecuteFuncaoExpedicaoCommand()
         {
@@ -198,7 +207,7 @@ namespace Prodfy.ViewModels
         private Command _irPaginaLoteCommand;
         public Command IrPaginaLoteCommand =>
             _irPaginaLoteCommand ?? (_irPaginaLoteCommand = new Command(async () => 
-                await ExecuteIrPaginaLoteCommand(), CanExecuteFuncaoEvolucaoCommand));
+                await ExecuteIrPaginaLoteCommand(), CanExecuteFuncaoMovimentacaoCommand));
 
         private async Task ExecuteIrPaginaLoteCommand()
         {

@@ -19,7 +19,11 @@
                     <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Identificação"
                                           Command="{Binding IrPaginaIdentificacaoCommand}" />
-                    
+
+                    <control:CustomButton Style="{StaticResource styleButton}"
+                                          Text="Estoque Viveiro" 
+                                          Command="{Binding}" IsEnabled="False"/>
+
                     <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Atividade Realizada" 
                                           Command="{Binding IrPaginaAtividadeCommand}" IsEnabled="False"/>
@@ -29,16 +33,16 @@
                                           Command="{Binding IrPaginaInventarioCommand}" />
 
                     <control:CustomButton Style="{StaticResource styleButton}"
+                                          Text="Movimentação"
+                                          Command="{Binding IrPaginaLoteCommand}" />
+
+                    <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Perdas" 
                                           Command="{Binding IrPagianaPerdasCommand}" />
 
                     <control:CustomButton Style="{StaticResource styleButton}" 
                                           Text="Histórico"
-                                          Command="{Binding IrPaginaHistoricoCommand}" />
-
-                    <control:CustomButton Style="{StaticResource styleButton}"
-                                          Text="Evolução de Lote"
-                                          Command="{Binding IrPaginaLoteCommand}" />
+                                          Command="{Binding IrPaginaHistoricoCommand}" />                    
 
                     <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Expedição"
