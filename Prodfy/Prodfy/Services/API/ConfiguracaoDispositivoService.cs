@@ -15,9 +15,10 @@ namespace Prodfy.Services.API
             {
                 BaseAddress = new Uri(Contantes.BASE_URL)
             };
-            
+
             FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("l", idioma),
+                new KeyValuePair<string, string>("v", Contantes.VERSAO_APP),
                 new KeyValuePair<string, string>("a", "gsd"),
                 new KeyValuePair<string, string>("k", appKey)
             });
@@ -34,7 +35,7 @@ namespace Prodfy.Services.API
                     switch (dadosDispositivo.sinc_stat)
                     {
                         case 0:
-                            App.Current.MainPage.DisplayAlert("", dadosDispositivo.sinc_msg, "Ok");
+                            App.Current.MainPage.DisplayAlert("", dadosDispositivo.sinc_msg, "Ok");                            
                             break;
                         case 1:
                             var user = new User
@@ -61,7 +62,10 @@ namespace Prodfy.Services.API
                                 uso_liberado = dadosDispositivo.uso_liberado,
                                 dth_last_sincr = dadosDispositivo.dth_last_sincr,
                                 sinc_stat = dadosDispositivo.sinc_stat
-                            };                            
+                            };
+
+                            //App.Current.MainPage.DisplayAlert("", dadosDispositivo.sinc_msg, "Ok");
+
                             return user;
                     }
                 }

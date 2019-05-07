@@ -41,6 +41,7 @@ namespace Prodfy.ViewModels
         private Command _leitorQRCommand;
         public Command LeitorQRCommand => _leitorQRCommand ?? (_leitorQRCommand = new Command(async () => await ExecuteLeitorQRCommand()));
 
+        // ToDo refatorar função.
         private async Task ExecuteLeitorQRCommand()
         {
             if (VerificaConexaoInternet.VerificaConexao())
@@ -82,23 +83,20 @@ namespace Prodfy.ViewModels
 
                             _dadosUsuario = ConfiguracaoDispositivoService.ObterDadosConfiguracaoDispositivo(dadosQR.qrKey, dadosQR.qrLang);
 
-                            _userRepository.Adicionar(_dadosUsuario);
+                            if (_dadosUsuario != null)
+                            {
+                                _userRepository.Adicionar(_dadosUsuario);
 
-                            //_dadosUsuario = new User
-                            //{
-                            //    idUser = _dadosUsuario.idUser,
-                            //    disp_num = _dadosUsuario.disp_num,
-                            //    nome = _dadosUsuario.nome,
-                            //    empresa = _dadosUsuario.empresa
-                            //};
+                                OnPropertyChanged(nameof(NumeroDispositivo));
+                                OnPropertyChanged(nameof(Usuario));
+                                OnPropertyChanged(nameof(Empresa));
 
-                            OnPropertyChanged(nameof(NumeroDispositivo));
-                            OnPropertyChanged(nameof(Usuario));
-                            OnPropertyChanged(nameof(Empresa));
+                                await _dialogService.AlertAsync("Configuração", "Configuração básica recebida com sucesso!", "Ok");
+                            }
 
-                            IsBusy = false;                            
+                            IsBusy = false;
 
-                            await _dialogService.AlertAsync("Configuração", "Configuração básica recebida com sucesso!", "Ok");
+                            return;
                         }
                         catch (Exception)
                         {
