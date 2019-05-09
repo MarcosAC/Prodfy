@@ -702,8 +702,3 @@ namespace Prodfy.ViewModels
         }
     }
 }
-
-
-
-
-

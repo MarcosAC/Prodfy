@@ -28,6 +28,7 @@ namespace Prodfy.Services.API
 
             FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("l", idioma),
+                new KeyValuePair<string, string>("v", Contantes.VERSAO_APP),
                 new KeyValuePair<string, string>("a", "s"),
                 new KeyValuePair<string, string>("k", appKey)
             });
@@ -98,6 +99,7 @@ namespace Prodfy.Services.API
 
             FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("l", idioma),
+                new KeyValuePair<string, string>("v", Contantes.VERSAO_APP),
                 new KeyValuePair<string, string>("a", "u"),
                 new KeyValuePair<string, string>("k", appKey),
                 new KeyValuePair<string, string>("d", dadosParaUpload)

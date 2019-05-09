@@ -69,7 +69,7 @@ namespace Prodfy.Services.Repository
 
         public List<Movimentacao> ObterTodos()
         {
-            throw new NotImplementedException();
+            return dataBase._conexao.Table<Movimentacao>().OrderBy(m => m.idMovimentacao).ToList();
         }
     }
 }
