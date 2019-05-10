@@ -52,6 +52,11 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
+        public string ObterInformacoesParaIdentificacao(int codigo)
+        {
+            throw new NotImplementedException();
+        }
+
         public string ObterInformacoesParaIdentificacao(string codigo)
         {
             throw new NotImplementedException();

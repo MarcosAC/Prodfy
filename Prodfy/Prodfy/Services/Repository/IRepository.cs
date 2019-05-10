@@ -8,6 +8,7 @@ namespace Prodfy.Services.Repository
         void Adicionar(T entidade);
         void Deletar();
         void Editar(T entidade);
+        string ObterInformacoesParaIdentificacao(int id);
         string ObterInformacoesParaIdentificacao(string codigo);
         T ObterDados();
         T ObterDadosPorId(string id);

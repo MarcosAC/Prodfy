@@ -61,12 +61,17 @@ namespace Prodfy.Services.Repository
             return _dataBase._conexao.Table<Atividade>().OrderBy(a => a.idAtividade).ToList();
         }
 
-        public string ObterInformacoesParaIdentificacao(string codigo)
+        public string ObterInformacoesParaIdentificacao(int codigo)
         {
             throw new NotImplementedException();
         }
 
         public Atividade ObterDadosPorId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ObterInformacoesParaIdentificacao(string codigo)
         {
             throw new NotImplementedException();
         }

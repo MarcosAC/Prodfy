@@ -43,9 +43,9 @@ namespace Prodfy.Services.Repository
             string query = "SELECT " +
                              "lote_id, lote, muda_id, muda, data_estaq, qtde, qualidade_id, qualidade, colab_estaq_id, colab_estaq " +
                            "FROM Estaq " +
-                           "WHERE lote_id = " + "'" + 215 + "'" +
-                           " AND muda_id = " + "'" + 3707 + "'" +
-                           " AND data_estaq = " + "'" + 2018/11/01 + "'" +
+                           "WHERE lote_id = " + "'" + loteId + "'" +
+                           " AND muda_id = " + "'" + mudaId + "'" +
+                           " AND data_estaq = " + "'" + dataEstaq + "'" +
                            " ORDER BY lote, muda, data_estaq";
             try
             {
@@ -80,7 +80,7 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public string ObterInformacoesParaIdentificacao(string codigo)
+        public string ObterInformacoesParaIdentificacao(int codigo)
         {
             throw new NotImplementedException();
         }
@@ -91,6 +91,11 @@ namespace Prodfy.Services.Repository
         }
 
         public int ObterTotalDeRegistros()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ObterInformacoesParaIdentificacao(string codigo)
         {
             throw new NotImplementedException();
         }

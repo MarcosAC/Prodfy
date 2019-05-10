@@ -1,7 +1,7 @@
-﻿using Prodfy.Helpers;
-using Prodfy.Services;
+﻿using Prodfy.Services;
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -19,8 +19,6 @@ namespace Prodfy.ViewModels
         private readonly ProdutoRepository produtoRepositorio;
         private readonly EstaqRepository estaqRepository;
 
-        private readonly AuxLib auxLib;
-
         public IdentificacaoViewModel()
         {
             navigationService = new NavigationService();
@@ -30,8 +28,6 @@ namespace Prodfy.ViewModels
             mudaRepository = new MudaRepository();
             produtoRepositorio = new ProdutoRepository();
             estaqRepository = new EstaqRepository();
-
-            auxLib = new AuxLib();
 
             CapturarCoordenadasGPS();
         }
@@ -58,7 +54,7 @@ namespace Prodfy.ViewModels
 
                 string[] resultadoQR = result.Text.Split('|');
 
-                if (resultadoQR.Count() < 8)
+                if (resultadoQR.Count() < 10)
                 {
                     await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
 
@@ -84,27 +80,31 @@ namespace Prodfy.ViewModels
                     qrDensidade = resultadoQR[4],
                     qrPontoControle = resultadoQR[5],
                     qrEstagioId = resultadoQR[6],
-                    qrColaboradorId = resultadoQR[7]
-
-                    #region Nova Versão
-                    /* Nova Versão
-                     * qrLivre = resultadoQR[8],
-                     * qrTipoEtiqueta = resultadoQR[9]
-                     */
-                    #endregion
+                    qrColaboradorId = resultadoQR[7],
+                    qrLivre = resultadoQR[8],
+                    qrTipoEtiqueta = resultadoQR[9]
                 };
 
-                #region Nova Versão
-                //if (qrTipoEtiqueta == null || qrTipoEtiqueta != 1)
-                //   {
-                //       await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
-                //       return;
-                //   }
-                #endregion
+                if (dadosQR.qrTipoEtiqueta == null || dadosQR.qrTipoEtiqueta != "1")
+                {
+                    await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
+                    return;
+                }
 
-                ObterInformacoesLote(dadosQR.qrLoteCod);
-                ObterInformacoesMuda(dadosQR.qrMudaId);
-                ListaDatasEstaqueamentoColaborador(dadosQR.qrLoteCod, dadosQR.qrMudaId, dadosQR.qrDataEstaq);
+                try
+                {
+                    ObterInformacoesLote(dadosQR.qrLoteCod);
+                    ObterInformacoesMuda(Convert.ToInt32(dadosQR.qrMudaId));
+                    ListaDatasEstaqueamentoColaborador(dadosQR.qrLoteCod, dadosQR.qrMudaId, dadosQR.qrDataEstaq);
+
+                    await dialogService.AlertAsync("DEBUG", "Idetificação funciou :D", "Ok");
+                }
+                catch (Exception ex)
+                {
+
+                    await dialogService.AlertAsync("DEBUG", "ERRO => "+ ex.ToString(), "Ok");
+                }
+                
 
                 IsBusy = false;
             }
@@ -116,9 +116,9 @@ namespace Prodfy.ViewModels
             var localizacao = Geolocation.GetLocationAsync(request);
         }
 
-        private async void ObterInformacoesLote(string dadosQR)
+        private async void ObterInformacoesLote(string loteCod)
         {
-            var temp = loteRepositorio.ObterInformacoesParaIdentificacao(dadosQR);
+            var temp = loteRepositorio.ObterInformacoesParaIdentificacao(loteCod);
             var infoLote = temp.Split('|');
 
             if (infoLote[0] == "0")
@@ -136,9 +136,9 @@ namespace Prodfy.ViewModels
             var info_lote_produto = infoLote[6];
         }
 
-        private async void ObterInformacoesMuda(string dadosQR)
+        private async void ObterInformacoesMuda(int mudaId)
         {            
-            var temp = mudaRepository.ObterInformacoesParaIdentificacao(dadosQR);
+            var temp = mudaRepository.ObterInformacoesParaIdentificacao(mudaId);
             var infoMuda = temp.Split('|');
 
             if (infoMuda[0] == "0")
