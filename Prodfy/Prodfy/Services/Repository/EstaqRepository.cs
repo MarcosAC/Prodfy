@@ -38,7 +38,7 @@ namespace Prodfy.Services.Repository
             return dataBase._conexao.Table<Estaq>();
         }
 
-        public async Task<List<Estaq>> ListaDadosEstaqueamento(string loteId, string mudaId, string dataEstaq)
+        public async Task<List<Estaq>> ListaDadosEstaqueamento(int loteId, int mudaId, DateTime dataEstaq)
         {
             string query = "SELECT " +
                              "lote_id, lote, muda_id, muda, data_estaq, qtde, qualidade_id, qualidade, colab_estaq_id, colab_estaq " +

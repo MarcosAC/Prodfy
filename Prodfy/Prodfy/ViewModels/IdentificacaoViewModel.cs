@@ -1,7 +1,9 @@
-﻿using Prodfy.Services;
+﻿using Prodfy.Models;
+using Prodfy.Services;
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -18,6 +20,8 @@ namespace Prodfy.ViewModels
         private readonly MudaRepository mudaRepository;
         private readonly ProdutoRepository produtoRepositorio;
         private readonly EstaqRepository estaqRepository;
+        private readonly PontoControleRepository pontoControleRepository;
+        private readonly EstagioRepository estagioRepository;
 
         public IdentificacaoViewModel()
         {
@@ -28,9 +32,21 @@ namespace Prodfy.ViewModels
             mudaRepository = new MudaRepository();
             produtoRepositorio = new ProdutoRepository();
             estaqRepository = new EstaqRepository();
+            pontoControleRepository = new PontoControleRepository();
+            estagioRepository = new EstagioRepository();
 
             CapturarCoordenadasGPS();
         }
+
+        #region Variáveis do método ObterInformacoesLote
+        private string stat;
+        private string msg;
+        private int infoLoteId;
+        private string infoLoteCodigo;
+        private string infoLoteObejetivo;
+        private string infoLoteCliente;
+        private string infoLoteProduto;
+        #endregion
 
         private Command _titleViewBotaoVoltarCommand;
         public Command TitleViewBotaoVoltarCommand => 
@@ -95,7 +111,14 @@ namespace Prodfy.ViewModels
                 {
                     ObterInformacoesLote(dadosQR.qrLoteCod);
                     ObterInformacoesMuda(Convert.ToInt32(dadosQR.qrMudaId));
-                    ListaDatasEstaqueamentoColaborador(dadosQR.qrLoteCod, dadosQR.qrMudaId, dadosQR.qrDataEstaq);
+                    ListaDatasEstaqueamentoColaborador(infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+
+                    var listaPontoControle = await ListaLocalPontoControle(infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+
+                    //for (int i = 0; i < listaPontoControle.Count; i++)
+                    //{
+                    //    string locais = $"<li>{listaPontoControle[i]}:";
+                    //}
 
                     await dialogService.AlertAsync("DEBUG", "Idetificação funciou :D", "Ok");
                 }
@@ -108,13 +131,13 @@ namespace Prodfy.ViewModels
 
                 IsBusy = false;
             }
-        }
+        }        
 
         private void CapturarCoordenadasGPS()
         {
             var request = new GeolocationRequest(GeolocationAccuracy.High);
             var localizacao = Geolocation.GetLocationAsync(request);
-        }
+        }        
 
         private async void ObterInformacoesLote(string loteCod)
         {
@@ -127,13 +150,13 @@ namespace Prodfy.ViewModels
                 return;
             }
 
-            var stat = infoLote[0];
-            var msg = infoLote[1];
-            var info_lote_id = infoLote[2];
-            var info_lote_codigo = infoLote[3];
-            var info_lote_objetivo = infoLote[4];
-            var info_lote_cliente = infoLote[5];
-            var info_lote_produto = infoLote[6];
+            stat = infoLote[0];
+            msg = infoLote[1];
+            infoLoteId = Convert.ToInt32(infoLote[2]);
+            infoLoteCodigo = infoLote[3];
+            infoLoteObejetivo = infoLote[4];
+            infoLoteCliente = infoLote[5];
+            infoLoteProduto = infoLote[6];
         }
 
         private async void ObterInformacoesMuda(int mudaId)
@@ -159,9 +182,23 @@ namespace Prodfy.ViewModels
             var info_muda_qtde = infoMuda[13];
         }  
         
-        private void ListaDatasEstaqueamentoColaborador(string loteId, string mudaId, string dataEstaq)
+        private void ListaDatasEstaqueamentoColaborador(int infoLoteId, int mudaId, DateTime dataEstaq)
         {
-            var listaEstaqueamento = estaqRepository.ListaDadosEstaqueamento(loteId, mudaId, dataEstaq);
+            var listaEstaqueamento = estaqRepository.ListaDadosEstaqueamento(infoLoteId, mudaId, dataEstaq);
+        }
+
+        private async Task<List<Ponto_Controle>> ListaLocalPontoControle(int infoLoteId, int mudaId, DateTime dataEstaq)
+        {
+            List<Ponto_Controle> listaLocalPontoControle = await pontoControleRepository.ListaDadosPontoControle(infoLoteId, mudaId, dataEstaq);
+
+            return listaLocalPontoControle;
+        }
+
+        private async Task<List<Estagio>> ListaLocalEstagio(int pontoControleId, int loteId, int mudaId, DateTime dataEstaq)
+        {
+            List<Estagio> ListaLocalEstagio = await estagioRepository.ListaLocalEstagio(pontoControleId, infoLoteId, mudaId, dataEstaq);
+
+            return ListaLocalEstagio;
         }
     }
 }

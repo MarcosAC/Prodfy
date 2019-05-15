@@ -3,6 +3,7 @@ using Prodfy.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Prodfy.Services.Repository
 {
@@ -25,6 +26,12 @@ namespace Prodfy.Services.Repository
             {
                 App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
             }
+        }
+
+        public async Task<List<Estagio>> ListaLocalEstagio(int pontoControleId, int loteId, int mudaId, DateTime dataEstaq)
+        {
+            await App.Current.MainPage.DisplayAlert("Erro", "", "OK");
+            return null;
         }
 
         public TableQuery<Estagio> AsQueryable()
