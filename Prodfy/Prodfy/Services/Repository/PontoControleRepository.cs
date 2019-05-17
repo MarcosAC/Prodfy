@@ -61,22 +61,21 @@ namespace Prodfy.Services.Repository
                                         "WHERE IE.ponto_controle_ori_id = PC.ponto_controle_id),0) ) > 0 " +
                            "ORDER BY PC.ordem";
 
+            List<Ponto_Controle> listaPontoControles = new List<Ponto_Controle>();
+
             try
             {
                 var dados = dataBase._conexao.Query<Ponto_Controle>(query);
-                List<Ponto_Controle> listaPontoControles = new List<Ponto_Controle>();
 
                 for (int i = 0; i < dados.Count; i++)
                     listaPontoControles.Add(dados[i]);
-
-                return listaPontoControles;
             }
             catch (Exception erro)
             {
                 await dialogService.AlertAsync("Erro", erro.ToString(), "Ok");
             }
-            
-            return null;
+
+            return listaPontoControles; ;
         }
 
         public TableQuery<Ponto_Controle> AsQueryable()

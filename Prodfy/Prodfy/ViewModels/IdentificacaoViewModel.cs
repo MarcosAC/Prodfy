@@ -112,13 +112,33 @@ namespace Prodfy.ViewModels
                     ObterInformacoesLote(dadosQR.qrLoteCod);
                     ObterInformacoesMuda(Convert.ToInt32(dadosQR.qrMudaId));
                     ListaDatasEstaqueamentoColaborador(infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+                    #region Gera Lista de Locais onde existe Lote/Muda/Estaq
+                    // Refatora código
+                    List<Ponto_Controle> dadosLocalPontoControle = await ListaLocalPontoControle(infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
 
-                    var listaPontoControle = await ListaLocalPontoControle(infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+                    List<Ponto_Controle> listaLocalPontoControle = new List<Ponto_Controle>();
 
-                    //for (int i = 0; i < listaPontoControle.Count; i++)
-                    //{
-                    //    string locais = $"<li>{listaPontoControle[i]}:";
-                    //}
+                    for (int i = 0; i < dadosLocalPontoControle.Count; i++)
+                    {
+                        string listaPontoControleEstagio = string.Empty;
+                        string pontoControleEstagioQuantidade = string.Empty;
+
+                        string titulo = listaLocalPontoControle[i].titulo;
+
+                        string locais = $"<li>{titulo}: {listaPontoControleEstagio}</li>";
+
+                        List<Estagio> listaLocalEstagio = await estagioRepository.ListaLocalEstagio(listaLocalPontoControle[i].ponto_controle_id, infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+
+                        for (int j = 0; j < listaLocalEstagio.Count; j++)
+                        {
+                            pontoControleEstagioQuantidade = await estagioRepository.LocalQuantidadeMudasNoEstagio(listaLocalPontoControle[i].ponto_controle_id, infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+                            listaPontoControleEstagio = $"<li>{listaLocalEstagio[j].titulo}: <b style='color:#ff7b00;'>{pontoControleEstagioQuantidade}</b></li>";
+                        }
+                        
+                        if (string.IsNullOrEmpty(pontoControleEstagioQuantidade) && string.IsNullOrEmpty(listaPontoControleEstagio))
+                            locais = $"<li>{titulo}: <ul style='list-style-image: url((BASE64_IMG_SRC_LISTDOT_ESTAGIO));'>{listaPontoControleEstagio}</ul></li>";
+                    }
+                    #endregion
 
                     await dialogService.AlertAsync("DEBUG", "Idetificação funciou :D", "Ok");
                 }
@@ -127,7 +147,6 @@ namespace Prodfy.ViewModels
 
                     await dialogService.AlertAsync("DEBUG", "ERRO => "+ ex.ToString(), "Ok");
                 }
-                
 
                 IsBusy = false;
             }
@@ -196,9 +215,9 @@ namespace Prodfy.ViewModels
 
         private async Task<List<Estagio>> ListaLocalEstagio(int pontoControleId, int loteId, int mudaId, DateTime dataEstaq)
         {
-            List<Estagio> ListaLocalEstagio = await estagioRepository.ListaLocalEstagio(pontoControleId, infoLoteId, mudaId, dataEstaq);
+            List<Estagio> listaLocalEstagio = await estagioRepository.ListaLocalEstagio(pontoControleId, infoLoteId, mudaId, dataEstaq);            
 
-            return ListaLocalEstagio;
+            return listaLocalEstagio;
         }
     }
 }
