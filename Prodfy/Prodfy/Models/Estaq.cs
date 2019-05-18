@@ -19,7 +19,7 @@ namespace Prodfy.Models
         public string muda { get; set; }
 
         public DateTime data_estaq { get; set; }
-        public int qtde { get; set; }
+        public int? qtde { get; set; }
         public int qualidade_id { get; set; }
 
         [MaxLength(255)]

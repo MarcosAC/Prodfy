@@ -111,9 +111,28 @@ namespace Prodfy.ViewModels
                 {
                     ObterInformacoesLote(dadosQR.qrLoteCod);
                     ObterInformacoesMuda(Convert.ToInt32(dadosQR.qrMudaId));
-                    ListaDatasEstaqueamentoColaborador(infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+                    
                     #region Gera Lista de Locais onde existe Lote/Muda/Estaq
-                    // Refatora código
+                    // Refatorar código
+                    List<Estaq> dadosEstaqueamento = await ListaDatasEstaqueamentoColaborador(infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+
+                    #region Lista Colaboradores Responsaveis Por Estaqueamento de Lote/Muda/Estaq
+                    for (int i = 0; i < dadosEstaqueamento.Count; i++)
+                    {
+                        List<Estaq> listaEstaqueamento = new List<Estaq>();
+
+                        double contadorQuantidade = 0;
+                        string estaqueamento = string.Empty;
+
+
+                        if (dadosEstaqueamento[i].qtde != null)
+                        {
+                            contadorQuantidade = contadorQuantidade + Convert.ToDouble(dadosEstaqueamento[i].qtde);
+                            estaqueamento = $"<li>{dadosEstaqueamento[i].colab_estaq} - <b style='color:#ff7b00;'>{dadosEstaqueamento[i].qtde}</b><li>";
+                        }
+                    }
+                    #endregion
+
                     List<Ponto_Controle> dadosLocalPontoControle = await ListaLocalPontoControle(infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
 
                     List<Ponto_Controle> listaLocalPontoControle = new List<Ponto_Controle>();
@@ -201,9 +220,11 @@ namespace Prodfy.ViewModels
             var info_muda_qtde = infoMuda[13];
         }  
         
-        private void ListaDatasEstaqueamentoColaborador(int infoLoteId, int mudaId, DateTime dataEstaq)
+        private async Task<List<Estaq>> ListaDatasEstaqueamentoColaborador(int infoLoteId, int mudaId, DateTime dataEstaq)
         {
-            var listaEstaqueamento = estaqRepository.ListaDadosEstaqueamento(infoLoteId, mudaId, dataEstaq);
+            var listaEstaqueamento = await estaqRepository.ListaDadosEstaqueamento(infoLoteId, mudaId, dataEstaq);
+
+            return listaEstaqueamento;
         }
 
         private async Task<List<Ponto_Controle>> ListaLocalPontoControle(int infoLoteId, int mudaId, DateTime dataEstaq)
