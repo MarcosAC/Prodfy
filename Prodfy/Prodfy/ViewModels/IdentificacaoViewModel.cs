@@ -182,6 +182,28 @@ namespace Prodfy.ViewModels
                  }*/
                 #endregion
 
+                #region Lote
+                var temp = loteRepositorio.ObterInformacoesParaIdentificacao(dadosQR.qrLoteCod);
+                var infoLote = temp.Split('|');
+
+                if (infoLote[0] == "0")
+                {
+                    await dialogService.AlertAsync("Etiqueta QR", "Lote indicado no QR inexistente! Sincronize o dispositivo.", "Ok");
+                }
+
+                var informacoesLote = new
+                {
+                    stat = infoLote[0],
+                    msg = infoLote[1],
+                    infoLoteId = Convert.ToInt32(infoLote[2]),
+                    infoLoteCodigo = infoLote[3],
+                    infoLoteObejetivo = infoLote[4],
+                    infoLoteCliente = infoLote[5],
+                    infoLoteProduto = infoLote[6],
+                };
+
+                #endregion
+
                 IsBusy = false;
 
                 await navigationService.PushAsync(new PaginaHtmlIdentificacaoView());
