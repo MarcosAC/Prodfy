@@ -40,20 +40,20 @@ namespace Prodfy.ViewModels
         }
 
         #region Variáveis ObterInformacoesLote/QtdeEstaq/Localizacao
-        private string stat;
-        private string msg;
-        private int infoLoteId;
-        private string infoLoteCodigo;
-        private string infoLoteObejetivo;
-        private string infoLoteCliente;
-        private string infoLoteProduto;
+        //private string stat;
+        //private string msg;
+        //private int infoLoteId;
+        //private string infoLoteCodigo;
+        //private string infoLoteObejetivo;
+        //private string infoLoteCliente;
+        //private string infoLoteProduto;
 
         //QtdeEstaq
-        private double contadorQuantidade;
-        private string estaqueamento = string.Empty;
+        //private double contadorQuantidade;
+        //private string estaqueamento = string.Empty;
 
         //Localizacao
-        private string locais = string.Empty;
+        //private string locais = string.Empty;
         #endregion
 
         private string _conteudoHtml;
@@ -204,6 +204,84 @@ namespace Prodfy.ViewModels
 
                 #endregion
 
+                #region Muda
+                var temp2 = mudaRepository.ObterInformacoesParaIdentificacao(dadosQR.qrMudaId);
+                var infoMuda = temp.Split('|');
+
+                List<string> listaMuda = new List<string>();
+
+                listaMuda = infoMuda.ToList<string>();
+
+                if (infoMuda[0] == "0")
+                {
+                    await dialogService.AlertAsync("Etiqueta QR", "Muda indicada no QR inexistente! Sincronize o dispositivo.", "Ok");
+                }
+
+                var info_muda_id = infoMuda[2];
+                var info_muda_nome_interno = infoMuda[3];
+                var info_muda_nome = infoMuda[4];
+                var info_muda_especie = infoMuda[5];
+                var info_muda_origem = infoMuda[8];
+                var info_muda_viveiro = infoMuda[9];
+                var info_muda_canaletao = infoMuda[10];
+                var info_muda_linha = infoMuda[11];
+                var info_muda_coluna = infoMuda[12];
+                var info_muda_qtde = infoMuda[13];
+                #endregion
+
+                #region Obtem Lista de Datas de Estaqueamento com colaborador e qualidade
+                string lote = string.Empty;
+                string muda = string.Empty;
+                string dataEstqueamento = string.Empty;
+                string quantidade = string.Empty;
+                string qualidade = string.Empty;
+                string colaboradorEstaqueamento = string.Empty;
+                string estaqueamentos = string.Empty;
+                double contadorQuantidade;
+
+                contadorQuantidade = 0;
+
+                // Lista Colaboradores Responsaveis Por Estaqueamento de Lote/Muda/Estaq
+                var listaEstaqueamento = await estaqRepository.ListaDadosEstaqueamento(informacoesLote.infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+
+                foreach (var item in listaEstaqueamento)
+                {
+                    if (item.qtde != null)
+                    {
+                        contadorQuantidade = contadorQuantidade + Convert.ToDouble(item.qtde);
+                        estaqueamentos += $"<li>{item.colab_estaq} - <b style='color:#ff7b00;'>{item.qtde}</b></li>";
+                    }
+                }
+                #endregion
+
+                #region Lista Colaboradores Responsaveis Por Estaqueamento de Lote/Muda/Estaq
+                string locais = string.Empty;
+                string listaPontoControle = string.Empty;
+                string listaPontoControleEstaqueamento = string.Empty;
+                string quantidadePontoControleEstaqueamento = string.Empty;
+
+                List<Ponto_Controle> listaLocalPontoControle = await pontoControleRepository.ListaDadosPontoControle(informacoesLote.infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+
+                foreach (var pontoControle in listaLocalPontoControle)
+                {
+                    locais += $"{pontoControle.titulo}";
+
+                    // Lista Estagios do Ponnto de Controle onde existe Lote/Muda/Estaq
+                    List<Estagio> listaLocalEstagio = await estagioRepository.ListaLocalEstagio(pontoControle.ponto_controle_id, informacoesLote.infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+
+                    foreach (var pontoControleEstaqueamento in listaLocalEstagio)
+                    {
+                        quantidadePontoControleEstaqueamento = await estagioRepository.LocalQuantidadeMudasNoEstagio(pontoControle.ponto_controle_id, informacoesLote.infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
+                        listaPontoControleEstaqueamento += $"<li>{pontoControleEstaqueamento.titulo}: <b style='color:#ff7b00;'>{quantidadePontoControleEstaqueamento}</b></li>";
+                    }
+
+                    if (string.IsNullOrEmpty(listaPontoControleEstaqueamento))
+                        locais += $"<ul style='list-style-image: url((BASE64_IMG_SRC_LISTDOT_ESTAGIO));'>{listaPontoControleEstaqueamento}</ul>";
+
+                    locais += "</li>";
+                }
+                #endregion
+
                 IsBusy = false;
 
                 await navigationService.PushAsync(new PaginaHtmlIdentificacaoView());
@@ -282,12 +360,12 @@ namespace Prodfy.ViewModels
             return listaLocalPontoControle;
         }
 
-        private async Task<List<Estagio>> ListaLocalEstagio(int pontoControleId, int loteId, int mudaId, DateTime dataEstaq)
-        {
-            List<Estagio> listaLocalEstagio = await estagioRepository.ListaLocalEstagio(pontoControleId, infoLoteId, mudaId, dataEstaq);            
+        //private async Task<List<Estagio>> ListaLocalEstagio(int pontoControleId, int loteId, int mudaId, DateTime dataEstaq)
+        //{
+        //    List<Estagio> listaLocalEstagio = await estagioRepository.ListaLocalEstagio(pontoControleId, infoLoteId, mudaId, dataEstaq);            
 
-            return listaLocalEstagio;
-        }
+        //    return listaLocalEstagio;
+        //}
 
         private string PaginaHtmlIdentificao(List<string> infoMuda, List<Estaq> quantidadeEstaqueamento, string infoLote)
         {            
@@ -379,7 +457,7 @@ namespace Prodfy.ViewModels
                 #endregion
 
                 #region QtdeEstaq
-                string qtdeEstaq = Convert.ToString(contadorQuantidade);
+                //string qtdeEstaq = Convert.ToString(contadorQuantidade);
 
                 List<Estaq> listaEstaqueamento = new List<Estaq>();
 
@@ -391,8 +469,8 @@ namespace Prodfy.ViewModels
 
                 string estaqs = string.Empty;
 
-                if (!string.IsNullOrEmpty(estaqueamento))
-                    estaqs = $"<div class='font-size-70'><ul style='list-style-image: url(BASE64_IMG_SRC_LISTDOT2);';>(oESTAQS!)</ul></div>";
+                //if (!string.IsNullOrEmpty(estaqueamento))
+                //    estaqs = $"<div class='font-size-70'><ul style='list-style-image: url(BASE64_IMG_SRC_LISTDOT2);';>(oESTAQS!)</ul></div>";
 
                 /*codigoHtml*/ ConteudoHtml= "<html><head><title>Prodfy APP</title></head>";
                 /*codigoHtml*/ ConteudoHtml+= "body { background-color: transparent; font-family: Helvetica; font-size: 60px; margin:10px 0; padding:0; text-align:center; margin-left: 15px; margin-right: 15px; margin-top: 15px; }";
@@ -411,8 +489,8 @@ namespace Prodfy.ViewModels
                 #region Localizacao
                 string localTxt = string.Empty;
 
-                if (!string.IsNullOrEmpty(locais))
-                    localTxt += $"<ul style='font-size:70%; list-style-image: url((BASE64_IMG_SRC_LISTDOT_PONTO_CONTROLE));'>{localTxt}</ul>";
+                //if (!string.IsNullOrEmpty(locais))
+                //    localTxt += $"<ul style='font-size:70%; list-style-image: url((BASE64_IMG_SRC_LISTDOT_PONTO_CONTROLE));'>{localTxt}</ul>";
 
                 string cap = string.Empty;
 
