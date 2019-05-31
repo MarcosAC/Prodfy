@@ -1,5 +1,4 @@
-﻿using Prodfy.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Views
@@ -7,19 +6,17 @@ namespace Prodfy.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class PaginaHtmlIdentificacaoView : ContentPage
 	{
-		public PaginaHtmlIdentificacaoView ()
+		public PaginaHtmlIdentificacaoView (string codigoHtml)
 		{
 			InitializeComponent ();
 
-            BindingContext = new IdentificacaoViewModel();
+            NavigationPage.SetHasBackButton(this, false);
 
-            //BindingContext = new IdentificacaoViewModel();
+            var conteudoHtml = new HtmlWebViewSource();
 
-            //var browser = new WebView();
+            conteudoHtml.Html = @codigoHtml;
 
-            //var conteudoHtml = new HtmlWebViewSource();
-
-            //conteudoHtml.Html = @"";
-		}
+            IdentificacaoHtml.Source = conteudoHtml;
+        }
 	}
 }

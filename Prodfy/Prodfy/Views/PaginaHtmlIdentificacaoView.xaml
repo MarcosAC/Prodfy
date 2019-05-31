@@ -2,9 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Prodfy.Views.PaginaHtmlIdentificacaoView">
+    
     <ContentPage.Content>
-        <StackLayout>
-            <WebView Source="{Binding ConteudoHtml}" />
-        </StackLayout>
+        <WebView x:Name="IdentificacaoHtml"/>        
     </ContentPage.Content>
 </ContentPage>

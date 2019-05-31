@@ -47,17 +47,17 @@ namespace Prodfy.Services.Repository
                            " AND muda_id = " + "'" + mudaId + "'" +
                            " AND data_estaq = " + "'" + dataEstaq + "'" +
                            " ORDER BY lote, muda, data_estaq";
+
             try
             {
-                var dados =  dataBase._conexao.Query<Estaq>(query);
+                return dataBase._conexao.Query<Estaq>(query);
             }
             catch (Exception erro)
             {
                 await dialogService.AlertAsync("Erro", erro.ToString(), "Ok");
             }
 
-            return null;
-            
+            return dataBase._conexao.Query<Estaq>(query);            
         }
 
         public void Deletar()

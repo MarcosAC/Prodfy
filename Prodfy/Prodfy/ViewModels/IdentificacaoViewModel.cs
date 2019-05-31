@@ -37,31 +37,7 @@ namespace Prodfy.ViewModels
             estagioRepository = new EstagioRepository();
 
             CapturarCoordenadasGPS();
-        }
-
-        #region Variáveis ObterInformacoesLote/QtdeEstaq/Localizacao
-        //private string stat;
-        //private string msg;
-        //private int infoLoteId;
-        //private string infoLoteCodigo;
-        //private string infoLoteObejetivo;
-        //private string infoLoteCliente;
-        //private string infoLoteProduto;
-
-        //QtdeEstaq
-        //private double contadorQuantidade;
-        //private string estaqueamento = string.Empty;
-
-        //Localizacao
-        //private string locais = string.Empty;
-        #endregion
-
-        private string _conteudoHtml;
-        public string ConteudoHtml
-        {
-            get => _conteudoHtml;
-            set => SetProperty(ref _conteudoHtml, value);
-        }
+        }        
 
         private Command _titleViewBotaoVoltarCommand;
         public Command TitleViewBotaoVoltarCommand => 
@@ -197,7 +173,7 @@ namespace Prodfy.ViewModels
                     msg = infoLote[1],
                     infoLoteId = Convert.ToInt32(infoLote[2]),
                     infoLoteCodigo = infoLote[3],
-                    infoLoteObejetivo = infoLote[4],
+                    infoLoteObjetivo = infoLote[4],
                     infoLoteCliente = infoLote[5],
                     infoLoteProduto = infoLote[6],
                 };
@@ -205,8 +181,8 @@ namespace Prodfy.ViewModels
                 #endregion
 
                 #region Muda
-                var temp2 = mudaRepository.ObterInformacoesParaIdentificacao(dadosQR.qrMudaId);
-                var infoMuda = temp.Split('|');
+                var temp2 = mudaRepository.ObterInformacoesParaIdentificacao(Convert.ToInt32(dadosQR.qrMudaId));
+                var infoMuda = temp2.Split('|');
 
                 List<string> listaMuda = new List<string>();
 
@@ -275,236 +251,130 @@ namespace Prodfy.ViewModels
                         listaPontoControleEstaqueamento += $"<li>{pontoControleEstaqueamento.titulo}: <b style='color:#ff7b00;'>{quantidadePontoControleEstaqueamento}</b></li>";
                     }
 
-                    if (string.IsNullOrEmpty(listaPontoControleEstaqueamento))
+                    if (!string.IsNullOrEmpty(listaPontoControleEstaqueamento))
                         locais += $"<ul style='list-style-image: url((BASE64_IMG_SRC_LISTDOT_ESTAGIO));'>{listaPontoControleEstaqueamento}</ul>";
 
                     locais += "</li>";
                 }
                 #endregion
 
-                IsBusy = false;
+                #region Pagina HTML
+                string codigoHtml = string.Empty;
 
-                await navigationService.PushAsync(new PaginaHtmlIdentificacaoView());
-            }
-        }        
+                if (informacoesLote.stat == "1")
+                {
+                    #region Planta
+                    string plantaHtml = $"<b>{info_muda_nome_interno}";
 
-        private void CapturarCoordenadasGPS()
-        {
-            var request = new GeolocationRequest(GeolocationAccuracy.High);
-            var localizacao = Geolocation.GetLocationAsync(request);
-        }
+                    if (!string.IsNullOrEmpty(info_muda_especie))
+                        plantaHtml += $" - <small><i>{info_muda_especie}</i></small>";
+                    else if (!string.IsNullOrEmpty(info_muda_especie))
+                        plantaHtml += $" - <small><i>{info_muda_nome}</i></small>";
 
-        private async Task<string> ObterInformacoesLote(string loteCod)
-        {
-            var temp = loteRepositorio.ObterInformacoesParaIdentificacao(loteCod);
-            var infoLote = temp.Split('|');
+                    plantaHtml += "</b>";
 
-            if (infoLote[0] == "0")
-            {
-                await dialogService.AlertAsync("Etiqueta QR", "Lote indicado no QR inexistente! Sincronize o dispositivo.", "Ok");
-            }
+                    string origem = $"{infoMuda[8]}";
+                    string viveiro = $"{infoMuda[9]}";
+                    string canaletao = $"{infoMuda[10]}";
+                    string linha = $"{infoMuda[11]}";
+                    string coluna = $"{infoMuda[12]}";
+                    string qtde = $"{infoMuda[13]}";
+                    string local = $"Linha: {linha}, Coluna: {coluna}, Qtde: {qtde}";
 
-            var informacoesLote = new
-            {
-                stat = infoLote[0],
-                msg = infoLote[1],
-                infoLoteId = Convert.ToInt32(infoLote[2]),
-                infoLoteCodigo = infoLote[3],
-                infoLoteObejetivo = infoLote[4],
-                infoLoteCliente = infoLote[5],
-                infoLoteProduto = infoLote[6],
-            };
+                    if (!string.IsNullOrEmpty(plantaHtml))
+                    {
+                        //Origem
+                        plantaHtml = "<br/><b>Origem:</b> ";                        
+                        if (!string.IsNullOrEmpty(info_muda_origem))
+                            plantaHtml += $"<small>{info_muda_origem}</small>";
+                        else
+                            plantaHtml += $"<small><i style='color:#ff0000;'>Indefinido!</i></small>";
 
-            return informacoesLote.ToString();
-        }
+                        //Viveiro
+                        plantaHtml += "<br/><b>Viiro:</b> ";
+                        if (!string.IsNullOrEmpty(info_muda_viveiro))
+                            plantaHtml += $"<small>{info_muda_viveiro}</small>";
+                        else
+                            plantaHtml += "<small><i style='color:#ff0000;'>Indefinido!</i></small>";
 
-        private async Task<List<string>> ObterInformacoesMuda(int mudaId)
-        {            
-            var temp = mudaRepository.ObterInformacoesParaIdentificacao(mudaId);
-            var infoMuda = temp.Split('|');
+                        //Caneletao
+                        plantaHtml += "<br/><b>Caneletão:</b> ";
+                        if (!string.IsNullOrEmpty(info_muda_canaletao))
+                            plantaHtml += $"<small>{info_muda_canaletao}</small>";
+                        else
+                            plantaHtml += "<small><i style='color:#ff0000;'>Indefinido!</i></small>";
 
-            List<string> listaMuda = new List<string>();
+                        //Local
+                        plantaHtml += "<br/><b>Local:</b> <small>";
+                        plantaHtml += "Linha: ";
+                        if (!string.IsNullOrEmpty(info_muda_coluna))
+                            plantaHtml += $"<small>{info_muda_coluna}</small>";
+                        else
+                            plantaHtml += "<small><i style='color:#ff0000;'>Indefinido!</i></small>";
 
-            listaMuda = infoMuda.ToList<string>();
+                        plantaHtml += ", Coluna: ";
+                        if (!string.IsNullOrEmpty(info_muda_coluna))
+                            plantaHtml += $"<small>{info_muda_coluna}</small>";
+                        else
+                            plantaHtml += "<small><i style='color:#ff0000;'>Indefinido!</i></small>";
 
-            if (infoMuda[0] == "0")
-            {
-                await dialogService.AlertAsync("Etiqueta QR", "Muda indicada no QR inexistente! Sincronize o dispositivo.", "Ok");
-            }
+                        plantaHtml += ", Qtde: ";
+                        if (!string.IsNullOrEmpty(info_muda_qtde))
+                            plantaHtml += $"{info_muda_qtde}";
+                        else
+                            plantaHtml += "<small><i style='color:#ff0000;'>Indefinido!</i></small>";
 
-            return listaMuda;
+                        plantaHtml += "</small>";
+                    }
+                    #endregion
 
-            //var info_muda_id = infoMuda[2];
-            //var info_muda_nome_interno = infoMuda[3];
-            //var info_muda_nome = infoMuda[4];
-            //var info_muda_especie = infoMuda[5];
-            //var info_muda_origem = infoMuda[8];
-            //var info_muda_viveiro = infoMuda[9];
-            //var info_muda_canaletao = infoMuda[10];
-            //var info_muda_linha = infoMuda[11];
-            //var info_muda_coluna = infoMuda[12];
-            //var info_muda_qtde = infoMuda[13];
-        }  
-        
-        private async Task<List<Estaq>> ListaDatasEstaqueamentoColaborador(int infoLoteId, int mudaId, DateTime dataEstaq)
-        {
-            var listaEstaqueamento = await estaqRepository.ListaDadosEstaqueamento(infoLoteId, mudaId, dataEstaq);
+                    #region Lote
+                    string loteHtml = informacoesLote.infoLoteCodigo;
 
-            return listaEstaqueamento;
-        }
+                    if (!string.IsNullOrEmpty(informacoesLote.infoLoteProduto))
+                        loteHtml += $"(<small>{informacoesLote.infoLoteProduto}</small>)";
+                    #endregion
 
-        private async Task<List<Ponto_Controle>> ListaLocalPontoControle(int infoLoteId, int mudaId, DateTime dataEstaq)
-        {
-            List<Ponto_Controle> listaLocalPontoControle = await pontoControleRepository.ListaDadosPontoControle(infoLoteId, mudaId, dataEstaq);
+                    #region Quantida de Estaqueamento
+                    string quantidadeEstaquamento = Convert.ToString(contadorQuantidade);
 
-            return listaLocalPontoControle;
-        }
+                    string estaqs = string.Empty;
 
-        //private async Task<List<Estagio>> ListaLocalEstagio(int pontoControleId, int loteId, int mudaId, DateTime dataEstaq)
-        //{
-        //    List<Estagio> listaLocalEstagio = await estagioRepository.ListaLocalEstagio(pontoControleId, infoLoteId, mudaId, dataEstaq);            
+                    if (!string.IsNullOrEmpty(estaqueamentos))
+                        estaqs = $"<div class='font-size-70'><ul style='list-style-image: url((BASE64_IMG_SRC_LISTDOT2));';>{estaqueamentos}</ul></div>";
+                    #endregion                    
 
-        //    return listaLocalEstagio;
-        //}
+                    codigoHtml = "<html><head><title>Prodfy APP</title></head>";
+                    codigoHtml += "body { background-color: transparent; font-family: Helvetica; font-size: 60px; margin:10px 0; padding:0; text-align:center; margin-left: 15px; margin-right: 15px; margin-top: 15px; }";
+                    codigoHtml += ".info-table { width: 100%; } .info-table th { width: 60px; font-size: 60px; text-align: left; vertical-align: top; padding: 10px; color:black; white-space: nowrap; } .info-table td { width: 400px; font-size: 60px; text-align: left; vertical-align: top; padding: 10px; color:#0000ff; }";
+                    codigoHtml += ".font-size-70 { font-size: 70%; }";
+                    codigoHtml += "</style><body><center>";
+                    codigoHtml += "<table class='info-table'>";
+                    codigoHtml += $"<tr><th><b>Planta:</b></th></tr><tr><td><small>{plantaHtml}</small></td></tr>";
+                    codigoHtml += $"<tr><th><br/><b>Lote:</b></th></tr><tr><td>{loteHtml}</td></tr>";
+                    codigoHtml += $"<tr><th><br/><b>Objetivo:</b></th></tr><tr><td><small>{informacoesLote.infoLoteObjetivo}</small></td></tr>";
+                    codigoHtml += $"<tr><th><br/><b>Cliente:</b></th></tr><tr><td><small>{informacoesLote.infoLoteCliente}</small></td></tr>";
+                    codigoHtml += $"<tr><th><br/><b>Estaqueamento:</b></th></tr><tr><td>{Convert.ToDateTime(dadosQR.qrDataEstaq)} - <b style='color:#ff7b00;'>{quantidadeEstaquamento}</b> ((idade_estaq) Dias)</td></tr>";
+                    codigoHtml += $"<tr><th><br/><b>Colaboradores:</b></th></tr><tr><td>{estaqs}</td></tr>";
 
-        private string PaginaHtmlIdentificao(List<string> infoMuda, List<Estaq> quantidadeEstaqueamento, string infoLote)
-        {            
-            //string codigoHtml = string.Empty;
+                    #region Localização
+                    string localHtml = string.Empty;
 
-            var stat = infoLote[0].ToString();
-            var msg = infoLote[1];
+                    if (!string.IsNullOrEmpty(locais))
+                        localHtml += locais;
+                    #endregion
 
-            if (stat == "1")
-            {
-                var lote = infoLote[3].ToString();
-                var produto = infoLote[6].ToString();
-                var objetivo = infoLote[4];
-                var cliente = infoLote[5];
+                    string cap = string.Empty;
 
-                var info_muda_id = infoMuda[2];
-                var info_muda_nome_interno = infoMuda[3];
-                var info_muda_nome = infoMuda[4];
-                var info_muda_especie = infoMuda[5];
-                var info_muda_origem = infoMuda[8];
-                var info_muda_viveiro = infoMuda[9];
-                var info_muda_canaletao = infoMuda[10];
-                var info_muda_linha = infoMuda[11];
-                var info_muda_coluna = infoMuda[12];
-                var info_muda_qtde = infoMuda[13];
+                    if (string.IsNullOrEmpty(estaqs))
+                        cap = "<br/>";
 
-                #region Planta
-                string planta = $"<b>{info_muda_nome_interno}";
-
-                if (!string.IsNullOrEmpty(info_muda_especie))
-                    planta = planta + " - <small><i>{info_muda_especie}</li></small></b>";
+                    codigoHtml += $"<tr><th>{cap}<b>Localização:</b></th></tr><tr><td>{localHtml}</td></tr>";
+                    codigoHtml += "</table><br/><br/></center></body></html>";
+                }
                 else
-                    planta += " - <small><i>{info_muda_nome}</i></small></b>";
-
-                string local = $"Linha: {info_muda_linha}, Coluna: {info_muda_coluna}, Qtde: {info_muda_qtde}";
-
-                if (!string.IsNullOrEmpty(planta))
                 {
-                    //Origem
-                    planta = planta + "<br/><b>Origem:</b> ";
-                    if (!string.IsNullOrEmpty(info_muda_origem))
-                        planta += $"<small>{info_muda_origem}</small>";
-                    else
-                        planta += $"<small><i style='color:#ff0000;'>Indefinido!</i></small>";
-
-                    //Viveiro
-                    planta = "<br/><b>Viiro:</b> ";
-                    if (!string.IsNullOrEmpty(info_muda_viveiro))
-                        planta += $"<small>{info_muda_viveiro}</small>";
-                    else
-                        planta += "<small><i style='color:#ff0000;'>Indefinido!</i></small>";
-
-                    //Caneletao
-                    planta = "<br/><b>Caneletão:</b> ";
-                    if (!string.IsNullOrEmpty(info_muda_canaletao))
-                        planta += $"<small>{info_muda_canaletao}</small>";
-                    else
-                        planta += "<small><i style='color:#ff0000;'>Indefinido!</i></small>";
-
-                    //Local
-                    planta += "<br/><b>Local:</b> <small>";
-                    planta += "Linha: ";
-                    if (!string.IsNullOrEmpty(info_muda_coluna))
-                        planta += $"<small>{info_muda_coluna}</small>";
-                    else
-                        planta += "<small><i style='color:#ff0000;'>Indefinido!</i></small>";
-
-                    planta = ", Coluna: ";
-                    if (!string.IsNullOrEmpty(info_muda_coluna))
-                        planta += $"<small>{info_muda_coluna}</small>";
-                    else
-                        planta += "<small><i style='color:#ff0000;'>Indefinido!</i></small>";
-
-                    planta = "<br/><b>Caneletão:</b> ";
-                    if (!string.IsNullOrEmpty(info_muda_canaletao))
-                        planta += $"<small>{info_muda_canaletao}</small>";
-                    else
-                        planta += "<small><i style='color:#ff0000;'>Indefinido!</i></small>";
-                }
-                #endregion
-
-                #region Lote
-                string loteTxt = lote;
-
-                if (string.IsNullOrEmpty(produto))
-                {
-                    loteTxt += $" (<small>{produto}</small>)";
-                }
-                #endregion
-
-                #region QtdeEstaq
-                //string qtdeEstaq = Convert.ToString(contadorQuantidade);
-
-                List<Estaq> listaEstaqueamento = new List<Estaq>();
-
-                for (int i = 0; i < quantidadeEstaqueamento.Count; i++)
-                {
-                    listaEstaqueamento[i].qtde = quantidadeEstaqueamento[i].qtde;
-                    listaEstaqueamento[i].data_estaq = quantidadeEstaqueamento[i].data_estaq;
-                }
-
-                string estaqs = string.Empty;
-
-                //if (!string.IsNullOrEmpty(estaqueamento))
-                //    estaqs = $"<div class='font-size-70'><ul style='list-style-image: url(BASE64_IMG_SRC_LISTDOT2);';>(oESTAQS!)</ul></div>";
-
-                /*codigoHtml*/ ConteudoHtml= "<html><head><title>Prodfy APP</title></head>";
-                /*codigoHtml*/ ConteudoHtml+= "body { background-color: transparent; font-family: Helvetica; font-size: 60px; margin:10px 0; padding:0; text-align:center; margin-left: 15px; margin-right: 15px; margin-top: 15px; }";
-                /*codigoHtml*/ ConteudoHtml+= ".info-table { width: 100%; } .info-table th { width: 60px; font-size: 60px; text-align: left; vertical-align: top; padding: 10px; color:black; white-space: nowrap; } .info-table td { width: 400px; font-size: 60px; text-align: left; vertical-align: top; padding: 10px; color:#0000ff; }";
-                /*codigoHtml*/ ConteudoHtml+= ".font-size-70 { font-size: 70%; }";
-                /*codigoHtml*/ ConteudoHtml+= "</style><body><center>";
-                /*codigoHtml*/ ConteudoHtml+= "<table class='info-table'>";
-                /*codigoHtml*/ ConteudoHtml+= $"<tr><th><b>Planta:</b></th></tr><tr><td><small>{planta}</small></td></tr>";
-                /*codigoHtml*/ ConteudoHtml+= $"<tr><th><br/><b>Lote:</b></th></tr><tr><td>{loteTxt}</td></tr>";
-                /*codigoHtml*/ ConteudoHtml+= $"<tr><th><br/><b>Objetivo:</b></th></tr><tr><td><small>{objetivo}</small></td></tr>";
-                /*codigoHtml*/ ConteudoHtml+= $"<tr><th><br/><b>Cliente:</b></th></tr><tr><td><small>{cliente}</small></td></tr>";
-                /*codigoHtml*/ ConteudoHtml+= $"<tr><th><br/><b>Estaqueamento:</b></th></tr><tr><td>{quantidadeEstaqueamento[0].data_estaq} - <b style='color:#ff7b00;'>{quantidadeEstaqueamento[0].qtde}</b> ((idade_estaq) Dias)</td></tr>";
-                /*codigoHtml*/ ConteudoHtml += $"<tr><th><br/><b>Colaboradores:</b></th></tr><tr><td>{estaqs}</td></tr>";
-                #endregion
-
-                #region Localizacao
-                string localTxt = string.Empty;
-
-                //if (!string.IsNullOrEmpty(locais))
-                //    localTxt += $"<ul style='font-size:70%; list-style-image: url((BASE64_IMG_SRC_LISTDOT_PONTO_CONTROLE));'>{localTxt}</ul>";
-
-                string cap = string.Empty;
-
-                if (string.IsNullOrEmpty(estaqs))
-                    cap = "<br/>";
-
-                ConteudoHtml += $"<tr><th>{cap}<b>Localização:</b></th></tr><tr><td>{localTxt}</td></tr>";
-                ConteudoHtml += "</table><br/><br/></center></body></html>";
-
-                #endregion
-            }
-            else
-            {
-                ConteudoHtml = "<html>" +
+                    codigoHtml = "<html>" +
                                 "<head>" +
                                     $"<title>Prodfy APP</title>" +
                                 "</head>" +
@@ -525,7 +395,7 @@ namespace Prodfy.ViewModels
                                                          "padding: 10px;" +
                                                          "color:black;" +
                                                          "white-space: nowrap;" +
-                                                       "}"+
+                                                       "}" +
                                         ".info-table td { width: 400px;" +
                                                          "font-size: 60px;" +
                                                          "text-align: left;" +
@@ -536,11 +406,22 @@ namespace Prodfy.ViewModels
                                         ".colab_list { font-size: 70%; }" +
                                     "</style>" +
                                 "<body>" +
-                                    $"<center><h3 style='color: red;'>{msg}</h3></center>" +
+                                    $"<center><h3 style='color: red;'>{informacoesLote.msg}</h3></center>" +
                                 "</body>" +
                              "</html>";
+                }
+                #endregion
+
+                IsBusy = false;
+
+                await navigationService.PushAsync(new PaginaHtmlIdentificacaoView(codigoHtml));
             }
-            return ConteudoHtml;
+        }        
+
+        private void CapturarCoordenadasGPS()
+        {
+            var request = new GeolocationRequest(GeolocationAccuracy.High);
+            var localizacao = Geolocation.GetLocationAsync(request);
         }
     }
 }
