@@ -26,6 +26,8 @@ namespace Prodfy.ViewModels
 
         public IdentificacaoViewModel()
         {
+            Title = "Identificação";
+
             navigationService = new NavigationService();
             dialogService = new DialogService();
 
@@ -284,14 +286,14 @@ namespace Prodfy.ViewModels
                     if (!string.IsNullOrEmpty(plantaHtml))
                     {
                         //Origem
-                        plantaHtml = "<br/><b>Origem:</b> ";                        
+                        plantaHtml += "<br/><b>Origem:</b> ";                        
                         if (!string.IsNullOrEmpty(info_muda_origem))
                             plantaHtml += $"<small>{info_muda_origem}</small>";
                         else
                             plantaHtml += $"<small><i style='color:#ff0000;'>Indefinido!</i></small>";
 
                         //Viveiro
-                        plantaHtml += "<br/><b>Viiro:</b> ";
+                        plantaHtml += "<br/><b>Viveiro:</b> ";
                         if (!string.IsNullOrEmpty(info_muda_viveiro))
                             plantaHtml += $"<small>{info_muda_viveiro}</small>";
                         else
@@ -345,8 +347,9 @@ namespace Prodfy.ViewModels
                     #endregion                    
 
                     codigoHtml = "<html><head><title>Prodfy APP</title></head>";
-                    codigoHtml += "body { background-color: transparent; font-family: Helvetica; font-size: 60px; margin:10px 0; padding:0; text-align:center; margin-left: 15px; margin-right: 15px; margin-top: 15px; }";
-                    codigoHtml += ".info-table { width: 100%; } .info-table th { width: 60px; font-size: 60px; text-align: left; vertical-align: top; padding: 10px; color:black; white-space: nowrap; } .info-table td { width: 400px; font-size: 60px; text-align: left; vertical-align: top; padding: 10px; color:#0000ff; }";
+                    codigoHtml += "<style type='text/css'>";
+                    codigoHtml += "body { background-color: transparent; font-family: Helvetica; font-size: 18px; margin:10px 0; padding:0; text-align:center; margin-left: 15px; margin-right: 15px; margin-top: 15px; }";
+                    codigoHtml += ".info-table { width: 100%; } .info-table th { width: 60px; font-size: 18px; text-align: left; vertical-align: top; padding: 10px; color:black; white-space: nowrap; } .info-table td { width: 400px; font-size: 18px; text-align: left; vertical-align: top; padding: 10px; color:#0000ff; }";
                     codigoHtml += ".font-size-70 { font-size: 70%; }";
                     codigoHtml += "</style><body><center>";
                     codigoHtml += "<table class='info-table'>";
@@ -356,6 +359,7 @@ namespace Prodfy.ViewModels
                     codigoHtml += $"<tr><th><br/><b>Cliente:</b></th></tr><tr><td><small>{informacoesLote.infoLoteCliente}</small></td></tr>";
                     codigoHtml += $"<tr><th><br/><b>Estaqueamento:</b></th></tr><tr><td>{Convert.ToDateTime(dadosQR.qrDataEstaq)} - <b style='color:#ff7b00;'>{quantidadeEstaquamento}</b> ((idade_estaq) Dias)</td></tr>";
                     codigoHtml += $"<tr><th><br/><b>Colaboradores:</b></th></tr><tr><td>{estaqs}</td></tr>";
+                    codigoHtml += "</style><body><center>";
 
                     #region Localização
                     string localHtml = string.Empty;

@@ -15,7 +15,7 @@
                     </Label.GestureRecognizers>
                 </Label>
 
-                <Label Text="Identificação" 
+                <Label Text="{Binding Title}"
                        FontSize="20" 
                        TextColor="White" 
                        HorizontalOptions="CenterAndExpand" 

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Prodfy.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Views
@@ -12,9 +13,12 @@ namespace Prodfy.Views
 
             NavigationPage.SetHasBackButton(this, false);
 
-            var conteudoHtml = new HtmlWebViewSource();
+            BindingContext = new IdentificacaoViewModel();
 
-            conteudoHtml.Html = @codigoHtml;
+            var conteudoHtml = new HtmlWebViewSource
+            {
+                Html = @codigoHtml
+            };
 
             IdentificacaoHtml.Source = conteudoHtml;
         }
