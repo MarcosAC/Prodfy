@@ -10,7 +10,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using ZXing.Net.Mobile.Forms;
 
 namespace Prodfy.ViewModels
 {
