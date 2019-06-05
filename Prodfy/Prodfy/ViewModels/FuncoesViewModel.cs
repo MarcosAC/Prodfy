@@ -161,7 +161,7 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteIrPaginaIdentificacaoCommand()
         {
-            await _navigationService.PopAsync();
+            await _navigationService.PushAsync(new IdentificacaoView());
         }
 
         private Command _irPaginaAtividadeCommand;

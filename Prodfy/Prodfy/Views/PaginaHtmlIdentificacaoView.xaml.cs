@@ -1,12 +1,13 @@
 ﻿using Prodfy.ViewModels;
+using Rg.Plugins.Popup.Pages;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class PaginaHtmlIdentificacaoView : ContentPage
-	{
+	public partial class PaginaHtmlIdentificacaoView : PopupPage
+    {
 		public PaginaHtmlIdentificacaoView (string codigoHtml)
 		{
 			InitializeComponent ();
@@ -22,5 +23,5 @@ namespace Prodfy.Views
 
             IdentificacaoHtml.Source = conteudoHtml;
         }
-	}
+    }
 }

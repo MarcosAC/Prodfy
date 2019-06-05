@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:control="clr-namespace:Prodfy.Controls"
-             x:Class="Prodfy.Views.PaginaHtmlIdentificacaoView"
-             BackgroundImage="splash_bg4.png">
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:control="clr-namespace:Prodfy.Controls"
+                 x:Class="Prodfy.Views.PaginaHtmlIdentificacaoView"
+                 BackgroundImage="splash_bg4.png">
 
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal" Padding="0,0,20,0">
@@ -37,4 +38,4 @@
     <ContentPage.Content>
         <control:CustomWebView x:Name="IdentificacaoHtml"/>        
     </ContentPage.Content>
-</ContentPage>
+</pages:PopupPage>
