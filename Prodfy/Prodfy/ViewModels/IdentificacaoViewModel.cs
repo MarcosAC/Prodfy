@@ -2,6 +2,7 @@
 using Prodfy.Services;
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
+using Prodfy.Utils;
 using Prodfy.Views;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using ZXing.Net.Mobile.Forms;
 
 namespace Prodfy.ViewModels
 {
@@ -100,66 +102,6 @@ namespace Prodfy.ViewModels
                     return;
                 }
 
-                #region Código de geração de html antigo
-                /* try
-                 {
-                     infoLoteId = Convert.ToInt32(ObterInformacoesLote(dadosQR.qrLoteCod));
-                     //await ObterInformacoesMuda(Convert.ToInt32(dadosQR.qrMudaId));
-
-                     #region Gera Lista de Locais onde existe Lote/Muda/Estaq
-                     // Refatorar código
-                     List<Estaq> dadosEstaqueamento = await ListaDatasEstaqueamentoColaborador(infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
-
-                     #region Lista Colaboradores Responsaveis Por Estaqueamento de Lote/Muda/Estaq
-                     for (int i = 0; i < dadosEstaqueamento.Count; i++)
-                     {
-                         //List<Estaq> listaEstaqueamento = new List<Estaq>();                       
-
-                         if (dadosEstaqueamento[i].qtde != null)
-                         {
-                             contadorQuantidade = contadorQuantidade + Convert.ToDouble(dadosEstaqueamento[i].qtde);
-                             estaqueamento = $"<li>{dadosEstaqueamento[i].colab_estaq} - <b style='color:#ff7b00;'>{dadosEstaqueamento[i].qtde}</b><li>";
-                         }
-                     }
-                     #endregion
-
-                     List<Ponto_Controle> dadosLocalPontoControle = await ListaLocalPontoControle(infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
-
-                     List<Ponto_Controle> listaLocalPontoControle = new List<Ponto_Controle>();
-
-                     for (int i = 0; i < dadosLocalPontoControle.Count; i++)
-                     {
-                         string listaPontoControleEstagio = string.Empty;
-                         string pontoControleEstagioQuantidade = string.Empty;
-
-                         string titulo = listaLocalPontoControle[i].titulo;
-
-                         locais = $"<li>{titulo}: {listaPontoControleEstagio}</li>";
-
-                         List<Estagio> listaLocalEstagio = await estagioRepository.ListaLocalEstagio(listaLocalPontoControle[i].ponto_controle_id, infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
-
-                         for (int j = 0; j < listaLocalEstagio.Count; j++)
-                         {
-                             pontoControleEstagioQuantidade = await estagioRepository.LocalQuantidadeMudasNoEstagio(listaLocalPontoControle[i].ponto_controle_id, infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
-                             listaPontoControleEstagio = $"<li>{listaLocalEstagio[j].titulo}: <b style='color:#ff7b00;'>{pontoControleEstagioQuantidade}</b></li>";
-                         }
-
-                         if (string.IsNullOrEmpty(pontoControleEstagioQuantidade) && string.IsNullOrEmpty(listaPontoControleEstagio))
-                             locais = $"<li>{titulo}: <ul style='list-style-image: url((BASE64_IMG_SRC_LISTDOT_ESTAGIO));'>{listaPontoControleEstagio}</ul></li>";
-                     }
-                     #endregion
-
-                     PaginaHtmlIdentificao(await ObterInformacoesMuda(Convert.ToInt32(dadosQR.qrMudaId)), dadosEstaqueamento, await ObterInformacoesLote(dadosQR.qrLoteCod));
-
-                     await dialogService.AlertAsync("DEBUG", "Idetificação funciou :D", "Ok");
-                 }
-                 catch (Exception ex)
-                 {
-
-                     await dialogService.AlertAsync("DEBUG", "ERRO => "+ ex.ToString(), "Ok");
-                 }*/
-                #endregion
-
                 #region Lote
                 var temp = loteRepositorio.ObterInformacoesParaIdentificacao(dadosQR.qrLoteCod);
                 var infoLote = temp.Split('|');
@@ -244,7 +186,7 @@ namespace Prodfy.ViewModels
                 {
                     locais += $"{pontoControle.titulo}";
 
-                    // Lista Estagios do Ponnto de Controle onde existe Lote/Muda/Estaq
+                    // Lista Estagios do Ponto de Controle onde existe Lote/Muda/Estaq
                     List<Estagio> listaLocalEstagio = await estagioRepository.ListaLocalEstagio(pontoControle.ponto_controle_id, informacoesLote.infoLoteId, Convert.ToInt32(dadosQR.qrMudaId), Convert.ToDateTime(dadosQR.qrDataEstaq));
 
                     foreach (var pontoControleEstaqueamento in listaLocalEstagio)
@@ -273,7 +215,7 @@ namespace Prodfy.ViewModels
                     else if (!string.IsNullOrEmpty(info_muda_especie))
                         plantaHtml += $" - <small><i>{info_muda_nome}</i></small>";
 
-                    plantaHtml += "</b>";
+                    plantaHtml += "</b><br/>";
 
                     string origem = $"{infoMuda[8]}";
                     string viveiro = $"{infoMuda[9]}";
@@ -286,7 +228,7 @@ namespace Prodfy.ViewModels
                     if (!string.IsNullOrEmpty(plantaHtml))
                     {
                         //Origem
-                        plantaHtml += "<br/><b>Origem:</b> ";                        
+                        plantaHtml += "<br/><b>Origem:</b> ";
                         if (!string.IsNullOrEmpty(info_muda_origem))
                             plantaHtml += $"<small>{info_muda_origem}</small>";
                         else
@@ -334,7 +276,7 @@ namespace Prodfy.ViewModels
                     string loteHtml = informacoesLote.infoLoteCodigo;
 
                     if (!string.IsNullOrEmpty(informacoesLote.infoLoteProduto))
-                        loteHtml += $"(<small>{informacoesLote.infoLoteProduto}</small>)";
+                        loteHtml += $" (<small>{informacoesLote.infoLoteProduto}</small>)";
                     #endregion
 
                     #region Quantida de Estaqueamento
@@ -357,7 +299,7 @@ namespace Prodfy.ViewModels
                     codigoHtml += $"<tr><th><br/><b>Lote:</b></th></tr><tr><td>{loteHtml}</td></tr>";
                     codigoHtml += $"<tr><th><br/><b>Objetivo:</b></th></tr><tr><td><small>{informacoesLote.infoLoteObjetivo}</small></td></tr>";
                     codigoHtml += $"<tr><th><br/><b>Cliente:</b></th></tr><tr><td><small>{informacoesLote.infoLoteCliente}</small></td></tr>";
-                    codigoHtml += $"<tr><th><br/><b>Estaqueamento:</b></th></tr><tr><td>{Convert.ToDateTime(dadosQR.qrDataEstaq)} - <b style='color:#ff7b00;'>{quantidadeEstaquamento}</b> ((idade_estaq) Dias)</td></tr>";
+                    codigoHtml += $"<tr><th><br/><b>Estaqueamento:</b></th></tr><tr><td>{Convert.ToDateTime(dadosQR.qrDataEstaq).ToShortDateString()} - <b style='color:#ff7b00;'>{quantidadeEstaquamento}</b> ({CalculaIdade.CalcularPorDataIniciaDataFinal(Convert.ToDateTime(dadosQR.qrDataEstaq), DateTime.Now)} Dias)</td></tr>";
                     codigoHtml += $"<tr><th><br/><b>Colaboradores:</b></th></tr><tr><td>{estaqs}</td></tr>";
                     codigoHtml += "</style><body><center>";
 

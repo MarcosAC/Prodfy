@@ -25,6 +25,10 @@
                 <Label Style="{StaticResource styleBotaoTitleView}" 
                        Text="&#xf029;"
                        HorizontalOptions="End">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LeitorQRCommand}" />
+                    </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
         </StackLayout>
