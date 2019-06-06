@@ -12,22 +12,22 @@
                 <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                        <TapGestureRecognizer Command="{Binding TitleViewBotaoVoltarCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
 
-                <Label Text="Histórico" 
+                <Label Text="{Binding Title}" 
                        FontSize="20" 
                        TextColor="White" 
                        HorizontalOptions="CenterAndExpand" 
                        VerticalOptions="CenterAndExpand" />
 
                 <Label Style="{StaticResource styleBotaoTitleView}" 
-                       Text="&#xf029;"
+                       Text="&#xf055;"
                        HorizontalOptions="End">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                        <TapGestureRecognizer Command="{Binding IrParaCadastroHistoricoCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>

@@ -201,7 +201,7 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteIrPaginaHistoricoCommand()
         {
-            await _navigationService.PushAsync(new CadastroHistoricoView());
+            await _navigationService.PushAsync(new HistoricoView());
         }
 
         private Command _irPaginaLoteCommand;
