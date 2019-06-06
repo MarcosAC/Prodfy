@@ -363,14 +363,6 @@ namespace Prodfy.ViewModels
             }
         }
 
-        private Command _testePopUp;
-        public Command TestePopUp => _testePopUp ?? (_testePopUp = new Command(async () => await ExecuteTestePopUpCommand()));
-
-        private async Task ExecuteTestePopUpCommand()
-        {
-            await navigationService.PushAsync(new Teste());
-        }
-
         private void CapturarCoordenadasGPS()
         {
             var request = new GeolocationRequest(GeolocationAccuracy.High);
