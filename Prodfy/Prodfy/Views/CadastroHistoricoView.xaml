@@ -12,7 +12,7 @@
                 <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                        <TapGestureRecognizer Command="{Binding TitleViewBotaoVoltarCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
 
@@ -23,7 +23,7 @@
                    VerticalOptions="CenterAndExpand" />                
 
                 <Label Style="{StaticResource styleBotaoTitleView}" 
-                       Text="&#xf029;"
+                       Text="&#xf055;"
                        HorizontalOptions="End">
 
                     <Label.GestureRecognizers>
@@ -41,9 +41,9 @@
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
-                <Label Style="{StaticResource styleLabelFormulario}" Text="Título: (154)" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Título: (180)" />
                 <control:CustomEntry Style="{StaticResource styleEntryFormulario}" />                
-                <Label Style="{StaticResource styleLabelFormulario}" Text="Texto: (1924)" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Texto: (2000)" />
                 <control:CustomEditor Style="{StaticResource styleEditorFormulario}" />                
 
                 <StackLayout Orientation="Horizontal">
