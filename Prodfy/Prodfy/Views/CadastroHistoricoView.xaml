@@ -38,7 +38,11 @@
         <!--<ScrollView>-->
             <StackLayout Padding="20,10,20,20">
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                      ItemsSource="{Binding listaLotes}"
+                                      ItemDisplayBinding="{Binding codigo}"
+                                      SelectedItem="{Binding LoteSelecionado}"/>
+                
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Título: (180)" />

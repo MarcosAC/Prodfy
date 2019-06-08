@@ -122,7 +122,7 @@ namespace Prodfy.Services.Repository
 
         public List<Lote> ObterTodos()
         {
-            throw new NotImplementedException();
+            return dataBase._conexao.Table<Lote>().OrderBy(l => l.idLote).ToList();
         }
 
         public Lote ObterDadosPorId(string id)

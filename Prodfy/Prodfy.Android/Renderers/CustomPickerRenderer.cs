@@ -19,7 +19,7 @@ namespace Prodfy.Droid.Renderers
             base.OnElementChanged(e);
 
             if (Control != null)
-                Control.Background = new ColorDrawable(Android.Graphics.Color.Transparent);        
+                Control.Background = new ColorDrawable(Android.Graphics.Color.Transparent);
         }
     }
 }

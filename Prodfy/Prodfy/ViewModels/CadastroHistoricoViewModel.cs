@@ -1,6 +1,9 @@
-﻿using Prodfy.Services;
+﻿using Prodfy.Models;
+using Prodfy.Services;
 using Prodfy.Services.Dialog;
+using Prodfy.Services.Repository;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,13 +14,21 @@ namespace Prodfy.ViewModels
         private readonly INavigationService navigationService;
         private readonly IDialogService dialogService;
 
+        private readonly LoteRepository loteRepositorio;
+
         public CadastroHistoricoViewModel()
         {
             Title = "Histórico";
 
             navigationService = new NavigationService();
             dialogService = new DialogService();
+
+            loteRepositorio = new LoteRepository();
+
+            Lotes();
         }
+
+        public List<Lote> listaLotes { get; set; }
 
         private string _dispId;
         public string DispId
@@ -26,11 +37,21 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _dispId, value);
         }
 
-        private string _loteId;
-        public string LoteId
+        private Lote _loteSelecionado;
+        public Lote LoteSelecionado
         {
-            get => _loteId;
-            set => SetProperty(ref _loteId, value);
+            get => _loteSelecionado;
+            set
+            {
+                SetProperty(ref _loteSelecionado, value);
+            }
+        }
+
+        private string _lote;
+        private string Lote
+        {
+            get => _lote;
+            set => SetProperty(ref _lote, value);
         }
 
         private string _data;
@@ -90,6 +111,11 @@ namespace Prodfy.ViewModels
         private Task ExecuteSalvarCadastroCommand()
         {
             throw new NotImplementedException();
+        }
+
+        public List<Lote> Lotes()
+        {
+            return listaLotes = loteRepositorio.ObterTodos();
         }
     }
 }
