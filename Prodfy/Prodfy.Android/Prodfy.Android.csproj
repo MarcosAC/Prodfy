@@ -97,6 +97,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\BottomNavTabPageRenderer.cs" />
     <Compile Include="Renderers\CustomButtonRenderer.cs" />
+    <Compile Include="Renderers\CustomDatePickerRenderer.cs" />
     <Compile Include="Renderers\CustomEditorRenderer.cs" />
     <Compile Include="Renderers\CustomEntryRenderer.cs" />
     <Compile Include="Renderers\CustomPickerRenderer.cs" />
