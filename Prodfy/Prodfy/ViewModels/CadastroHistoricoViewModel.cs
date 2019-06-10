@@ -30,6 +30,15 @@ namespace Prodfy.ViewModels
 
         public List<Lote> listaLotes { get; set; }
 
+        private int contadorTitulo = 180;
+        private int contatorTexto = 2000;
+
+        private string _contagemCaracteresTitulo;
+        public string ContagemCaracteresTitulo { get => _contagemCaracteresTitulo = $"Título: {contadorTitulo}"; }
+
+        private string _contagemCaracteresTexto;
+        public string ContagemCaracteresTexto { get => _contagemCaracteresTexto = $"Texto: {contatorTexto}"; }
+
         private string _dispId;
         public string DispId
         {
@@ -41,10 +50,7 @@ namespace Prodfy.ViewModels
         public Lote LoteSelecionado
         {
             get => _loteSelecionado;
-            set
-            {
-                SetProperty(ref _loteSelecionado, value);
-            }
+            set => SetProperty(ref _loteSelecionado, value);
         }
 
         private string _lote;
@@ -65,7 +71,30 @@ namespace Prodfy.ViewModels
         public string Titulo
         {
             get => _titulo;
-            set => SetProperty(ref _titulo, value);
+            set
+            {
+                SetProperty(ref _titulo, value);
+
+                //foreach (char item in _titulo)
+                //{
+                //    var contadorAtual = _titulo.Length;
+
+                //    var contadorAntigo = contadorAtual;
+
+                //    if (contadorAtual == _titulo.Length - 1)
+                //    {
+                //        contadorTitulo += 1;
+                //    }
+                //    contadorTitulo -= 1;
+                //    OnPropertyChanged(nameof(ContagemCaracterTitulo));
+                //}
+
+                //if (contadorTitulo >= contadorTitulo)
+                //{
+                //    contadorTitulo -= 1;
+                //    OnPropertyChanged(nameof(ContagemCaracterTitulo));
+                //}            
+            }
         }
 
         private string _texto;
