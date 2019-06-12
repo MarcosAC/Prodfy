@@ -15,5 +15,18 @@ namespace Prodfy.Views
 
             BindingContext = new HistoricoViewModel();
         }
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            BindingContext = new HistoricoViewModel();
+        }
+
+        public HistoricoViewModel ViewModel
+        {
+            get {return BindingContext as HistoricoViewModel; }
+            set { BindingContext = value; }
+        }
+    }
 }

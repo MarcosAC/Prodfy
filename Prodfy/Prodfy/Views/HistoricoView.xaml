@@ -36,12 +36,42 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <!--<control:BarraPesquisa />
-            <StackLayout Style="{StaticResource baseStyleStackLayout}">
-            </StackLayout>-->
             <Frame Style="{StaticResource styleFrameSearchBar}">
                 <control:CustomSearchBar Style="{StaticResource styleSearchBar}" />
             </Frame>
+
+            <ListView ItemsSource="{Binding ListaDeHistoricos}" 
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Style="{StaticResource styleFrameLista}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="DATA:" Style="{StaticResource styleLabelLista}" Grid.Row="0" Grid.Column="0" />
+                                    <Label Text="LOTE:" Style="{StaticResource styleLabelLista}" Grid.Row="1" Grid.Column="0" />
+                                    <Label Text="TÍTULO:" Style="{StaticResource styleLabelLista}" Grid.Row="2" Grid.Column="0" />
+
+                                    <Label Text="{Binding Data}" FontSize="16" TextColor="White" Grid.Row="0" Grid.Column="1" />
+                                    <Label Text="{Binding Codigo}" FontSize="16" TextColor="White" Grid.Row="1" Grid.Column="1" />
+                                    <Label Text="{Binding Titulo}" FontSize="16" TextColor="White" Grid.Row="2" Grid.Column="1" />
+                                </Grid>
+                            </Frame>                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

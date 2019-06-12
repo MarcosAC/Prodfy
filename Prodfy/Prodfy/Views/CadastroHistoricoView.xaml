@@ -17,10 +17,10 @@
                 </Label>
 
                 <Label Text="Histórico" 
-                   FontSize="20" 
-                   TextColor="White" 
-                   HorizontalOptions="CenterAndExpand" 
-                   VerticalOptions="CenterAndExpand" />                
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" />                
 
                 <Label Style="{StaticResource styleBotaoTitleView}" 
                        Text="&#xf055;"
@@ -46,7 +46,7 @@
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
                 <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" />
 
-                <Label Style="{StaticResource styleLabelFormulario}" Text="{Binding ContagemCaracterTitulo}" />
+                <Label Style="{StaticResource styleLabelFormulario}" Text="{Binding ContagemCaracteresTitulo}" />
                 <control:CustomEntry Style="{StaticResource styleEntryFormulario}" 
                                      MaxLength="180"
                                      Text="{Binding Titulo}" />
@@ -58,7 +58,7 @@
 
                 <StackLayout Orientation="Horizontal">
                 <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
-                <control:CustomButton Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+                <control:CustomButton Style="{StaticResource styleButtonSalvar}" Text="Salvar" Command="{Binding SalvarCadastroCommand}"/>
                 </StackLayout>
             </StackLayout>
         <!--</ScrollView>-->

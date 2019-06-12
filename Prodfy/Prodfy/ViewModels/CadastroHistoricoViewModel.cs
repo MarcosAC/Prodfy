@@ -15,6 +15,7 @@ namespace Prodfy.ViewModels
         private readonly IDialogService dialogService;
 
         private readonly LoteRepository loteRepositorio;
+        private readonly HistoricoRepository historicoRepositorio;
 
         public CadastroHistoricoViewModel()
         {
@@ -24,6 +25,7 @@ namespace Prodfy.ViewModels
             dialogService = new DialogService();
 
             loteRepositorio = new LoteRepository();
+            historicoRepositorio = new HistoricoRepository();
 
             Lotes();
         }
@@ -31,11 +33,10 @@ namespace Prodfy.ViewModels
         public List<Lote> listaLotes { get; set; }
 
         private int contadorTitulo = 180;
-        private int contatorTexto = 2000;
-
         private string _contagemCaracteresTitulo;
         public string ContagemCaracteresTitulo { get => _contagemCaracteresTitulo = $"Título: {contadorTitulo}"; }
 
+        private int contatorTexto = 2000;
         private string _contagemCaracteresTexto;
         public string ContagemCaracteresTexto { get => _contagemCaracteresTexto = $"Texto: {contatorTexto}"; }
 
@@ -137,12 +138,41 @@ namespace Prodfy.ViewModels
         public Command SalvarCadastroCommand =>
             _salvarCadastroCommand ?? (_salvarCadastroCommand = new Command(async () => await ExecuteSalvarCadastroCommand()));
 
-        private Task ExecuteSalvarCadastroCommand()
+        private async Task ExecuteSalvarCadastroCommand()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var historico = new Historico
+                {
+                    lote_id = LoteSelecionado.lote_id,
+                    data = Convert.ToDateTime(Data),
+                    titulo = Titulo,
+                    texto = Texto
+                };
+
+                bool historicoAceite = await dialogService.AlertAsync("HISTÓRICO", "Deseja salvar os dados informados?", "Sim", "Não");
+
+                if (historicoAceite)
+                {
+                    try
+                    {
+                        historicoRepositorio.Adicionar(historico);
+                        await dialogService.AlertAsync("HISTÓRICO", "Dados salvos com sucesso!", "Ok");
+                    }
+                    catch (Exception)
+                    {
+                        await dialogService.AlertAsync("HISTÓRICO", "Erro ao salvar dados!", "Ok");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
-        public List<Lote> Lotes()
+        private List<Lote> Lotes()
         {
             return listaLotes = loteRepositorio.ObterTodos();
         }
