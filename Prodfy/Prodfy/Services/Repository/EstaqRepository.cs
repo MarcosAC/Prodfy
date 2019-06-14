@@ -99,5 +99,10 @@ namespace Prodfy.Services.Repository
         {
             throw new NotImplementedException();
         }
+
+        public void Deletar(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

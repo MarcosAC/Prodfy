@@ -28,5 +28,13 @@ namespace Prodfy.Views
             get {return BindingContext as HistoricoViewModel; }
             set { BindingContext = value; }
         }
+
+        private void OnItemSelect(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem != null)
+                ViewModel.SelecionarHistoricoCommand.Execute(e.SelectedItem);
+
+            lisViewHistoricos.SelectedItem = null;
+        }
     }
 }

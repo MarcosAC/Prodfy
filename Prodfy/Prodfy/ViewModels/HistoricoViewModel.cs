@@ -43,6 +43,18 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteIrParaCadastroHistoricoCommand() => await navigationService.PushAsync(new CadastroHistoricoView());
 
+        private Command _selecionarHistoricoCommand;
+        public Command SelecionarHistoricoCommand =>
+            _selecionarHistoricoCommand ?? (_selecionarHistoricoCommand = new Command<ListaHistorico>(async h => await ExecuteSelecionarHistoricoCommand(h)));
+
+        private async Task ExecuteSelecionarHistoricoCommand(ListaHistorico historicoSelecionado)
+        {
+            if (historicoSelecionado == null)
+                return;
+
+            await dialogService.AlertAsync("LOTE", "Deseja apagar este registro ?", "Sim", "Não");
+        }
+
         private List<ListaHistorico> Historicos()
         {
             List<ListaHistorico> listaDadosHistoricos = new List<ListaHistorico>();

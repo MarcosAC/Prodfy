@@ -40,7 +40,10 @@
                 <control:CustomSearchBar Style="{StaticResource styleSearchBar}" />
             </Frame>
 
-            <ListView ItemsSource="{Binding ListaDeHistoricos}" 
+            <ListView x:Name="lisViewHistoricos"
+                      ItemSelected="OnItemSelect"
+                      ItemsSource="{Binding ListaDeHistoricos}"                      
+                      SelectedItem="{Binding SelecionarHistorico, Mode=TwoWay}"
                       HasUnevenRows="True"
                       SeparatorVisibility="None">
                 <ListView.ItemTemplate>
