@@ -52,7 +52,7 @@ namespace Prodfy.ViewModels
             if (historicoSelecionado == null)
                 return;
 
-            bool deleteAceite = await dialogService.AlertAsync("LOTE", "Deseja apagar este registro ?", "Sim", "Não");
+            bool deleteAceite = await dialogService.AlertAsync($"LOTE {historicoSelecionado.Codigo}", "Deseja apagar este registro ?", "Sim", "Não");
 
             if (deleteAceite)
             {
