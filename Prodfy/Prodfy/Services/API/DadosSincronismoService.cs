@@ -95,14 +95,14 @@ namespace Prodfy.Services.API
 
             string dados = JsonConvert.SerializeObject(dadosSincrismo, Formatting.Indented); 
 
-            string dadosParaUpload = "{" + dados + "}";            
+            //string dadosParaUpload = "{" + dados + "}";            
 
             FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("l", idioma),
                 new KeyValuePair<string, string>("v", Contantes.VERSAO_APP),
                 new KeyValuePair<string, string>("a", "u"),
                 new KeyValuePair<string, string>("k", appKey),
-                new KeyValuePair<string, string>("d", dadosParaUpload)
+                new KeyValuePair<string, string>("d", dados)
             });
 
             try

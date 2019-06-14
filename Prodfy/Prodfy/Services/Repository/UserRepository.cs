@@ -27,7 +27,7 @@ namespace Prodfy.Services.Repository
             }
         }
                
-        public void Deletar()
+        public void DeletarTodos()
         {
             _dataBase._conexao.Execute("Delete From User");
         }

@@ -63,7 +63,7 @@
                                     <Label Text="LOTE:" Style="{StaticResource styleLabelLista}" Grid.Row="1" Grid.Column="0" />
                                     <Label Text="TÍTULO:" Style="{StaticResource styleLabelLista}" Grid.Row="2" Grid.Column="0" />
 
-                                    <Label Text="{Binding Data}" FontSize="16" TextColor="White" Grid.Row="0" Grid.Column="1" />
+                                    <Label Text="{Binding Data, StringFormat='{0:dd/MM/yyyy}'}" FontSize="16" TextColor="White" Grid.Row="0" Grid.Column="1" />
                                     <Label Text="{Binding Codigo}" FontSize="16" TextColor="White" Grid.Row="1" Grid.Column="1" />
                                     <Label Text="{Binding Titulo}" FontSize="16" TextColor="White" Grid.Row="2" Grid.Column="1" />
                                 </Grid>

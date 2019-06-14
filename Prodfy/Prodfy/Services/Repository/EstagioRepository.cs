@@ -117,7 +117,7 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public void Deletar()
+        public void DeletarTodos()
         {
             throw new NotImplementedException();
         }

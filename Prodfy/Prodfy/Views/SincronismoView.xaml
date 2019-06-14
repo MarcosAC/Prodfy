@@ -76,21 +76,21 @@
                             Labels Dados 
                         -->
                         <!-- Atividades -->
-                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="7" Text="{Binding IndAtv}" />
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="0" Text="{Binding IndAtv}" />
                         <!-- Invetários -->
-                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="0" Text="{Binding IndInv}" />
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="1" Text="{Binding IndInv}" />
                         <!-- Movimentações -->
-                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="3" Text="{Binding IndMov}" />
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="2" Text="{Binding IndMov}" />
                         <!-- Perdas -->
-                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="1" Text="{Binding IndPer}" />
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="3" Text="{Binding IndPer}" />
                         <!-- Histórico -->
-                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="2" Text="{Binding IndHist}" />                        
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="4" Text="{Binding IndHist}" />                        
                         <!-- Ocorrências -->
-                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="4" Text="{Binding IndOco}" />
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="5" Text="{Binding IndOco}" />
                         <!-- Medições -->
-                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="5" Text="{Binding IndMnt}" />
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="6" Text="{Binding IndMnt}" />
                         <!-- Expedições -->
-                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="6" Text="{Binding IndExp}" />
+                        <Label Style="{StaticResource styleLabelDadosSincronismo}" Grid.Column="1" Grid.Row="7" Text="{Binding IndExp}" />
                     </Grid>
 
                     <control:CustomButton Style="{StaticResource styleButton}"

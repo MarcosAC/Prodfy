@@ -35,7 +35,7 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public void Deletar()
+        public void DeletarTodos()
         {
             _dataBase._conexao.Execute("Delete From Atividade");
         }

@@ -105,7 +105,7 @@ namespace Prodfy.Services.Repository
             return dados;
         }
 
-        public void Deletar()
+        public void DeletarTodos()
         {
             throw new NotImplementedException();
         }

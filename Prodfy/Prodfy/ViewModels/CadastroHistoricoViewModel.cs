@@ -61,10 +61,10 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _lote, value);
         }
 
-        private string _data;
-        public string Data
+        private DateTime _data;
+        public DateTime Data
         {
-            get => _data;
+            get => _data = DateTime.Today;
             set => SetProperty(ref _data, value);
         }
 
@@ -145,7 +145,7 @@ namespace Prodfy.ViewModels
                 var historico = new Historico
                 {
                     lote_id = LoteSelecionado.lote_id,
-                    data = Convert.ToDateTime(Data),
+                    data = Data,
                     titulo = Titulo,
                     texto = Texto
                 };

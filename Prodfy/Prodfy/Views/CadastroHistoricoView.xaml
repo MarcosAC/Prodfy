@@ -44,7 +44,7 @@
                                       SelectedItem="{Binding LoteSelecionado}"/>
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
-                <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding SelectedDate}"/>
 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="{Binding ContagemCaracteresTitulo}" />
                 <control:CustomEntry Style="{StaticResource styleEntryFormulario}" 

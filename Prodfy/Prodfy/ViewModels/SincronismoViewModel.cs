@@ -181,49 +181,49 @@ namespace Prodfy.ViewModels
                             if (dadosResponse.ind_atv != null) // Atividade
                             {
                                 if (dadosResponse.ind_atv == 1)
-                                    atividadeRepository.Deletar();
+                                    atividadeRepository.DeletarTodos();
                             }
 
                             if (dadosResponse.ind_mov != null) // Evolução
                             {
                                 if (dadosResponse.ind_mov == 1)
-                                    movimentacaoRepository.Deletar();
+                                    movimentacaoRepository.DeletarTodos();
                             }
 
                             if (dadosResponse.ind_exp != null) // Expedição
                             {
                                 if (dadosResponse.ind_exp == 1)
-                                    expedicaoRepository.Deletar();
+                                    expedicaoRepository.DeletarTodos();
                             }
 
                             if (dadosResponse.ind_hist != null) // Historico
                             {
                                 if (dadosResponse.ind_hist == 1)
-                                    historicoRepository.Deletar();
+                                    historicoRepository.DeletarTodos();
                             }
 
                             if (dadosResponse.ind_inv != null) // Inventario
                             {
                                 if (dadosResponse.ind_inv == 1)
-                                    inventarioRepository.Deletar();
+                                    inventarioRepository.DeletarTodos();
                             }
 
                             if (dadosResponse.ind_mnt != null) // Medição
                             {
                                 if (dadosResponse.ind_mnt == 1)
-                                    medicaoRepository.Deletar();
+                                    medicaoRepository.DeletarTodos();
                             }
 
                             if (dadosResponse.ind_oco != null) // Ocorrencia
                             {
                                 if (dadosResponse.ind_oco == 1)
-                                    ocorrenciaRepository.Deletar();
+                                    ocorrenciaRepository.DeletarTodos();
                             }
 
                             if (dadosResponse.ind_per != null) // Perda
                             {
                                 if (dadosResponse.ind_per == 1)
-                                    perdaRepository.Deletar();
+                                    perdaRepository.DeletarTodos();
                             }
 
                             #endregion

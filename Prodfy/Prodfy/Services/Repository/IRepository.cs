@@ -6,7 +6,7 @@ namespace Prodfy.Services.Repository
     public interface IRepository<T> where T : class
     {
         void Adicionar(T entidade);
-        void Deletar();
+        void DeletarTodos();
         void Editar(T entidade);
         string ObterInformacoesParaIdentificacao(int id);
         string ObterInformacoesParaIdentificacao(string codigo);

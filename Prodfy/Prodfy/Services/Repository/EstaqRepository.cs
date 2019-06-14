@@ -60,7 +60,7 @@ namespace Prodfy.Services.Repository
             return dataBase._conexao.Query<Estaq>(query);            
         }
 
-        public void Deletar()
+        public void DeletarTodos()
         {
             throw new NotImplementedException();
         }
