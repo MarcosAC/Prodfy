@@ -52,7 +52,20 @@ namespace Prodfy.ViewModels
             if (historicoSelecionado == null)
                 return;
 
-            await dialogService.AlertAsync("LOTE", "Deseja apagar este registro ?", "Sim", "Não");
+            bool deleteAceite = await dialogService.AlertAsync("LOTE", "Deseja apagar este registro ?", "Sim", "Não");
+
+            if (deleteAceite)
+            {
+                try
+                {
+                    historicoRepositorio.Deletar(historicoSelecionado.IdHistorico);
+                    await dialogService.AlertAsync("", $"Histórico item {historicoSelecionado.IdHistorico} DELETADO!!", "Ok");
+                }
+                catch (System.Exception)
+                {
+                    await dialogService.AlertAsync("", $"Erro ao deletar item {historicoSelecionado.IdHistorico}", "Ok");
+                }
+            }
         }
 
         private List<ListaHistorico> Historicos()
