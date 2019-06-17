@@ -62,7 +62,7 @@ namespace Prodfy.Services.Repository
 
         public void DeletarTodos()
         {
-            throw new NotImplementedException();
+            dataBase._conexao.DeleteAll<Estaq>();
         }
 
         public void Editar(Estaq entidade)

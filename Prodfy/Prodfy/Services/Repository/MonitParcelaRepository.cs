@@ -39,7 +39,7 @@ namespace Prodfy.Services.Repository
 
         public void DeletarTodos()
         {
-            throw new NotImplementedException();
+            dataBase._conexao.DeleteAll<Monit_Parcela>();
         }
 
         public void Editar(Monit_Parcela entidade)

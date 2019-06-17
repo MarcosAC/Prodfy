@@ -44,7 +44,7 @@ namespace Prodfy.Services.Repository
 
         public void DeletarTodos()
         {
-            throw new NotImplementedException();
+            dataBase._conexao.DeleteAll<Monit_Cod_Arv>();
         }
 
         public void Editar(Monit_Cod_Arv entidade)

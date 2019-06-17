@@ -119,7 +119,7 @@ namespace Prodfy.Services.Repository
 
         public void DeletarTodos()
         {
-            throw new NotImplementedException();
+            dataBase._conexao.DeleteAll<Estagio>();
         }
 
         public void Editar(Estagio entidade)

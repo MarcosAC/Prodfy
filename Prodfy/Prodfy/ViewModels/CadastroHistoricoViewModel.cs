@@ -27,6 +27,8 @@ namespace Prodfy.ViewModels
             loteRepositorio = new LoteRepository();
             historicoRepositorio = new HistoricoRepository();
 
+            loteRepositorio.ListaLotes();
+
             Lotes();
         }
 

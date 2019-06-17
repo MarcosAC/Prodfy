@@ -107,7 +107,7 @@ namespace Prodfy.Services.Repository
 
         public void DeletarTodos()
         {
-            throw new NotImplementedException();
+            dataBase._conexao.DeleteAll<Lote>();
         }
 
         public void Editar(Lote entidade)

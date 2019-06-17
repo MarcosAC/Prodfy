@@ -29,6 +29,7 @@ namespace Prodfy.ViewModels
             historicoRepositorio = new HistoricoRepository();
 
             ListaDeHistoricos = new ObservableCollection<ListaHistorico>(Historicos());
+            Historicos().Clear();
         }
 
         private Command _titleViewBotaoVoltarCommand;

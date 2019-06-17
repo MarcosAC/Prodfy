@@ -85,7 +85,7 @@ namespace Prodfy.Services.Repository
 
         public void DeletarTodos()
         {
-            throw new NotImplementedException();
+            dataBase._conexao.DeleteAll<Ponto_Controle>();
         }
 
         public void Editar(Ponto_Controle entidade)
