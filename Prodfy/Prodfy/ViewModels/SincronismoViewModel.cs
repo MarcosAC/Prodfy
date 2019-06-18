@@ -234,7 +234,7 @@ namespace Prodfy.ViewModels
                             #region Dados Sincronia
 
                             // Produto
-                            if (_dadosSincronismo.produto.Length >= 0)
+                            if (_dadosSincronismo.produto.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -260,7 +260,7 @@ namespace Prodfy.ViewModels
                             }
 
                             // Objetivo
-                            if (_dadosSincronismo.objetivo.Length >= 0)
+                            if (_dadosSincronismo.objetivo.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -286,7 +286,7 @@ namespace Prodfy.ViewModels
                             }
 
                             // Ponto Controle
-                            if (_dadosSincronismo.ponto_controle.Length >= 0)
+                            if (_dadosSincronismo.ponto_controle.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -318,7 +318,7 @@ namespace Prodfy.ViewModels
                             }
 
                             //Estagio
-                            if (_dadosSincronismo.estagio.Length >= 0)
+                            if (_dadosSincronismo.estagio.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -351,7 +351,7 @@ namespace Prodfy.ViewModels
                             }
 
                             //Muda
-                            if (_dadosSincronismo.muda.Length >= 0)
+                            if (_dadosSincronismo.muda.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -384,57 +384,39 @@ namespace Prodfy.ViewModels
 
                                     mudaRepository.Adicionar(muda);
                                 }
-
                             }
 
                             // Lote
-                            for (int i = 0; i < _dadosSincronismo.lote.Length; i++)
+                            if (_dadosSincronismo.lote.Length > 0)
                             {
-                                lote = new Lote
+                                int deletarTodos = 0;
+
+                                for (int i = 0; i < _dadosSincronismo.lote.Length; i++)
                                 {
-                                    idLote = int.Parse(_dadosSincronismo.lote[i].idLote.ToString()),
-                                    lote_id = _dadosSincronismo.lote[i].lote_id,
-                                    produto_id = _dadosSincronismo.lote[i].produto_id,
-                                    codigo = _dadosSincronismo.lote[i].codigo,
-                                    objetivo = _dadosSincronismo.lote[i].objetivo,
-                                    cliente = _dadosSincronismo.lote[i].cliente,
-                                    last_update = _dadosSincronismo.lote[i].last_update,
-                                    ind_sinc = int.Parse(_dadosSincronismo.lote[i].ind_sinc.ToString())
-                                };
+                                    lote = new Lote
+                                    {
+                                        idLote = int.Parse(_dadosSincronismo.lote[i].idLote.ToString()),
+                                        lote_id = _dadosSincronismo.lote[i].lote_id,
+                                        produto_id = _dadosSincronismo.lote[i].produto_id,
+                                        codigo = _dadosSincronismo.lote[i].codigo,
+                                        objetivo = _dadosSincronismo.lote[i].objetivo,
+                                        cliente = _dadosSincronismo.lote[i].cliente,
+                                        last_update = _dadosSincronismo.lote[i].last_update,
+                                        ind_sinc = int.Parse(_dadosSincronismo.lote[i].ind_sinc.ToString())
+                                    };
 
-                                loteRepository.Adicionar(lote);
-                                
-                                //if (_dadosSincronismo.lote.Length > 0)
-                                //{
-                                //    int deletarTodos = 0;
+                                    if (deletarTodos == 0)
+                                    {
+                                        loteRepository.DeletarTodos();
+                                        deletarTodos = 1;
+                                    }
 
-                                //    for (int i = 0; i < _dadosSincronismo.lote.Length; i++)
-                                //    {
-                                //        lote = new Lote
-                                //        {
-                                //            idLote = int.Parse(_dadosSincronismo.lote[i].idLote.ToString()),
-                                //            lote_id = _dadosSincronismo.lote[i].lote_id,
-                                //            produto_id = _dadosSincronismo.lote[i].produto_id,
-                                //            codigo = _dadosSincronismo.lote[i].codigo,
-                                //            objetivo = _dadosSincronismo.lote[i].objetivo,
-                                //            cliente = _dadosSincronismo.lote[i].cliente,
-                                //            last_update = _dadosSincronismo.lote[i].last_update,
-                                //            ind_sinc = int.Parse(_dadosSincronismo.lote[i].ind_sinc.ToString())
-                                //        };
-
-                                //        if (deletarTodos == 0)
-                                //        {
-                                //            loteRepository.DeletarTodos();
-                                //            deletarTodos = 1;
-                                //        }
-
-                                //        loteRepository.Adicionar(lote);
-                                //    }
-                                //
+                                    loteRepository.Adicionar(lote);
+                                }
                             }
 
-                                // Perda Motivo
-                                if (_dadosSincronismo.perda_motivo.Length >= 0)
+                            // Perda Motivo
+                            if (_dadosSincronismo.perda_motivo.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -451,7 +433,7 @@ namespace Prodfy.ViewModels
 
                                     if (deletarTodos == 0)
                                     {
-                                        loteRepository.DeletarTodos();
+                                        perdaMotivoRepository.DeletarTodos();
                                         deletarTodos = 1;
                                     }
 
@@ -460,7 +442,7 @@ namespace Prodfy.ViewModels
                             }
 
                             // Monit
-                            if (_dadosSincronismo.monit.Length >= 0)
+                            if (_dadosSincronismo.monit.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -505,7 +487,7 @@ namespace Prodfy.ViewModels
                             }
 
                             // Monit_Cod_Arv
-                            if (_dadosSincronismo.monit_cod_arv.Length >= 0)
+                            if (_dadosSincronismo.monit_cod_arv.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -532,7 +514,7 @@ namespace Prodfy.ViewModels
                             }
 
                             // Monit_Parcela
-                            if (_dadosSincronismo.monit_parcela.Length >= 0)
+                            if (_dadosSincronismo.monit_parcela.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -557,9 +539,9 @@ namespace Prodfy.ViewModels
                                     monitParcelaRepository.Adicionar(monit_parcela);
                                 }
                             }
-
+                            
                             // Colaborador
-                            if (_dadosSincronismo.colaborador.Length >= 0)
+                            if (_dadosSincronismo.colaborador.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -586,7 +568,7 @@ namespace Prodfy.ViewModels
                             }
 
                             // Lista_Atv
-                            if (_dadosSincronismo.lista_atv.Length >= 0)
+                            if (_dadosSincronismo.lista_atv.Length > 0 )
                             {
                                 int deletarTodos = 0;
 
@@ -616,7 +598,7 @@ namespace Prodfy.ViewModels
                             }
 
                             // Qualidade
-                            if (_dadosSincronismo.qualidade.Length >= 0)
+                            if (_dadosSincronismo.qualidade.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -643,7 +625,7 @@ namespace Prodfy.ViewModels
                             }
 
                             // Exped_Dest
-                            if (_dadosSincronismo.exped_dest.Length >= 0)
+                            if (_dadosSincronismo.exped_dest.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -670,7 +652,7 @@ namespace Prodfy.ViewModels
                             }
 
                             // Estaq
-                            if (_dadosSincronismo.estaq.Length >= 0)
+                            if (_dadosSincronismo.estaq.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -701,7 +683,7 @@ namespace Prodfy.ViewModels
 
                                     estaqRepository.Adicionar(estaq);
                                 }
-                            }                           
+                            }
 
                             #endregion
 
