@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Prodfy.Services;
+using Prodfy.Services.Dialog;
+using Prodfy.Services.Repository;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -6,9 +9,21 @@ namespace Prodfy.ViewModels
 {
     public class CadastroAtividadeViewModel : BaseViewModel
     {
+        private readonly INavigationService navigationService;
+        private readonly IDialogService dialogService;
+
+        private readonly AtividadeRepository atividadeRepositorio;
+
+        //public ObservableCollection<ListaHistorico> ListaDeHistoricos { get; }
+
         public CadastroAtividadeViewModel()
         {
             Title = "Atividades";
+
+            navigationService = new NavigationService();
+            dialogService = new DialogService();
+
+            atividadeRepositorio = new AtividadeRepository();
         }
 
         private string _dispId;
@@ -66,6 +81,12 @@ namespace Prodfy.ViewModels
             get => _indSinc;
             set => SetProperty(ref _indSinc, value);
         }
+
+        private Command _titleViewBotaoVoltarCommand;
+        public Command TitleViewBotaoVoltarCommand =>
+            _titleViewBotaoVoltarCommand ?? (_titleViewBotaoVoltarCommand = new Command(async () => await ExecuteTitleViewBotaoVoltarCommand()));
+
+        private async Task ExecuteTitleViewBotaoVoltarCommand() => await navigationService.PopAsync();
 
         private Command _cancelarCadastroCommand;
         public Command CancelarCadastroCommand =>

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.AtividadeRealizadaView"
              BackgroundImage="splash_bg2.png">
 
@@ -11,7 +12,7 @@
                 <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                        <TapGestureRecognizer Command="{Binding TitleViewBotaoVoltarCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
 
@@ -26,7 +27,7 @@
                        HorizontalOptions="End">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                        <TapGestureRecognizer Command="{Binding IrParaCadastroHistoricoCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
@@ -38,8 +39,10 @@
             <Frame BackgroundColor="#206805"
                    CornerRadius="0" 
                    Padding="5">
-                
-                <SearchBar BackgroundColor="White" Placeholder="filtrar pelo nome do colaborador" FontSize="18"/>
+
+                <control:CustomSearchBar Style="{StaticResource styleSearchBar}" 
+                                         Text="{Binding Filtro}" 
+                                         Placeholder="Filtrar pelo nome do colaborador" />
             </Frame>
         </StackLayout>        
     </ContentPage.Content>

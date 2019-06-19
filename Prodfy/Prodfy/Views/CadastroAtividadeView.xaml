@@ -12,7 +12,7 @@
                 <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                        <TapGestureRecognizer Command="{Binding TitleViewBotaoVoltarCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
 
@@ -35,17 +35,24 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>
-        <StackLayout Padding="20,10,20,20">
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Atividade:" />
-            <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Início" />
-            <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Conclusão" />
-            <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Observação(468)" />
-            <control:CustomEditor Style="{StaticResource styleEditorFormulario}" Placeholder="Teste de registro de atividade." />
+        <ScrollView>
+            <StackLayout Padding="20,10,20,20">
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Colaborador:" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Atividade:" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Início:" />
+                <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding SelectedDate}"/>
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Conclusão:" />
+                <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding SelectedDate}"/>
+                
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Observação:(500)" />
+                <control:CustomEditor Style="{StaticResource styleEditorFormulario}" />
 
-            <control:BotoesCadastro />          
-        </StackLayout>
+                <control:BotoesCadastro />
+            </StackLayout>
+        </ScrollView>        
     </ContentPage.Content>
 </ContentPage>

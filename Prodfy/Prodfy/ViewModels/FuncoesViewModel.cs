@@ -171,7 +171,7 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteIrPaginaAtividadeCommand()
         {
-            await _navigationService.PushAsync(new CadastroAtividadeView());
+            await _navigationService.PushAsync(new AtividadeRealizadaView());
         }
 
         private Command _irPaginaInventarioCommand;
