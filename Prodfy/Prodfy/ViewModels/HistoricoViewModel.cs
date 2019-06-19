@@ -29,7 +29,17 @@ namespace Prodfy.ViewModels
             historicoRepositorio = new HistoricoRepository();
 
             ListaDeHistoricos = new ObservableCollection<ListaHistorico>(Historicos());
-            Historicos().Clear();
+        }
+
+        private string _filtro;
+        public string Filtro
+        {
+            get { return _filtro; }
+            set
+            {
+                SetProperty(ref _filtro, value);
+                Historicos(_filtro);
+            }
         }
 
         private Command _titleViewBotaoVoltarCommand;
@@ -69,16 +79,19 @@ namespace Prodfy.ViewModels
             }
         }
 
-        private List<ListaHistorico> Historicos()
+        private List<ListaHistorico> Historicos(string filtro = null)
         {
-            List<ListaHistorico> listaDadosHistoricos = new List<ListaHistorico>();
-
-            foreach (var item in historicoRepositorio.ListaDeHistoricos())
+            if (!string.IsNullOrEmpty(filtro))
             {
-                listaDadosHistoricos.Add(item);
+                var listaDadosHistoricos = new List<ListaHistorico>();
+
+                foreach (var item in historicoRepositorio.ListaDeHistoricos(filtro))
+                {
+                    listaDadosHistoricos.Add(item);
+                }                
             }
 
-            return listaDadosHistoricos;            
+            return historicoRepositorio.ListaDeHistoricos(filtro);
         }
     }
 }

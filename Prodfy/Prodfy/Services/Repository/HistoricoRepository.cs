@@ -43,10 +43,10 @@ namespace Prodfy.Services.Repository
             dataBase._conexao.Delete<Historico>(id);
         }
 
-        public List<ListaHistorico> ListaDeHistoricos()
+        public List<ListaHistorico> ListaDeHistoricos(string filtro)
         {
-            var listaDadosHistoricos = dataBase._conexao.Query<ListaHistorico>("SELECT AA.idhistorico, AA.disp_id, L.lote_id, L.codigo, AA.data, AA.titulo FROM Historico AA INNER JOIN Lote L ON L.lote_id = AA.lote_id ORDER BY AA.data desc");
-            return listaDadosHistoricos;
+            return dataBase._conexao.Query<ListaHistorico>("SELECT AA.idhistorico, AA.disp_id, L.lote_id, L.codigo, AA.data, AA.titulo FROM Historico AA INNER JOIN Lote L ON L.lote_id = AA.lote_id ORDER BY AA.data desc");
+            //return listaDadosHistoricos;
         }
 
         public TableQuery<Historico> AsQueryable()

@@ -37,7 +37,9 @@
     <ContentPage.Content>
         <StackLayout>
             <Frame Style="{StaticResource styleFrameSearchBar}">
-                <control:CustomSearchBar Style="{StaticResource styleSearchBar}" />
+                <control:CustomSearchBar Style="{StaticResource styleSearchBar}" 
+                                         Text="{Binding Filtro}" 
+                                         Placeholder="Filtrar pelo código do lote" />
             </Frame>
 
             <ListView x:Name="lisViewHistoricos"
