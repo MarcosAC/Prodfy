@@ -48,12 +48,48 @@
                                       ItemsSource="{Binding listaAtividades}"
                                       ItemDisplayBinding="{Binding atividade}"
                                       SelectedItem="{Binding ListaAtividadeSelecionada}" />
-                
-                <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Início:" />
-                <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding SelectedDate}" Format="dd/MM/yyyy HH:mm" />
-                <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Conclusão:" />
-                <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding SelectedDate}"/>
-                
+
+
+
+                <FlexLayout Direction="Row">
+                    <Label Style="{StaticResource styleLabelFormulario}" 
+                           Text="Data Início:"
+                           FlexLayout.Grow="1" />
+                    <Label Style="{StaticResource styleLabelFormulario}" 
+                           Text="Hora Início:" 
+                           FlexLayout.Grow="1" />
+                </FlexLayout>
+
+                <FlexLayout Direction="Row">
+                    <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
+                                              Date="{Binding SelectedDate}"
+                                              FlexLayout.Grow="1" 
+                                              Margin="0,0,5,0" />
+                    
+                    <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
+                                              Date="{Binding SelectedDate}" 
+                                              FlexLayout.Grow="1" 
+                                              Margin="5,0,0,0"/>
+                    <!--<TimePicker FlexLayout.Grow="1" />-->
+                </FlexLayout>
+
+                <FlexLayout Direction="Row">
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="Data Conclusão:" FlexLayout.Grow="1" />
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="Hora Conclusão:" FlexLayout.Grow="1" />
+                </FlexLayout>
+
+                <FlexLayout Direction="Row">
+                    <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
+                                              Date="{Binding SelectedDate}" 
+                                              FlexLayout.Grow="1" 
+                                              Margin="0,0,5,0"/>
+
+                    <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
+                                              Date="{Binding SelectedDate}" 
+                                              FlexLayout.Grow="1" 
+                                              Margin="5,0,0,0"/>
+                </FlexLayout>                
+
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Observação:(500)" />
                 <control:CustomEditor Style="{StaticResource styleEditorFormulario}" />
 

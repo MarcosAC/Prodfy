@@ -13,7 +13,7 @@ namespace Prodfy.Views
 
             NavigationPage.SetHasBackButton(this, false);
 
-            BindingContext = new CadastroAtividadeViewModel();
+            BindingContext = new CadastroAtividadeViewModel();           
         }
     }
 }
