@@ -1,7 +1,9 @@
-﻿using Prodfy.Services;
+﻿using Prodfy.Models;
+using Prodfy.Services;
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -12,9 +14,8 @@ namespace Prodfy.ViewModels
         private readonly INavigationService navigationService;
         private readonly IDialogService dialogService;
 
-        private readonly AtividadeRepository atividadeRepositorio;
-
-        //public ObservableCollection<ListaHistorico> ListaDeHistoricos { get; }
+        private readonly ColaboradorRepository colaboradorRepositorio;
+        private readonly ListaAtvRepository listaAtvRepositorio;               
 
         public CadastroAtividadeViewModel()
         {
@@ -23,8 +24,15 @@ namespace Prodfy.ViewModels
             navigationService = new NavigationService();
             dialogService = new DialogService();
 
-            atividadeRepositorio = new AtividadeRepository();
+            colaboradorRepositorio = new ColaboradorRepository();
+            listaAtvRepositorio = new ListaAtvRepository();            
+
+            Colaboradores();
+            ListaAtividades();
         }
+
+        public List<Colaborador> listaColaboradores { get; set; }
+        public List<Lista_Atv> listaAtividades { get; set; }
 
         private string _dispId;
         public string DispId
@@ -40,6 +48,13 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _colaboradorId, value);
         }
 
+        private Colaborador _colaboradorSelecionado;
+        public Colaborador ColaboradorSelecionado
+        {
+            get => _colaboradorSelecionado;
+            set => SetProperty(ref _colaboradorSelecionado, value);
+        }
+
         private string _listaAtvId;
         public string ListaAtvId
         {
@@ -47,17 +62,24 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaAtvId, value);
         }
 
-        private string _dataInicio;
-        public string DataInicio
+        private Lista_Atv _listaAtividadeSelecionada;
+        public Lista_Atv ListaAtividadeSelecionada
         {
-            get => _dataInicio;
+            get => _listaAtividadeSelecionada;
+            set => SetProperty(ref _listaAtividadeSelecionada, value);
+        }
+
+        private DateTime _dataInicio;
+        public DateTime DataInicio
+        {
+            get => _dataInicio = DateTime.Now + DateTime.Now.TimeOfDay;
             set => SetProperty(ref _dataInicio, value);
         }
 
-        private string _dataFim;
-        public string DataFim
+        private DateTime _dataFim;
+        public DateTime DataFim
         {
-            get => _dataFim;
+            get => _dataFim = DateTime.Today;
             set => SetProperty(ref _dataFim, value);
         }
 
@@ -104,6 +126,16 @@ namespace Prodfy.ViewModels
         private Task ExecuteSalvarCadastroCommand()
         {
             throw new NotImplementedException();
+        }
+
+        private List<Colaborador> Colaboradores()
+        {
+            return listaColaboradores = colaboradorRepositorio.ObterTodos();
+        }
+
+        private List<Lista_Atv> ListaAtividades()
+        {
+            return listaAtividades = listaAtvRepositorio.ObterTodos();
         }
     }
 }

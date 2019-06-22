@@ -21,5 +21,10 @@ namespace Prodfy.Models
         public int definicao { get; set; }
         public DateTime last_update { get; set; }
         public int ind_sinc { get; set; }
+
+        public string atividade
+        {
+            get => $"{codigo} - {titulo}";
+        }
     }
 }

@@ -69,7 +69,7 @@ namespace Prodfy.Services.Repository
 
         public List<Colaborador> ObterTodos()
         {
-            throw new NotImplementedException();
+            return dataBase._conexao.Table<Colaborador>().OrderBy(c => c.idColaborador).ToList();
         }
 
         public int ObterTotalDeRegistros()

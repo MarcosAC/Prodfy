@@ -74,7 +74,7 @@ namespace Prodfy.Services.Repository
 
         public List<Lista_Atv> ObterTodos()
         {
-            throw new NotImplementedException();
+            return dataBase._conexao.Table<Lista_Atv>().OrderBy(la => la.idLista_Atv).ToList();
         }
 
         public int ObterTotalDeRegistros()

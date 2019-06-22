@@ -38,13 +38,19 @@
         <ScrollView>
             <StackLayout Padding="20,10,20,20">
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Colaborador:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
+                                      ItemsSource="{Binding listaColaboradores}"
+                                      ItemDisplayBinding="{Binding nome_interno}"
+                                      SelectedItem="{Binding ColaboradorSelecionado}" />
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Atividade:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                      ItemsSource="{Binding listaAtividades}"
+                                      ItemDisplayBinding="{Binding atividade}"
+                                      SelectedItem="{Binding ListaAtividadeSelecionada}" />
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Início:" />
-                <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding SelectedDate}"/>
+                <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding SelectedDate}" Format="dd/MM/yyyy HH:mm" />
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data Hora de Conclusão:" />
                 <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding SelectedDate}"/>
                 
