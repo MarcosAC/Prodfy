@@ -15,7 +15,8 @@ namespace Prodfy.ViewModels
         private readonly IDialogService dialogService;
 
         private readonly ColaboradorRepository colaboradorRepositorio;
-        private readonly ListaAtvRepository listaAtvRepositorio;               
+        private readonly ListaAtvRepository listaAtvRepositorio;
+        private readonly AtividadeRepository atividadeRepositorio;
 
         public CadastroAtividadeViewModel()
         {
@@ -25,7 +26,8 @@ namespace Prodfy.ViewModels
             dialogService = new DialogService();
 
             colaboradorRepositorio = new ColaboradorRepository();
-            listaAtvRepositorio = new ListaAtvRepository();            
+            listaAtvRepositorio = new ListaAtvRepository();
+            atividadeRepositorio = new AtividadeRepository();
 
             Colaboradores();
             ListaAtividades();
@@ -72,14 +74,14 @@ namespace Prodfy.ViewModels
         private DateTime _dataInicio;
         public DateTime DataInicio
         {
-            get => _dataInicio = DateTime.Now + DateTime.Now.TimeOfDay;
+            get => _dataInicio = DateTime.Now;
             set => SetProperty(ref _dataInicio, value);
         }
 
         private DateTime _dataFim;
         public DateTime DataFim
         {
-            get => _dataFim = DateTime.Today;
+            get => _dataFim = DateTime.Now;
             set => SetProperty(ref _dataFim, value);
         }
 
@@ -121,11 +123,39 @@ namespace Prodfy.ViewModels
 
         private Command _salvarCadastroCommand;
         public Command SalvarCadastroCommand =>
-            _salvarCadastroCommand ?? (_salvarCadastroCommand = new Command(async () => await ExecuteSalvarCadastroCommand()));
+            _salvarCadastroCommand ?? (_salvarCadastroCommand = new Command(async () => await ExecuteSalvarCadastroCommandAsync()));
 
-        private Task ExecuteSalvarCadastroCommand()
+        private async Task ExecuteSalvarCadastroCommandAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var atividade = new Atividade
+                {
+                    colaborador_id = ColaboradorSelecionado.colaborador_id,
+                    lista_atv_id = ListaAtividadeSelecionada.lista_atv_id,
+                    data_inicio = DataInicio,
+                    data_fim = DataFim
+                };
+
+                bool atividadeAceite = await dialogService.AlertAsync("ATIVIDADES", "Deseja salvar os dados informados?", "Sim", "Não");
+
+                if (atividadeAceite)
+                {
+                    try
+                    {
+                        atividadeRepositorio.Adicionar(atividade);
+                        await dialogService.AlertAsync("ATIVIDADES", "Dados salvos com sucesso!", "Ok");
+                    }
+                    catch (Exception)
+                    {
+                        await dialogService.AlertAsync("ATIVIDADES", "Erro ao salvar dados!", "Ok");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await dialogService.AlertAsync("ATIVIDADES", ex.Message, "OK");
+            }
         }
 
         private List<Colaborador> Colaboradores()

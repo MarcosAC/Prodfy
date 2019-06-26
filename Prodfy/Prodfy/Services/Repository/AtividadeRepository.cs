@@ -8,16 +8,16 @@ namespace Prodfy.Services.Repository
 {
     public class AtividadeRepository : IRepository<Atividade>
     {
-        private DataBase _dataBase;
+        private DataBase dataBase;
 
         public AtividadeRepository()
         {
-            _dataBase = new DataBase();
+            dataBase = new DataBase();
         }
 
         public int ObterTotalDeRegistros()
         {
-            var total = _dataBase._conexao.Table<Atividade>().Count();
+            var total = dataBase._conexao.Table<Atividade>().Count();
 
             if (total > 0)
                 return total;
@@ -25,9 +25,16 @@ namespace Prodfy.Services.Repository
             return 0;
         }
 
-        public void Adicionar(Atividade entidade)
+        public void Adicionar(Atividade atividade)
         {
-            throw new NotImplementedException();
+            try
+            {
+                dataBase._conexao.Insert(atividade);
+            }
+            catch (Exception ex)
+            {
+                App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
+            }
         }
 
         public TableQuery<Atividade> AsQueryable()
@@ -37,7 +44,7 @@ namespace Prodfy.Services.Repository
 
         public void DeletarTodos()
         {
-            _dataBase._conexao.Execute("Delete From Atividade");
+            dataBase._conexao.Execute("Delete From Atividade");
         }
 
         public void Editar(Atividade entidade)
@@ -47,9 +54,9 @@ namespace Prodfy.Services.Repository
 
         public Atividade ObterDados()
         {
-            if (_dataBase._conexao.Table<Atividade>().Count() > 0)
+            if (dataBase._conexao.Table<Atividade>().Count() > 0)
             {
-                var dadosAtividade = _dataBase._conexao.Table<Atividade>().FirstOrDefault();
+                var dadosAtividade = dataBase._conexao.Table<Atividade>().FirstOrDefault();
                 return dadosAtividade;
             }
 
@@ -58,7 +65,7 @@ namespace Prodfy.Services.Repository
 
         public List<Atividade> ObterTodos()
         {
-            return _dataBase._conexao.Table<Atividade>().OrderBy(a => a.idAtividade).ToList();
+            return dataBase._conexao.Table<Atividade>().OrderBy(a => a.idAtividade).ToList();
         }
 
         public string ObterInformacoesParaIdentificacao(int codigo)

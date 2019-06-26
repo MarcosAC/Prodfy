@@ -48,258 +48,54 @@
                                       ItemsSource="{Binding listaAtividades}"
                                       ItemDisplayBinding="{Binding atividade}"
                                       SelectedItem="{Binding ListaAtividadeSelecionada}" />
-
-                <!-- Data/Hora Inicio -->
+                
                 <FlexLayout Direction="Row">
                     <Label Style="{StaticResource styleLabelFormulario}" 
                            Text="Data Início:"
                            FlexLayout.Grow="1" />
                     <Label Style="{StaticResource styleLabelFormulario}" 
-                           Text="Hora Início:" 
+                           Text=" Hora Início:" 
                            FlexLayout.Grow="1" />
                 </FlexLayout>
 
                 <FlexLayout Direction="Row" Padding="0,0,0,10">
                     <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
                                               Date="{Binding SelectedDate}"
-                                              FlexLayout.Grow="2" 
+                                              FlexLayout.Grow="1" 
                                               Margin="0,0,5,0" />
 
-                    <!-- Picker Horas -->
-                    <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                    <control:CustomTimePicker Style="{StaticResource stylePickerFormulario}" 
                                               FlexLayout.Grow="1" 
-                                              Margin="5,0,5,0">
-                        <control:CustomPicker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>00</x:String>
-                                <x:String>01</x:String>
-                                <x:String>02</x:String>
-                                <x:String>03</x:String>
-                                <x:String>04</x:String>
-                                <x:String>05</x:String>
-                                <x:String>06</x:String>
-                                <x:String>07</x:String>
-                                <x:String>08</x:String>
-                                <x:String>09</x:String>
-                                <x:String>10</x:String>
-                                <x:String>11</x:String>
-                                <x:String>12</x:String>
-                                <x:String>13</x:String>
-                                <x:String>14</x:String>
-                                <x:String>15</x:String>
-                                <x:String>16</x:String>
-                                <x:String>17</x:String>
-                                <x:String>18</x:String>
-                                <x:String>19</x:String>
-                                <x:String>20</x:String>
-                                <x:String>21</x:String>
-                                <x:String>22</x:String>
-                                <x:String>23</x:String>
-                            </x:Array>
-                        </control:CustomPicker.ItemsSource>
-                    </control:CustomPicker>
-
-                    <Label Text=":" FontSize="Medium" FontAttributes="Bold" FlexLayout.AlignSelf="Center" />
-
-                    <!-- Picker Minutos -->
-                    <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                          FlexLayout.Grow="1"
-                                          Margin="5,0,0,0">
-                        <control:CustomPicker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>00</x:String>
-                                <x:String>01</x:String>
-                                <x:String>02</x:String>
-                                <x:String>03</x:String>
-                                <x:String>04</x:String>
-                                <x:String>05</x:String>
-                                <x:String>06</x:String>
-                                <x:String>07</x:String>
-                                <x:String>08</x:String>
-                                <x:String>09</x:String>
-                                <x:String>10</x:String>
-                                <x:String>11</x:String>
-                                <x:String>12</x:String>
-                                <x:String>13</x:String>
-                                <x:String>14</x:String>
-                                <x:String>15</x:String>
-                                <x:String>16</x:String>
-                                <x:String>17</x:String>
-                                <x:String>18</x:String>
-                                <x:String>19</x:String>
-                                <x:String>20</x:String>
-                                <x:String>21</x:String>
-                                <x:String>22</x:String>
-                                <x:String>23</x:String>
-                                <x:String>24</x:String>
-                                <x:String>25</x:String>
-                                <x:String>26</x:String>
-                                <x:String>27</x:String>
-                                <x:String>28</x:String>
-                                <x:String>29</x:String>
-                                <x:String>30</x:String>
-                                <x:String>31</x:String>
-                                <x:String>32</x:String>
-                                <x:String>33</x:String>
-                                <x:String>34</x:String>
-                                <x:String>35</x:String>
-                                <x:String>36</x:String>
-                                <x:String>37</x:String>
-                                <x:String>38</x:String>
-                                <x:String>39</x:String>
-                                <x:String>40</x:String>
-                                <x:String>41</x:String>
-                                <x:String>42</x:String>
-                                <x:String>43</x:String>
-                                <x:String>44</x:String>
-                                <x:String>45</x:String>
-                                <x:String>46</x:String>
-                                <x:String>47</x:String>
-                                <x:String>48</x:String>
-                                <x:String>49</x:String>
-                                <x:String>50</x:String>
-                                <x:String>51</x:String>
-                                <x:String>52</x:String>
-                                <x:String>53</x:String>
-                                <x:String>54</x:String>
-                                <x:String>55</x:String>
-                                <x:String>56</x:String>
-                                <x:String>57</x:String>
-                                <x:String>58</x:String>
-                                <x:String>59</x:String>
-                            </x:Array>
-                        </control:CustomPicker.ItemsSource>
-                    </control:CustomPicker>
+                                              Margin="5,0,0,0" />
                 </FlexLayout>
-                <!-- Fim - Data/Hora Inicio -->
-
-                <!-- Data/Hora Conclusão -->
+                
                 <FlexLayout Direction="Row">
-                    <Label Style="{StaticResource styleLabelFormulario}" Text="Data Conclusão:" FlexLayout.Grow="1" />
-                    <Label Style="{StaticResource styleLabelFormulario}" Text="Hora Conclusão:" FlexLayout.Grow="1" />
+                    <Label Style="{StaticResource styleLabelFormulario}" 
+                           Text="Data Conclusão:" 
+                           FlexLayout.Grow="1" />
+                    <Label Style="{StaticResource styleLabelFormulario}" 
+                           Text=" Hora Conclusão:" 
+                           FlexLayout.Grow="1" />
                 </FlexLayout>
                 
                 <FlexLayout Direction="Row" Padding="0,0,0,10">
                     <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
                                               Date="{Binding SelectedDate}" 
-                                              FlexLayout.Grow="2" 
+                                              FlexLayout.Grow="1" 
                                               Margin="0,0,5,0"/>
 
-                    <!-- Hora Conclusão -->
-
-                    <!-- Picker Horas -->
-                    <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                    <control:CustomTimePicker Style="{StaticResource stylePickerFormulario}"
                                               FlexLayout.Grow="1" 
-                                              Margin="5,0,5,0">
-                        <control:CustomPicker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>00</x:String>
-                                <x:String>01</x:String>
-                                <x:String>02</x:String>
-                                <x:String>03</x:String>
-                                <x:String>04</x:String>
-                                <x:String>05</x:String>
-                                <x:String>06</x:String>
-                                <x:String>07</x:String>
-                                <x:String>08</x:String>
-                                <x:String>09</x:String>
-                                <x:String>10</x:String>
-                                <x:String>11</x:String>
-                                <x:String>12</x:String>
-                                <x:String>13</x:String>
-                                <x:String>14</x:String>
-                                <x:String>15</x:String>
-                                <x:String>16</x:String>
-                                <x:String>17</x:String>
-                                <x:String>18</x:String>
-                                <x:String>19</x:String>
-                                <x:String>20</x:String>
-                                <x:String>21</x:String>
-                                <x:String>22</x:String>
-                                <x:String>23</x:String>
-                            </x:Array>
-                        </control:CustomPicker.ItemsSource>
-                    </control:CustomPicker>                    
-
-                    <Label Text=":" FontSize="Medium" FontAttributes="Bold" FlexLayout.AlignSelf="Center" />
-
-                    <!-- Picker Minutos -->
-                    <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                              FlexLayout.Grow="1" 
-                                              Margin="5,0,0,0">
-                        <control:CustomPicker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>00</x:String>
-                                <x:String>01</x:String>
-                                <x:String>02</x:String>
-                                <x:String>03</x:String>
-                                <x:String>04</x:String>
-                                <x:String>05</x:String>
-                                <x:String>06</x:String>
-                                <x:String>07</x:String>
-                                <x:String>08</x:String>
-                                <x:String>09</x:String>
-                                <x:String>10</x:String>
-                                <x:String>11</x:String>
-                                <x:String>12</x:String>
-                                <x:String>13</x:String>
-                                <x:String>14</x:String>
-                                <x:String>15</x:String>
-                                <x:String>16</x:String>
-                                <x:String>17</x:String>
-                                <x:String>18</x:String>
-                                <x:String>19</x:String>
-                                <x:String>20</x:String>
-                                <x:String>21</x:String>
-                                <x:String>22</x:String>
-                                <x:String>23</x:String>
-                                <x:String>24</x:String>
-                                <x:String>25</x:String>
-                                <x:String>26</x:String>
-                                <x:String>27</x:String>
-                                <x:String>28</x:String>
-                                <x:String>29</x:String>
-                                <x:String>30</x:String>
-                                <x:String>31</x:String>
-                                <x:String>32</x:String>
-                                <x:String>33</x:String>
-                                <x:String>34</x:String>
-                                <x:String>35</x:String>
-                                <x:String>36</x:String>
-                                <x:String>37</x:String>
-                                <x:String>38</x:String>
-                                <x:String>39</x:String>
-                                <x:String>40</x:String>
-                                <x:String>41</x:String>
-                                <x:String>42</x:String>
-                                <x:String>43</x:String>
-                                <x:String>44</x:String>
-                                <x:String>45</x:String>
-                                <x:String>46</x:String>
-                                <x:String>47</x:String>
-                                <x:String>48</x:String>
-                                <x:String>49</x:String>
-                                <x:String>50</x:String>
-                                <x:String>51</x:String>
-                                <x:String>52</x:String>
-                                <x:String>53</x:String>
-                                <x:String>54</x:String>
-                                <x:String>55</x:String>
-                                <x:String>56</x:String>
-                                <x:String>57</x:String>
-                                <x:String>58</x:String>
-                                <x:String>59</x:String>
-                            </x:Array>
-                        </control:CustomPicker.ItemsSource>                        
-                    </control:CustomPicker>
-                    <!-- Fim - Hora Conclusão -->
+                                              Margin="5,0,0,0" />
                 </FlexLayout>
-                <!-- Fim - Data/Hora Conclusão -->
 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Observação:(500)" />
                 <control:CustomEditor Style="{StaticResource styleEditorFormulario}" />
 
-                <control:BotoesCadastro />
+                <StackLayout Orientation="Horizontal">
+                    <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
+                    <control:CustomButton Style="{StaticResource styleButtonSalvar}" Text="Salvar" Command="{Binding SalvarCadastroCommand}"/>
+                </StackLayout>
             </StackLayout>
         </ScrollView>        
     </ContentPage.Content>

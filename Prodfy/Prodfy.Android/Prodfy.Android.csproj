@@ -105,6 +105,7 @@
     <Compile Include="Renderers\CustomEntryRenderer.cs" />
     <Compile Include="Renderers\CustomPickerRenderer.cs" />
     <Compile Include="Renderers\CustomSearchBarRenderer.cs" />
+    <Compile Include="Renderers\CustomTimePickerRenderer.cs" />
     <Compile Include="Renderers\CustomWebViewRenderer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
