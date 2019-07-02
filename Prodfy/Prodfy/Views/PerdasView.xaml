@@ -12,11 +12,11 @@
                 <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                        <TapGestureRecognizer Command="{Binding TitleViewBotaoVoltarCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
 
-                <Label Text="Perdas" 
+                <Label Text="{Binding Title}" 
                        FontSize="20" 
                        TextColor="White" 
                        HorizontalOptions="CenterAndExpand" 
@@ -27,7 +27,7 @@
                        HorizontalOptions="End">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                        <TapGestureRecognizer Command="{Binding IrParaCadastroPerdasCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
 
@@ -37,7 +37,7 @@
                        HorizontalOptions="End">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding NavegacaoCommand}" />
+                        <TapGestureRecognizer Command="{Binding LeitorQRCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
@@ -47,7 +47,9 @@
     <ContentPage.Content>
         <StackLayout>
             <Frame Style="{StaticResource styleFrameSearchBar}">
-                <control:CustomSearchBar Style="{StaticResource styleSearchBar}" />
+                <control:CustomSearchBar Style="{StaticResource styleSearchBar}" 
+                                         Text="{Binding Filtro}" 
+                                         Placeholder="Filtrar pelo código do lote" />
             </Frame>
         </StackLayout>
     </ContentPage.Content>

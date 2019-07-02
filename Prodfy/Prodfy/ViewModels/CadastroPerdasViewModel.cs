@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Prodfy.Services;
+using Prodfy.Services.Dialog;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -6,9 +8,15 @@ namespace Prodfy.ViewModels
 {
     public class CadastroPerdasViewModel : BaseViewModel
     {
+        private readonly INavigationService navigationService;
+        private readonly IDialogService dialogService;
+
         public CadastroPerdasViewModel()
         {
             Title = "Perdas";
+
+            navigationService = new NavigationService();
+            dialogService = new DialogService();
         }
 
         private string _dispId;
@@ -86,6 +94,21 @@ namespace Prodfy.ViewModels
         {
             get => _indSinc;
             set => SetProperty(ref _indSinc, value);
+        }
+
+        private Command _titleViewBotaoVoltarCommand;
+        public Command TitleViewBotaoVoltarCommand =>
+            _titleViewBotaoVoltarCommand ?? (_titleViewBotaoVoltarCommand = new Command(async () => await ExecuteTitleViewBotaoVoltarCommand()));
+
+        private async Task ExecuteTitleViewBotaoVoltarCommand() => await navigationService.PopAsync();        
+
+        private Command _leitorQRCommand;
+        public Command LeitorQRCommand => _leitorQRCommand ?? (_leitorQRCommand = new Command(async () => await ExecuteLeitorQRCommand()));
+
+        private async Task ExecuteLeitorQRCommand()
+        {
+            var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+            var result = await scanner.Scan();
         }
 
         private Command _cancelarCadastroCommand;

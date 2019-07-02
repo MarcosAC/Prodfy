@@ -191,7 +191,7 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteIrPaginaPerdasComand()
         {
-            await _navigationService.PushAsync(new CadastroPerdasView());
+            await _navigationService.PushAsync(new PerdasView());
         }
 
         private Command _irPaginaHistoricoCommand;
