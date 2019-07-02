@@ -15,5 +15,26 @@ namespace Prodfy.Views
 
             BindingContext = new AtividadeViewModel();
         }
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            BindingContext = new AtividadeViewModel();
+        }
+
+        public AtividadeViewModel ViewModel
+        {
+            get { return BindingContext as AtividadeViewModel; }
+            set { BindingContext = value; }
+        }
+
+        private void OnItemSelect(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem != null)
+                //ViewModel.SelecionarHistoricoCommand.Execute(e.SelectedItem);
+
+                listViewAtividades.SelectedItem = null;
+        }
+    }
 }

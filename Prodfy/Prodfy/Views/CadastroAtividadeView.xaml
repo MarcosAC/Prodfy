@@ -60,11 +60,12 @@
 
                 <FlexLayout Direction="Row" Padding="0,0,0,10">
                     <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
-                                              Date="{Binding SelectedDate}"
+                                              Date="{Binding DataInicio}"
                                               FlexLayout.Grow="1" 
                                               Margin="0,0,5,0" />
 
                     <control:CustomTimePicker Style="{StaticResource stylePickerFormulario}" 
+                                              Time="{Binding HoraInicio}"
                                               FlexLayout.Grow="1" 
                                               Margin="5,0,0,0" />
                 </FlexLayout>
@@ -80,21 +81,27 @@
                 
                 <FlexLayout Direction="Row" Padding="0,0,0,10">
                     <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
-                                              Date="{Binding SelectedDate}" 
+                                              Date="{Binding DataFim}" 
                                               FlexLayout.Grow="1" 
                                               Margin="0,0,5,0"/>
 
-                    <control:CustomTimePicker Style="{StaticResource stylePickerFormulario}"
+                    <control:CustomTimePicker Style="{StaticResource stylePickerFormulario}" 
+                                              Time="{Binding HoraConclusao}"
                                               FlexLayout.Grow="1" 
                                               Margin="5,0,0,0" />
                 </FlexLayout>
 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Observação:(500)" />
-                <control:CustomEditor Style="{StaticResource styleEditorFormulario}" />
+                <control:CustomEditor Style="{StaticResource styleEditorFormulario}" Text="{Binding Obs}"/>
 
                 <StackLayout Orientation="Horizontal">
-                    <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
-                    <control:CustomButton Style="{StaticResource styleButtonSalvar}" Text="Salvar" Command="{Binding SalvarCadastroCommand}"/>
+                    <control:CustomButton Style="{StaticResource styleButtonCancelar}" 
+                                          Text="Cancelar" 
+                                          Command="{Binding CancelarCadastroCommand}" />
+                    
+                    <control:CustomButton Style="{StaticResource styleButtonSalvar}" 
+                                          Text="Salvar" 
+                                          Command="{Binding SalvarCadastroCommand}" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>        

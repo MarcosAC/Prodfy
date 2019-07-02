@@ -35,15 +35,51 @@
     </NavigationPage.TitleView>
     
     <ContentPage.Content>        
-        <StackLayout>           
-            <Frame BackgroundColor="#206805"
-                   CornerRadius="0" 
-                   Padding="5">
-
+        <StackLayout>
+            <Frame Style="{StaticResource styleFrameSearchBar}">
                 <control:CustomSearchBar Style="{StaticResource styleSearchBar}" 
                                          Text="{Binding Filtro}" 
                                          Placeholder="Filtrar pelo nome do colaborador" />
             </Frame>
+
+            <ListView x:Name="listViewAtividades"
+                      ItemSelected="OnItemSelect"
+                      ItemsSource="{Binding ListaDeAtividades}"
+                      SelectedItem="{Binding SelecionarAtividade, Mode=TwoWay}"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Style="{StaticResource styleFrameLista}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="COLAB:" Style="{StaticResource styleLabelLista}" Grid.Row="0" Grid.Column="0" />
+                                    <Label Text="ATIV:" Style="{StaticResource styleLabelLista}" Grid.Row="1" Grid.Column="0" />
+                                    <Label Text="INÍCIO:" Style="{StaticResource styleLabelLista}" Grid.Row="2" Grid.Column="0" />
+                                    <Label Text="FIM:" Style="{StaticResource styleLabelLista}" Grid.Row="3" Grid.Column="0" />
+
+                                    <Label Text="{Binding nome_interno}" FontSize="16" TextColor="White" Grid.Row="0" Grid.Column="1" />
+                                    <Label Text="{Binding codigoTitulo}" FontSize="16" TextColor="White" Grid.Row="1" Grid.Column="1" />
+                                    <Label Text="{Binding data_inicio, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="16" TextColor="White" Grid.Row="2" Grid.Column="1" />
+                                    <Label Text="{Binding data_fim, StringFormat='{0:dd/MM/yyyy HH:mm}'}" FontSize="16" TextColor="White" Grid.Row="3" Grid.Column="1" />
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>        
     </ContentPage.Content>
 </ContentPage>

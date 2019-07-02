@@ -1,8 +1,11 @@
-﻿using Prodfy.Services;
+﻿using Prodfy.Models;
+using Prodfy.Services;
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
 using Prodfy.Views;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -15,6 +18,8 @@ namespace Prodfy.ViewModels
 
         private readonly AtividadeRepository atividadeRepositorio;
 
+        public ObservableCollection<ListaAtividades> ListaDeAtividades { get; }        
+
         public AtividadeViewModel()
         {
             Title = "Atividades";
@@ -23,34 +28,20 @@ namespace Prodfy.ViewModels
             dialogService = new DialogService();
 
             atividadeRepositorio = new AtividadeRepository();
+
+            ListaDeAtividades = new ObservableCollection<ListaAtividades>(Atividades());
+            
         }
 
-        private string _colaborador;
-        public string Colaborador
+        private string _filtro;
+        public string Filtro
         {
-            get => _colaborador;
-            set => SetProperty(ref _colaborador, value);
-        }
-
-        private string _atividade;
-        public string Atividade
-        {
-            get => _atividade;
-            set => SetProperty(ref _atividade, value);
-        }
-
-        private string _dataInicio;
-        public string DataInicio
-        {
-            get => _dataInicio;
-            set => SetProperty(ref _dataInicio, value);
-        }
-
-        private string _dataFim;
-        public string DataFim
-        {
-            get => _dataFim;
-            set => SetProperty(ref _dataFim, value);
+            get { return _filtro; }
+            set
+            {
+                SetProperty(ref _filtro, value);
+                Atividades(_filtro);
+            }
         }
 
         private Command _titleViewBotaoVoltarCommand;
@@ -72,6 +63,21 @@ namespace Prodfy.ViewModels
         private Task ExecuteDeletarAtividadeListaCommand()
         {
             throw new NotImplementedException();
+        }
+
+        private List<ListaAtividades> Atividades(string filtro = null)
+        {
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                var listaAtividades = new List<ListaAtividades>();
+
+                foreach (var item in atividadeRepositorio.ListaDeAtividades(filtro))
+                {
+                    listaAtividades.Add(item);
+                }
+            }
+
+            return atividadeRepositorio.ListaDeAtividades(filtro);
         }
     }
 }

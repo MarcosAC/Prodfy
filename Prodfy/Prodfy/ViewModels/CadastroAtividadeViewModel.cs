@@ -71,18 +71,32 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaAtividadeSelecionada, value);
         }
 
-        private DateTime _dataInicio;
-        public DateTime DataInicio
+        private string _dataInicio;
+        public string DataInicio
         {
-            get => _dataInicio = DateTime.Now;
+            get => _dataInicio;
             set => SetProperty(ref _dataInicio, value);
         }
 
-        private DateTime _dataFim;
-        public DateTime DataFim
+        private string _dataFim;
+        public string DataFim
         {
-            get => _dataFim = DateTime.Now;
+            get => _dataFim;
             set => SetProperty(ref _dataFim, value);
+        }
+
+        private TimeSpan _horaInicio;
+        public TimeSpan HoraInicio
+        {
+            get => _horaInicio;
+            set => SetProperty(ref _horaInicio, value);
+        }
+
+        private TimeSpan _horaConclusao;
+        public TimeSpan HoraConclusao
+        {
+            get => _horaConclusao;
+            set => SetProperty(ref _horaConclusao, value);
         }
 
         private string _obs;
@@ -114,11 +128,11 @@ namespace Prodfy.ViewModels
 
         private Command _cancelarCadastroCommand;
         public Command CancelarCadastroCommand =>
-            _cancelarCadastroCommand ?? (_cancelarCadastroCommand = new Command(async () => await ExecuteCancelarCadastroCommand()));
+            _cancelarCadastroCommand ?? (_cancelarCadastroCommand = new Command(() => ExecuteCancelarCadastroCommand()));
 
-        private Task ExecuteCancelarCadastroCommand()
+        private void ExecuteCancelarCadastroCommand()
         {
-            throw new NotImplementedException();
+           
         }
 
         private Command _salvarCadastroCommand;
@@ -133,8 +147,9 @@ namespace Prodfy.ViewModels
                 {
                     colaborador_id = ColaboradorSelecionado.colaborador_id,
                     lista_atv_id = ListaAtividadeSelecionada.lista_atv_id,
-                    data_inicio = DataInicio,
-                    data_fim = DataFim
+                    data_inicio = Convert.ToDateTime(DataInicio + HoraInicio),
+                    data_fim = Convert.ToDateTime(DataFim + HoraConclusao),
+                    obs = Obs
                 };
 
                 bool atividadeAceite = await dialogService.AlertAsync("ATIVIDADES", "Deseja salvar os dados informados?", "Sim", "Não");
@@ -143,7 +158,7 @@ namespace Prodfy.ViewModels
                 {
                     try
                     {
-                        atividadeRepositorio.Adicionar(atividade);
+                        atividadeRepositorio.Adicionar(atividade);                        
                         await dialogService.AlertAsync("ATIVIDADES", "Dados salvos com sucesso!", "Ok");
                     }
                     catch (Exception)
@@ -166,6 +181,6 @@ namespace Prodfy.ViewModels
         private List<Lista_Atv> ListaAtividades()
         {
             return listaAtividades = listaAtvRepositorio.ObterTodos();
-        }
+        }        
     }
 }
