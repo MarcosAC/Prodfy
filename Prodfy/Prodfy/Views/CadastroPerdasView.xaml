@@ -48,17 +48,23 @@
         <ScrollView>
             <StackLayout Padding="20,10,20,20">
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding SelectedDate}" />
+                
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Ponto de Controle:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Estágio:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Quantidade:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Motivo:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />                
 
