@@ -149,7 +149,7 @@ namespace Prodfy.Services.Repository
 
         public List<Estagio> ObterTodos()
         {
-            throw new NotImplementedException();
+            return dataBase._conexao.Table<Estagio>().ToList();
         }
 
         public int ObterTotalDeRegistros()

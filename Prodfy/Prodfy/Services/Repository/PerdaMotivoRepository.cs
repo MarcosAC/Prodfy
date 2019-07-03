@@ -74,7 +74,7 @@ namespace Prodfy.Services.Repository
 
         public List<Perda_Motivo> ObterTodos()
         {
-            throw new NotImplementedException();
+            return dataBase._conexao.Table<Perda_Motivo>().ToList();
         }
 
         public int ObterTotalDeRegistros()

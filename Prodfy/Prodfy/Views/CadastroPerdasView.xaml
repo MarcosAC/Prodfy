@@ -51,22 +51,37 @@
                 <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding SelectedDate}" />
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                      ItemsSource="{Binding listaLotes}"
+                                      ItemDisplayBinding="{Binding codigo}"
+                                      SelectedItem="{Binding LoteSelecionado}" />
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                      ItemsSource="{Binding listaMudas}"
+                                      ItemDisplayBinding="{Binding nome}"
+                                      SelectedItem="{Binding MudaSelecionado}" />
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Ponto de Controle:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                      ItemsSource="{Binding listaPontoControle}"
+                                      ItemDisplayBinding="{Binding titulo}"
+                                      SelectedItem="{Binding PontoControleSelecionado}" />
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Estágio:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                      ItemsSource="{Binding listaEstagios}"
+                                      ItemDisplayBinding="{Binding titulo}"
+                                      SelectedItem="{Binding EstagiosSelecionado}" />
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Quantidade:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Motivo:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />                
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
+                                      ItemsSource="{Binding listaPerdaMotivo}"
+                                      ItemDisplayBinding="{Binding motivo}"
+                                      SelectedItem="{Binding PerdaMotivoSelecionado}" />                
 
                 <StackLayout Orientation="Horizontal">
                     <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />

@@ -1,6 +1,9 @@
-﻿using Prodfy.Services;
+﻿using Prodfy.Models;
+using Prodfy.Services;
 using Prodfy.Services.Dialog;
+using Prodfy.Services.Repository;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,13 +14,39 @@ namespace Prodfy.ViewModels
         private readonly INavigationService navigationService;
         private readonly IDialogService dialogService;
 
+        private readonly LoteRepository loteRepositorio;
+        private readonly PerdaRepository perdaRepositorio;
+        private readonly MudaRepository mudaRepositorio;
+        private readonly PontoControleRepository pontoControleRepositorio;
+        private readonly EstagioRepository estagioRepositorio;
+        private readonly PerdaMotivoRepository perdaMotivoRepositorio;
+
         public CadastroPerdasViewModel()
         {
             Title = "Perdas";
 
             navigationService = new NavigationService();
             dialogService = new DialogService();
+
+            loteRepositorio = new LoteRepository();
+            perdaRepositorio = new PerdaRepository();
+            mudaRepositorio = new MudaRepository();
+            pontoControleRepositorio = new PontoControleRepository();
+            estagioRepositorio = new EstagioRepository();
+            perdaMotivoRepositorio = new PerdaMotivoRepository();
+
+            Lotes();
+            Mudas();
+            PontoControle();
+            Estagios();
+            PerdaMotivo();
         }
+
+        public List<Lote> listaLotes { get; set; }
+        public List<Muda> listaMudas { get; set; }
+        public List<Ponto_Controle> listaPontoControle { get; set; }
+        public List<Estagio> listaEstagios { get; set; }
+        public List<Perda_Motivo> listaPerdaMotivo { get; set; }        
 
         private string _dispId;
         public string DispId
@@ -68,8 +97,8 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _motivoId, value);
         }
 
-        private string _data;
-        public string Data
+        private DateTime _data;
+        public DateTime Data
         {
             get => _data;
             set => SetProperty(ref _data, value);
@@ -124,9 +153,66 @@ namespace Prodfy.ViewModels
         public Command SalvarCadastroCommand =>
             _salvarCadastroCommand ?? (_salvarCadastroCommand = new Command(async () => await ExecuteSalvarCadastroCommand()));
 
-        private Task ExecuteSalvarCadastroCommand()
+        private async Task ExecuteSalvarCadastroCommand()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var perda = new Perda
+                {
+                    data = Data,
+                    lote_id = Convert.ToInt32(LoteId),
+                    muda_id = Convert.ToInt32(MudaId),
+                    ponto_controle_id = Convert.ToInt32(PontoControleId),
+                    estagio_id = Convert.ToInt32(EstagioId),
+                    qtde = Convert.ToInt32(Qtde),
+                    motivo_id = Convert.ToInt32(MotivoId)
+                };
+
+                bool perdasAceite = await dialogService.AlertAsync("PERDAS", "Deseja salvar os dados informados?", "Sim", "Não");
+
+                if (perdasAceite)
+                {
+                    try
+                    {
+                        perdaRepositorio.Adicionar(perda);
+                        await dialogService.AlertAsync("PERDAS", "Dados salvos com sucesso!", "Ok");
+                    }
+                    catch (Exception)
+                    {
+                        await dialogService.AlertAsync("PERDAS", "Erro ao salvar dados!", "Ok");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private List<Lote> Lotes()
+        {
+            return listaLotes = loteRepositorio.ObterTodos();
+        }
+
+        private List<Muda> Mudas()
+        {
+            return listaMudas = mudaRepositorio.ObterTodos();
+        }
+
+        private List<Ponto_Controle> PontoControle()
+        {
+            return listaPontoControle = pontoControleRepositorio.ObterTodos();
+        }
+
+        private List<Estagio> Estagios()
+        {
+            return listaEstagios = estagioRepositorio.ObterTodos();
+        }
+
+        private List<Perda_Motivo> PerdaMotivo()
+        {
+            return listaPerdaMotivo = perdaMotivoRepositorio.ObterTodos();
         }
     }
 }

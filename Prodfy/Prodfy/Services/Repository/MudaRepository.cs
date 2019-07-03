@@ -121,8 +121,7 @@ namespace Prodfy.Services.Repository
 
         public List<Muda> ObterTodos()
         {
-            var listaMuda = dataBase._conexao.Table<Muda>().ToList();
-            return listaMuda;
+            return dataBase._conexao.Table<Muda>().ToList();
         }
 
         public int ObterTotalDeRegistros()

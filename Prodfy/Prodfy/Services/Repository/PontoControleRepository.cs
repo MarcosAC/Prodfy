@@ -120,7 +120,7 @@ namespace Prodfy.Services.Repository
 
         public List<Ponto_Controle> ObterTodos()
         {
-            throw new NotImplementedException();
+            return dataBase._conexao.Table<Ponto_Controle>().ToList();
         }
 
         public int ObterTotalDeRegistros()
