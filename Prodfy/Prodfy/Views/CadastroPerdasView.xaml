@@ -60,7 +60,7 @@
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
                                       ItemsSource="{Binding listaMudas}"
                                       ItemDisplayBinding="{Binding nome}"
-                                      SelectedItem="{Binding MudaSelecionado}" />
+                                      SelectedItem="{Binding MudaSelecionada}" />
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Ponto de Controle:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
@@ -72,20 +72,26 @@
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
                                       ItemsSource="{Binding listaEstagios}"
                                       ItemDisplayBinding="{Binding titulo}"
-                                      SelectedItem="{Binding EstagiosSelecionado}" />
+                                      SelectedItem="{Binding EstagioSelecionado}" />
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Quantidade:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                <control:CustomEntry Text="{Binding Qtde}"
+                                     Keyboard="Numeric"
+                                     BackgroundColor="White"
+                                     control:CornerRadiusEffect.CornerRadius="5" />
+                <!--<control:CustomPicker Style="{StaticResource stylePickerFormulario}" />-->
                 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Motivo:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
                                       ItemsSource="{Binding listaPerdaMotivo}"
                                       ItemDisplayBinding="{Binding motivo}"
-                                      SelectedItem="{Binding PerdaMotivoSelecionado}" />                
+                                      SelectedItem="{Binding MotivoSelecionado}" />                
 
                 <StackLayout Orientation="Horizontal">
                     <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
-                    <control:CustomButton Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+                    <control:CustomButton Style="{StaticResource styleButtonSalvar}" 
+                                          Text="Salvar"
+                                          Command="{Binding SalvarCadastroCommand}" />
                 </StackLayout>
             </StackLayout>
         </ScrollView>

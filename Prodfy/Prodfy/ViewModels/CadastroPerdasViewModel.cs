@@ -20,6 +20,9 @@ namespace Prodfy.ViewModels
         private readonly PontoControleRepository pontoControleRepositorio;
         private readonly EstagioRepository estagioRepositorio;
         private readonly PerdaMotivoRepository perdaMotivoRepositorio;
+        private readonly UserRepository userRepositorio;
+
+        private User user;
 
         public CadastroPerdasViewModel()
         {
@@ -34,10 +37,11 @@ namespace Prodfy.ViewModels
             pontoControleRepositorio = new PontoControleRepository();
             estagioRepositorio = new EstagioRepository();
             perdaMotivoRepositorio = new PerdaMotivoRepository();
+            userRepositorio = new UserRepository();
 
             Lotes();
             Mudas();
-            PontoControle();
+            PontoControles();
             Estagios();
             PerdaMotivo();
         }
@@ -48,59 +52,45 @@ namespace Prodfy.ViewModels
         public List<Estagio> listaEstagios { get; set; }
         public List<Perda_Motivo> listaPerdaMotivo { get; set; }        
 
-        private string _dispId;
-        public string DispId
+        private Lote _loteSelecionado;
+        public Lote LoteSelecionado
         {
-            get => _dispId;
-            set => SetProperty(ref _dispId, value);
+            get => _loteSelecionado;
+            set => SetProperty(ref _loteSelecionado, value);
         }
 
-        private string _loteId;
-        public string LoteId
+        private Muda _mudaSelecionada;
+        public Muda MudaSelecionada
         {
-            get => _loteId;
-            set => SetProperty(ref _loteId, value);
+            get => _mudaSelecionada;
+            set => SetProperty(ref _mudaSelecionada, value);
         }
 
-        private string _mudaId;
-        public string MudaId
+        private Ponto_Controle _pontoControleSelecionado;
+        public Ponto_Controle PontoControleSelecionado
         {
-            get => _mudaId;
-            set => SetProperty(ref _mudaId, value);
+            get => _pontoControleSelecionado;
+            set => SetProperty(ref _pontoControleSelecionado, value);
         }
 
-        private string _produtoId;
-        public string ProdutoId
+        private Estagio _estagioSelecionado;
+        public Estagio EstagioSelecionado
         {
-            get => _produtoId;
-            set => SetProperty(ref _produtoId, value);
+            get => _estagioSelecionado;
+            set => SetProperty(ref _estagioSelecionado, value);
         }
 
-        private string _pontoControleId;
-        public string PontoControleId
+        private Perda_Motivo _motivoSelecionado;
+        public Perda_Motivo MotivoSelecionado
         {
-            get => _pontoControleId;
-            set => SetProperty(ref _pontoControleId, value);
-        }
-
-        private string _estagioId;
-        public string EstagioId
-        {
-            get => _estagioId;
-            set => SetProperty(ref _estagioId, value);
-        }
-
-        private string _motivoId;
-        public string MotivoId
-        {
-            get => _motivoId;
-            set => SetProperty(ref _motivoId, value);
+            get => _motivoSelecionado;
+            set => SetProperty(ref _motivoSelecionado, value);
         }
 
         private DateTime _data;
         public DateTime Data
         {
-            get => _data;
+            get => _data = DateTime.Today;
             set => SetProperty(ref _data, value);
         }
 
@@ -111,12 +101,12 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _qtde, value);
         }
 
-        private string _lastUpdate;
-        public string LastUpdate
-        {
-            get => _lastUpdate;
-            set => SetProperty(ref _lastUpdate, value);
-        }
+        //private string _lastUpdate;
+        //public string LastUpdate
+        //{
+        //    get => _lastUpdate;
+        //    set => SetProperty(ref _lastUpdate, value);
+        //}
 
         private string _indSinc;
         public string IndSinc
@@ -159,13 +149,16 @@ namespace Prodfy.ViewModels
             {
                 var perda = new Perda
                 {
+                    disp_id = ObterDispositivoId().disp_id,
+                    lote_id = LoteSelecionado.lote_id,
+                    muda_id = MudaSelecionada.muda_id,
+                    produto_id = LoteSelecionado.produto_id,
+                    ponto_controle_id = PontoControleSelecionado.ponto_controle_id,
+                    estagio_id = EstagioSelecionado.estagio_id,                    
+                    motivo_id = MotivoSelecionado.idPerda_Motivo,
                     data = Data,
-                    lote_id = Convert.ToInt32(LoteId),
-                    muda_id = Convert.ToInt32(MudaId),
-                    ponto_controle_id = Convert.ToInt32(PontoControleId),
-                    estagio_id = Convert.ToInt32(EstagioId),
                     qtde = Convert.ToInt32(Qtde),
-                    motivo_id = Convert.ToInt32(MotivoId)
+                    last_update = DateTime.Now
                 };
 
                 bool perdasAceite = await dialogService.AlertAsync("PERDAS", "Deseja salvar os dados informados?", "Sim", "Não");
@@ -200,7 +193,7 @@ namespace Prodfy.ViewModels
             return listaMudas = mudaRepositorio.ObterTodos();
         }
 
-        private List<Ponto_Controle> PontoControle()
+        private List<Ponto_Controle> PontoControles()
         {
             return listaPontoControle = pontoControleRepositorio.ObterTodos();
         }
@@ -213,6 +206,21 @@ namespace Prodfy.ViewModels
         private List<Perda_Motivo> PerdaMotivo()
         {
             return listaPerdaMotivo = perdaMotivoRepositorio.ObterTodos();
+        }
+
+        private User ObterDispositivoId()
+        {
+            List<User> dispositivoId = new List<User>();
+            dispositivoId = userRepositorio.ObterDispositivoId();
+
+            foreach (var item in dispositivoId)
+            {
+                user = new User
+                {
+                    disp_id = item.disp_id
+                };                
+            }
+            return user;
         }
     }
 }

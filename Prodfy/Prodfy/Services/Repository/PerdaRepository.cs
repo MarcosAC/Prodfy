@@ -25,9 +25,9 @@ namespace Prodfy.Services.Repository
             return 0;
         }
 
-        public void Adicionar(Perda entidade)
+        public void Adicionar(Perda perda)
         {
-            throw new NotImplementedException();
+            _dataBase._conexao.Insert(perda);
         }
 
         public TableQuery<Perda> AsQueryable()

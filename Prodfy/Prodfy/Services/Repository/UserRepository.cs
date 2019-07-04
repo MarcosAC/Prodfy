@@ -70,6 +70,11 @@ namespace Prodfy.Services.Repository
             _dataBase.DeletaTodasTabelas();
         }
 
+        public List<User> ObterDispositivoId()
+        {
+            return _dataBase._conexao.Query<User>("SELECT disp_id FROM User LIMIT 1");
+        }
+
         public TableQuery<User> AsQueryable()
         {
             throw new NotImplementedException();
