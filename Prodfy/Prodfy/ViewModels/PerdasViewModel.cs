@@ -1,6 +1,10 @@
-﻿using Prodfy.Services;
+﻿using Prodfy.Models;
+using Prodfy.Services;
 using Prodfy.Services.Dialog;
+using Prodfy.Services.Repository;
 using Prodfy.Views;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,12 +15,20 @@ namespace Prodfy.ViewModels
         private readonly INavigationService navigationService;
         private readonly IDialogService dialogService;
 
+        private readonly PerdaRepository perdaRepositorio;
+
+        public ObservableCollection<ListaPerdas> ListaDePerdas { get; }
+
         public PerdasViewModel()
         {
             Title = "Perdas";
 
             navigationService = new NavigationService();
             dialogService = new DialogService();
+
+            perdaRepositorio = new PerdaRepository();
+
+            ListaDePerdas = new ObservableCollection<ListaPerdas>(Perdas());
         }
 
         private string _filtro;
@@ -49,6 +61,21 @@ namespace Prodfy.ViewModels
         {
             var scanner = new ZXing.Mobile.MobileBarcodeScanner();
             var result = await scanner.Scan();
+        }
+
+        private List<ListaPerdas> Perdas(string filtro = null)
+        {
+            if (!string.IsNullOrEmpty(filtro))
+            {
+                var listaDadosPerdas = new List<ListaPerdas>();
+
+                foreach (var item in perdaRepositorio.ListaDePerdas(filtro))
+                {
+                    listaDadosPerdas.Add(item);
+                }
+            }
+
+            return perdaRepositorio.ListaDePerdas(filtro);
         }
     }
 }

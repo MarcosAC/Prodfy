@@ -51,6 +51,45 @@
                                          Text="{Binding Filtro}" 
                                          Placeholder="Filtrar pelo código do lote" />
             </Frame>
+
+            <ListView x:Name="listViewPerdas"
+                      ItemSelected="OnItemSelect"
+                      ItemsSource="{Binding ListaDePerdas}"
+                      SelectedItem="{Binding SelecionarPerda, Mode=TwoWay}"
+                      HasUnevenRows="True"
+                      SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Style="{StaticResource styleFrameLista}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="DATA:" Style="{StaticResource styleLabelLista}" Grid.Row="0" Grid.Column="0" />
+                                    <Label Text="LOTE:" Style="{StaticResource styleLabelLista}" Grid.Row="1" Grid.Column="0" />
+                                    <Label Text="PLANTA:" Style="{StaticResource styleLabelLista}" Grid.Row="2" Grid.Column="0" />
+                                    <Label Text="QTDE:" Style="{StaticResource styleLabelLista}" Grid.Row="3" Grid.Column="0" />
+
+                                    <Label Text="{Binding data, StringFormat='{0:dd/MM/yyyy}'}" FontSize="16" TextColor="White" Grid.Row="0" Grid.Column="1" />
+                                    <Label Text="{Binding codigo}" FontSize="16" TextColor="White" Grid.Row="1" Grid.Column="1" />
+                                    <Label Text="{Binding nomeInternoCientifico}" FontSize="16" TextColor="White" Grid.Row="2" Grid.Column="1" />
+                                    <Label Text="{Binding qtde}" FontSize="16" TextColor="White" Grid.Row="3" Grid.Column="1" />
+                                </Grid>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

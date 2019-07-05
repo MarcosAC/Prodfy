@@ -15,5 +15,26 @@ namespace Prodfy.Views
 
             BindingContext = new PerdasViewModel();
         }
-	}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            BindingContext = new PerdasViewModel();
+        }
+
+        public PerdasViewModel ViewModel
+        {
+            get { return BindingContext as PerdasViewModel; }
+            set { BindingContext = value; }
+        }
+
+        private void OnItemSelect(object sender, SelectedItemChangedEventArgs e)
+        {
+            //if (e.SelectedItem != null)
+            //    ViewModel.(e.SelectedItem);
+
+            //listViewPerdas.SelectedItem = null;
+        }
+    }
 }

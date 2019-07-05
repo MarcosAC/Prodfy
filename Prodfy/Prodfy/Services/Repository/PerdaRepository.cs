@@ -8,16 +8,16 @@ namespace Prodfy.Services.Repository
 {
     public class PerdaRepository : IRepository<Perda>
     {
-        private DataBase _dataBase;
+        private DataBase dataBase;
 
         public PerdaRepository()
         {
-            _dataBase = new DataBase();
+            dataBase = new DataBase();
         }
 
         public int ObterTotalDeRegistros()
         {
-            var total = _dataBase._conexao.Table<Perda>().Count();
+            var total = dataBase._conexao.Table<Perda>().Count();
 
             if (total > 0)
                 return total;
@@ -27,7 +27,7 @@ namespace Prodfy.Services.Repository
 
         public void Adicionar(Perda perda)
         {
-            _dataBase._conexao.Insert(perda);
+            dataBase._conexao.Insert(perda);
         }
 
         public TableQuery<Perda> AsQueryable()
@@ -37,7 +37,7 @@ namespace Prodfy.Services.Repository
 
         public void DeletarTodos()
         {
-            _dataBase._conexao.Execute("Delete From Perda");
+            dataBase._conexao.Execute("Delete From Perda");
         }
 
         public void Editar(Perda entidade)
@@ -52,7 +52,33 @@ namespace Prodfy.Services.Repository
 
         public List<Perda> ObterTodos()
         {
-            return _dataBase._conexao.Table<Perda>().OrderBy(p => p.idPerda).ToList();
+            return dataBase._conexao.Table<Perda>().OrderBy(p => p.idPerda).ToList();
+        }
+
+        public List<ListaPerdas> ListaDePerdas(string filtro)
+        {
+            List<ListaPerdas> listaDePerdas = new List<ListaPerdas>();
+
+            listaDePerdas = dataBase._conexao.Query<ListaPerdas>("SELECT " +
+                                                                    "AA.idperda, " +
+                                                                    "AA.disp_id, " +
+                                                                    "L.lote_id, " +
+                                                                    "L.codigo, " +
+                                                                    "AA.muda_id, " +
+                                                                    "M.nome_interno, " +
+                                                                    "M.especie_nome_cientifico, " +
+                                                                    "AA.data, " +
+                                                                    "AA.qtde " +
+                                                                 "FROM " +
+                                                                    "Perda AA " +
+                                                                 "INNER JOIN " +
+                                                                    "Lote L " +
+                                                                 "ON L.lote_id = AA.lote_id " +
+                                                                 "INNER JOIN " +
+                                                                    "Muda M ON M.muda_id = AA.muda_id " +
+                                                                 "ORDER BY AA.data");
+
+            return listaDePerdas;
         }
 
         public string ObterInformacoesParaIdentificacao(string codigo)

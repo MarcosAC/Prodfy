@@ -101,13 +101,6 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _qtde, value);
         }
 
-        //private string _lastUpdate;
-        //public string LastUpdate
-        //{
-        //    get => _lastUpdate;
-        //    set => SetProperty(ref _lastUpdate, value);
-        //}
-
         private string _indSinc;
         public string IndSinc
         {
