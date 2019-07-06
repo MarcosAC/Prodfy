@@ -7,7 +7,7 @@ namespace Prodfy.Models
         public int idperda { get; set; }
         public int disp_id { get; set; }
         public int lote_id { get; set; }
-        public string codigo { get; set; }
+        public string codigo { get; set; } // lote_codigo
         public int muda_id { get; set; }
         public string nome_interno { get; set; }
         public string especie_nome_cientifico { get; set; }

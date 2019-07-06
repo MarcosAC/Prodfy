@@ -103,7 +103,7 @@ namespace Prodfy.Services.Repository
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            dataBase._conexao.Delete<Perda>(id);
         }
     }
 }

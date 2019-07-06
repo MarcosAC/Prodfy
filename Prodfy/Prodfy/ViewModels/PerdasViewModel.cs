@@ -3,6 +3,7 @@ using Prodfy.Services;
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Repository;
 using Prodfy.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -61,6 +62,31 @@ namespace Prodfy.ViewModels
         {
             var scanner = new ZXing.Mobile.MobileBarcodeScanner();
             var result = await scanner.Scan();
+        }
+
+        private Command _selecionarPerdaCommand;
+        public Command SelecionarPerdaCommand =>
+            _selecionarPerdaCommand ?? (_selecionarPerdaCommand = new Command<ListaPerdas>(async p => await ExecuteSelecionarPerdaCommand(p)));
+
+        private async Task ExecuteSelecionarPerdaCommand(ListaPerdas perdaSelecionado)
+        {
+            if (perdaSelecionado == null)
+                return;
+
+            bool deleteAceite = await dialogService.AlertAsync($"LOTE {perdaSelecionado.codigo}", "Deseja apagar este registro ?", "Sim", "Não");
+
+            if (deleteAceite)
+            {
+                try
+                {
+                    perdaRepositorio.Deletar(perdaSelecionado.idperda);
+                    await dialogService.AlertAsync("", $"Perda item {perdaSelecionado.idperda} DELETADO!!", "Ok");
+                }
+                catch (Exception)
+                {
+                    await dialogService.AlertAsync("", $"Erro ao deletar item {perdaSelecionado.idperda}", "Ok");
+                }
+            }
         }
 
         private List<ListaPerdas> Perdas(string filtro = null)

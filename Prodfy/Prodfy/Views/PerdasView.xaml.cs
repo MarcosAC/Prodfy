@@ -31,10 +31,10 @@ namespace Prodfy.Views
 
         private void OnItemSelect(object sender, SelectedItemChangedEventArgs e)
         {
-            //if (e.SelectedItem != null)
-            //    ViewModel.(e.SelectedItem);
+            if (e.SelectedItem != null)
+                ViewModel.SelecionarPerdaCommand.Execute(e.SelectedItem);
 
-            //listViewPerdas.SelectedItem = null;
+            listViewPerdas.SelectedItem = null;
         }
     }
 }
