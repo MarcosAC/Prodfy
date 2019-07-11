@@ -101,8 +101,7 @@ namespace Prodfy.Services.Repository
 
         public TableQuery<Lote> AsQueryable()
         {
-            var dados = dataBase._conexao.Table<Lote>();
-            return dados;
+            throw new NotImplementedException();
         }
 
         public void DeletarTodos()
@@ -125,9 +124,52 @@ namespace Prodfy.Services.Repository
             return dataBase._conexao.Table<Lote>().OrderBy(l => l.idLote).ToList();
         }
 
-        public Lote ObterDadosPorId(string id)
+        public string ObterLotePorId(string id)
         {
-            throw new NotImplementedException();
+            var dados = dataBase._conexao.Query<Lote>($"SELECT lote_id FROM Lote WHERE codigo = '{id}' LIMIT 1");
+
+            string lotePorId = string.Empty;
+            string ret = string.Empty;
+
+            foreach (var item in dados)
+            {
+                lotePorId = item.lote_id.ToString();
+            }
+
+            if (!string.IsNullOrEmpty(lotePorId))
+            {
+                ret = $"1||{lotePorId}|";
+            }
+            else
+            {
+                ret = "0|Registro não encontrado!||";
+            }
+
+            return ret;
+        }
+
+        public string ObterLoteProdutoPorId(string id)
+        {
+            var dados = dataBase._conexao.Query<Lote>($"SELECT produto_id FROM Lote WHERE codigo = '{id}' LIMIT 1");
+
+            string loteProdutoPorId = string.Empty;
+            string ret = string.Empty;
+
+            foreach (var item in dados)
+            {
+                loteProdutoPorId = item.produto_id.ToString();
+            }
+
+            if (!string.IsNullOrEmpty(loteProdutoPorId))
+            {
+                ret = $"1||{loteProdutoPorId}|";
+            }
+            else
+            {
+                ret = "0|Registro não encontrado!||";
+            }
+
+            return ret;            
         }
 
         public string ObterInformacoesParaIdentificacao(int id)
@@ -141,6 +183,11 @@ namespace Prodfy.Services.Repository
         }
 
         public void Deletar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Lote ObterDadosPorId(string id)
         {
             throw new NotImplementedException();
         }
