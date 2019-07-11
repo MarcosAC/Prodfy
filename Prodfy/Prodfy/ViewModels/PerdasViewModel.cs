@@ -20,6 +20,7 @@ namespace Prodfy.ViewModels
         private readonly PerdaRepository perdaRepositorio;
         private readonly LoteRepository loteRepositorio;
         private readonly MudaRepository mudaRepositorio;
+        private readonly PontoControleRepository pontoControleRepositorio;
 
         public ObservableCollection<ListaPerdas> ListaDePerdas { get; }
 
@@ -33,6 +34,7 @@ namespace Prodfy.ViewModels
             perdaRepositorio = new PerdaRepository();
             loteRepositorio = new LoteRepository();
             mudaRepositorio = new MudaRepository();
+            pontoControleRepositorio = new PontoControleRepository();
 
             ListaDePerdas = new ObservableCollection<ListaPerdas>(Perdas());
         }
@@ -93,14 +95,14 @@ namespace Prodfy.ViewModels
                     qrQtd = resultadoQR[2],
                     qrDataEstaq = resultadoQR[3],
                     qrDensidade = resultadoQR[4],
-                    qrPontoControle = resultadoQR[5],
+                    qrPontoControleId = resultadoQR[5],
                     qrEstagioId = resultadoQR[6],
                     qrColaboradorId = resultadoQR[7],
                     qrLivre = resultadoQR[8],
                     qrTipoEtiqueta = resultadoQR[9]
                 };
 
-                //LOTE
+                #region Lote
                 if (!string.IsNullOrEmpty(dadosQR.qrLoteCod))
                 {
                     //Lote ID
@@ -123,8 +125,9 @@ namespace Prodfy.ViewModels
                         return;
                     }
                 }
+                #endregion
 
-                //MUDA
+                #region Muda
                 if (!string.IsNullOrEmpty(dadosQR.qrMudaId))
                 {
                     //Muda Nome Comum
@@ -137,6 +140,33 @@ namespace Prodfy.ViewModels
                         return;
                     }
                 }
+                #endregion
+
+                #region Quantidade
+                if (resultadoQR.Count() >= 8)
+                {
+                    if (!string.IsNullOrEmpty(dadosQR.qrPontoControleId))
+                    {
+                        //Ponto Controle Info
+                        string pontoControleIndo = pontoControleRepositorio.ObterInformacoesParaIdentificacao(int.Parse(dadosQR.qrPontoControleId));
+                        var tmpPontoControleIndo = pontoControleIndo.Split('|');
+
+                        if (tmpPontoControleIndo[0] == "0")
+                        {
+                            await dialogService.AlertAsync("Etiqueta QR", "Ponto de Controle indicado não localizado!", "Ok");
+                            return;
+                        }
+                        else
+                        {
+                            var pontoControleCodigo = tmpPontoControleIndo[4];
+                            var pontoControleTitulo = tmpPontoControleIndo[5];
+                        }
+                    }                    
+                }
+                #endregion
+
+                #region Estagio
+                #endregion
 
                 if (dadosQR.qrTipoEtiqueta == null || dadosQR.qrTipoEtiqueta != "1")
                 {

@@ -108,9 +108,43 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public string ObterInformacoesParaIdentificacao(int id)
+        public string ObterInformacoesParaIdentificacao(int pontoControleId)
         {
-            throw new NotImplementedException();
+            var dadosPontoControle = dataBase._conexao.Table<Ponto_Controle>().FirstOrDefault(p => p.ponto_controle_id == pontoControleId);
+
+            var pontoControleInfo = new
+            {
+                dadosPontoControle.ponto_controle_id,
+                dadosPontoControle.produto_id,
+                dadosPontoControle.codigo,
+                dadosPontoControle.titulo,
+                dadosPontoControle.unidade,
+                dadosPontoControle.maturacao,
+                dadosPontoControle.maturacao_seg,
+                dadosPontoControle.ind_alertas,
+                dadosPontoControle.ordem
+            };
+
+            string ret = string.Empty;
+
+            if (pontoControleInfo.ponto_controle_id != 0)
+            {
+                ret = $"1||{pontoControleInfo.ponto_controle_id}|" +
+                      $"{pontoControleInfo.produto_id}|" +
+                      $"{pontoControleInfo.codigo}|" +
+                      $"{pontoControleInfo.titulo}|" +
+                      $"{pontoControleInfo.unidade}|" +
+                      $"{pontoControleInfo.maturacao}|" +
+                      $"{pontoControleInfo.maturacao_seg}|" +
+                      $"{pontoControleInfo.ind_alertas}|" +
+                      $"{pontoControleInfo.ordem}|";
+            }
+            else
+            {
+                ret = "0|Registro não encontrado!|";
+            }
+
+            return ret;
         }
 
         public string ObterInformacoesParaIdentificacao(int id, string codigo)

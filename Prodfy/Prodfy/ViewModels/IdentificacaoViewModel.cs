@@ -88,7 +88,7 @@ namespace Prodfy.ViewModels
                     qrQtd = resultadoQR[2],
                     qrDataEstaq = resultadoQR[3],
                     qrDensidade = resultadoQR[4],
-                    qrPontoControle = resultadoQR[5],
+                    qrPontoControleId = resultadoQR[5],
                     qrEstagioId = resultadoQR[6],
                     qrColaboradorId = resultadoQR[7],
                     qrLivre = resultadoQR[8],
