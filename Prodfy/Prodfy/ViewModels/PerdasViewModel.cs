@@ -21,6 +21,7 @@ namespace Prodfy.ViewModels
         private readonly LoteRepository loteRepositorio;
         private readonly MudaRepository mudaRepositorio;
         private readonly PontoControleRepository pontoControleRepositorio;
+        private readonly EstagioRepository estagioRepositorio;
 
         public ObservableCollection<ListaPerdas> ListaDePerdas { get; }
 
@@ -35,6 +36,7 @@ namespace Prodfy.ViewModels
             loteRepositorio = new LoteRepository();
             mudaRepositorio = new MudaRepository();
             pontoControleRepositorio = new PontoControleRepository();
+            estagioRepositorio = new EstagioRepository();
 
             ListaDePerdas = new ObservableCollection<ListaPerdas>(Perdas());
         }
@@ -77,6 +79,11 @@ namespace Prodfy.ViewModels
             {
                 IsBusy = true;
 
+                string pontoControleCodigo = string.Empty;
+                string pontoControleTitulo = string.Empty;
+                string estagioCodigo = string.Empty;
+                string estagioTitulo = string.Empty;
+
                 string[] resultadoQR = result.Text.Split('|');
 
                 if (resultadoQR.Count() < 8)
@@ -103,7 +110,7 @@ namespace Prodfy.ViewModels
                 };
 
                 #region Lote
-                if (!string.IsNullOrEmpty(dadosQR.qrLoteCod))
+                if (dadosQR.qrLoteCod != null)
                 {
                     //Lote ID
                     string loteInfo = loteRepositorio.ObterLotePorId(dadosQR.qrLoteCod);
@@ -128,7 +135,7 @@ namespace Prodfy.ViewModels
                 #endregion
 
                 #region Muda
-                if (!string.IsNullOrEmpty(dadosQR.qrMudaId))
+                if (dadosQR.qrMudaId != null)
                 {
                     //Muda Nome Comum
                     string mudaIndo = mudaRepositorio.ObterInformacoesParaIdentificacao(int.Parse(dadosQR.qrMudaId));
@@ -145,27 +152,47 @@ namespace Prodfy.ViewModels
                 #region Quantidade
                 if (resultadoQR.Count() >= 8)
                 {
-                    if (!string.IsNullOrEmpty(dadosQR.qrPontoControleId))
+                    if (dadosQR.qrPontoControleId != null)
                     {
                         //Ponto Controle Info
-                        string pontoControleIndo = pontoControleRepositorio.ObterInformacoesParaIdentificacao(int.Parse(dadosQR.qrPontoControleId));
-                        var tmpPontoControleIndo = pontoControleIndo.Split('|');
+                        string pontoControleInfo = pontoControleRepositorio.ObterInformacoesParaIdentificacao(int.Parse(dadosQR.qrPontoControleId));
+                        var tmpPontoControleInfo = pontoControleInfo.Split('|');
 
-                        if (tmpPontoControleIndo[0] == "0")
+                        if (tmpPontoControleInfo[0] == "0")
                         {
                             await dialogService.AlertAsync("Etiqueta QR", "Ponto de Controle indicado não localizado!", "Ok");
                             return;
                         }
                         else
                         {
-                            var pontoControleCodigo = tmpPontoControleIndo[4];
-                            var pontoControleTitulo = tmpPontoControleIndo[5];
+                            pontoControleCodigo = tmpPontoControleInfo[4];
+                            pontoControleTitulo = tmpPontoControleInfo[5];
                         }
                     }                    
                 }
                 #endregion
 
                 #region Estagio
+                if (!string.IsNullOrEmpty(pontoControleCodigo))
+                {
+                    if (dadosQR.qrEstagioId != null)
+                    {
+                        //Estagio Info
+                        string estagioInfo = estagioRepositorio.ObterInformacoesParaIdentificacao(int.Parse(dadosQR.qrPontoControleId), int.Parse(dadosQR.qrEstagioId));
+                        var tmpestagioInfo = estagioInfo.Split('|');
+
+                        if (tmpestagioInfo[0] == "0")
+                        {
+                            await dialogService.AlertAsync("Etiqueta QR", "Ponto de Controle indicado não localizado!", "Ok");
+                            return;
+                        }
+                        else
+                        {
+                            estagioCodigo = tmpestagioInfo[5];
+                            estagioTitulo = tmpestagioInfo[6];
+                        }
+                    }
+                }
                 #endregion
 
                 if (dadosQR.qrTipoEtiqueta == null || dadosQR.qrTipoEtiqueta != "1")

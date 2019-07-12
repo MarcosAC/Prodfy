@@ -147,6 +147,63 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
+        public string ObterInformacoesParaIdentificacao(int pontoControleId, int estagioId)
+        {
+            var dadosEstagioInfo = dataBase._conexao.Query<Estagio>("SELECT " +
+                                                "AA.estagio_id, " +
+                                                "AA.produto_id, " +
+                                                "AA.ponto_controle_id, " +
+                                                "AA.codigo, " +
+                                                "AA.titulo, " +
+                                                "AA.unidade, " +
+                                                "AA.maturacao, " +
+                                                "AA.maturacao_seg, " +
+                                                "AA.ind_alertas, " +
+                                                "AA.ordem " +
+                                             "FROM " +
+                                                "Estagio AA " +
+                                             "WHERE " +
+                                                $"AA.ponto_controle_id = '{pontoControleId}' " +
+                                             "AND " +
+                                                $"AA.estagio_id = '{estagioId}' LIMIT 1");
+
+            var estagioInfo = new
+            {
+                dadosEstagioInfo[0].estagio_id,
+                dadosEstagioInfo[0].produto_id,
+                dadosEstagioInfo[0].ponto_controle_id,
+                dadosEstagioInfo[0].codigo,
+                dadosEstagioInfo[0].titulo,
+                dadosEstagioInfo[0].unidade,
+                dadosEstagioInfo[0].maturacao,
+                dadosEstagioInfo[0].maturacao_seg,
+                dadosEstagioInfo[0].ind_alertas,
+                dadosEstagioInfo[0].ordem
+            };
+
+            string ret = string.Empty;
+
+            if (estagioInfo.estagio_id != 0)
+            {
+                ret = $"1||{estagioInfo.estagio_id}|" +
+                      $"{estagioInfo.produto_id}|" +
+                      $"{estagioInfo.ponto_controle_id}|" +
+                      $"{estagioInfo.codigo}|" +
+                      $"{estagioInfo.titulo}|" +
+                      $"{estagioInfo.unidade}|" +
+                      $"{estagioInfo.maturacao}|" +
+                      $"{estagioInfo.maturacao_seg}|" +
+                      $"{estagioInfo.ind_alertas}|" +
+                      $"{estagioInfo.ordem}|";
+            }
+            else
+            {
+                ret = "0|Registro não encontrado!|";
+            }
+
+            return ret;
+        }
+
         public List<Estagio> ObterTodos()
         {
             return dataBase._conexao.Table<Estagio>().ToList();

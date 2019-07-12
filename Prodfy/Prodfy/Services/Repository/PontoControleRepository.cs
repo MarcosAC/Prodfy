@@ -145,12 +145,7 @@ namespace Prodfy.Services.Repository
             }
 
             return ret;
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
-        {
-            throw new NotImplementedException();
-        }
+        }        
 
         public List<Ponto_Controle> ObterTodos()
         {
