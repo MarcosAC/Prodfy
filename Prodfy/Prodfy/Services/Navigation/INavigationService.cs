@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Prodfy.Services
+namespace Prodfy.Services.Navigation
 {
     public interface INavigationService
     {

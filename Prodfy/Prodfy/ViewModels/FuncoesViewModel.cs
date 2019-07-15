@@ -1,5 +1,5 @@
 ﻿using Prodfy.Models;
-using Prodfy.Services;
+using Prodfy.Services.Navigation;
 using Prodfy.Services.Repository;
 using Prodfy.Views;
 using System.Threading.Tasks;

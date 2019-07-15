@@ -9,9 +9,8 @@ using Xamarin.Forms;
 
 namespace Prodfy.ViewModels
 {
-    public class AdicionarPerdasViewModel : BaseViewModel
-    {       
-
+    public class EditarPerdasViewModel : BaseViewModel
+    {
         private readonly INavigationService navigationService;
         private readonly IDialogService dialogService;
 
@@ -23,7 +22,7 @@ namespace Prodfy.ViewModels
         private readonly PerdaMotivoRepository perdaMotivoRepositorio;
         private readonly UserRepository userRepositorio;
 
-        private User user;     
+        private User user;
 
         public List<Lote> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }
@@ -31,7 +30,7 @@ namespace Prodfy.ViewModels
         public List<Estagio> listaEstagios { get; set; }
         public List<Perda_Motivo> listaPerdaMotivo { get; set; }
 
-        public AdicionarPerdasViewModel()
+        public EditarPerdasViewModel()
         {
             Title = "Perdas";
 
@@ -52,57 +51,48 @@ namespace Prodfy.ViewModels
             Estagios();
             PerdaMotivo();
         }
-
-        private Lote _loteSelecionado;
         public Lote LoteSelecionado
         {
             get => _loteSelecionado;
             set => SetProperty(ref _loteSelecionado, value);
         }
 
-        private Muda _mudaSelecionada;
         public Muda MudaSelecionada
         {
             get => _mudaSelecionada;
             set => SetProperty(ref _mudaSelecionada, value);
         }
 
-        private Ponto_Controle _pontoControleSelecionado;
         public Ponto_Controle PontoControleSelecionado
         {
             get => _pontoControleSelecionado;
             set => SetProperty(ref _pontoControleSelecionado, value);
         }
 
-        private Estagio _estagioSelecionado;
         public Estagio EstagioSelecionado
         {
             get => _estagioSelecionado;
             set => SetProperty(ref _estagioSelecionado, value);
         }
 
-        private Perda_Motivo _motivoSelecionado;
         public Perda_Motivo MotivoSelecionado
         {
             get => _motivoSelecionado;
             set => SetProperty(ref _motivoSelecionado, value);
         }
 
-        private DateTime _data;
         public DateTime Data
         {
             get => _data = DateTime.Today;
             set => SetProperty(ref _data, value);
         }
 
-        private string _qtde;
         public string Qtde
         {
             get => _qtde;
             set => SetProperty(ref _qtde, value);
         }
 
-        private string _indSinc;
         public string IndSinc
         {
             get => _indSinc;
