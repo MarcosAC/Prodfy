@@ -9,8 +9,9 @@ using Xamarin.Forms;
 
 namespace Prodfy.ViewModels
 {
-    public class CadastroPerdasViewModel : BaseViewModel
-    {
+    public class AdicionarPerdasViewModel : BaseViewModel
+    {       
+
         private readonly INavigationService navigationService;
         private readonly IDialogService dialogService;
 
@@ -22,9 +23,15 @@ namespace Prodfy.ViewModels
         private readonly PerdaMotivoRepository perdaMotivoRepositorio;
         private readonly UserRepository userRepositorio;
 
-        private User user;
+        private User user;     
 
-        public CadastroPerdasViewModel()
+        public List<Lote> listaLotes { get; set; }
+        public List<Muda> listaMudas { get; set; }
+        public List<Ponto_Controle> listaPontoControle { get; set; }
+        public List<Estagio> listaEstagios { get; set; }
+        public List<Perda_Motivo> listaPerdaMotivo { get; set; }
+
+        public AdicionarPerdasViewModel()
         {
             Title = "Perdas";
 
@@ -45,12 +52,6 @@ namespace Prodfy.ViewModels
             Estagios();
             PerdaMotivo();
         }
-
-        public List<Lote> listaLotes { get; set; }
-        public List<Muda> listaMudas { get; set; }
-        public List<Ponto_Controle> listaPontoControle { get; set; }
-        public List<Estagio> listaEstagios { get; set; }
-        public List<Perda_Motivo> listaPerdaMotivo { get; set; }        
 
         private Lote _loteSelecionado;
         public Lote LoteSelecionado
@@ -112,7 +113,7 @@ namespace Prodfy.ViewModels
         public Command TitleViewBotaoVoltarCommand =>
             _titleViewBotaoVoltarCommand ?? (_titleViewBotaoVoltarCommand = new Command(async () => await ExecuteTitleViewBotaoVoltarCommand()));
 
-        private async Task ExecuteTitleViewBotaoVoltarCommand() => await navigationService.PopAsync();        
+        private async Task ExecuteTitleViewBotaoVoltarCommand() => await navigationService.PopAsync();
 
         private Command _leitorQRCommand;
         public Command LeitorQRCommand => _leitorQRCommand ?? (_leitorQRCommand = new Command(async () => await ExecuteLeitorQRCommand()));
@@ -147,7 +148,7 @@ namespace Prodfy.ViewModels
                     muda_id = MudaSelecionada.muda_id,
                     produto_id = LoteSelecionado.produto_id,
                     ponto_controle_id = PontoControleSelecionado.ponto_controle_id,
-                    estagio_id = EstagioSelecionado.estagio_id,                    
+                    estagio_id = EstagioSelecionado.estagio_id,
                     motivo_id = MotivoSelecionado.idPerda_Motivo,
                     data = Data,
                     qtde = Convert.ToInt32(Qtde),
@@ -211,7 +212,7 @@ namespace Prodfy.ViewModels
                 user = new User
                 {
                     disp_id = item.disp_id
-                };                
+                };
             }
             return user;
         }

@@ -1,12 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Controls.BotoesCadastro">
     
   <ContentView.Content>
         <StackLayout Orientation="Horizontal">
-            <Button Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
-            <Button Style="{StaticResource styleButtonSalvar}" Text="Salvar" />
+            <control:CustomButton Style="{StaticResource styleButtonCancelar}" 
+                                  Text="Cancelar" 
+                                  Command="{Binding CancelarCadastroCommand}" />
+            
+            <control:CustomButton Style="{StaticResource styleButtonSalvar}" 
+                                          Text="Salvar"
+                                          Command="{Binding SalvarCadastroCommand}" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>
