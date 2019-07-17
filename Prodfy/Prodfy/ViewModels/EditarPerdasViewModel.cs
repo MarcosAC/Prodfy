@@ -23,6 +23,7 @@ namespace Prodfy.ViewModels
         private readonly UserRepository userRepositorio;
 
         private User user;
+        public EditarPerdas _editarPerdas;
 
         public List<Lote> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }
@@ -30,7 +31,7 @@ namespace Prodfy.ViewModels
         public List<Estagio> listaEstagios { get; set; }
         public List<Perda_Motivo> listaPerdaMotivo { get; set; }
 
-        public EditarPerdasViewModel()
+        public EditarPerdasViewModel(EditarPerdas editarPerdas)
         {
             Title = "Perdas";
 
@@ -45,54 +46,93 @@ namespace Prodfy.ViewModels
             perdaMotivoRepositorio = new PerdaMotivoRepository();
             userRepositorio = new UserRepository();
 
+            _editarPerdas = editarPerdas;
+
             Lotes();
             Mudas();
             PontoControles();
             Estagios();
             PerdaMotivo();
         }
+
+        public int LoteSelecionadoIndex { get => Index("Lote"); }
+
+        private Lote _loteSelecionado;
         public Lote LoteSelecionado
         {
             get => _loteSelecionado;
             set => SetProperty(ref _loteSelecionado, value);
         }
 
+        public int MudaSelecionadaIndex { get => Index("Muda"); }
+
+        private Muda _mudaSelecionada;
         public Muda MudaSelecionada
         {
             get => _mudaSelecionada;
             set => SetProperty(ref _mudaSelecionada, value);
         }
 
+        public int PontoControleSelecionadoIndex { get => Index("PontoControle"); }
+
+        private Ponto_Controle _pontoControleSelecionado;
         public Ponto_Controle PontoControleSelecionado
         {
             get => _pontoControleSelecionado;
             set => SetProperty(ref _pontoControleSelecionado, value);
         }
 
+        public int EstagioSelecionadoIndex { get => Index("Estagio"); }
+
+        private Estagio _estagioSelecionado;
         public Estagio EstagioSelecionado
         {
             get => _estagioSelecionado;
             set => SetProperty(ref _estagioSelecionado, value);
         }
 
+        public int PerdaMotivoSelecionadoIndex { get => Index("PerdaMotivo"); }
+
+        private Perda_Motivo _motivoSelecionado;
         public Perda_Motivo MotivoSelecionado
         {
             get => _motivoSelecionado;
             set => SetProperty(ref _motivoSelecionado, value);
         }
 
+        private DateTime _data;
         public DateTime Data
         {
             get => _data = DateTime.Today;
             set => SetProperty(ref _data, value);
         }
 
+        private string _qtde;
         public string Qtde
         {
-            get => _qtde;
-            set => SetProperty(ref _qtde, value);
+            get
+            {
+                if (!string.IsNullOrEmpty(_editarPerdas.Oquantidade))
+                {
+                    _qtde = _editarPerdas.Oquantidade;
+                }
+
+                return _qtde;
+            } 
+
+            set
+            {
+                if (!string.IsNullOrEmpty(_editarPerdas.Oquantidade))
+                {
+                    _editarPerdas.Oquantidade = value;
+                    OnPropertyChanged();
+                }
+
+                SetProperty(ref _qtde, value);
+            }
         }
 
+        private string _indSinc;
         public string IndSinc
         {
             get => _indSinc;
@@ -205,6 +245,36 @@ namespace Prodfy.ViewModels
                 };
             }
             return user;
+        }
+
+        private int Index(string objeto)
+        {
+            int index = -1;
+
+            switch (objeto)
+            {
+                case "Lote":
+                    var listaLotes = Lotes();
+                    index = listaLotes.FindIndex(l => l.codigo == _editarPerdas.OloteCodigo);
+                    break;
+                case "Muda":
+                    var listaMudas = Mudas();
+                    index = listaMudas.FindIndex(m => m.muda_id == int.Parse(_editarPerdas.OmudaId));
+                    break;
+                case "PontoControle":
+                    var listaPontoControles = PontoControles();
+                    index = listaPontoControles.FindIndex(p => p.ponto_controle_id == int.Parse(_editarPerdas.OpontoControleId));
+                    break;
+                case "Estagio":
+                    var listaEstagios = Estagios();
+                    index = listaEstagios.FindIndex(e => e.estagio_id == int.Parse(_editarPerdas.OestagioId));
+                    break;
+                case "PerdaMotivo":
+                    var listaPerdaMotivos = PerdaMotivo();
+                    index = listaPerdaMotivos.FindIndex(p => p.perda_motivo_id == int.Parse(_editarPerdas.OPerdaMotivoId));
+                    break;
+            }
+            return index;
         }
     }
 }

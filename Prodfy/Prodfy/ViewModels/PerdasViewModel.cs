@@ -162,11 +162,16 @@ namespace Prodfy.ViewModels
                 #endregion
 
                 #region Quantidade
+                if (dadosQR.qrQtd != null)
+                    quantidade = dadosQR.qrQtd;
+                #endregion
+
+                #region Ponto Controle
                 if (resultadoQR.Count() >= 8)
                 {
-                    if (dadosQR.qrPontoControleId != null)
+                    if (dadosQR.qrPontoControleId == null)
                     {
-                        quantidade = dadosQR.qrQtd;
+
                         pontoControleId = string.Empty;
                         pontoControleCodigo = string.Empty;
                         pontoControleTitulo = string.Empty;
@@ -199,7 +204,7 @@ namespace Prodfy.ViewModels
                 #region Estagio
                 if (!string.IsNullOrEmpty(pontoControleCodigo))
                 {
-                    if (dadosQR.qrEstagioId != null)
+                    if (dadosQR.qrEstagioId == null)
                     {
                         estagioId = string.Empty;
                         estagioCodigo = string.Empty;
@@ -237,17 +242,20 @@ namespace Prodfy.ViewModels
                     !string.IsNullOrEmpty(mudaNomeComum) &&
                     !string.IsNullOrEmpty(quantidade))
                 {
-                    var carregarCadastroPerdas = new CarregaCamposPerdas
+                    var carregarCadastroPerdas = new EditarPerdas
                     {
                         OloteId = loteId,
                         OloteCodigo = loteCodigo,
                         OloteProdutoId = loteProdutoId,
                         OmudaId = mudaId,
                         OmudaNomeComum = mudaNomeComum,
-                        Oquantidade = quantidade
+                        Oquantidade = quantidade,
+                        OpontoControleId = pontoControleId,
+                        OestagioId = estagioId,
+                        //OPerdaMotivoId = perdaMotivoId
                     };
 
-                    await navigationService.PushAsync(new AdicionarPerdasView());
+                    await navigationService.PushAsync(new EditarPerdasView(carregarCadastroPerdas));
                 }
                 else
                 {
