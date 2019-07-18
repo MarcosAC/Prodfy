@@ -10,8 +10,7 @@ using Xamarin.Forms;
 namespace Prodfy.ViewModels
 {
     public class AdicionarPerdasViewModel : BaseViewModel
-    {       
-
+    {
         private readonly INavigationService navigationService;
         private readonly IDialogService dialogService;
 
@@ -23,7 +22,7 @@ namespace Prodfy.ViewModels
         private readonly PerdaMotivoRepository perdaMotivoRepositorio;
         private readonly UserRepository userRepositorio;
 
-        private User user;     
+        private User user;
 
         public List<Lote> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }

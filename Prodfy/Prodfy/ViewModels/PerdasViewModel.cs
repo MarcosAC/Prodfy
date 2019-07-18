@@ -58,11 +58,11 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteTitleViewBotaoVoltarCommand() => await navigationService.PopAsync();
 
-        private Command _irParaCadastroPerdasCommand;
-        public Command IrParaCadastroPerdasCommand =>
-            _irParaCadastroPerdasCommand ?? (_irParaCadastroPerdasCommand = new Command(async () => await ExecuteIrParaCadastroPerdasCommand()));
+        private Command _irParaAdicionarPerdasCommand;
+        public Command IrParaAdicionarPerdasCommand =>
+            _irParaAdicionarPerdasCommand ?? (_irParaAdicionarPerdasCommand = new Command(async () => await ExecuteIrParaAdicionarPerdasCommand()));
 
-        private async Task ExecuteIrParaCadastroPerdasCommand() => await navigationService.PushAsync(new AdicionarPerdasView());
+        private async Task ExecuteIrParaAdicionarPerdasCommand() => await navigationService.PushAsync(new AdicionarPerdasView());
 
         private Command _leitorQRCommand;
         public Command LeitorQRCommand => _leitorQRCommand ?? (_leitorQRCommand = new Command(async () => await ExecuteLeitorQRCommand()));
@@ -242,7 +242,7 @@ namespace Prodfy.ViewModels
                     !string.IsNullOrEmpty(mudaNomeComum) &&
                     !string.IsNullOrEmpty(quantidade))
                 {
-                    var carregarCadastroPerdas = new EditarPerdas
+                    var carregarCadastroPerdas = new CarregarDadosPerda
                     {
                         OloteId = loteId,
                         OloteCodigo = loteCodigo,
@@ -251,11 +251,10 @@ namespace Prodfy.ViewModels
                         OmudaNomeComum = mudaNomeComum,
                         Oquantidade = quantidade,
                         OpontoControleId = pontoControleId,
-                        OestagioId = estagioId,
-                        //OPerdaMotivoId = perdaMotivoId
+                        OestagioId = estagioId
                     };
 
-                    await navigationService.PushAsync(new EditarPerdasView(carregarCadastroPerdas));
+                    //await navigationService.PushAsync(new CadastroPerdasView(/*carregarCadastroPerdas*/));
                 }
                 else
                 {

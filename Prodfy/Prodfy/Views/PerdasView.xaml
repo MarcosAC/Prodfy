@@ -27,7 +27,7 @@
                        HorizontalOptions="End">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding IrParaCadastroPerdasCommand}" />
+                        <TapGestureRecognizer Command="{Binding IrParaAdicionarPerdasCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
 

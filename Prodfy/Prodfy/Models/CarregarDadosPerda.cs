@@ -1,6 +1,6 @@
 ﻿namespace Prodfy.Models
 {
-    public class EditarPerdas
+    public class CarregarDadosPerda
     {
         public string OloteId { get; set; }
         public string OloteCodigo { get; set; }

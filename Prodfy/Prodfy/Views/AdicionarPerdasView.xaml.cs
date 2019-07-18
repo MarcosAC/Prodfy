@@ -4,7 +4,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AdicionarPerdasView : ContentPage
 	{
 		public AdicionarPerdasView ()
