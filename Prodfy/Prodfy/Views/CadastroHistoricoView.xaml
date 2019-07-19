@@ -54,13 +54,18 @@
                 <Label Style="{StaticResource styleLabelFormulario}" Text="{Binding ContagemCaracteresTexto}" />
                 <control:CustomEditor Style="{StaticResource styleEditorFormulario}" 
                                       MaxLength="2000" 
-                                      Text="{Binding Texto}" />                
+                                      Text="{Binding Texto}" />
 
-                <StackLayout Orientation="Horizontal">
-                <control:CustomButton Style="{StaticResource styleButtonCancelar}" Text="Cancelar" />
-                <control:CustomButton Style="{StaticResource styleButtonSalvar}" Text="Salvar" Command="{Binding SalvarCadastroCommand}"/>
-                </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <control:CustomButton Style="{StaticResource styleButtonCancelar}" 
+                                      Text="Cancelar" 
+                                      Command="{Binding CancelarCadastroCommand}" />
+
+                <control:CustomButton Style="{StaticResource styleButtonSalvar}" 
+                                      Text="Salvar"
+                                      Command="{Binding SalvarCadastroCommand}" />
             </StackLayout>
+        </StackLayout>
         <!--</ScrollView>-->
     </ContentPage.Content>
 </ContentPage>

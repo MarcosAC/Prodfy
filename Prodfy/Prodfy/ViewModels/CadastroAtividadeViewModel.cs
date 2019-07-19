@@ -128,12 +128,9 @@ namespace Prodfy.ViewModels
 
         private Command _cancelarCadastroCommand;
         public Command CancelarCadastroCommand =>
-            _cancelarCadastroCommand ?? (_cancelarCadastroCommand = new Command(() => ExecuteCancelarCadastroCommand()));
+            _cancelarCadastroCommand ?? (_cancelarCadastroCommand = new Command(async () => await ExecuteCancelarCadastroCommand()));
 
-        private void ExecuteCancelarCadastroCommand()
-        {
-           
-        }
+        private async Task ExecuteCancelarCadastroCommand() => await navigationService.PopAsync();
 
         private Command _salvarCadastroCommand;
         public Command SalvarCadastroCommand =>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Prodfy.Services.Dialog;
+using Prodfy.Services.Navigation;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -6,9 +8,15 @@ namespace Prodfy.ViewModels
 {
     public class CadastroEvolucaoViewModel : BaseViewModel
     {
+        private readonly INavigationService navigationService;
+        private readonly IDialogService dialogService;
+
         public CadastroEvolucaoViewModel()
         {
             Title = "Evolução";
+
+            navigationService = new NavigationService();
+            dialogService = new DialogService();
         }
 
         private string _data;
@@ -119,10 +127,7 @@ namespace Prodfy.ViewModels
         public Command CancelarCadastroCommand =>
             _cancelarCadastroCommand ?? (_cancelarCadastroCommand = new Command(async () => await ExecuteCancelarCadastroCommand()));
 
-        private Task ExecuteCancelarCadastroCommand()
-        {
-            throw new NotImplementedException();
-        }
+        private async Task ExecuteCancelarCadastroCommand() => await navigationService.PopAsync();
 
         private Command _salvarCadastroCommand;
         public Command SalvarCadastroCommand =>
