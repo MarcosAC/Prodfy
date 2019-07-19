@@ -339,6 +339,8 @@ namespace Prodfy.ViewModels
         {
             try
             {
+                await ValidarCampos();
+
                 var perda = new Perda
                 {
                     disp_id = ObterDispositivoId().disp_id,
@@ -370,8 +372,7 @@ namespace Prodfy.ViewModels
             }
             catch (Exception)
             {
-
-                throw;
+                return;
             }
         }
 
@@ -413,6 +414,51 @@ namespace Prodfy.ViewModels
                 };
             }
             return user;
+        }
+
+        private async Task ValidarCampos()
+        {
+            if (Data == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo DATA é obrigatório!", "Ok");
+                return;
+            }
+
+            if (LoteSelecionado == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo LOTE é obrigatório!", "Ok");
+                return;
+            }
+
+            if (MudaSelecionada == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo MUDA é obrigatório!", "Ok");
+                return;
+            }
+
+            if (PontoControleSelecionado == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo PONTO DE CONTROLE é obrigatório!", "Ok");
+                return;
+            }
+
+            if (EstagioSelecionado == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo ESTÁGIO é obrigatório!", "Ok");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(Qtde))
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo QUANTIDADE é obrigatório!", "Ok");
+                return;
+            }
+
+            if (MotivoSelecionado == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo MOTIVO é obrigatório!", "Ok");
+                return;
+            }
         }
     }
 }
