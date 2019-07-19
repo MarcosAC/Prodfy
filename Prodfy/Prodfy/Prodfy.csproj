@@ -34,6 +34,9 @@
     <Compile Update="Views\CadastroOcorrenciaView.xaml.cs">
       <DependentUpon>CadastroOcorrenciaView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\CadastroPerdasQrView.xaml.cs">
+      <DependentUpon>CadastroPerdasQrView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -83,7 +86,7 @@
     <EmbeddedResource Update="Views\CadastroOcorrenciaView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\CadastroPerdasView.xaml">
+    <EmbeddedResource Update="Views\CadastroPerdasQrView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ConexaoView.xaml">

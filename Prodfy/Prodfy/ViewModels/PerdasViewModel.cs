@@ -242,7 +242,7 @@ namespace Prodfy.ViewModels
                     !string.IsNullOrEmpty(mudaNomeComum) &&
                     !string.IsNullOrEmpty(quantidade))
                 {
-                    var carregarCadastroPerdas = new CarregarDadosPerda
+                    var carregarCadastroPerdasQr = new CarregarDadosPerdaQr
                     {
                         OloteId = loteId,
                         OloteCodigo = loteCodigo,
@@ -253,8 +253,8 @@ namespace Prodfy.ViewModels
                         OpontoControleId = pontoControleId,
                         OestagioId = estagioId
                     };
-
-                    //await navigationService.PushAsync(new CadastroPerdasView(/*carregarCadastroPerdas*/));
+                    
+                    await navigationService.PushAsync(new CadastroPerdasQrView(carregarCadastroPerdasQr));
                 }
                 else
                 {

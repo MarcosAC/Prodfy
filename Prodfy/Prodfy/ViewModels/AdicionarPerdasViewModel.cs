@@ -2,8 +2,10 @@
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Navigation;
 using Prodfy.Services.Repository;
+using Prodfy.Views;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -119,8 +121,205 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteLeitorQRCommand()
         {
+            await navigationService.PopAsync();
+
             var scanner = new ZXing.Mobile.MobileBarcodeScanner();
             var result = await scanner.Scan();
+
+            scanner.Cancel();
+
+
+            if (result != null)
+            {
+                IsBusy = true;
+
+                string loteId = string.Empty;
+                string loteCodigo = string.Empty;
+                string loteProdutoId = string.Empty;
+                string mudaId = string.Empty;
+                string mudaNomeComum = string.Empty;
+                string quantidade = string.Empty;
+                string pontoControleId = string.Empty;
+                string pontoControleCodigo = string.Empty;
+                string pontoControleTitulo = string.Empty;
+                string estagioId = string.Empty;
+                string estagioCodigo = string.Empty;
+                string estagioTitulo = string.Empty;
+
+                string[] resultadoQR = result.Text.Split('|');
+
+                if (resultadoQR.Count() < 8)
+                {
+                    await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
+
+                    IsBusy = false;
+                }
+
+                var dadosQR = new
+                {
+                    qrLoteCod = resultadoQR[0],
+                    qrMudaId = resultadoQR[1],
+                    qrQtd = resultadoQR[2],
+                    qrDataEstaq = resultadoQR[3],
+                    qrDensidade = resultadoQR[4],
+                    qrPontoControleId = resultadoQR[5],
+                    qrEstagioId = resultadoQR[6],
+                    qrColaboradorId = resultadoQR[7],
+                    qrLivre = resultadoQR[8],
+                    qrTipoEtiqueta = resultadoQR[9]
+                };
+
+                #region Lote
+                if (dadosQR.qrLoteCod != null)
+                {
+                    loteCodigo = dadosQR.qrLoteCod;
+                    //Lote ID
+                    string loteInfo = loteRepositorio.ObterLotePorId(dadosQR.qrLoteCod);
+                    var tmpLoteInfo = loteInfo.Split('|');
+
+                    if (tmpLoteInfo[0] == "0")
+                    {
+                        await dialogService.AlertAsync("Etiqueta QR", "Lote indicado no QR inexistente! Sincronize o dispositivo.", "Ok");
+                    }
+                    loteId = tmpLoteInfo[2];
+
+
+                    //Lote Produto ID
+                    string loteProdutoInfo = loteRepositorio.ObterLoteProdutoPorId(dadosQR.qrLoteCod);
+                    var tmpLoteprodutoInfo = loteProdutoInfo.Split('|');
+
+                    if (tmpLoteprodutoInfo[0] == "0")
+                    {
+                        await dialogService.AlertAsync("Etiqueta QR", "Produto associado ao Lote indicado no QR inexistente! Sincronize o dispositivo.", "Ok");
+                    }
+
+                    loteProdutoId = tmpLoteInfo[2];
+                }
+                #endregion
+
+                #region Muda
+                if (dadosQR.qrMudaId != null)
+                {
+                    mudaId = dadosQR.qrMudaId;
+
+                    //Muda Nome Comum
+                    string mudaIndo = mudaRepositorio.ObterInformacoesParaIdentificacao(int.Parse(dadosQR.qrMudaId));
+                    var tmpMudainfo = mudaIndo.Split('|');
+
+                    if (tmpMudainfo[0] == "0")
+                    {
+                        await dialogService.AlertAsync("Etiqueta QR", "Muda indicada no QR inexistente! Sincronize o dispositivo.", "Ok");
+                    }
+
+                    mudaNomeComum = tmpMudainfo[3];
+                }
+                #endregion
+
+                #region Quantidade
+                if (dadosQR.qrQtd != null)
+                    quantidade = dadosQR.qrQtd;
+                #endregion
+
+                #region Ponto Controle
+                if (resultadoQR.Count() >= 8)
+                {
+                    if (dadosQR.qrPontoControleId == null)
+                    {
+
+                        pontoControleId = string.Empty;
+                        pontoControleCodigo = string.Empty;
+                        pontoControleTitulo = string.Empty;
+                    }
+                    else
+                    {
+                        pontoControleId = dadosQR.qrPontoControleId;
+
+                        //Ponto Controle Info
+                        string pontoControleInfo = pontoControleRepositorio.ObterInformacoesParaIdentificacao(int.Parse(dadosQR.qrPontoControleId));
+                        var tmpPontoControleInfo = pontoControleInfo.Split('|');
+
+                        if (tmpPontoControleInfo[0] == "0")
+                        {
+                            pontoControleId = string.Empty;
+                            pontoControleCodigo = string.Empty;
+                            pontoControleTitulo = string.Empty;
+
+                            await dialogService.AlertAsync("Etiqueta QR", "Ponto de Controle indicado não localizado!", "Ok");
+                        }
+                        else
+                        {
+                            pontoControleCodigo = tmpPontoControleInfo[4];
+                            pontoControleTitulo = tmpPontoControleInfo[5];
+                        }
+                    }
+                }
+                #endregion
+
+                #region Estagio
+                if (!string.IsNullOrEmpty(pontoControleCodigo))
+                {
+                    if (dadosQR.qrEstagioId == null)
+                    {
+                        estagioId = string.Empty;
+                        estagioCodigo = string.Empty;
+                        estagioTitulo = string.Empty;
+                    }
+                    else
+                    {
+                        estagioId = dadosQR.qrEstagioId;
+
+                        //Estagio Info
+                        string estagioInfo = estagioRepositorio.ObterInformacoesParaIdentificacao(int.Parse(dadosQR.qrPontoControleId), int.Parse(dadosQR.qrEstagioId));
+                        var tmpestagioInfo = estagioInfo.Split('|');
+
+                        if (tmpestagioInfo[0] == "0")
+                        {
+                            estagioId = string.Empty;
+                            estagioCodigo = string.Empty;
+                            estagioTitulo = string.Empty;
+
+                            await dialogService.AlertAsync("Etiqueta QR", "Estágio indicado não localizado!", "Ok");
+                        }
+                        else
+                        {
+                            estagioCodigo = tmpestagioInfo[5];
+                            estagioTitulo = tmpestagioInfo[6];
+                        }
+                    }
+                }
+                #endregion
+
+                if (!string.IsNullOrEmpty(loteId) &&
+                    !string.IsNullOrEmpty(loteCodigo) &&
+                    !string.IsNullOrEmpty(loteProdutoId) &&
+                    !string.IsNullOrEmpty(mudaId) &&
+                    !string.IsNullOrEmpty(mudaNomeComum) &&
+                    !string.IsNullOrEmpty(quantidade))
+                {
+                    var carregarCadastroPerdasQr = new CarregarDadosPerdaQr
+                    {
+                        OloteId = loteId,
+                        OloteCodigo = loteCodigo,
+                        OloteProdutoId = loteProdutoId,
+                        OmudaId = mudaId,
+                        OmudaNomeComum = mudaNomeComum,
+                        Oquantidade = quantidade,
+                        OpontoControleId = pontoControleId,
+                        OestagioId = estagioId
+                    };
+
+                    await navigationService.PushAsync(new CadastroPerdasQrView(carregarCadastroPerdasQr));
+                }
+                else
+                {
+                    await dialogService.AlertAsync("Etiqueta QR", "Etiqueta incompatível! Gere uma nova etiqueta QR!", "Ok");
+                }
+
+                if (dadosQR.qrTipoEtiqueta == null || dadosQR.qrTipoEtiqueta != "1")
+                {
+                    await dialogService.AlertAsync("ERRO", "Erro ao carregar dados", "Ok");
+                }
+            }
         }
 
         private Command _cancelarCadastroCommand;

@@ -1,6 +1,6 @@
 ﻿namespace Prodfy.Models
 {
-    public class CarregarDadosPerda
+    public class CarregarDadosPerdaQr
     {
         public string OloteId { get; set; }
         public string OloteCodigo { get; set; }
