@@ -43,6 +43,7 @@
             </StackLayout>
         </StackLayout>
     </NavigationPage.TitleView>
+    
     <ContentPage.Content>
         <StackLayout>
             <local:CadastroPerdasView />
