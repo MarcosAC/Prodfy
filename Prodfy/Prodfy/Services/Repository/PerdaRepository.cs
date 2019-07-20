@@ -55,30 +55,53 @@ namespace Prodfy.Services.Repository
             return dataBase._conexao.Table<Perda>().OrderBy(p => p.idPerda).ToList();
         }
 
+        public List<ListaPerdas> ObterTodasPerdas()
+        {
+            return dataBase._conexao.Query<ListaPerdas>("SELECT " +
+                                                           "AA.idperda, " +
+                                                           "AA.disp_id, " +
+                                                           "L.lote_id, " +
+                                                           "L.codigo, " +
+                                                           "AA.muda_id, " +
+                                                           "M.nome_interno, " +
+                                                           "M.especie_nome_cientifico, " +
+                                                           "AA.data, " +
+                                                           "AA.qtde " +
+                                                        "FROM " +
+                                                           "Perda AA " +
+                                                        "INNER JOIN " +
+                                                           "Lote L " +
+                                                        "ON L.lote_id = AA.lote_id " +
+                                                        "INNER JOIN " +
+                                                           "Muda M ON M.muda_id = AA.muda_id " +
+                                                        "ORDER BY AA.data");
+        }
+
         public List<ListaPerdas> ListaDePerdas(string filtro)
         {
-            List<ListaPerdas> listaDePerdas = new List<ListaPerdas>();
+            var listaDePerdas = dataBase._conexao.Query<ListaPerdas>("SELECT " +
+                                                                        "AA.idperda, " +
+                                                                        "AA.disp_id, " +
+                                                                        "L.lote_id, " +
+                                                                        "L.codigo, " +
+                                                                        "AA.muda_id, " +
+                                                                        "M.nome_interno, " +
+                                                                        "M.especie_nome_cientifico, " +
+                                                                        "AA.data, " +
+                                                                        "AA.qtde " +
+                                                                     "FROM " +
+                                                                        "Perda AA " +
+                                                                     "INNER JOIN " +
+                                                                        "Lote L " +
+                                                                     "ON L.lote_id = AA.lote_id " +
+                                                                     "INNER JOIN " +
+                                                                        "Muda M ON M.muda_id = AA.muda_id " +
+                                                                     "ORDER BY AA.data");
 
-            listaDePerdas = dataBase._conexao.Query<ListaPerdas>("SELECT " +
-                                                                    "AA.idperda, " +
-                                                                    "AA.disp_id, " +
-                                                                    "L.lote_id, " +
-                                                                    "L.codigo, " +
-                                                                    "AA.muda_id, " +
-                                                                    "M.nome_interno, " +
-                                                                    "M.especie_nome_cientifico, " +
-                                                                    "AA.data, " +
-                                                                    "AA.qtde " +
-                                                                 "FROM " +
-                                                                    "Perda AA " +
-                                                                 "INNER JOIN " +
-                                                                    "Lote L " +
-                                                                 "ON L.lote_id = AA.lote_id " +
-                                                                 "INNER JOIN " +
-                                                                    "Muda M ON M.muda_id = AA.muda_id " +
-                                                                 "ORDER BY AA.data");
+            if (string.IsNullOrEmpty(filtro))
+                return ObterTodasPerdas();
 
-            return listaDePerdas;
+            return listaDePerdas.FindAll(l => l.codigo.Contains(filtro));
         }
 
         public string ObterInformacoesParaIdentificacao(string codigo)

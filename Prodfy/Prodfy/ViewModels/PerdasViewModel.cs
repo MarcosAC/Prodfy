@@ -48,7 +48,7 @@ namespace Prodfy.ViewModels
             set
             {
                 SetProperty(ref _filtro, value);
-                //Atividades(_filtro);
+                Perdas(_filtro);
             }
         }
 
@@ -295,17 +295,19 @@ namespace Prodfy.ViewModels
 
         private List<ListaPerdas> Perdas(string filtro = null)
         {
-            if (!string.IsNullOrEmpty(filtro))
+            if (filtro != null)
             {
-                var listaDadosPerdas = new List<ListaPerdas>();
+                var listaDadosPerdas = perdaRepositorio.ListaDePerdas(filtro);
 
-                foreach (var item in perdaRepositorio.ListaDePerdas(filtro))
+                ListaDePerdas.Clear();
+
+                foreach (var item in listaDadosPerdas)
                 {
-                    listaDadosPerdas.Add(item);
+                    ListaDePerdas.Add(item);
                 }
             }
 
-            return perdaRepositorio.ListaDePerdas(filtro);
+            return perdaRepositorio.ObterTodasPerdas();
         }
     }
 }
