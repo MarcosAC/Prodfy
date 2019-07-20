@@ -81,17 +81,19 @@ namespace Prodfy.ViewModels
 
         private List<ListaHistorico> Historicos(string filtro = null)
         {
-            if (!string.IsNullOrEmpty(filtro))
+            if (filtro != null)
             {
-                var listaDadosHistoricos = new List<ListaHistorico>();
+                var listaDadosHistoricos = historicoRepositorio.ListaDeHistoricos(filtro);
 
-                foreach (var item in historicoRepositorio.ListaDeHistoricos(filtro))
+                ListaDeHistoricos.Clear();
+
+                foreach (var item in listaDadosHistoricos)
                 {
-                    listaDadosHistoricos.Add(item);
-                }                
+                    ListaDeHistoricos.Add(item);
+                }
             }
 
-            return historicoRepositorio.ListaDeHistoricos(filtro);
+            return historicoRepositorio.ObterTodosHistoricos();
         }
     }
 }

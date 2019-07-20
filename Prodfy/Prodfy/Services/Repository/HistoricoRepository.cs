@@ -43,10 +43,19 @@ namespace Prodfy.Services.Repository
             dataBase._conexao.Delete<Historico>(id);
         }
 
+        public List<ListaHistorico> ObterTodosHistoricos()
+        {
+            return dataBase._conexao.Query<ListaHistorico>("SELECT AA.idhistorico, AA.disp_id, L.lote_id, L.codigo, AA.data, AA.titulo FROM Historico AA INNER JOIN Lote L ON L.lote_id = AA.lote_id ORDER BY AA.data desc");            
+        }
+
         public List<ListaHistorico> ListaDeHistoricos(string filtro)
         {
-            return dataBase._conexao.Query<ListaHistorico>("SELECT AA.idhistorico, AA.disp_id, L.lote_id, L.codigo, AA.data, AA.titulo FROM Historico AA INNER JOIN Lote L ON L.lote_id = AA.lote_id ORDER BY AA.data desc");
-            //return listaDadosHistoricos;
+            var lista = dataBase._conexao.Query<ListaHistorico>("SELECT AA.idhistorico, AA.disp_id, L.lote_id, L.codigo, AA.data, AA.titulo FROM Historico AA INNER JOIN Lote L ON L.lote_id = AA.lote_id ORDER BY AA.data desc");
+
+            if (string.IsNullOrEmpty(filtro))
+                return ObterTodosHistoricos();
+
+            return lista.FindAll(l => l.Codigo.Contains(filtro));
         }
 
         public TableQuery<Historico> AsQueryable()
