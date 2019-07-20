@@ -47,6 +47,26 @@ namespace Prodfy.Services.Repository
             dataBase._conexao.Execute("Delete From Atividade");
         }
 
+        public List<ListaAtividades> ObterTodasAtividades()
+        {
+            return dataBase._conexao.Query<ListaAtividades>("SELECT " +
+                                                                    "AA.idatividade, " +
+                                                                    "AA.colaborador_id, " +
+                                                                    "CB.nome_interno, " +
+                                                                    "AA.lista_atv_id, " +
+                                                                    "LA.codigo, " +
+                                                                    "LA.titulo, " +
+                                                                    "AA.data_inicio, " +
+                                                                    "AA.data_fim " +
+                                                                 "FROM " +
+                                                                    "Atividade AA " +
+                                                                 "LEFT JOIN " +
+                                                                    "Colaborador CB ON CB.colaborador_id = AA.colaborador_id " +
+                                                                 "LEFT JOIN " +
+                                                                    "Lista_Atv LA ON LA.lista_atv_id = AA.lista_atv_id " +
+                                                                 "ORDER BY AA.data_inicio");
+        }
+
         public List<ListaAtividades> ListaDeAtividades(string filtro)
         {
             var lista = dataBase._conexao.Query<ListaAtividades>("SELECT " +
@@ -65,13 +85,17 @@ namespace Prodfy.Services.Repository
                                                                  "LEFT JOIN " +
                                                                     "Lista_Atv LA ON LA.lista_atv_id = AA.lista_atv_id " +
                                                                  "ORDER BY AA.data_inicio");
-            return lista;
+
+            if (string.IsNullOrEmpty(filtro))
+                return ObterTodasAtividades();
+
+            return lista.FindAll(l => l.nome_interno.Contains(filtro));
         }
 
         public void Editar(Atividade entidade)
         {
             throw new NotImplementedException();
-        }
+        }       
 
         public Atividade ObterDados()
         {

@@ -67,17 +67,19 @@ namespace Prodfy.ViewModels
 
         private List<ListaAtividades> Atividades(string filtro = null)
         {
-            if (!string.IsNullOrEmpty(filtro))
+            if (filtro != null)
             {
-                var listaAtividades = new List<ListaAtividades>();
+                var listaAtividades = atividadeRepositorio.ListaDeAtividades(filtro.ToUpper());
 
-                foreach (var item in atividadeRepositorio.ListaDeAtividades(filtro))
+                ListaDeAtividades.Clear();
+
+                foreach (var item in listaAtividades)
                 {
-                    listaAtividades.Add(item);
+                    ListaDeAtividades.Add(item);
                 }
             }
 
-            return atividadeRepositorio.ListaDeAtividades(filtro);
+            return atividadeRepositorio.ObterTodasAtividades();
         }
     }
 }
