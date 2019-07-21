@@ -71,15 +71,15 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaAtividadeSelecionada, value);
         }
 
-        private string _dataInicio;
-        public string DataInicio
+        private DateTime _dataInicio = DateTime.Today;
+        public DateTime DataInicio
         {
             get => _dataInicio;
             set => SetProperty(ref _dataInicio, value);
         }
 
-        private string _dataFim;
-        public string DataFim
+        private DateTime _dataFim = DateTime.Today;
+        public DateTime DataFim
         {
             get => _dataFim;
             set => SetProperty(ref _dataFim, value);
@@ -137,15 +137,15 @@ namespace Prodfy.ViewModels
             _salvarCadastroCommand ?? (_salvarCadastroCommand = new Command(async () => await ExecuteSalvarCadastroCommandAsync()));
 
         private async Task ExecuteSalvarCadastroCommandAsync()
-        {
+        {            
             try
-            {
+            {                
                 var atividade = new Atividade
                 {
                     colaborador_id = ColaboradorSelecionado.colaborador_id,
                     lista_atv_id = ListaAtividadeSelecionada.lista_atv_id,
-                    data_inicio = Convert.ToDateTime(DataInicio + HoraInicio),
-                    data_fim = Convert.ToDateTime(DataFim + HoraConclusao),
+                    data_inicio = DataInicio + HoraInicio,
+                    data_fim = DataFim + HoraConclusao,
                     obs = Obs
                 };
 
