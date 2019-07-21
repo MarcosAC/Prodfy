@@ -63,10 +63,10 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _lote, value);
         }
 
-        private DateTime _data;
+        private DateTime _data = DateTime.Today;
         public DateTime Data
         {
-            get => _data = DateTime.Today;
+            get => _data;
             set => SetProperty(ref _data, value);
         }
 

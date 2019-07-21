@@ -60,7 +60,7 @@
 
                 <FlexLayout Direction="Row" Padding="0,0,0,10">
                     <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
-                                              Date="{Binding DataInicio, Mode=TwoWay}"
+                                              Date="{Binding DataInicio}"
                                               FlexLayout.Grow="1" 
                                               Margin="0,0,5,0" />
 
@@ -81,7 +81,7 @@
                 
                 <FlexLayout Direction="Row" Padding="0,0,0,10">
                     <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
-                                              Date="{Binding DataFim, Mode=TwoWay}"
+                                              Date="{Binding DataFim}"
                                               FlexLayout.Grow="1" 
                                               Margin="0,0,5,0"/>
 
