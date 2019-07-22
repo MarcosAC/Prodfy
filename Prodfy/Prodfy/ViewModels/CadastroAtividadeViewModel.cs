@@ -139,7 +139,9 @@ namespace Prodfy.ViewModels
         private async Task ExecuteSalvarCadastroCommandAsync()
         {            
             try
-            {                
+            {
+                await ValidarCampos();
+
                 var atividade = new Atividade
                 {
                     colaborador_id = ColaboradorSelecionado.colaborador_id,
@@ -149,24 +151,34 @@ namespace Prodfy.ViewModels
                     obs = Obs
                 };
 
-                bool atividadeAceite = await dialogService.AlertAsync("ATIVIDADES", "Deseja salvar os dados informados?", "Sim", "Não");
-
-                if (atividadeAceite)
+                if (DataInicio != null && DataFim != null)
                 {
-                    try
+                    if (DataFim <= DataInicio)
                     {
-                        atividadeRepositorio.Adicionar(atividade);                        
-                        await dialogService.AlertAsync("ATIVIDADES", "Dados salvos com sucesso!", "Ok");
+                        await dialogService.AlertAsync("ALERTA", "DATA FIM deve ser superior à DATA INÍCIO!", "Ok");
+                        return;
                     }
-                    catch (Exception)
+
+                    bool atividadeAceite = await dialogService.AlertAsync("ATIVIDADES", "Deseja salvar os dados informados?", "Sim", "Não");
+
+                    if (atividadeAceite)
                     {
-                        await dialogService.AlertAsync("ATIVIDADES", "Erro ao salvar dados!", "Ok");
+                        try
+                        {
+                            atividadeRepositorio.Adicionar(atividade);
+                            await dialogService.AlertAsync("ATIVIDADES", "Dados salvos com sucesso!", "Ok");
+                            await navigationService.PopAsync();
+                        }
+                        catch (Exception)
+                        {
+                            await dialogService.AlertAsync("ATIVIDADES", "Erro ao salvar dados!", "Ok");
+                        }
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                await dialogService.AlertAsync("ATIVIDADES", ex.Message, "OK");
+                return;
             }
         }
 
@@ -178,6 +190,51 @@ namespace Prodfy.ViewModels
         private List<Lista_Atv> ListaAtividades()
         {
             return listaAtividades = listaAtvRepositorio.ObterTodos();
-        }        
+        }
+
+        private async Task ValidarCampos()
+        {
+            if (ColaboradorSelecionado == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo COLABORADOR é obrigatório!", "Ok");
+                return;
+            }
+
+            if (ListaAtividadeSelecionada == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo ATIVIDADE é obrigatório!", "Ok");
+                return;
+            }
+
+            if (DataInicio == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo DATA INÍCIO é obrigatório!", "Ok");
+                return;
+            }
+
+            if (DataFim == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo DATA FIM é obrigatório!", "Ok");
+                return;
+            }                       
+
+            if (HoraInicio == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo HORA INÍCIO é obrigatório!", "Ok");
+                return;
+            }
+
+            if (HoraConclusao == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo HORA CONCLUSÃO é obrigatório!", "Ok");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(Obs))
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo OBSERVAÇÃO é obrigatório!", "Ok");
+                return;
+            }
+        }
     }
 }
