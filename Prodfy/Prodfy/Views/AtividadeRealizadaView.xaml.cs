@@ -32,7 +32,7 @@ namespace Prodfy.Views
         private void OnItemSelect(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
-                //ViewModel.SelecionarHistoricoCommand.Execute(e.SelectedItem);
+                ViewModel.SelecinarAtividadeCommand.Execute(e.SelectedItem);
 
                 listViewAtividades.SelectedItem = null;
         }

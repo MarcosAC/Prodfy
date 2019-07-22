@@ -29,8 +29,7 @@ namespace Prodfy.ViewModels
 
             atividadeRepositorio = new AtividadeRepository();
 
-            ListaDeAtividades = new ObservableCollection<ListaAtividades>(Atividades());
-            
+            ListaDeAtividades = new ObservableCollection<ListaAtividades>(Atividades());            
         }
 
         private string _filtro;
@@ -56,13 +55,29 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteIrParaCadastroAtividadeCommand() => await navigationService.PushAsync(new CadastroAtividadeView());
 
-        private Command _deletarAtividadeListaCommand;
-        public Command DeletarAtividadeListaCommand =>
-            _deletarAtividadeListaCommand ?? (_deletarAtividadeListaCommand = new Command(async () => await ExecuteDeletarAtividadeListaCommand()));
+        private Command _selecionarAtividadeCommand;
+        public Command SelecinarAtividadeCommand =>
+            _selecionarAtividadeCommand ?? (_selecionarAtividadeCommand = new Command<ListaAtividades>(async a => await ExecuteSelecionarAtividadeListaCommand(a)));
 
-        private Task ExecuteDeletarAtividadeListaCommand()
+        private async Task ExecuteSelecionarAtividadeListaCommand(ListaAtividades atividadeSelecionada)
         {
-            throw new NotImplementedException();
+            if (atividadeSelecionada == null)
+                return;
+
+            bool deleteAceite = await dialogService.AlertAsync($"LOTE {atividadeSelecionada.codigo}", "Deseja apagar este registro ?", "Sim", "Não");
+
+            if (deleteAceite)
+            {
+                try
+                {
+                    atividadeRepositorio.Deletar(atividadeSelecionada.idatividade);
+                    await dialogService.AlertAsync("", $"Histórico item {atividadeSelecionada.idatividade} DELETADO!!", "Ok");
+                }
+                catch (Exception)
+                {
+                    await dialogService.AlertAsync("", $"Erro ao deletar item {atividadeSelecionada.idatividade}", "Ok");
+                }
+            }
         }
 
         private List<ListaAtividades> Atividades(string filtro = null)
