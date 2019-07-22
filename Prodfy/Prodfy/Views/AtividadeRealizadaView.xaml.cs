@@ -24,12 +24,6 @@ namespace Prodfy.Views
             ((AtividadeViewModel)BindingContext).RefreshCommand.Execute(null);
         }
 
-        //public AtividadeViewModel ViewModel
-        //{
-        //    get { return BindingContext as AtividadeViewModel; }
-        //    set { BindingContext = value; }
-        //}
-
         private void OnItemSelect(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
