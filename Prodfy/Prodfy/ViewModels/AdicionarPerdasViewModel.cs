@@ -89,10 +89,10 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _motivoSelecionado, value);
         }
 
-        private DateTime _data;
+        private DateTime _data = DateTime.Today;
         public DateTime Data
         {
-            get => _data = DateTime.Today;
+            get => _data;
             set => SetProperty(ref _data, value);
         }
 
@@ -360,6 +360,7 @@ namespace Prodfy.ViewModels
                     {
                         perdaRepositorio.Adicionar(perda);
                         await dialogService.AlertAsync("PERDAS", "Dados salvos com sucesso!", "Ok");
+                        await navigationService.PopAsync();
                     }
                     catch (Exception)
                     {

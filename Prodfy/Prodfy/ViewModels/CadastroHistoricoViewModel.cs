@@ -106,14 +106,7 @@ namespace Prodfy.ViewModels
             get => _texto;
             set => SetProperty(ref _texto, value);
         }
-                
-        private string _lastUpdate;
-        public string LastUpdate
-        {
-            get => _lastUpdate;
-            set => SetProperty(ref _lastUpdate, value);
-        }
-
+        
         private string _indSinc;
         public string IndSinc
         {
@@ -141,13 +134,28 @@ namespace Prodfy.ViewModels
         {
             try
             {
+                await ValidarCampos();
+
                 var historico = new Historico
                 {
                     lote_id = LoteSelecionado.lote_id,
                     data = Data,
                     titulo = Titulo,
-                    texto = Texto
+                    texto = Texto,
+                    last_update = DateTime.Now
                 };
+
+                if (string.IsNullOrEmpty(Titulo))
+                {
+                    await dialogService.AlertAsync("ALERTA", "O campo TÍTULO é obrigatório!", "Ok");
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(Texto))
+                {
+                    await dialogService.AlertAsync("ALERTA", "O campo TEXTO é obrigatório!", "Ok");
+                    return;
+                }
 
                 bool historicoAceite = await dialogService.AlertAsync("HISTÓRICO", "Deseja salvar os dados informados?", "Sim", "Não");
 
@@ -157,6 +165,7 @@ namespace Prodfy.ViewModels
                     {
                         historicoRepositorio.Adicionar(historico);
                         await dialogService.AlertAsync("HISTÓRICO", "Dados salvos com sucesso!", "Ok");
+                        await navigationService.PopAsync();
                     }
                     catch (Exception)
                     {
@@ -166,14 +175,28 @@ namespace Prodfy.ViewModels
             }
             catch (Exception)
             {
-
-                throw;
+                return;
             }
         }
 
         private List<Lote> Lotes()
         {
             return listaLotes = loteRepositorio.ObterTodos();
+        }
+
+        private async Task ValidarCampos()
+        {
+            if (LoteSelecionado == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo LOTE é obrigatório!", "Ok");
+                return;
+            }
+
+            if (Data == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo DATA é obrigatório!", "Ok");
+                return;
+            }
         }
     }
 }

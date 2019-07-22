@@ -20,19 +20,13 @@ namespace Prodfy.Views
         {
             base.OnAppearing();
 
-            BindingContext = new HistoricoViewModel();
-        }
-
-        public HistoricoViewModel ViewModel
-        {
-            get {return BindingContext as HistoricoViewModel; }
-            set { BindingContext = value; }
-        }
+            ((HistoricoViewModel)BindingContext).RefreshCommand.Execute(null);
+        }        
 
         private void OnItemSelect(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
-                ViewModel.SelecionarHistoricoCommand.Execute(e.SelectedItem);
+                ((HistoricoViewModel)BindingContext).SelecionarHistoricoCommand.Execute(e.SelectedItem);
 
             lisViewHistoricos.SelectedItem = null;
         }

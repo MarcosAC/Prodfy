@@ -3,6 +3,7 @@ using Prodfy.Services.Dialog;
 using Prodfy.Services.Navigation;
 using Prodfy.Services.Repository;
 using Prodfy.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -71,11 +72,38 @@ namespace Prodfy.ViewModels
                 {
                     historicoRepositorio.Deletar(historicoSelecionado.IdHistorico);
                     await dialogService.AlertAsync("", $"Histórico item {historicoSelecionado.IdHistorico} DELETADO!!", "Ok");
+                    await RefreshCommandExecute();
                 }
-                catch (System.Exception)
+                catch (Exception)
                 {
                     await dialogService.AlertAsync("", $"Erro ao deletar item {historicoSelecionado.IdHistorico}", "Ok");
                 }
+            }
+        }
+
+        private Command _RefreshCommand;
+        public Command RefreshCommand => _RefreshCommand ?? (_RefreshCommand = new Command(async () => await RefreshCommandExecute()));
+
+        private async Task RefreshCommandExecute()
+        {
+            try
+            {
+                RefreshCommand.ChangeCanExecute();
+
+                ListaDeHistoricos.Clear();
+
+                foreach (var item in historicoRepositorio.ObterTodosHistoricos())
+                {
+                    ListaDeHistoricos.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                await dialogService.AlertAsync("Erro", "Erro ao listar Historicos", "Ok");
+            }
+            finally
+            {
+                RefreshCommand.ChangeCanExecute();
             }
         }
 

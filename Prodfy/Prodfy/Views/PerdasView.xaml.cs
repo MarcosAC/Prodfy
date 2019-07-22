@@ -20,19 +20,13 @@ namespace Prodfy.Views
         {
             base.OnAppearing();
 
-            BindingContext = new PerdasViewModel();
-        }
-
-        public PerdasViewModel ViewModel
-        {
-            get { return BindingContext as PerdasViewModel; }
-            set { BindingContext = value; }
+            ((PerdasViewModel)BindingContext).RefreshCommand.Execute(null);
         }
 
         private void OnItemSelect(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
-                ViewModel.SelecionarPerdaCommand.Execute(e.SelectedItem);
+                ((PerdasViewModel)BindingContext).SelecionarPerdaCommand.Execute(e.SelectedItem);
 
             listViewPerdas.SelectedItem = null;
         }

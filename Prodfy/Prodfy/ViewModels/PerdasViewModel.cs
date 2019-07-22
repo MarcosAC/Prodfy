@@ -285,11 +285,38 @@ namespace Prodfy.ViewModels
                 {
                     perdaRepositorio.Deletar(perdaSelecionado.idperda);
                     await dialogService.AlertAsync("", $"Perda item {perdaSelecionado.idperda} DELETADO!!", "Ok");
+                    await RefreshCommandExecute();
                 }
                 catch (Exception)
                 {
                     await dialogService.AlertAsync("", $"Erro ao deletar item {perdaSelecionado.idperda}", "Ok");
                 }
+            }
+        }
+
+        private Command _RefreshCommand;
+        public Command RefreshCommand => _RefreshCommand ?? (_RefreshCommand = new Command(async () => await RefreshCommandExecute()));
+
+        private async Task RefreshCommandExecute()
+        {
+            try
+            {
+                RefreshCommand.ChangeCanExecute();
+
+                ListaDePerdas.Clear();
+
+                foreach (var item in perdaRepositorio.ObterTodasPerdas())
+                {
+                    ListaDePerdas.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                await dialogService.AlertAsync("Erro", "Erro ao listar Atividades", "Ok");
+            }
+            finally
+            {
+                RefreshCommand.ChangeCanExecute();
             }
         }
 
