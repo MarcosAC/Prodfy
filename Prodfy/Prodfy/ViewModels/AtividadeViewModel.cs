@@ -64,19 +64,51 @@ namespace Prodfy.ViewModels
             if (atividadeSelecionada == null)
                 return;
 
-            bool deleteAceite = await dialogService.AlertAsync($"LOTE {atividadeSelecionada.codigo}", "Deseja apagar este registro ?", "Sim", "Não");
+            bool deleteAceite = await dialogService.AlertAsync($"ATIVIDADE {atividadeSelecionada.codigo}", "Deseja apagar este registro ?", "Sim", "Não");
 
             if (deleteAceite)
             {
                 try
                 {
                     atividadeRepositorio.Deletar(atividadeSelecionada.idatividade);
-                    await dialogService.AlertAsync("", $"Histórico item {atividadeSelecionada.idatividade} DELETADO!!", "Ok");
+                    await dialogService.AlertAsync("", $"Atividade item {atividadeSelecionada.idatividade} DELETADO!!", "Ok");
+                    await RefreshCommandExecute();
                 }
                 catch (Exception)
                 {
                     await dialogService.AlertAsync("", $"Erro ao deletar item {atividadeSelecionada.idatividade}", "Ok");
                 }
+            }
+        }
+
+        private Command _RefreshCommand;
+        public Command RefreshCommand => _RefreshCommand ?? (_RefreshCommand = new Command(async () => await RefreshCommandExecute()));
+
+        private async Task RefreshCommandExecute()
+        {
+            try
+            {
+                if (IsBusy)
+                    return;
+
+                IsBusy = true;
+                RefreshCommand.ChangeCanExecute();
+
+                ListaDeAtividades.Clear();
+
+                foreach (var item in atividadeRepositorio.ObterTodasAtividades())
+                {
+                    ListaDeAtividades.Add(item);
+                }
+            }
+            catch (Exception)
+            {
+                await dialogService.AlertAsync("Erro", "Erro ao listar Atividades", "Ok");
+            }
+            finally
+            {
+                IsBusy = false;
+                RefreshCommand.ChangeCanExecute();
             }
         }
 

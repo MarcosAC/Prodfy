@@ -21,18 +21,19 @@ namespace Prodfy.Views
             base.OnAppearing();
 
             BindingContext = new AtividadeViewModel();
+            ((AtividadeViewModel)BindingContext).RefreshCommand.Execute(null);
         }
 
-        public AtividadeViewModel ViewModel
-        {
-            get { return BindingContext as AtividadeViewModel; }
-            set { BindingContext = value; }
-        }
+        //public AtividadeViewModel ViewModel
+        //{
+        //    get { return BindingContext as AtividadeViewModel; }
+        //    set { BindingContext = value; }
+        //}
 
         private void OnItemSelect(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
-                ViewModel.SelecinarAtividadeCommand.Execute(e.SelectedItem);
+                ((AtividadeViewModel)BindingContext).SelecinarAtividadeCommand.Execute(e.SelectedItem);
 
                 listViewAtividades.SelectedItem = null;
         }
