@@ -57,6 +57,7 @@ namespace Prodfy.Services.API
                         ind_mnt = dadosSincronismo.ind_mnt,
                         ind_exp = dadosSincronismo.ind_exp,
                         ind_hist = dadosSincronismo.ind_hist,
+                        ind_mov = dadosSincronismo.ind_mov,
                         ind_inv = dadosSincronismo.ind_inv,
                         ind_per = dadosSincronismo.ind_per,
                         produto = dadosSincronismo.produto,

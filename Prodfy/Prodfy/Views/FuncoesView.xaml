@@ -22,11 +22,11 @@
 
                     <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Estoque Viveiro" 
-                                          Command="{Binding}" IsEnabled="False"/>
+                                          Command="{Binding IrPaginaEstoqueViveiroCommand}" />
 
                     <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Atividade Realizada" 
-                                          Command="{Binding IrPaginaAtividadeCommand}" IsEnabled="False"/>
+                                          Command="{Binding IrPaginaAtividadeCommand}" />
 
                     <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Inventário"
@@ -34,7 +34,7 @@
 
                     <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Movimentação"
-                                          Command="{Binding IrPaginaLoteCommand}" />
+                                          Command="{Binding IrPaginaMovimentacaoCommand}" />
 
                     <control:CustomButton Style="{StaticResource styleButton}"
                                           Text="Perdas" 

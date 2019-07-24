@@ -64,7 +64,7 @@ namespace Prodfy.ViewModels
         private bool CanExecuteFuncaoEstoqueViveiroCommand()
         {
             if (CanExecuteCommand())
-                if (user.ind_atv == 1)
+                if (user.ind_ident == 1 || user.ind_inv == 1 || user.ind_mov == 1 || user.ind_exp == 1)
                     return true;
 
             return false;
@@ -91,7 +91,7 @@ namespace Prodfy.ViewModels
         private bool CanExecuteFuncaoMovimentacaoCommand()
         {
             if (CanExecuteCommand())
-                if (user.ind_inv == 1)
+                if (user.ind_mov == 1)
                     return true;
 
             return false;
@@ -164,6 +164,16 @@ namespace Prodfy.ViewModels
             await _navigationService.PushAsync(new IdentificacaoView());
         }
 
+        private Command _irPaginaEstoqueViveiroCommand;
+        public Command IrPaginaEstoqueViveiroCommand =>
+            _irPaginaEstoqueViveiroCommand ?? (_irPaginaEstoqueViveiroCommand = new Command(async () =>
+                await ExecuteIrPaginaEstoqueViveiroCommand(), CanExecuteFuncaoEstoqueViveiroCommand));
+
+        private async Task ExecuteIrPaginaEstoqueViveiroCommand()
+        {
+            await _navigationService.PopAsync();
+        }
+
         private Command _irPaginaAtividadeCommand;
         public Command IrPaginaAtividadeCommand =>
             _irPaginaAtividadeCommand ?? (_irPaginaAtividadeCommand = new Command(async () => 
@@ -184,6 +194,16 @@ namespace Prodfy.ViewModels
             await _navigationService.PushAsync(new CadastroInventarioView());
         }
 
+        private Command _irPaginaMovimentacaoCommand;
+        public Command IrPaginaMovimentacaoCommand =>
+            _irPaginaMovimentacaoCommand ?? (_irPaginaMovimentacaoCommand = new Command(async () =>
+                await ExecuteIrPaginaMovimentacaoCommand(), CanExecuteFuncaoMovimentacaoCommand));
+
+        private async Task ExecuteIrPaginaMovimentacaoCommand()
+        {
+            await _navigationService.PopAsync();
+        }
+
         private Command _irPaginaPerdasCommand;
         public Command IrPagianaPerdasCommand =>
             _irPaginaPerdasCommand ?? (_irPaginaPerdasCommand = new Command(async () => 
@@ -202,7 +222,7 @@ namespace Prodfy.ViewModels
         private async Task ExecuteIrPaginaHistoricoCommand()
         {
             await _navigationService.PushAsync(new HistoricoView());
-        }
+        }        
 
         private Command _irPaginaLoteCommand;
         public Command IrPaginaLoteCommand =>
@@ -260,8 +280,10 @@ namespace Prodfy.ViewModels
         private void RefresCommandExecute()
         {
             IrPaginaIdentificacaoCommand.ChangeCanExecute();
+            IrPaginaEstoqueViveiroCommand.ChangeCanExecute();
             IrPaginaAtividadeCommand.ChangeCanExecute();
             IrPaginaInventarioCommand.ChangeCanExecute();
+            IrPaginaMovimentacaoCommand.ChangeCanExecute();
             IrPagianaPerdasCommand.ChangeCanExecute();
             IrPaginaHistoricoCommand.ChangeCanExecute();
             IrPaginaLoteCommand.ChangeCanExecute();
