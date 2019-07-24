@@ -83,7 +83,7 @@
                                     <Label Text="{Binding data, StringFormat='{0:dd/MM/yyyy}'}" FontSize="16" TextColor="White" Grid.Row="0" Grid.Column="1" />
                                     <Label Text="{Binding codigo}" FontSize="16" TextColor="White" Grid.Row="1" Grid.Column="1" />
                                     <Label Text="{Binding nomeInternoCientifico}" FontSize="16" TextColor="White" Grid.Row="2" Grid.Column="1" />
-                                    <Label Text="{Binding qtde}" FontSize="16" TextColor="White" Grid.Row="3" Grid.Column="1" />
+                                    <Label Text="{Binding qtde}" FontSize="16" TextColor="Yellow" Grid.Row="3" Grid.Column="1" />
                                 </Grid>
                             </Frame>
                         </ViewCell>
