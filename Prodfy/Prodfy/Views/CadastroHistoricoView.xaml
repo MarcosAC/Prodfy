@@ -35,14 +35,14 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <!--<ScrollView>-->
+        <ScrollView>
             <StackLayout Padding="20,10,20,20">
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
                 <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
                                       ItemsSource="{Binding listaLotes}"
                                       ItemDisplayBinding="{Binding codigo}"
                                       SelectedItem="{Binding LoteSelecionado}"/>
-                
+
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
                 <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding Data}"/>
 
@@ -56,16 +56,16 @@
                                       MaxLength="2000" 
                                       Text="{Binding Texto}" />
 
-            <StackLayout Orientation="Horizontal">
-                <control:CustomButton Style="{StaticResource styleButtonCancelar}" 
+                <StackLayout Orientation="Horizontal">
+                    <control:CustomButton Style="{StaticResource styleButtonCancelar}" 
                                       Text="Cancelar" 
                                       Command="{Binding CancelarCadastroCommand}" />
 
-                <control:CustomButton Style="{StaticResource styleButtonSalvar}" 
+                    <control:CustomButton Style="{StaticResource styleButtonSalvar}" 
                                       Text="Salvar"
                                       Command="{Binding SalvarCadastroCommand}" />
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
-        <!--</ScrollView>-->
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

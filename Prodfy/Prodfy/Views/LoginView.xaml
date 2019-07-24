@@ -7,77 +7,85 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Style="{StaticResource baseStyleStackLayout}">
-                <Image Style="{StaticResource ImagemFundo}" />
+            <ScrollView>
+                <StackLayout Style="{StaticResource baseStyleStackLayout}">
+                    <Image Style="{StaticResource ImagemFundo}" />
 
-                <!-- Numero Dispositivo -->
-                <Label Style="{StaticResource styleLabelTitulo}" 
-                       Text="DISPOSITIVO:"
-                       Margin="0,30,0,0" />
+                    <!-- Numero Dispositivo -->
+                    <Label Style="{StaticResource styleLabelTitulo}" 
+                           Text="DISPOSITIVO:"
+                           Margin="0,30,0,0" />
 
-                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding DispNum}" />
+                    <Label Style="{StaticResource styleLabelTexto}" Text="{Binding DispNum}" />
 
-                <!-- Usuário -->
-                <Label Style="{StaticResource styleLabelTitulo}" Text="USUÁRIO:" />
-                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Nome}" />
+                    <!-- Usuário -->
+                    <Label Style="{StaticResource styleLabelTitulo}" Text="USUÁRIO:" />
+                    <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Nome}" />
 
-                <!-- Empresa -->
-                <Label Style="{StaticResource styleLabelTitulo}" Text="EMPRESA:" IsVisible="False">
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding Logado}" Value="True">
-                            <Setter Property="IsVisible" Value="True" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
+                    <!-- Empresa -->
+                    <Label Style="{StaticResource styleLabelTitulo}" 
+                           Text="EMPRESA:" 
+                           IsVisible="False">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Logado}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
 
-                <Label Style="{StaticResource styleLabelTexto}" Text="{Binding Empresa}" IsVisible="False">
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding Logado}" Value="True">
-                            <Setter Property="IsVisible" Value="True" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
-                <!---->
+                    <Label Style="{StaticResource styleLabelTexto}" 
+                           Text="{Binding Empresa}" 
+                           IsVisible="False">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Logado}" Value="True">
+                                <Setter Property="IsVisible" Value="True" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <!---->
 
-                <!-- Senha -->
-                <Label Style="{StaticResource styleLabelTitulo}" Text="SENHA:" IsVisible="True">
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding Logado}" Value="True">
-                            <Setter Property="IsVisible" Value="False" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
+                    <!-- Senha -->
+                    <Label Style="{StaticResource styleLabelTitulo}" 
+                           Text="SENHA:" 
+                           IsVisible="True">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Logado}" Value="True">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
 
-                <control:CustomEntry Placeholder="senha de acesso" 
-                                     PlaceholderColor="LightGray"
-                                     Text="{Binding Senha}"
-                                     IsPassword="True"
-                                     HorizontalTextAlignment="Center"
-                                     BackgroundColor="White" 
-                                     Margin="0,0,0,15" 
-                                     IsVisible="True"
-                                     control:CornerRadiusEffect.CornerRadius="5">
+                    <control:CustomEntry Placeholder="senha de acesso" 
+                                         PlaceholderColor="LightGray"
+                                         Text="{Binding Senha}"
+                                         IsPassword="True"
+                                         HorizontalTextAlignment="Center"
+                                         BackgroundColor="White" 
+                                         Margin="0,0,0,15" 
+                                         IsVisible="True"
+                                         control:CornerRadiusEffect.CornerRadius="5">
 
-                    <Entry.Triggers>
-                        <DataTrigger TargetType="Entry" Binding="{Binding Logado}" Value="True">
-                            <Setter Property="IsVisible" Value="False" />
-                        </DataTrigger>
-                    </Entry.Triggers>
-                </control:CustomEntry>
-                <!---->
+                        <Entry.Triggers>
+                            <DataTrigger TargetType="Entry" Binding="{Binding Logado}" Value="True">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </Entry.Triggers>
+                    </control:CustomEntry>
+                    <!---->
 
-                <control:CustomButton Style="{StaticResource styleButton}"
-                                      Text="ENTRAR"
-                                      Command="{Binding LoginCommand}"
-                                      IsVisible="True">
+                    <control:CustomButton Style="{StaticResource styleButton}"
+                                          Text="ENTRAR"
+                                          Command="{Binding LoginCommand}"
+                                          IsVisible="True">
 
-                    <control:CustomButton.Triggers>
-                        <DataTrigger TargetType="Button" Binding="{Binding Logado}" Value="True">
-                            <Setter Property="IsVisible" Value="False" />
-                        </DataTrigger>
-                    </control:CustomButton.Triggers>                    
-                </control:CustomButton>                
-            </StackLayout>
+                        <control:CustomButton.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding Logado}" Value="True">
+                                <Setter Property="IsVisible" Value="False" />
+                            </DataTrigger>
+                        </control:CustomButton.Triggers>                    
+                    </control:CustomButton>                
+                </StackLayout>
+            </ScrollView>            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -26,59 +26,61 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout HorizontalOptions="Center">
-                <Label Style="{StaticResource styleIconeTelasSobre}" Text="&#xf086;">
+            <ScrollView>
+                <StackLayout HorizontalOptions="Center">
+                    <Label Style="{StaticResource styleIconeTelasSobre}" Text="&#xf086;">
 
-                    <Label.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
-                    </Label.FontFamily>
-                </Label>
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Refular" />
+                        </Label.FontFamily>
+                    </Label>
 
-                <StackLayout Margin="0,0,0,15">
-                    <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="E-Mail:" />
-                    <Label Text="contato@thersistemas.com.br" 
+                    <StackLayout Margin="0,0,0,15">
+                        <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="E-Mail:" />
+                        <Label Text="contato@thersistemas.com.br" 
                            FontSize="18"
                            TextColor="Blue" 
                            TextDecorations="Underline">
 
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EnviarEmailCommand}" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                </StackLayout>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding EnviarEmailCommand}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
 
-                <StackLayout Margin="0,0,0,15">
-                    <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="Web Site:" />
+                    <StackLayout Margin="0,0,0,15">
+                        <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="Web Site:" />
 
-                    <Label Text="https://www.prodfy.com.br" 
+                        <Label Text="https://www.prodfy.com.br" 
                            FontSize="16"
                            TextColor="Blue" 
                            TextDecorations="Underline">
 
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding IrPaginaSiteCommand}" 
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding IrPaginaSiteCommand}" 
                                                   CommandParameter="https://www.prodfy.com.br" />
-                        </Label.GestureRecognizers>
-                    </Label>
-                </StackLayout>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
 
-                <StackLayout Margin="0,0,0,15">
-                    <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="Telefone Fixo:" />
-                    <Label Style ="{StaticResource styleLabelFormulario}" Text="+55-31-3885-2424" />
-                </StackLayout>
+                    <StackLayout Margin="0,0,0,15">
+                        <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="Telefone Fixo:" />
+                        <Label Style ="{StaticResource styleLabelFormulario}" Text="+55-31-3885-2424" />
+                    </StackLayout>
 
-                <StackLayout Margin="0,0,0,15">
-                    <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="WhatsApp:" />
-                    <Label Style ="{StaticResource styleLabelFormulario}" Text="+55-31-9-9947-4426" />                    
+                    <StackLayout Margin="0,0,0,15">
+                        <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="WhatsApp:" />
+                        <Label Style ="{StaticResource styleLabelFormulario}" Text="+55-31-9-9947-4426" />
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="Endereço:" />
+                        <Label Style="{StaticResource styleLabelFormulario}" Text="Av Oraida Mendes de Castro, 6000, Sala 23" />
+                        <Label Style="{StaticResource styleLabelFormulario}" Text="Bairro Novo Silvestre - Viçosa - MG" />
+                        <Label Style="{StaticResource styleLabelFormulario}" Text="CEP 36.570-000" />
+                    </StackLayout>
                 </StackLayout>
-                
-                <StackLayout>
-                    <Label Style="{StaticResource styleLabelTituloTelasSobre}" Text="Endereço:" />
-                    <Label Style="{StaticResource styleLabelFormulario}" Text="Av Oraida Mendes de Castro, 6000, Sala 23" />
-                    <Label Style="{StaticResource styleLabelFormulario}" Text="Bairro Novo Silvestre - Viçosa - MG" />
-                    <Label Style="{StaticResource styleLabelFormulario}" Text="CEP 36.570-000" />
-                </StackLayout>
-            </StackLayout>
-        </StackLayout>
+            </ScrollView>            
+        </StackLayout>               
     </ContentPage.Content>
 </ContentPage>
