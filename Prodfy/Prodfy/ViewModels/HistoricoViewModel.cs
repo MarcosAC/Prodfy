@@ -70,8 +70,7 @@ namespace Prodfy.ViewModels
             {
                 try
                 {
-                    historicoRepositorio.Deletar(historicoSelecionado.IdHistorico);
-                    await dialogService.AlertAsync("", $"Histórico item {historicoSelecionado.IdHistorico} DELETADO!!", "Ok");
+                    historicoRepositorio.Deletar(historicoSelecionado.IdHistorico);                    
                     await RefreshCommandExecute();
                 }
                 catch (Exception)

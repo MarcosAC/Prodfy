@@ -284,7 +284,6 @@ namespace Prodfy.ViewModels
                 try
                 {
                     perdaRepositorio.Deletar(perdaSelecionado.idperda);
-                    await dialogService.AlertAsync("", $"Perda item {perdaSelecionado.idperda} DELETADO!!", "Ok");
                     await RefreshCommandExecute();
                 }
                 catch (Exception)

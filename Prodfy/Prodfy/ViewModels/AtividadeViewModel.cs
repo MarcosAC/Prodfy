@@ -71,7 +71,6 @@ namespace Prodfy.ViewModels
                 try
                 {
                     atividadeRepositorio.Deletar(atividadeSelecionada.idatividade);
-                    await dialogService.AlertAsync("", $"Atividade item {atividadeSelecionada.idatividade} DELETADO!!", "Ok");
                     await RefreshCommandExecute();
                 }
                 catch (Exception)
