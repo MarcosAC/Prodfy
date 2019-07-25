@@ -35,7 +35,6 @@ namespace Prodfy.ViewModels
         #endregion
 
         private string dataSincronizacao = "Não Sincronizado!";
-        //private bool sincronizado = false;
 
         private readonly IDialogService _dialogService;
 
@@ -129,8 +128,6 @@ namespace Prodfy.ViewModels
         private async void ExecuteSincronizarCommand()
         {
             IsBusy = true;
-
-            //sincronizado = true;
 
             if (VerificaConexaoInternet.VerificaConexao())
             {
@@ -823,11 +820,14 @@ namespace Prodfy.ViewModels
                     OnPropertyChanged(nameof(IndExp));
                     OnPropertyChanged(nameof(IndIdent));
 
-                    if (CanExecuteSincronizarCommand())
+                    if (dadosUser.dth_last_sincr != new DateTime())
                     {
-                        dataSincronizacao = dadosUser.dth_last_sincr.ToString("dd/MM/yyyy HH:mm:ss");
-                        OnPropertyChanged(nameof(DhtLastSincr));
-                    }              
+                        if (CanExecuteSincronizarCommand() || dadosUser.dth_last_sincr != new DateTime())
+                        {
+                            dataSincronizacao = dadosUser.dth_last_sincr.ToString("dd/MM/yyyy HH:mm:ss");
+                            OnPropertyChanged(nameof(DhtLastSincr));
+                        }
+                    }                                
                 }
                 else
                 {

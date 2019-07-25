@@ -81,11 +81,33 @@ namespace Prodfy.ViewModels
                         {
                             IsBusy = true;
 
-                            _dadosUsuario = ConfiguracaoDispositivoService.ObterDadosConfiguracaoDispositivo(dadosQR.qrKey, dadosQR.qrLang);
+                            var dadosConfiguracaoDispositivo = ConfiguracaoDispositivoService.ObterDadosConfiguracaoDispositivo(dadosQR.qrKey, dadosQR.qrLang);
 
-                            if (_dadosUsuario != null)
+                            var usuario = new User
                             {
-                                _userRepository.Adicionar(_dadosUsuario);
+                                disp_id = dadosConfiguracaoDispositivo.disp_id,
+                                disp_num = dadosConfiguracaoDispositivo.disp_num,
+                                senha = dadosConfiguracaoDispositivo.senha,
+                                nome = dadosConfiguracaoDispositivo.nome,
+                                sobrenome = dadosConfiguracaoDispositivo.sobrenome,
+                                empresa = dadosConfiguracaoDispositivo.empresa,
+                                autosinc = dadosConfiguracaoDispositivo.autosinc,
+                                autosinc_time = dadosConfiguracaoDispositivo.autosinc_time,
+                                sinc_url = dadosConfiguracaoDispositivo.sinc_url,
+                                app_key = dadosConfiguracaoDispositivo.app_key,
+                                ind_ident = dadosConfiguracaoDispositivo.ind_ident,
+                                ind_mov = dadosConfiguracaoDispositivo.ind_mov,
+                                ind_per = dadosConfiguracaoDispositivo.ind_per,
+                                ind_hist = dadosConfiguracaoDispositivo.ind_hist,
+                                ind_mnt = dadosConfiguracaoDispositivo.ind_mnt,
+                                ind_exp = dadosConfiguracaoDispositivo.ind_exp,
+                                ind_atv = dadosConfiguracaoDispositivo.ind_atv,
+                                uso_liberado = dadosConfiguracaoDispositivo.uso_liberado
+                            };
+
+                            if (usuario != null)
+                            {
+                                _userRepository.Adicionar(usuario);
 
                                 OnPropertyChanged(nameof(NumeroDispositivo));
                                 OnPropertyChanged(nameof(Usuario));
