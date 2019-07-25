@@ -153,7 +153,7 @@ namespace Prodfy.ViewModels
 
                 if (DataInicio != null && DataFim != null)
                 {
-                    if (DataFim <= DataInicio)
+                    if (atividade.data_fim <= atividade.data_inicio)
                     {
                         await dialogService.AlertAsync("ALERTA", "DATA FIM deve ser superior à DATA INÍCIO!", "Ok");
                         return;
