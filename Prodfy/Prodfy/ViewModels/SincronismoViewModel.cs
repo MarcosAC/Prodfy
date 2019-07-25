@@ -685,10 +685,9 @@ namespace Prodfy.ViewModels
                                 }
                             }
 
-                            #endregion
-
-                            //await _dialogService.AlertAsync("Sincronia", dadosResponse.sinc_msg, "Ok");
+                            #endregion                            
                         }
+                        await _dialogService.AlertAsync("Sincronia", dadosResponse.sinc_msg, "Ok");
                     }
                     catch (Exception)
                     {
