@@ -536,7 +536,7 @@ namespace Prodfy.ViewModels
                                     monitParcelaRepository.Adicionar(monit_parcela);
                                 }
                             }
-                            
+
                             // Colaborador
                             if (_dadosSincronismo.colaborador.Length > 0)
                             {
@@ -565,7 +565,7 @@ namespace Prodfy.ViewModels
                             }
 
                             // Lista_Atv
-                            if (_dadosSincronismo.lista_atv.Length > 0 )
+                            if (_dadosSincronismo.lista_atv.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -576,7 +576,7 @@ namespace Prodfy.ViewModels
                                         idLista_Atv = int.Parse(_dadosSincronismo.lista_atv[i].idLista_Atv.ToString()),
                                         lista_atv_id = _dadosSincronismo.lista_atv[i].lista_atv_id,
                                         codigo = _dadosSincronismo.lista_atv[i].codigo,
-                                        titulo = _dadosSincronismo.objetivo[i].titulo,
+                                        titulo = _dadosSincronismo.lista_atv[i].titulo,
                                         drescr = _dadosSincronismo.lista_atv[i].drescr,
                                         media_exec = _dadosSincronismo.lista_atv[i].media_exec,
                                         definicao = _dadosSincronismo.lista_atv[i].definicao,
@@ -681,6 +681,7 @@ namespace Prodfy.ViewModels
                                     estaqRepository.Adicionar(estaq);
                                 }
                             }
+
 
                             #endregion                            
                         }

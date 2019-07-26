@@ -74,7 +74,8 @@ namespace Prodfy.Services.Repository
 
         public List<Lista_Atv> ObterTodos()
         {
-            return dataBase._conexao.Table<Lista_Atv>().OrderBy(la => la.idLista_Atv).ToList();
+            var lista = dataBase._conexao.Table<Lista_Atv>().OrderBy(la => la.idLista_Atv).ToList();
+            return lista;
         }
 
         public int ObterTotalDeRegistros()

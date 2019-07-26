@@ -13,19 +13,19 @@ namespace Prodfy.Services.API
         {
             HttpClient request = new HttpClient
             {
-                BaseAddress = new Uri(Contantes.BASE_URL)
+                BaseAddress = new Uri(Constantes.BASE_URL)
             };
 
             FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("l", idioma),
-                new KeyValuePair<string, string>("v", Contantes.VERSAO_APP),
+                new KeyValuePair<string, string>("v", Constantes.VERSAO_APP),
                 new KeyValuePair<string, string>("a", "gsd"),
                 new KeyValuePair<string, string>("k", appKey)
             });
 
             try
             {
-                HttpResponseMessage response = request.PostAsync(Contantes.BASE_URL, parametros).GetAwaiter().GetResult();                
+                HttpResponseMessage response = request.PostAsync(Constantes.BASE_URL, parametros).GetAwaiter().GetResult();                
 
                 if (response.IsSuccessStatusCode)
                 {
