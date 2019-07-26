@@ -23,7 +23,7 @@ namespace Prodfy.Services.API
         {
             HttpClient request = new HttpClient
             {
-                BaseAddress = new Uri(Contantes.BASE_URL)
+                BaseAddress = new Uri(uriString: Contantes.BASE_URL)
             };
 
             FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
