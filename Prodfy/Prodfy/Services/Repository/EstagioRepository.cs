@@ -204,6 +204,14 @@ namespace Prodfy.Services.Repository
             return ret;
         }
 
+        public List<Estagio> ObterTodos(int pontoControleId)
+        {
+            if (pontoControleId != 0)
+                return dataBase._conexao.Table<Estagio>().Where(e => e.ponto_controle_id == pontoControleId).OrderBy(e => e.ordem).ToList();
+
+            return null;            
+        }
+
         public List<Estagio> ObterTodos()
         {
             return dataBase._conexao.Table<Estagio>().ToList();

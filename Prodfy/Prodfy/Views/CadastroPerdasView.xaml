@@ -32,7 +32,7 @@
 
             <Label Style="{StaticResource styleLabelFormulario}" Text="Estágio:" />
             <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                  ItemsSource="{Binding listaEstagios}"
+                                  ItemsSource="{Binding ListaDeEstagios, Mode=TwoWay}"
                                   ItemDisplayBinding="{Binding titulo}"
                                   SelectedItem="{Binding EstagioSelecionado}"
                                   SelectedIndex="{Binding EstagioSelecionadoIndex}" />
@@ -42,7 +42,6 @@
                                  Keyboard="Numeric"
                                  BackgroundColor="White"
                                  control:CornerRadiusEffect.CornerRadius="5" />
-            <!--<control:CustomPicker Style="{StaticResource stylePickerFormulario}" />-->
 
             <Label Style="{StaticResource styleLabelFormulario}" Text="Motivo:" />
             <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 

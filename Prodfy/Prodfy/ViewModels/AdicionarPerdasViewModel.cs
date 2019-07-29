@@ -29,7 +29,7 @@ namespace Prodfy.ViewModels
         public List<Lote> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }
         public List<Ponto_Controle> listaPontoControle { get; set; }
-        public List<Estagio> listaEstagios { get; set; }
+        //public List<Estagio> listaEstagios { get; set; }
         public List<Perda_Motivo> listaPerdaMotivo { get; set; }
 
         public AdicionarPerdasViewModel()
@@ -50,7 +50,7 @@ namespace Prodfy.ViewModels
             Lotes();
             Mudas();
             PontoControles();
-            Estagios();
+            //Estagios();
             PerdaMotivo();
         }
 
@@ -72,14 +72,27 @@ namespace Prodfy.ViewModels
         public Ponto_Controle PontoControleSelecionado
         {
             get => _pontoControleSelecionado;
-            set => SetProperty(ref _pontoControleSelecionado, value);
+            set
+            {
+                SetProperty(ref _pontoControleSelecionado, value);
+
+                if (_pontoControleSelecionado != null)
+                    _listaDeEstagios = Estagios();
+            }
         }
 
         private Estagio _estagioSelecionado;
         public Estagio EstagioSelecionado
         {
-            get => _estagioSelecionado;
+            get => _estagioSelecionado;            
             set => SetProperty(ref _estagioSelecionado, value);
+        }
+
+        private List<Estagio> _listaDeEstagios;
+        public List<Estagio> ListaDeEstagios
+        {
+            get => _listaDeEstagios;
+            set => SetProperty(ref _listaDeEstagios, value);
         }
 
         private Perda_Motivo _motivoSelecionado;
@@ -391,7 +404,10 @@ namespace Prodfy.ViewModels
 
         private List<Estagio> Estagios()
         {
-            return listaEstagios = estagioRepositorio.ObterTodos();
+            if (PontoControleSelecionado != null)
+                return ListaDeEstagios = estagioRepositorio.ObterTodos(PontoControleSelecionado.ponto_controle_id);
+            
+            return ListaDeEstagios = estagioRepositorio.ObterTodos();
         }
 
         private List<Perda_Motivo> PerdaMotivo()

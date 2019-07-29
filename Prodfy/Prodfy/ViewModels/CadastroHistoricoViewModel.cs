@@ -78,6 +78,16 @@ namespace Prodfy.ViewModels
             {
                 SetProperty(ref _titulo, value);
 
+                /*
+                 * maxlenth = 180
+                 * 
+                 * lenthUsado = 0
+                 * 
+                 * totalLenth = maxlenth - lenthUsado
+                 */
+
+
+
                 //foreach (char item in _titulo)
                 //{
                 //    var contadorAtual = _titulo.Length;
