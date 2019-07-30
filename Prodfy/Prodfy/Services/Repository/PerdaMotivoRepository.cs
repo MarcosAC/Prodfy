@@ -74,7 +74,7 @@ namespace Prodfy.Services.Repository
 
         public List<Perda_Motivo> ObterTodos()
         {
-            return dataBase._conexao.Table<Perda_Motivo>().ToList();
+            return dataBase._conexao.Query<Perda_Motivo>("SELECT perda_motivo_id, motivo FROM Perda_Motivo ORDER BY 2");
         }
 
         public int ObterTotalDeRegistros()
