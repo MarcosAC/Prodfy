@@ -34,13 +34,13 @@ namespace Prodfy.ViewModels
 
         public List<Lote> listaLotes { get; set; }
 
-        private int contadorTitulo = 180;
+        private int maxLengthTitulo = 180;
         private string _contagemCaracteresTitulo;
-        public string ContagemCaracteresTitulo { get => _contagemCaracteresTitulo = $"Título: {contadorTitulo}"; }
+        public string ContagemCaracteresTitulo { get => _contagemCaracteresTitulo = $"Título: {maxLengthTitulo}"; }
 
-        private int contatorTexto = 2000;
+        private int maxLengthTexto = 2000;
         private string _contagemCaracteresTexto;
-        public string ContagemCaracteresTexto { get => _contagemCaracteresTexto = $"Texto: {contatorTexto}"; }
+        public string ContagemCaracteresTexto { get => _contagemCaracteresTexto = $"Texto: {maxLengthTexto}"; }
 
         private string _dispId;
         public string DispId
@@ -78,35 +78,9 @@ namespace Prodfy.ViewModels
             {
                 SetProperty(ref _titulo, value);
 
-                /*
-                 * maxlenth = 180
-                 * 
-                 * lenthUsado = 0
-                 * 
-                 * totalLenth = maxlenth - lenthUsado
-                 */
-
-
-
-                //foreach (char item in _titulo)
-                //{
-                //    var contadorAtual = _titulo.Length;
-
-                //    var contadorAntigo = contadorAtual;
-
-                //    if (contadorAtual == _titulo.Length - 1)
-                //    {
-                //        contadorTitulo += 1;
-                //    }
-                //    contadorTitulo -= 1;
-                //    OnPropertyChanged(nameof(ContagemCaracterTitulo));
-                //}
-
-                //if (contadorTitulo >= contadorTitulo)
-                //{
-                //    contadorTitulo -= 1;
-                //    OnPropertyChanged(nameof(ContagemCaracterTitulo));
-                //}            
+                var totalCaracteres = 180;
+                maxLengthTitulo = totalCaracteres - _titulo.Length;
+                OnPropertyChanged(nameof(ContagemCaracteresTitulo));
             }
         }
 
@@ -114,7 +88,14 @@ namespace Prodfy.ViewModels
         public string Texto
         {
             get => _texto;
-            set => SetProperty(ref _texto, value);
+            set
+            {
+                SetProperty(ref _texto, value);
+
+                var totalCaracteres = 2000;
+                maxLengthTexto = totalCaracteres - _texto.Length;
+                OnPropertyChanged(nameof(ContagemCaracteresTexto));
+            } 
         }
         
         private string _indSinc;
