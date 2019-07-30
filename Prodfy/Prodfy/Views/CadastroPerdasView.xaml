@@ -25,7 +25,7 @@
 
             <Label Style="{StaticResource styleLabelFormulario}" Text="Ponto de Controle:" />
             <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                  ItemsSource="{Binding listaPontoControle}"
+                                  ItemsSource="{Binding ListaPontoControle}"
                                   ItemDisplayBinding="{Binding titulo}"
                                   SelectedItem="{Binding PontoControleSelecionado}"
                                   SelectedIndex="{Binding PontoControleSelecionadoIndex}" />

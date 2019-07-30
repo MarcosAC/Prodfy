@@ -152,6 +152,14 @@ namespace Prodfy.Services.Repository
             return dataBase._conexao.Table<Ponto_Controle>().ToList();
         }
 
+        public List<Ponto_Controle> ObterTodos(int produtoId)
+        {
+            if (produtoId != 0)
+                return dataBase._conexao.Table<Ponto_Controle>().Where(p => p.produto_id == produtoId).OrderBy(p => p.ordem).ToList();
+
+            return null;
+        }
+
         public int ObterTotalDeRegistros()
         {
             throw new NotImplementedException();

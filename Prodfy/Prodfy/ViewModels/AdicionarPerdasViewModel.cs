@@ -28,8 +28,6 @@ namespace Prodfy.ViewModels
 
         public List<Lote> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }
-        public List<Ponto_Controle> listaPontoControle { get; set; }
-        //public List<Estagio> listaEstagios { get; set; }
         public List<Perda_Motivo> listaPerdaMotivo { get; set; }
 
         public AdicionarPerdasViewModel()
@@ -49,8 +47,6 @@ namespace Prodfy.ViewModels
 
             Lotes();
             Mudas();
-            PontoControles();
-            //Estagios();
             PerdaMotivo();
         }
 
@@ -58,7 +54,20 @@ namespace Prodfy.ViewModels
         public Lote LoteSelecionado
         {
             get => _loteSelecionado;
-            set => SetProperty(ref _loteSelecionado, value);
+            set
+            {
+                SetProperty(ref _loteSelecionado, value);
+
+                if (_loteSelecionado != null)
+                    _listaPonteControle = PontoControles();
+            }
+        }
+
+        private List<Lote> _listaDeLotes;
+        public List<Lote> ListaDeLotes
+        {
+            get => _listaDeLotes;
+            set => SetProperty(ref _listaDeLotes, value);
         }
 
         private Muda _mudaSelecionada;
@@ -81,10 +90,17 @@ namespace Prodfy.ViewModels
             }
         }
 
+        private List<Ponto_Controle> _listaPonteControle;
+        public List<Ponto_Controle> ListaPontoControle
+        {
+            get => _listaPonteControle;
+            set => SetProperty(ref _listaPonteControle, value);
+        }
+
         private Estagio _estagioSelecionado;
         public Estagio EstagioSelecionado
         {
-            get => _estagioSelecionado;            
+            get => _estagioSelecionado;
             set => SetProperty(ref _estagioSelecionado, value);
         }
 
@@ -399,7 +415,10 @@ namespace Prodfy.ViewModels
 
         private List<Ponto_Controle> PontoControles()
         {
-            return listaPontoControle = pontoControleRepositorio.ObterTodos();
+            if (LoteSelecionado != null)
+                return ListaPontoControle = pontoControleRepositorio.ObterTodos(LoteSelecionado.produto_id);
+
+            return ListaPontoControle = pontoControleRepositorio.ObterTodos();
         }
 
         private List<Estagio> Estagios()

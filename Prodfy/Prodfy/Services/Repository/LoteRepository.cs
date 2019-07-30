@@ -121,7 +121,7 @@ namespace Prodfy.Services.Repository
 
         public List<Lote> ObterTodos()
         {
-            return dataBase._conexao.Table<Lote>().OrderBy(l => l.idLote).ToList();
+            return dataBase._conexao.Query<Lote>($"SELECT lote_id, produto_id, codigo, objetivo, cliente FROM Lote ORDER BY 3 desc");
         }
 
         public string ObterLotePorId(string id)
