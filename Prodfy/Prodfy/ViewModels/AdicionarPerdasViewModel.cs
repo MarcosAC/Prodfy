@@ -28,7 +28,7 @@ namespace Prodfy.ViewModels
 
         public List<Lote> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }
-        public List<Perda_Motivo> listaPerdaMotivo { get; set; }
+        public List<Perda_Motivo> listaPerdaMotivo { get; set; }        
 
         public AdicionarPerdasViewModel()
         {
@@ -49,6 +49,23 @@ namespace Prodfy.ViewModels
             Mudas();
             PerdaMotivo();
         }
+
+        #region Propriedades
+        //private bool _isEnable = true;
+        //public bool IsEnable
+        //{
+        //    get => _isEnable;
+        //    set
+        //    {
+        //        //SetProperty(ref _isEnable, value);
+        //        if (ExecuteVerificarDadosPickerEstagiosCommand())
+        //        {
+        //            _isEnable = false;
+        //            SetProperty(ref _isEnable, value);
+        //            //OnPropertyChanged(nameof(IsEnable));
+        //        }
+        //    }
+        //}
 
         private Lote _loteSelecionado;
         public Lote LoteSelecionado
@@ -83,10 +100,10 @@ namespace Prodfy.ViewModels
             get => _pontoControleSelecionado;
             set
             {
-                SetProperty(ref _pontoControleSelecionado, value);
-
                 if (_pontoControleSelecionado != null)
                     _listaDeEstagios = Estagios();
+
+                SetProperty(ref _pontoControleSelecionado, value);
             }
         }
 
@@ -138,6 +155,28 @@ namespace Prodfy.ViewModels
             get => _indSinc;
             set => SetProperty(ref _indSinc, value);
         }
+        #endregion
+
+        #region Commands
+
+        //private bool CanExecuteCommand()
+        //{
+        //    if (_listaPonteControle != null)
+        //        return true;
+
+        //    return false;
+        //}
+
+        //private bool CanExecutePickerEstagiosCommand()
+        //{
+        //    if (!CanExecuteCommand())
+        //    {
+        //        dialogService.AlertAsync("ALERTA", "Selecione um PONTO DE CONTROLE para gerar a lista de ESTÁGIOS", "Ok");
+        //        return false;
+        //    }                
+
+        //    return true;
+        //}
 
         private Command _titleViewBotaoVoltarCommand;
         public Command TitleViewBotaoVoltarCommand =>
@@ -403,6 +442,34 @@ namespace Prodfy.ViewModels
             }
         }
 
+        private Command _verificarDadosPickerEstagiosCammand;
+        public Command VerificarDadosPickerEstagiosCommand =>
+            _verificarDadosPickerEstagiosCammand ?? (_verificarDadosPickerEstagiosCammand = new Command(() => ExecuteVerificarDadosPickerEstagiosCommand()));
+
+        private void ExecuteVerificarDadosPickerEstagiosCommand()
+        {
+            if (_pontoControleSelecionado == null)
+                dialogService.AlertAsync("ALERTA", "Selecione um PONTO DE CONTROLE para gerar a lista de ESTÁGIOS", "Ok");
+            else
+                if (_pontoControleSelecionado != null)
+                _listaDeEstagios = Estagios();
+        }
+
+        private Command _verificarDadosPickerPontoControleCammand;
+        public Command VerificarDadosPickerPontoControleCommand =>
+            _verificarDadosPickerPontoControleCammand ?? (_verificarDadosPickerPontoControleCammand = new Command(() => ExecuteVerificarDadosPickerPontoControleCommand()));
+
+        private void ExecuteVerificarDadosPickerPontoControleCommand()
+        {
+            if (_loteSelecionado == null)
+                dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de PONTOS DE CONTROLE", "Ok");
+            else
+                if (_loteSelecionado != null)
+                _listaPonteControle = PontoControles();
+        }
+        #endregion
+
+        #region Métodos
         private List<Lote> Lotes()
         {
             return listaLotes = loteRepositorio.ObterTodos();
@@ -493,5 +560,6 @@ namespace Prodfy.ViewModels
                 return;
             }
         }
+        #endregion
     }
 }

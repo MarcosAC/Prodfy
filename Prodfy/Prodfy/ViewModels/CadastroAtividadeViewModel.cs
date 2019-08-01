@@ -36,6 +36,10 @@ namespace Prodfy.ViewModels
         public List<Colaborador> listaColaboradores { get; set; }
         public List<Lista_Atv> listaAtividades { get; set; }
 
+        private int maxLengthObs = 500;
+        private string _contagemCaracteresObs;
+        public string ContagemCaracteresObs { get => _contagemCaracteresObs = $"Observação: {maxLengthObs}"; }
+
         private string _dispId;
         public string DispId
         {
@@ -103,7 +107,14 @@ namespace Prodfy.ViewModels
         public string Obs
         {
             get => _obs;
-            set => SetProperty(ref _obs, value);
+            set
+            {
+                SetProperty(ref _obs, value);
+
+                var totalCaracteres = 500;
+                maxLengthObs = totalCaracteres - _obs.Length;
+                OnPropertyChanged(nameof(ContagemCaracteresObs));
+            }
         }
 
         private string _lastUpdate;

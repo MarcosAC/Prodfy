@@ -24,15 +24,19 @@
                                   SelectedIndex="{Binding MudaSelecionadaIndex}" />
 
             <Label Style="{StaticResource styleLabelFormulario}" Text="Ponto de Controle:" />
-            <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+            <control:CustomPicker x:Name="PickerPontoControle"
+                                  Style="{StaticResource stylePickerFormulario}"
+                                  Focused="PickerPontoControle_Click" 
                                   ItemsSource="{Binding ListaPontoControle}"
                                   ItemDisplayBinding="{Binding titulo}"
                                   SelectedItem="{Binding PontoControleSelecionado}"
                                   SelectedIndex="{Binding PontoControleSelecionadoIndex}" />
 
             <Label Style="{StaticResource styleLabelFormulario}" Text="Estágio:" />
-            <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                  ItemsSource="{Binding ListaDeEstagios, Mode=TwoWay}"
+            <control:CustomPicker x:Name="PickerEstagio"
+                                  Style="{StaticResource stylePickerFormulario}" 
+                                  Focused="PickerEstagio_Click"                                  
+                                  ItemsSource="{Binding ListaDeEstagios}"
                                   ItemDisplayBinding="{Binding titulo}"
                                   SelectedItem="{Binding EstagioSelecionado}"
                                   SelectedIndex="{Binding EstagioSelecionadoIndex}" />
