@@ -11,17 +11,29 @@ namespace Prodfy.Views
 		{
 			InitializeComponent ();
 
-            BindingContext = new AdicionarPerdasViewModel();
+            BindingContext = new AdicionarPerdasViewModel();            
+        }        
+
+        private void PickerLotes_Click(object sender, FocusEventArgs e)
+        {
+            if (PickerPontoControle.IsEnabled == false)
+                PickerPontoControle.IsEnabled = true;
+        }        
+
+        private void PickerPontoControle_Click(object sender, FocusEventArgs e)
+        {
+            if (!((AdicionarPerdasViewModel)BindingContext).VerificaPickerPontoControle())
+                PickerPontoControle.IsEnabled = false;
+
+            PickerEstagio.IsEnabled = true;
         }
 
         private void PickerEstagio_Click(object sender, FocusEventArgs e)
         {
-            ((AdicionarPerdasViewModel)BindingContext).VerificarDadosPickerEstagiosCommand.Execute(null);
-        }
-
-        private void PickerPontoControle_Click(object sender, FocusEventArgs e)
-        {
-            ((AdicionarPerdasViewModel)BindingContext).VerificarDadosPickerPontoControleCommand.Execute(null);
+            if (!((AdicionarPerdasViewModel)BindingContext).VerificaPickerEstagios())
+                PickerEstagio.IsEnabled = false;
+            else
+                PickerEstagio.IsEnabled = true;
         }
     }
 }

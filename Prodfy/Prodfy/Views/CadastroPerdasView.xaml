@@ -11,6 +11,7 @@
 
             <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
             <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                  Focused="PickerLotes_Click"
                                   ItemsSource="{Binding listaLotes}"
                                   ItemDisplayBinding="{Binding codigo}"
                                   SelectedItem="{Binding LoteSelecionado}"
@@ -26,7 +27,7 @@
             <Label Style="{StaticResource styleLabelFormulario}" Text="Ponto de Controle:" />
             <control:CustomPicker x:Name="PickerPontoControle"
                                   Style="{StaticResource stylePickerFormulario}"
-                                  Focused="PickerPontoControle_Click" 
+                                  Focused="PickerPontoControle_Click"
                                   ItemsSource="{Binding ListaPontoControle}"
                                   ItemDisplayBinding="{Binding titulo}"
                                   SelectedItem="{Binding PontoControleSelecionado}"
@@ -34,7 +35,7 @@
 
             <Label Style="{StaticResource styleLabelFormulario}" Text="Estágio:" />
             <control:CustomPicker x:Name="PickerEstagio"
-                                  Style="{StaticResource stylePickerFormulario}" 
+                                  Style="{StaticResource stylePickerFormulario}"
                                   Focused="PickerEstagio_Click"                                  
                                   ItemsSource="{Binding ListaDeEstagios}"
                                   ItemDisplayBinding="{Binding titulo}"

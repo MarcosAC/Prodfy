@@ -51,22 +51,6 @@ namespace Prodfy.ViewModels
         }
 
         #region Propriedades
-        //private bool _isEnable = true;
-        //public bool IsEnable
-        //{
-        //    get => _isEnable;
-        //    set
-        //    {
-        //        //SetProperty(ref _isEnable, value);
-        //        if (ExecuteVerificarDadosPickerEstagiosCommand())
-        //        {
-        //            _isEnable = false;
-        //            SetProperty(ref _isEnable, value);
-        //            //OnPropertyChanged(nameof(IsEnable));
-        //        }
-        //    }
-        //}
-
         private Lote _loteSelecionado;
         public Lote LoteSelecionado
         {
@@ -100,10 +84,10 @@ namespace Prodfy.ViewModels
             get => _pontoControleSelecionado;
             set
             {
+                SetProperty(ref _pontoControleSelecionado, value);
+
                 if (_pontoControleSelecionado != null)
                     _listaDeEstagios = Estagios();
-
-                SetProperty(ref _pontoControleSelecionado, value);
             }
         }
 
@@ -158,26 +142,6 @@ namespace Prodfy.ViewModels
         #endregion
 
         #region Commands
-
-        //private bool CanExecuteCommand()
-        //{
-        //    if (_listaPonteControle != null)
-        //        return true;
-
-        //    return false;
-        //}
-
-        //private bool CanExecutePickerEstagiosCommand()
-        //{
-        //    if (!CanExecuteCommand())
-        //    {
-        //        dialogService.AlertAsync("ALERTA", "Selecione um PONTO DE CONTROLE para gerar a lista de ESTÁGIOS", "Ok");
-        //        return false;
-        //    }                
-
-        //    return true;
-        //}
-
         private Command _titleViewBotaoVoltarCommand;
         public Command TitleViewBotaoVoltarCommand =>
             _titleViewBotaoVoltarCommand ?? (_titleViewBotaoVoltarCommand = new Command(async () => await ExecuteTitleViewBotaoVoltarCommand()));
@@ -441,32 +405,6 @@ namespace Prodfy.ViewModels
                 return;
             }
         }
-
-        private Command _verificarDadosPickerEstagiosCammand;
-        public Command VerificarDadosPickerEstagiosCommand =>
-            _verificarDadosPickerEstagiosCammand ?? (_verificarDadosPickerEstagiosCammand = new Command(() => ExecuteVerificarDadosPickerEstagiosCommand()));
-
-        private void ExecuteVerificarDadosPickerEstagiosCommand()
-        {
-            if (_pontoControleSelecionado == null)
-                dialogService.AlertAsync("ALERTA", "Selecione um PONTO DE CONTROLE para gerar a lista de ESTÁGIOS", "Ok");
-            else
-                if (_pontoControleSelecionado != null)
-                _listaDeEstagios = Estagios();
-        }
-
-        private Command _verificarDadosPickerPontoControleCammand;
-        public Command VerificarDadosPickerPontoControleCommand =>
-            _verificarDadosPickerPontoControleCammand ?? (_verificarDadosPickerPontoControleCammand = new Command(() => ExecuteVerificarDadosPickerPontoControleCommand()));
-
-        private void ExecuteVerificarDadosPickerPontoControleCommand()
-        {
-            if (_loteSelecionado == null)
-                dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de PONTOS DE CONTROLE", "Ok");
-            else
-                if (_loteSelecionado != null)
-                _listaPonteControle = PontoControles();
-        }
         #endregion
 
         #region Métodos
@@ -485,15 +423,15 @@ namespace Prodfy.ViewModels
             if (LoteSelecionado != null)
                 return ListaPontoControle = pontoControleRepositorio.ObterTodos(LoteSelecionado.produto_id);
 
-            return ListaPontoControle = pontoControleRepositorio.ObterTodos();
+            return null;
         }
 
         private List<Estagio> Estagios()
         {
             if (PontoControleSelecionado != null)
                 return ListaDeEstagios = estagioRepositorio.ObterTodos(PontoControleSelecionado.ponto_controle_id);
-            
-            return ListaDeEstagios = estagioRepositorio.ObterTodos();
+
+            return null;
         }
 
         private List<Perda_Motivo> PerdaMotivo()
@@ -560,6 +498,78 @@ namespace Prodfy.ViewModels
                 return;
             }
         }
+
+        public bool VerificaPickerPontoControle()
+        {
+            if (_listaPonteControle != null)
+                return true;
+
+            dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de PONTOS DE CONTROLE", "Ok");
+            return false;
+        }
+
+        public bool VerificaPickerEstagios()
+        {
+            if (_listaDeEstagios != null)
+                return true;
+
+            dialogService.AlertAsync("ALERTA", "Selecione um PONTO DE CONTROLE para gerar a lista de ESTÁGIOS", "Ok");
+            return false;
+        }
         #endregion
     }
 }
+
+#region Lixo
+
+//private Command _verificarDadosPickerEstagiosCammand;
+//public Command VerificarDadosPickerEstagiosCommand =>
+//    _verificarDadosPickerEstagiosCammand ?? (_verificarDadosPickerEstagiosCammand = new Command(() => 
+//    ExecuteVerificarDadosPickerEstagiosCommand(), VerificaPickerEstagios));
+
+//private void ExecuteVerificarDadosPickerEstagiosCommand()
+//{
+//    _listaDeEstagios = Estagios();
+//    //if (_pontoControleSelecionado == null)
+//    //    dialogService.AlertAsync("ALERTA", "Selecione um PONTO DE CONTROLE para gerar a lista de ESTÁGIOS", "Ok");
+//    //else
+//    //    if (_pontoControleSelecionado != null)
+//    //    _listaDeEstagios = Estagios();
+//}
+
+//private Command _refreshCommand;
+//public Command RefreshCommand => _refreshCommand ?? (_refreshCommand = new Command(RefresCommandExecute));
+
+//private void RefresCommandExecute()
+//{
+//    VerificarDadosPickerEstagiosCommand.ChangeCanExecute();
+//}
+
+//private bool CanExecuteCommand()
+//{
+//    if (_listaPonteControle != null)
+//        return true;
+
+//    enablePicker = false;
+//    return false;
+//}
+
+//private Command _verificarDadosPickerPontoControleCammand;
+//public Command VerificarDadosPickerPontoControleCommand =>
+//    _verificarDadosPickerPontoControleCammand ?? (_verificarDadosPickerPontoControleCammand = new Command(() => ExecuteVerificarDadosPickerPontoControleCommand()));
+
+//private void ExecuteVerificarDadosPickerPontoControleCommand()
+//{
+//    if (_loteSelecionado == null)
+//        dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de PONTOS DE CONTROLE", "Ok");
+//    else
+//        if (_loteSelecionado != null)
+//        _listaPonteControle = PontoControles();
+//}
+
+//private bool _isEnablePicker;
+//public bool IsEnablePicker { get => _isEnablePicker = enablePicker; }
+
+//private bool enablePicker = true;
+
+#endregion
