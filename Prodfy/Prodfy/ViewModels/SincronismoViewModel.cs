@@ -142,7 +142,7 @@ namespace Prodfy.ViewModels
 
                         var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(dadosUser.app_key, dadosUser.lang);
 
-                        if (dadosResponse.sinc_stat == 1)
+                        if (_dadosSincronismo.sinc_stat == 1)
                         {
                             #region Dados Usuario                            
 
@@ -685,7 +685,7 @@ namespace Prodfy.ViewModels
 
                             #endregion                            
                         }
-                        await _dialogService.AlertAsync("Sincronia", dadosResponse.sinc_msg, "Ok");
+                        await _dialogService.AlertAsync("Sincronia", "Sincronismo concluído com sucesso!", "Ok");
                     }
                     catch (Exception)
                     {

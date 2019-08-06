@@ -23,19 +23,21 @@ namespace Prodfy.Services.API
         {
             HttpClient request = new HttpClient
             {
-                BaseAddress = new Uri(uriString: Constantes.BASE_URL)
+                BaseAddress = new Uri(Constantes.BASE_URL)
             };
 
-            FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
-                new KeyValuePair<string, string>("l", idioma),
-                new KeyValuePair<string, string>("v", Constantes.VERSAO_APP),
-                new KeyValuePair<string, string>("a", "s"),
-                new KeyValuePair<string, string>("k", appKey)
-            });
+            //FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
+            //    new KeyValuePair<string, string>("l", idioma),
+            //    new KeyValuePair<string, string>("v", Constantes.VERSAO_APP),
+            //    new KeyValuePair<string, string>("a", "s"),
+            //    new KeyValuePair<string, string>("k", appKey)
+            //});
 
             try
             {
-                HttpResponseMessage response = request.PostAsync(Constantes.BASE_URL, parametros).GetAwaiter().GetResult();
+                string url = Constantes.BASE_URL + "l=" + idioma + "&v=" + Constantes.VERSAO_APP + "&a=s" + "&k=" + appKey;
+
+                HttpResponseMessage response = request.PostAsync(url, null).GetAwaiter().GetResult();
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -44,6 +46,7 @@ namespace Prodfy.Services.API
 
                     var sincronismo = new Sincronismo
                     {
+                        sinc_stat = dadosSincronismo.sinc_stat,
                         disp_num = dadosSincronismo.disp_num,
                         senha = dadosSincronismo.senha,
                         nome = dadosSincronismo.nome,

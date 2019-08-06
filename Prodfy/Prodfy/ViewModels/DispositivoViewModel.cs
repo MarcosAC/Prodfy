@@ -95,6 +95,7 @@ namespace Prodfy.ViewModels
                                 autosinc_time = dadosConfiguracaoDispositivo.autosinc_time,
                                 sinc_url = dadosConfiguracaoDispositivo.sinc_url,
                                 app_key = dadosConfiguracaoDispositivo.app_key,
+                                lang = dadosConfiguracaoDispositivo.lang,
                                 ind_ident = dadosConfiguracaoDispositivo.ind_ident,
                                 ind_mov = dadosConfiguracaoDispositivo.ind_mov,
                                 ind_per = dadosConfiguracaoDispositivo.ind_per,

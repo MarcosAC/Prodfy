@@ -16,16 +16,18 @@ namespace Prodfy.Services.API
                 BaseAddress = new Uri(Constantes.BASE_URL)
             };
 
-            FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
-                new KeyValuePair<string, string>("l", idioma),
-                new KeyValuePair<string, string>("v", Constantes.VERSAO_APP),
-                new KeyValuePair<string, string>("a", "gsd"),
-                new KeyValuePair<string, string>("k", appKey)
-            });
+            //FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
+            //    new KeyValuePair<string, string>("l=", idioma),
+            //    new KeyValuePair<string, string>("&v=", Constantes.VERSAO_APP),
+            //    new KeyValuePair<string, string>("&a=", "gsd"),
+            //    new KeyValuePair<string, string>("&k=", appKey)
+            //});
 
             try
             {
-                HttpResponseMessage response = request.PostAsync(Constantes.BASE_URL, parametros).GetAwaiter().GetResult();                
+                string url = Constantes.BASE_URL + "l=" + idioma + "&v=" + Constantes.VERSAO_APP + "&a=gsd" + "&k=" + appKey;
+
+                HttpResponseMessage response = request.PostAsync(url, null).GetAwaiter().GetResult();
 
                 if (response.IsSuccessStatusCode)
                 {
