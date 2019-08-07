@@ -1,33 +1,34 @@
 ﻿using Newtonsoft.Json;
 using Prodfy.Helpers;
 using Prodfy.Models;
+using Prodfy.Services.Dialog;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Prodfy.Services.API
 {
     public class ConfiguracaoDispositivoService
     {
-        public static User ObterDadosConfiguracaoDispositivo(string appKey, string idioma)
+        private readonly IDialogService _dialogService;
+
+        public ConfiguracaoDispositivoService()
         {
+            _dialogService = new DialogService();
+        }
+
+        public async Task<User> ObterDadosConfiguracaoDispositivo(string appKey, string idioma)
+        {            
             HttpClient request = new HttpClient
             {
                 BaseAddress = new Uri(Constantes.BASE_URL)
             };
 
-            //FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
-            //    new KeyValuePair<string, string>("l=", idioma),
-            //    new KeyValuePair<string, string>("&v=", Constantes.VERSAO_APP),
-            //    new KeyValuePair<string, string>("&a=", "gsd"),
-            //    new KeyValuePair<string, string>("&k=", appKey)
-            //});
-
             try
             {
-                string url = Constantes.BASE_URL + "l=" + idioma + "&v=" + Constantes.VERSAO_APP + "&a=gsd" + "&k=" + appKey;
+                string url = $"{Constantes.BASE_URL}l={idioma}&v={Constantes.VERSAO_APP}&a=gsd&k={appKey}";
 
-                HttpResponseMessage response = request.PostAsync(url, null).GetAwaiter().GetResult();
+                HttpResponseMessage response = request.GetAsync(url).GetAwaiter().GetResult();
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -37,7 +38,7 @@ namespace Prodfy.Services.API
                     switch (dadosDispositivo.sinc_stat)
                     {
                         case 0:
-                            App.Current.MainPage.DisplayAlert("", dadosDispositivo.sinc_msg, "Ok");                            
+                            await _dialogService.AlertAsync("", dadosDispositivo.sinc_msg, "Ok");                            
                             break;
                         case 1:
                             var user = new User
@@ -66,15 +67,13 @@ namespace Prodfy.Services.API
                                 sinc_stat = dadosDispositivo.sinc_stat
                             };
 
-                            //App.Current.MainPage.DisplayAlert("", dadosDispositivo.sinc_msg, "Ok");
-
                             return user;
                     }
                 }
             }
             catch (Exception)
             {
-                App.Current.MainPage.DisplayAlert("Erro", "Erro na configuração. Favor tentar novamente!", "Ok");                
+                await _dialogService.AlertAsync("Erro", "Erro na configuração. Favor tentar novamente!", "Ok");                
             }
             return null;
         }

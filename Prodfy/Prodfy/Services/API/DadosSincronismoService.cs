@@ -12,11 +12,11 @@ namespace Prodfy.Services.API
 {
     public class DadosSincronismoService
     {
-        private readonly IDialogService _dialogService;
+        private readonly IDialogService dialogService;
 
         public DadosSincronismoService()
         {
-            _dialogService = new DialogService();
+            dialogService = new DialogService();
         }
 
         public async Task<Sincronismo> ObterDadosSincronismo(string appKey, string idioma)
@@ -26,18 +26,11 @@ namespace Prodfy.Services.API
                 BaseAddress = new Uri(Constantes.BASE_URL)
             };
 
-            //FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
-            //    new KeyValuePair<string, string>("l", idioma),
-            //    new KeyValuePair<string, string>("v", Constantes.VERSAO_APP),
-            //    new KeyValuePair<string, string>("a", "s"),
-            //    new KeyValuePair<string, string>("k", appKey)
-            //});
-
             try
             {
-                string url = Constantes.BASE_URL + "l=" + idioma + "&v=" + Constantes.VERSAO_APP + "&a=s" + "&k=" + appKey;
+                string url = $"{Constantes.BASE_URL}l={idioma}&v={Constantes.VERSAO_APP}&a=s&k={appKey}";
 
-                HttpResponseMessage response = request.PostAsync(url, null).GetAwaiter().GetResult();
+                HttpResponseMessage response = request.GetAsync(url).GetAwaiter().GetResult();
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -85,7 +78,7 @@ namespace Prodfy.Services.API
             }
             catch (Exception ex)
             {
-                await _dialogService.AlertAsync("Erro", ex.ToString(), "Ok");
+                await dialogService.AlertAsync("Erro", ex.ToString(), "Ok");
             }
             return null;
         }
@@ -97,9 +90,7 @@ namespace Prodfy.Services.API
                 BaseAddress = new Uri(Constantes.BASE_URL)
             };
 
-            string dados = JsonConvert.SerializeObject(dadosSincrismo, Formatting.Indented); 
-
-            //string dadosParaUpload = "{" + dados + "}";            
+            string dados = JsonConvert.SerializeObject(dadosSincrismo, Formatting.Indented);
 
             FormUrlEncodedContent parametros = new FormUrlEncodedContent(new[] {
                 new KeyValuePair<string, string>("l", idioma),
@@ -124,7 +115,7 @@ namespace Prodfy.Services.API
             }
             catch (Exception)
             {
-                await _dialogService.AlertAsync("Erro", "Erro de sincronização.", "Ok");
+                await dialogService.AlertAsync("Erro", "Erro de sincronização.", "Ok");
             }
 
             return null;

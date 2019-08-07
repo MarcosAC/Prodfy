@@ -32,16 +32,13 @@ namespace Prodfy.ViewModels
         private Qualidade qualidade = null;
         private Exped_Dest exped_dest = null;
         private Estaq estaq = null;
+        private string dataSincronizacao = "Não Sincronizado!";
         #endregion
 
-        private string dataSincronizacao = "Não Sincronizado!";
-
-        private readonly IDialogService _dialogService;
-
-        DadosSincronismoService dadosSincronismo = new DadosSincronismoService();
+        private readonly IDialogService dialogService;
+        private readonly DadosSincronismoService dadosSincronismoService;
 
         #region Implementação Repositorios
-
         private UserRepository userRepository;
         private AtividadeRepository atividadeRepository;
         private InventarioRepository inventarioRepository;
@@ -71,7 +68,8 @@ namespace Prodfy.ViewModels
 
         public SincronismoViewModel()
         {
-            _dialogService = new DialogService();
+            dialogService = new DialogService();
+            dadosSincronismoService = new DadosSincronismoService();
 
             userRepository = new UserRepository();
             atividadeRepository = new AtividadeRepository();
@@ -134,13 +132,13 @@ namespace Prodfy.ViewModels
                 if (UploadDados().Count >= 0)
                 {
 
-                    var dadosResponse = await dadosSincronismo.UploadDadosParaSincronisar(userRepository.ObterDados().app_key, userRepository.ObterDados().lang, UploadDados());
+                    var dadosResponse = await dadosSincronismoService.UploadDadosParaSincronisar(userRepository.ObterDados().app_key, userRepository.ObterDados().lang, UploadDados());
 
                     try
                     {
                         var dadosUser = userRepository.ObterDados();
 
-                        var _dadosSincronismo = await dadosSincronismo.ObterDadosSincronismo(dadosUser.app_key, dadosUser.lang);
+                        var _dadosSincronismo = await dadosSincronismoService.ObterDadosSincronismo(dadosUser.app_key, dadosUser.lang);
 
                         if (_dadosSincronismo.sinc_stat == 1)
                         {
@@ -685,11 +683,11 @@ namespace Prodfy.ViewModels
 
                             #endregion                            
                         }
-                        await _dialogService.AlertAsync("Sincronia", "Sincronismo concluído com sucesso!", "Ok");
+                        await dialogService.AlertAsync("Sincronia", "Sincronismo concluído com sucesso!", "Ok");
                     }
                     catch (Exception)
                     {
-                        await _dialogService.AlertAsync("Erro", dadosResponse.sinc_msg, "Ok");
+                        await dialogService.AlertAsync("Erro", dadosResponse.sinc_msg, "Ok");
                     }
 
                     await RefreshCommandExecute();
@@ -697,7 +695,7 @@ namespace Prodfy.ViewModels
             }
             else
             {
-                await _dialogService.AlertAsync("Erro", "Sem conexão com a internet!", "Ok");
+                await dialogService.AlertAsync("Erro", "Sem conexão com a internet!", "Ok");
             }
 
             IsBusy = false;
@@ -837,7 +835,7 @@ namespace Prodfy.ViewModels
             }
             catch (Exception)
             {
-                return;
+                await dialogService.AlertAsync("Erro", "Erro ao atualizar lista de Perdas", "Ok");
             }
         }
     }

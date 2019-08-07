@@ -12,21 +12,21 @@ namespace Prodfy.ViewModels
 {
     public class DispositivoViewModel : BaseViewModel
     {
-        private readonly INavigationService _navigationService;
-        private readonly IDialogService _dialogService;
+        private readonly INavigationService navigationService;
+        private readonly IDialogService dialogService;
+        private readonly ConfiguracaoDispositivoService configuracaoDispositivoService;
 
-        private UserRepository _userRepository;
+        private UserRepository userRepository;
         private User _dadosUsuario = null;
 
         public DispositivoViewModel()
         {
             Title = "Dispositivo";
 
-            _navigationService = new NavigationService();
-
-            _dialogService = new DialogService();
-
-            _userRepository = new UserRepository();            
+            navigationService = new NavigationService();
+            dialogService = new DialogService();
+            configuracaoDispositivoService = new ConfiguracaoDispositivoService();
+            userRepository = new UserRepository();            
         }
 
         public int? NumeroDispositivo { get => _dadosUsuario?.disp_num; }
@@ -36,7 +36,7 @@ namespace Prodfy.ViewModels
         private Command _navegacaoCommand;
         public Command NavegacaoCommand => _navegacaoCommand ?? (_navegacaoCommand = new Command(async () => await ExecuteNavegacaoCommand()));
 
-        private async Task ExecuteNavegacaoCommand() => await _navigationService.PopAsync();
+        private async Task ExecuteNavegacaoCommand() => await navigationService.PopAsync();
 
         private Command _leitorQRCommand;
         public Command LeitorQRCommand => _leitorQRCommand ?? (_leitorQRCommand = new Command(async () => await ExecuteLeitorQRCommand()));
@@ -46,13 +46,13 @@ namespace Prodfy.ViewModels
         {
             if (VerificaConexaoInternet.VerificaConexao())
             {
-                bool configuracaoAceita = await _dialogService.AlertAsync
+                bool configuracaoAceita = await dialogService.AlertAsync
                                                ("Dispositivo", 
                                                 "Ao configurar o dispositivo todos os dados não sincronizados serão descartados. Confirma?", 
                                                 "Sim", "Não");
                 if (configuracaoAceita)
                 {                    
-                    _userRepository.DeletarTodasTabelas();
+                    userRepository.DeletarTodasTabelas();
 
                     /*
                      *  ToDo - Refatarar leitor de QR
@@ -81,7 +81,7 @@ namespace Prodfy.ViewModels
                         {
                             IsBusy = true;
 
-                            var dadosConfiguracaoDispositivo = ConfiguracaoDispositivoService.ObterDadosConfiguracaoDispositivo(dadosQR.qrKey, dadosQR.qrLang);
+                            var dadosConfiguracaoDispositivo = await configuracaoDispositivoService.ObterDadosConfiguracaoDispositivo(dadosQR.qrKey, dadosQR.qrLang);
 
                             var usuario = new User
                             {
@@ -108,13 +108,13 @@ namespace Prodfy.ViewModels
 
                             if (usuario != null)
                             {
-                                _userRepository.Adicionar(usuario);
+                                userRepository.Adicionar(usuario);
 
                                 OnPropertyChanged(nameof(NumeroDispositivo));
                                 OnPropertyChanged(nameof(Usuario));
                                 OnPropertyChanged(nameof(Empresa));
 
-                                await _dialogService.AlertAsync("Configuração", "Configuração básica recebida com sucesso!", "Ok");
+                                await dialogService.AlertAsync("Configuração", "Configuração básica recebida com sucesso!", "Ok");
                             }
 
                             IsBusy = false;
@@ -123,14 +123,14 @@ namespace Prodfy.ViewModels
                         }
                         catch (Exception)
                         {
-                            await _dialogService.AlertAsync("Configuração", "Erro ao configurar!", "Ok");
+                            await dialogService.AlertAsync("Configuração", "Erro ao configurar!", "Ok");
                         }                       
                     }
                 }                
             }
             else
             {
-                await _dialogService.AlertAsync("Erro", "Sem conexão com a internet!", "Ok");
+                await dialogService.AlertAsync("Erro", "Sem conexão com a internet!", "Ok");
             }
         }
 
@@ -145,7 +145,7 @@ namespace Prodfy.ViewModels
 
             try
             {
-                var dadosDispositivo = _userRepository.ObterDados();
+                var dadosDispositivo = userRepository.ObterDados();
 
                 if (dadosDispositivo != null)
                 {
