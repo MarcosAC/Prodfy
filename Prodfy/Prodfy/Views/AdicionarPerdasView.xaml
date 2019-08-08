@@ -46,7 +46,7 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <local:CadastroPerdasView />
+            <!--<local:CadastroPerdasView />-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

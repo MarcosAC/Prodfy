@@ -11,7 +11,7 @@ using Xamarin.Forms;
 
 namespace Prodfy.ViewModels
 {
-    public class AdicionarPerdasViewModel : BaseViewModel
+    public class CadastroPerdasViewModel : BaseViewModel
     {
         private readonly INavigationService navigationService;
         private readonly IDialogService dialogService;
@@ -25,12 +25,13 @@ namespace Prodfy.ViewModels
         private readonly UserRepository userRepositorio;
 
         private User user;
+        private readonly CarregarDadosPerdaQr _dadosPerdaQr;
 
         public List<Lote> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }
         public List<Perda_Motivo> listaPerdaMotivo { get; set; }        
 
-        public AdicionarPerdasViewModel()
+        public CadastroPerdasViewModel(CarregarDadosPerdaQr dadosPerdaQr)
         {
             Title = "Perdas";
 
@@ -45,12 +46,17 @@ namespace Prodfy.ViewModels
             perdaMotivoRepositorio = new PerdaMotivoRepository();
             userRepositorio = new UserRepository();
 
+            _dadosPerdaQr = dadosPerdaQr;
+
             Lotes();
             Mudas();
+            PontoControles();
             PerdaMotivo();
         }
 
         #region Propriedades
+        public int LoteSelecionadoIndex { get => Index("Lote"); }
+
         private Lote _loteSelecionado;
         public Lote LoteSelecionado
         {
@@ -71,12 +77,16 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaDeLotes, value);
         }
 
+        public int MudaSelecionadaIndex { get => Index("Muda"); }
+
         private Muda _mudaSelecionada;
         public Muda MudaSelecionada
         {
             get => _mudaSelecionada;
             set => SetProperty(ref _mudaSelecionada, value);
         }
+
+        public int PontoControleSelecionadoIndex { get => Index("PontoControle"); }
 
         private Ponto_Controle _pontoControleSelecionado;
         public Ponto_Controle PontoControleSelecionado
@@ -98,6 +108,8 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaPonteControle, value);
         }
 
+        public int EstagioSelecionadoIndex { get => Index("Estagio"); }
+
         private Estagio _estagioSelecionado;
         public Estagio EstagioSelecionado
         {
@@ -111,6 +123,8 @@ namespace Prodfy.ViewModels
             get => _listaDeEstagios;
             set => SetProperty(ref _listaDeEstagios, value);
         }
+
+        public int PerdaMotivoSelecionadoIndex { get => Index("PerdaMotivo"); }
 
         private Perda_Motivo _motivoSelecionado;
         public Perda_Motivo MotivoSelecionado
@@ -129,8 +143,25 @@ namespace Prodfy.ViewModels
         private string _qtde;
         public string Qtde
         {
-            get => _qtde;
-            set => SetProperty(ref _qtde, value);
+            get
+            {
+                if (!string.IsNullOrEmpty(_dadosPerdaQr.Oquantidade))
+                {
+                    _qtde = _dadosPerdaQr.Oquantidade;
+                }
+
+                return _qtde;
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(_dadosPerdaQr.Oquantidade))
+                {
+                    _dadosPerdaQr.Oquantidade = value;
+                    OnPropertyChanged();
+                }
+
+                SetProperty(ref _qtde, value);
+            }
         }
 
         private string _indSinc;
@@ -138,6 +169,7 @@ namespace Prodfy.ViewModels
         {
             get => _indSinc;
             set => SetProperty(ref _indSinc, value);
+            
         }
         #endregion
 
@@ -340,7 +372,7 @@ namespace Prodfy.ViewModels
                         OestagioId = estagioId
                     };
 
-                    await navigationService.PushAsync(new CadastroPerdasQrView(carregarCadastroPerdasQr));
+                    //await navigationService.PushAsync(new CadastroPerdasQrView(carregarCadastroPerdasQr));
                 }
                 else
                 {
@@ -454,6 +486,40 @@ namespace Prodfy.ViewModels
             return user;
         }
 
+        private int Index(string objeto)
+        {
+            int index = -1;
+
+            switch (objeto)
+            {
+                case "Lote":
+                    var listaLotes = Lotes();
+                    if (!string.IsNullOrEmpty(_dadosPerdaQr.OloteCodigo))
+                        index = listaLotes.FindIndex(l => l.codigo == _dadosPerdaQr.OloteCodigo);
+                    break;
+                case "Muda":
+                    var listaMudas = Mudas();
+                    if (!string.IsNullOrEmpty(_dadosPerdaQr.OmudaId))
+                        index = listaMudas.FindIndex(m => m.muda_id == int.Parse(_dadosPerdaQr.OmudaId));
+                    break;
+                case "PontoControle":
+                    var listaPontoControles = PontoControles();
+                    if (!string.IsNullOrEmpty(_dadosPerdaQr.OpontoControleId))
+                        index = listaPontoControles.FindIndex(p => p.ponto_controle_id == int.Parse(_dadosPerdaQr.OpontoControleId));
+                    break;
+                case "Estagio":
+                    var listaEstagios = Estagios();
+                    if (!string.IsNullOrEmpty(_dadosPerdaQr.OestagioId))
+                        index = listaEstagios.FindIndex(e => e.estagio_id == int.Parse(_dadosPerdaQr.OestagioId));
+                    break;
+                case "PerdaMotivo":
+                    var listaMotivos = PerdaMotivo();
+                    index = listaMotivos.FindIndex(p => p.perda_motivo_id == int.Parse(_dadosPerdaQr.OPerdaMotivoId));
+                    break;
+            }
+            return index;
+        }
+
         private async Task ValidarCampos()
         {
             if (Data == null)
@@ -516,6 +582,11 @@ namespace Prodfy.ViewModels
             dialogService.AlertAsync("ALERTA", "Selecione um PONTO DE CONTROLE para gerar a lista de ESTÁGIOS", "Ok");
             return false;
         }
+
+        //private void CarregaDadosPerdaQr(CarregarDadosPerdaQr dadosPerdaQr)
+        //{
+
+        //}
         #endregion
     }
 }

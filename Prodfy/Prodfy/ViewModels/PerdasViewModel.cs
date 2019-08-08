@@ -58,11 +58,11 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteTitleViewBotaoVoltarCommand() => await navigationService.PopAsync();
 
-        private Command _irParaAdicionarPerdasCommand;
-        public Command IrParaAdicionarPerdasCommand =>
-            _irParaAdicionarPerdasCommand ?? (_irParaAdicionarPerdasCommand = new Command(async () => await ExecuteIrParaAdicionarPerdasCommand()));
+        private Command _irParaCadastroPerdasCommand;
+        public Command IrParaCadastroPerdasCommand =>
+            _irParaCadastroPerdasCommand ?? (_irParaCadastroPerdasCommand = new Command(async () => await ExecuteIrParaCadastroPerdasCommand()));
 
-        private async Task ExecuteIrParaAdicionarPerdasCommand() => await navigationService.PushAsync(new AdicionarPerdasView());
+        private async Task ExecuteIrParaCadastroPerdasCommand() => await navigationService.PushAsync(new CadastroPerdasView());
 
         private Command _leitorQRCommand;
         public Command LeitorQRCommand => _leitorQRCommand ?? (_leitorQRCommand = new Command(async () => await ExecuteLeitorQRCommand()));
@@ -169,9 +169,8 @@ namespace Prodfy.ViewModels
                 #region Ponto Controle
                 if (resultadoQR.Count() >= 8)
                 {
-                    if (dadosQR.qrPontoControleId == null)
+                    if (string.IsNullOrEmpty(dadosQR.qrPontoControleId))
                     {
-
                         pontoControleId = string.Empty;
                         pontoControleCodigo = string.Empty;
                         pontoControleTitulo = string.Empty;
@@ -254,7 +253,7 @@ namespace Prodfy.ViewModels
                         OestagioId = estagioId
                     };
                     
-                    await navigationService.PushAsync(new CadastroPerdasQrView(carregarCadastroPerdasQr));
+                    await navigationService.PushAsync(new CadastroPerdasView(carregarCadastroPerdasQr));
                 }
                 else
                 {

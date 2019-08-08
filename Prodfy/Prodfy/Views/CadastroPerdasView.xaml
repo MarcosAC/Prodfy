@@ -1,68 +1,111 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentView  xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage  xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:control="clr-namespace:Prodfy.Controls"
-              x:Class="Prodfy.Views.CadastroPerdasView">
+              x:Class="Prodfy.Views.CadastroPerdasView"
+              BackgroundImage="splash_bg2.png">
 
-    <ScrollView>
-        <StackLayout Padding="20,10,20,20">
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
-            <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding Data}" />
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" Padding="0,0,20,0">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                <!--Botão Voltar-->
+                <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
 
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
-            <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                  Focused="PickerLotes_Click"
-                                  ItemsSource="{Binding listaLotes}"
-                                  ItemDisplayBinding="{Binding codigo}"
-                                  SelectedItem="{Binding LoteSelecionado}"
-                                  SelectedIndex="{Binding LoteSelecionadoIndex}" />
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TitleViewBotaoVoltarCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
 
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
-            <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                  ItemsSource="{Binding listaMudas}"
-                                  ItemDisplayBinding="{Binding nome}"
-                                  SelectedItem="{Binding MudaSelecionada}"
-                                  SelectedIndex="{Binding MudaSelecionadaIndex}" />
+                <Label Text="{Binding Title}" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" />
 
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Ponto de Controle:" />
-            <control:CustomPicker x:Name="PickerPontoControle"
-                                  Style="{StaticResource stylePickerFormulario}"
-                                  Focused="PickerPontoControle_Click"
-                                  ItemsSource="{Binding ListaPontoControle}"
-                                  ItemDisplayBinding="{Binding titulo}"
-                                  SelectedItem="{Binding PontoControleSelecionado}"
-                                  SelectedIndex="{Binding PontoControleSelecionadoIndex}" />
+                <Label Style="{StaticResource styleBotaoTitleView}" 
+                       Text="&#xf055;"
+                       HorizontalOptions="End">
 
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Estágio:" />
-            <control:CustomPicker x:Name="PickerEstagio"
-                                  Style="{StaticResource stylePickerFormulario}"
-                                  Focused="PickerEstagio_Click"                                  
-                                  ItemsSource="{Binding ListaDeEstagios}"
-                                  ItemDisplayBinding="{Binding titulo}"
-                                  SelectedItem="{Binding EstagioSelecionado}"
-                                  SelectedIndex="{Binding EstagioSelecionadoIndex}" />
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding IrParaCadastroPerdasCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
 
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Quantidade:" />
-            <control:CustomEntry Text="{Binding Qtde}"
-                                 Keyboard="Numeric"
-                                 BackgroundColor="White"
-                                 control:CornerRadiusEffect.CornerRadius="5" />
+                <Label Style="{StaticResource styleBotaoTitleView}" 
+                       Text="&#xf029;"
+                       Margin="10,0,0,0"
+                       HorizontalOptions="End">
 
-            <Label Style="{StaticResource styleLabelFormulario}" Text="Motivo:" />
-            <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
-                                  ItemsSource="{Binding listaPerdaMotivo}"
-                                  ItemDisplayBinding="{Binding motivo}"
-                                  SelectedItem="{Binding MotivoSelecionado}" />
-
-            <StackLayout Orientation="Horizontal">
-                <control:CustomButton Style="{StaticResource styleButtonCancelar}" 
-                                      Text="Cancelar" 
-                                      Command="{Binding CancelarCadastroCommand}" />
-
-                <control:CustomButton Style="{StaticResource styleButtonSalvar}" 
-                                      Text="Salvar"
-                                      Command="{Binding SalvarCadastroCommand}" />
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LeitorQRCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
             </StackLayout>
         </StackLayout>
-    </ScrollView>
-</ContentView>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20,10,20,20">
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Data:" />
+                <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" Date="{Binding Data}" />
+
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                      Focused="PickerLotes_Click"
+                                      ItemsSource="{Binding listaLotes}"
+                                      ItemDisplayBinding="{Binding codigo}"
+                                      SelectedItem="{Binding LoteSelecionado}"
+                                      SelectedIndex="{Binding LoteSelecionadoIndex}" />
+
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                      ItemsSource="{Binding listaMudas}"
+                                      ItemDisplayBinding="{Binding nome}"
+                                      SelectedItem="{Binding MudaSelecionada}"
+                                      SelectedIndex="{Binding MudaSelecionadaIndex}" />
+
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Ponto de Controle:" />
+                <control:CustomPicker x:Name="PickerPontoControle"
+                                      Style="{StaticResource stylePickerFormulario}"
+                                      Focused="PickerPontoControle_Click"
+                                      ItemsSource="{Binding ListaPontoControle}"
+                                      ItemDisplayBinding="{Binding titulo}"
+                                      SelectedItem="{Binding PontoControleSelecionado}"
+                                      SelectedIndex="{Binding PontoControleSelecionadoIndex}" />
+
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Estágio:" />
+                <control:CustomPicker x:Name="PickerEstagio"
+                                      Style="{StaticResource stylePickerFormulario}"
+                                      Focused="PickerEstagio_Click"                                  
+                                      ItemsSource="{Binding ListaDeEstagios}"
+                                      ItemDisplayBinding="{Binding titulo}"
+                                      SelectedItem="{Binding EstagioSelecionado}"
+                                      SelectedIndex="{Binding EstagioSelecionadoIndex}" />
+
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Quantidade:" />
+                <control:CustomEntry Text="{Binding Qtde}"
+                                     Keyboard="Numeric"
+                                     BackgroundColor="White"
+                                     control:CornerRadiusEffect.CornerRadius="5" />
+
+                <Label Style="{StaticResource styleLabelFormulario}" Text="Motivo:" />
+                <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
+                                      ItemsSource="{Binding listaPerdaMotivo}"
+                                      ItemDisplayBinding="{Binding motivo}"
+                                      SelectedItem="{Binding MotivoSelecionado}" />
+
+                <StackLayout Orientation="Horizontal">
+                    <control:CustomButton Style="{StaticResource styleButtonCancelar}" 
+                                          Text="Cancelar" 
+                                          Command="{Binding CancelarCadastroCommand}" />
+
+                    <control:CustomButton Style="{StaticResource styleButtonSalvar}" 
+                                          Text="Salvar"
+                                          Command="{Binding SalvarCadastroCommand}" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+    
+</ContentPage>

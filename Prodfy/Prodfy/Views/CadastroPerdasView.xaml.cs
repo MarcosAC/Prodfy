@@ -1,17 +1,18 @@
-﻿using Prodfy.ViewModels;
+﻿using Prodfy.Models;
+using Prodfy.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Prodfy.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class CadastroPerdasView : ContentView
+	public partial class CadastroPerdasView : ContentPage
     {
-		public CadastroPerdasView ()
+		public CadastroPerdasView (CarregarDadosPerdaQr dadosPerdaQr = null)
 		{
 			InitializeComponent ();
 
-            BindingContext = new AdicionarPerdasViewModel();            
+            BindingContext = new CadastroPerdasViewModel(dadosPerdaQr);            
         }        
 
         private void PickerLotes_Click(object sender, FocusEventArgs e)
@@ -22,7 +23,7 @@ namespace Prodfy.Views
 
         private void PickerPontoControle_Click(object sender, FocusEventArgs e)
         {
-            if (!((AdicionarPerdasViewModel)BindingContext).VerificaPickerPontoControle())
+            if (!((CadastroPerdasViewModel)BindingContext).VerificaPickerPontoControle())
                 PickerPontoControle.IsEnabled = false;
 
             PickerEstagio.IsEnabled = true;
@@ -30,7 +31,7 @@ namespace Prodfy.Views
 
         private void PickerEstagio_Click(object sender, FocusEventArgs e)
         {
-            if (!((AdicionarPerdasViewModel)BindingContext).VerificaPickerEstagios())
+            if (!((CadastroPerdasViewModel)BindingContext).VerificaPickerEstagios())
                 PickerEstagio.IsEnabled = false;
             else
                 PickerEstagio.IsEnabled = true;
