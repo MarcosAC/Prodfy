@@ -12,6 +12,8 @@ namespace Prodfy.Views
 		{
 			InitializeComponent ();
 
+            NavigationPage.SetHasBackButton(this, false);
+
             BindingContext = new CadastroPerdasViewModel(dadosPerdaQr);            
         }        
 

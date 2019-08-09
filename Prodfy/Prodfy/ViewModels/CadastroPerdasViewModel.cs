@@ -50,7 +50,6 @@ namespace Prodfy.ViewModels
 
             Lotes();
             Mudas();
-            PontoControles();
             PerdaMotivo();
         }
 
@@ -77,7 +76,7 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaDeLotes, value);
         }
 
-        public int MudaSelecionadaIndex { get => Index("Muda"); }
+       public int MudaSelecionadaIndex { get => Index("Muda"); }
 
         private Muda _mudaSelecionada;
         public Muda MudaSelecionada
@@ -145,22 +144,21 @@ namespace Prodfy.ViewModels
         {
             get
             {
-                if (!string.IsNullOrEmpty(_dadosPerdaQr.Oquantidade))
-                {
-                    _qtde = _dadosPerdaQr.Oquantidade;
-                }
+                if (_dadosPerdaQr != null)
+                    if (!string.IsNullOrEmpty(_dadosPerdaQr.Oquantidade))
+                        return _qtde = _dadosPerdaQr.Oquantidade; 
 
                 return _qtde;
             }
+
             set
             {
-                if (!string.IsNullOrEmpty(_dadosPerdaQr.Oquantidade))
-                {
-                    _dadosPerdaQr.Oquantidade = value;
-                    OnPropertyChanged();
-                }
+                if (_dadosPerdaQr != null)
+                    if (!string.IsNullOrEmpty(_dadosPerdaQr.Oquantidade))
+                        _dadosPerdaQr.Oquantidade = value;
 
-                SetProperty(ref _qtde, value);
+                SetProperty(ref _qtde, value);                
+                OnPropertyChanged();
             }
         }
 
@@ -287,7 +285,7 @@ namespace Prodfy.ViewModels
                 #region Ponto Controle
                 if (resultadoQR.Count() >= 8)
                 {
-                    if (dadosQR.qrPontoControleId == null)
+                    if (string.IsNullOrEmpty(dadosQR.qrPontoControleId))
                     {
 
                         pontoControleId = string.Empty;
@@ -372,7 +370,7 @@ namespace Prodfy.ViewModels
                         OestagioId = estagioId
                     };
 
-                    //await navigationService.PushAsync(new CadastroPerdasQrView(carregarCadastroPerdasQr));
+                    await navigationService.PushAsync(new CadastroPerdasView(carregarCadastroPerdasQr));
                 }
                 else
                 {
@@ -494,27 +492,33 @@ namespace Prodfy.ViewModels
             {
                 case "Lote":
                     var listaLotes = Lotes();
-                    if (!string.IsNullOrEmpty(_dadosPerdaQr.OloteCodigo))
-                        index = listaLotes.FindIndex(l => l.codigo == _dadosPerdaQr.OloteCodigo);
+                    if (_dadosPerdaQr != null)
+                        if (!string.IsNullOrEmpty(_dadosPerdaQr.OloteCodigo))
+                            index = listaLotes.FindIndex(l => l.codigo == _dadosPerdaQr.OloteCodigo);
                     break;
                 case "Muda":
                     var listaMudas = Mudas();
-                    if (!string.IsNullOrEmpty(_dadosPerdaQr.OmudaId))
-                        index = listaMudas.FindIndex(m => m.muda_id == int.Parse(_dadosPerdaQr.OmudaId));
+                    if (_dadosPerdaQr != null)
+                        if (!string.IsNullOrEmpty(_dadosPerdaQr.OmudaId))
+                            index = listaMudas.FindIndex(m => m.muda_id == int.Parse(_dadosPerdaQr.OmudaId));
                     break;
                 case "PontoControle":
                     var listaPontoControles = PontoControles();
-                    if (!string.IsNullOrEmpty(_dadosPerdaQr.OpontoControleId))
-                        index = listaPontoControles.FindIndex(p => p.ponto_controle_id == int.Parse(_dadosPerdaQr.OpontoControleId));
+                    if (_dadosPerdaQr != null)
+                        if (!string.IsNullOrEmpty(_dadosPerdaQr.OpontoControleId))
+                            index = listaPontoControles.FindIndex(p => p.ponto_controle_id == int.Parse(_dadosPerdaQr.OpontoControleId));
                     break;
                 case "Estagio":
                     var listaEstagios = Estagios();
-                    if (!string.IsNullOrEmpty(_dadosPerdaQr.OestagioId))
-                        index = listaEstagios.FindIndex(e => e.estagio_id == int.Parse(_dadosPerdaQr.OestagioId));
+                    if (_dadosPerdaQr != null)
+                        if (!string.IsNullOrEmpty(_dadosPerdaQr.OestagioId))
+                            index = listaEstagios.FindIndex(e => e.estagio_id == int.Parse(_dadosPerdaQr.OestagioId));
                     break;
                 case "PerdaMotivo":
                     var listaMotivos = PerdaMotivo();
-                    index = listaMotivos.FindIndex(p => p.perda_motivo_id == int.Parse(_dadosPerdaQr.OPerdaMotivoId));
+                    if (_dadosPerdaQr != null)
+                        if (!string.IsNullOrEmpty(_dadosPerdaQr.OPerdaMotivoId))
+                            index = listaMotivos.FindIndex(p => p.perda_motivo_id == int.Parse(_dadosPerdaQr.OPerdaMotivoId));
                     break;
             }
             return index;
@@ -582,11 +586,6 @@ namespace Prodfy.ViewModels
             dialogService.AlertAsync("ALERTA", "Selecione um PONTO DE CONTROLE para gerar a lista de ESTÁGIOS", "Ok");
             return false;
         }
-
-        //private void CarregaDadosPerdaQr(CarregarDadosPerdaQr dadosPerdaQr)
-        //{
-
-        //}
         #endregion
     }
 }
