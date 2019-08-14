@@ -54,6 +54,19 @@ namespace Prodfy.ViewModels
         }
 
         #region Propriedades
+        private bool _visible = true;
+        public bool Visible
+        {
+            get => _visible;
+            set => SetProperty(ref _visible, value);
+            //{
+            //    if (VerificaPickerPontoControle())
+            //        Visible = false;
+
+            //    SetProperty(ref _visible, value);
+            //} 
+        }
+
         public int LoteSelecionadoIndex { get => Index("Lote"); }
 
         private Lote _loteSelecionado;
@@ -65,7 +78,10 @@ namespace Prodfy.ViewModels
                 SetProperty(ref _loteSelecionado, value);
 
                 if (_loteSelecionado != null)
+                {
                     _listaPonteControle = PontoControles();
+                    Visible = false;
+                }
             }
         }
 
@@ -435,6 +451,16 @@ namespace Prodfy.ViewModels
                 return;
             }
         }
+
+        private Command _tappedPontoControleCommand;
+        public Command TappedPontoControleCommand =>
+            _tappedPontoControleCommand ?? (_tappedPontoControleCommand = new Command(async () => await VerificaPickerPontoControle()));
+
+        private async Task VerificaPickerPontoControle()
+        {
+            if (_listaPonteControle == null)
+                await dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de PONTOS DE CONTROLE", "Ok");
+        }
         #endregion
 
         #region Métodos
@@ -569,14 +595,18 @@ namespace Prodfy.ViewModels
             }
         }
 
-        public bool VerificaPickerPontoControle()
-        {
-            if (_listaPonteControle != null)
-                return true;
+        //public bool VerificaPickerPontoControle()
+        //{
+        //    if (_listaPonteControle != null)
+        //    {
+        //        Visible = false;
+        //        return true;
+        //    }                           
 
-            dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de PONTOS DE CONTROLE", "Ok");
-            return false;
-        }
+        //    dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de PONTOS DE CONTROLE", "Ok");
+        //    return false;
+        //}
+
 
         public bool VerificaPickerEstagios()
         {
