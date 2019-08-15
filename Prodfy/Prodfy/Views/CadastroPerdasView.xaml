@@ -70,12 +70,15 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="55" />
                         </Grid.RowDefinitions>
+                        
                         <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
                                               ItemsSource="{Binding ListaPontoControle}"
                                               ItemDisplayBinding="{Binding titulo}"
                                               SelectedItem="{Binding PontoControleSelecionado}"
-                                              SelectedIndex="{Binding PontoControleSelecionadoIndex}" Grid.Row="0"/>
-                        <BoxView IsVisible="{Binding Visible}" 
+                                              SelectedIndex="{Binding PontoControleSelecionadoIndex}" 
+                                              Grid.Row="0" />
+
+                        <BoxView IsVisible="{Binding VisiblePontoControle}" 
                                  HorizontalOptions="FillAndExpand" 
                                  VerticalOptions="FillAndExpand" 
                                  HeightRequest="2" 
@@ -87,19 +90,32 @@
                     </Grid>
                 </StackLayout>
 
-                <!--<Label Style="{StaticResource styleLabelFormulario}" Text="Ponto de Controle:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                      ItemsSource="{Binding ListaPontoControle}"
-                                      ItemDisplayBinding="{Binding titulo}"
-                                      SelectedItem="{Binding PontoControleSelecionado}"
-                                      SelectedIndex="{Binding PontoControleSelecionadoIndex}" />-->
-
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Estágio:" />
-                <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                      ItemsSource="{Binding ListaDeEstagios}"
-                                      ItemDisplayBinding="{Binding titulo}"
-                                      SelectedItem="{Binding EstagioSelecionado}"
-                                      SelectedIndex="{Binding EstagioSelecionadoIndex}" />
+                <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                    <Grid control:CornerRadiusEffect.CornerRadius="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55" />
+                        </Grid.RowDefinitions>
+                        
+                        <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                              ItemsSource="{Binding ListaDeEstagios}"
+                                              ItemDisplayBinding="{Binding titulo}"
+                                              SelectedItem="{Binding EstagioSelecionado}"
+                                              SelectedIndex="{Binding EstagioSelecionadoIndex}" 
+                                              Grid.Row="0" />
+
+                        <BoxView IsVisible="{Binding VisibleEstagio}" 
+                                 HorizontalOptions="FillAndExpand" 
+                                 VerticalOptions="FillAndExpand" 
+                                 HeightRequest="2" 
+                                 BackgroundColor="Transparent">
+                            <BoxView.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding TappedEstagioCommand}" />
+                            </BoxView.GestureRecognizers>
+                        </BoxView>
+                    </Grid>
+                </StackLayout>
+                
 
                 <Label Style="{StaticResource styleLabelFormulario}" Text="Quantidade:" />
                 <control:CustomEntry Text="{Binding Qtde}"

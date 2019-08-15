@@ -54,17 +54,18 @@ namespace Prodfy.ViewModels
         }
 
         #region Propriedades
-        private bool _visible = true;
-        public bool Visible
+        private bool _visiblePontoControle = true;
+        public bool VisiblePontoControle
         {
-            get => _visible;
-            set => SetProperty(ref _visible, value);
-            //{
-            //    if (VerificaPickerPontoControle())
-            //        Visible = false;
+            get => _visiblePontoControle;
+            set => SetProperty(ref _visiblePontoControle, value);
+        }
 
-            //    SetProperty(ref _visible, value);
-            //} 
+        private bool _visibleEstagio = true;
+        public bool VisibleEstagio
+        {
+            get => _visibleEstagio;
+            set => SetProperty(ref _visibleEstagio, value);
         }
 
         public int LoteSelecionadoIndex { get => Index("Lote"); }
@@ -80,7 +81,7 @@ namespace Prodfy.ViewModels
                 if (_loteSelecionado != null)
                 {
                     _listaPonteControle = PontoControles();
-                    Visible = false;
+                    VisiblePontoControle = false;
                 }
             }
         }
@@ -112,7 +113,10 @@ namespace Prodfy.ViewModels
                 SetProperty(ref _pontoControleSelecionado, value);
 
                 if (_pontoControleSelecionado != null)
+                {
                     _listaDeEstagios = Estagios();
+                    VisibleEstagio = false;
+                }                    
             }
         }
 
@@ -456,10 +460,22 @@ namespace Prodfy.ViewModels
         public Command TappedPontoControleCommand =>
             _tappedPontoControleCommand ?? (_tappedPontoControleCommand = new Command(async () => await VerificaPickerPontoControle()));
 
+        // Verifica se os dados do picker e nulo e não envia a mensagem.
         private async Task VerificaPickerPontoControle()
         {
             if (_listaPonteControle == null)
                 await dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de PONTOS DE CONTROLE", "Ok");
+        }
+
+        private Command _tappedEstagioCommand;
+        public Command TappedEstagioCommand =>
+            _tappedEstagioCommand ?? (_tappedEstagioCommand = new Command(async () => await VerificaPickerEstagios()));
+
+        // Verifica se os dados do picker e nulo e não envia a mensagem.
+        private async Task VerificaPickerEstagios()
+        {
+            if (_listaDeEstagios == null)
+                await dialogService.AlertAsync("ALERTA", "Selecione um PONTO DE CONTROLE para gerar a lista de ESTÁGIOS", "Ok");
         }
         #endregion
 
@@ -593,28 +609,6 @@ namespace Prodfy.ViewModels
                 await dialogService.AlertAsync("ALERTA", "O campo MOTIVO é obrigatório!", "Ok");
                 return;
             }
-        }
-
-        //public bool VerificaPickerPontoControle()
-        //{
-        //    if (_listaPonteControle != null)
-        //    {
-        //        Visible = false;
-        //        return true;
-        //    }                           
-
-        //    dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de PONTOS DE CONTROLE", "Ok");
-        //    return false;
-        //}
-
-
-        public bool VerificaPickerEstagios()
-        {
-            if (_listaDeEstagios != null)
-                return true;
-
-            dialogService.AlertAsync("ALERTA", "Selecione um PONTO DE CONTROLE para gerar a lista de ESTÁGIOS", "Ok");
-            return false;
         }
         #endregion
     }
