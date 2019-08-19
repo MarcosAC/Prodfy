@@ -38,6 +38,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\CadastroEstoqueViveiroView.xaml.cs">
+      <DependentUpon>CadastroEstoqueViveiroView.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\CadastroOcorrenciaView.xaml.cs">
       <DependentUpon>CadastroOcorrenciaView.xaml</DependentUpon>
     </Compile>
@@ -67,6 +70,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CadastroAtividadeView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\CadastroEstoqueViveiroView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\CadastroEvolucaoLoteView.xaml">
