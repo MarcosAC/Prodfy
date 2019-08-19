@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prodfy.Views.EstoqueViveiroView"
+             BackgroundImage="splash_bg4.png">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" Padding="0,0,20,0">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                <!--Botão Voltar-->
+                <Label Style="{StaticResource styleBotaoTitleView}" Text="&#xf104;">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding TitleViewBotaoVoltarCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <Label Text="{Binding Title}" 
+                       FontSize="20" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="CenterAndExpand" />
+
+                <Label Style="{StaticResource styleBotaoTitleView}" 
+                       Text="&#xf002;"
+                       HorizontalOptions="End">
+
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding IrParaCadastroHistoricoCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+    </NavigationPage.TitleView>
+
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource baseStyleStackLayout}">
+            <Label Style="{StaticResource styleBaseLabel}" 
+                   Text="Clique no botão de busca para preencher o formulário de localização de estoque de viveiro." 
+                   FontSize="Large" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
