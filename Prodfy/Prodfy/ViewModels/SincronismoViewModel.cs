@@ -680,7 +680,13 @@ namespace Prodfy.ViewModels
                                 }
                             }
 
-
+                            /* To-Do - Dados Sincronia
+                             * 
+                                * inv_item
+                                * inv
+                                * inv_evo
+                             * 
+                            */
                             #endregion                            
                         }
                         await dialogService.AlertAsync("Sincronia", "Sincronismo concluído com sucesso!", "Ok");

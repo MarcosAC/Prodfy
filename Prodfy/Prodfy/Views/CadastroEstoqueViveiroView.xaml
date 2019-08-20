@@ -27,7 +27,7 @@
                        HorizontalOptions="End">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding IrParaCadastroHistoricoCommand}" />
+                        <TapGestureRecognizer Command="{Binding PesquisarEstoqueViveiroCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
