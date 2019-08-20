@@ -68,7 +68,7 @@ namespace Prodfy.ViewModels
         private EstaqRepository estaqRepository;
         private InvItemRepository invItemRepository;
         private InvRepository invRepository;
-
+        private InvEvoRepository invEvoRepository;
         #endregion
 
         public SincronismoViewModel()
@@ -102,6 +102,7 @@ namespace Prodfy.ViewModels
             estaqRepository = new EstaqRepository();
             invItemRepository = new InvItemRepository();
             invRepository = new InvRepository();
+            invEvoRepository = new InvEvoRepository();
         }
 
         #region Propriedades sincronismo
@@ -724,13 +725,7 @@ namespace Prodfy.ViewModels
                                     invItemRepository.Adicionar(inv_item);
                                 }
                             }
-
-                            /* To-Do - Dados Sincronia
-                            *                               
-                               * inv
-                               * inv_evo
-                            * 
-                           */
+                            
                             // inv
                             if (_dadosSincronismo.inv.Length > 0)
                             {
@@ -756,6 +751,39 @@ namespace Prodfy.ViewModels
                                     }
 
                                     invRepository.Adicionar(inv);
+                                }
+                            }
+                            
+                            // inv_evo
+                            if (_dadosSincronismo.inv.Length > 0)
+                            {
+                                int deletarTodos = 0;
+
+                                for (int i = 0; i < _dadosSincronismo.inv_evo.Length; i++)
+                                {
+                                    inv_evo = new Inv_Evo
+                                    {
+                                        idInv_Evo = int.Parse(_dadosSincronismo.inv_evo[i].idInv_Evo.ToString()),
+                                        inv_evo_id = _dadosSincronismo.inv_evo[i].inv_evo_id,
+                                        inv_item_id = _dadosSincronismo.inv_evo[i].inv_item_id,
+                                        ponto_controle_ori_id = _dadosSincronismo.inv_evo[i].ponto_controle_ori_id,
+                                        estagio_ori_id = _dadosSincronismo.inv_evo[i].estagio_ori_id,
+                                        qualidade_ori_id = _dadosSincronismo.inv_evo[i].qualidade_ori_id,
+                                        data_estaq = _dadosSincronismo.inv_evo[i].data_estaq,
+                                        data_selecao = _dadosSincronismo.inv_evo[i].data_selecao,
+                                        qtde = _dadosSincronismo.inv_evo[i].qtde,
+                                        qtde_amostragem = _dadosSincronismo.inv_evo[i].qtde_amostragem,
+                                        last_update = _dadosSincronismo.inv[i].last_update,
+                                        ind_sinc = int.Parse(_dadosSincronismo.inv[i].ind_sinc.ToString())
+                                    };
+
+                                    if (deletarTodos == 0)
+                                    {
+                                        invEvoRepository.DeletarTodos();
+                                        deletarTodos = 1;
+                                    }
+
+                                    invEvoRepository.Adicionar(inv_evo);
                                 }
                             }
                             #endregion                            
