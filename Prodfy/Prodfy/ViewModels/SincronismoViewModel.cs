@@ -32,6 +32,9 @@ namespace Prodfy.ViewModels
         private Qualidade qualidade = null;
         private Exped_Dest exped_dest = null;
         private Estaq estaq = null;
+        private Inv_Item inv_item = null;
+        private Inv inv = null;
+        private Inv_Evo inv_evo = null;
         private string dataSincronizacao = "Não Sincronizado!";
         #endregion
 
@@ -63,6 +66,7 @@ namespace Prodfy.ViewModels
         private QualidadeRepository qualidadeRepository;
         private ExpedDestRepository expedDestRepository;
         private EstaqRepository estaqRepository;
+        private InvItemRepository invItemRepository;
 
         #endregion
 
@@ -95,6 +99,7 @@ namespace Prodfy.ViewModels
             qualidadeRepository = new QualidadeRepository();
             expedDestRepository = new ExpedDestRepository();
             estaqRepository = new EstaqRepository();
+            invItemRepository = new InvItemRepository();
         }
 
         #region Propriedades sincronismo
@@ -687,6 +692,43 @@ namespace Prodfy.ViewModels
                                 * inv_evo
                              * 
                             */
+
+                            if (_dadosSincronismo.inv_item.Length > 0)
+                            {
+                                int deletarTodos = 0;
+
+                                for (int i = 0; i < _dadosSincronismo.inv_item.Length; i++)
+                                {
+                                    inv_item = new Inv_Item
+                                    {
+                                        idInv_Item = int.Parse(_dadosSincronismo.inv_item[i].idInv_Item.ToString()),
+                                        inv_item_id = _dadosSincronismo.inv_item[i].inv_item_id,
+                                        lote_id = _dadosSincronismo.inv_item[i].lote_id,
+                                        ponto_controle_id = _dadosSincronismo.inv_item[i].ponto_controle_id,
+                                        estagio_id = _dadosSincronismo.inv_item[i].estagio_id,
+                                        muda_id = _dadosSincronismo.inv_item[i].muda_id,
+                                        data_estaq = _dadosSincronismo.inv_item[i].data_estaq,
+                                        colab_estaq_id = _dadosSincronismo.inv_item[i].colab_estaq_id,
+                                        data_selecao = _dadosSincronismo.inv_item[i].data_selecao,
+                                        colab_selecao_id = _dadosSincronismo.inv_item[i].colab_selecao_id,
+                                        qualidade_id = _dadosSincronismo.inv_item[i].qualidade_id,
+                                        data_inicio = _dadosSincronismo.inv_item[i].data_inicio,
+                                        data_fim = _dadosSincronismo.inv_item[i].data_fim,
+                                        latitude = _dadosSincronismo.inv_item[i].latitude,
+                                        longitude = _dadosSincronismo.inv_item[i].longitude,
+                                        last_update = _dadosSincronismo.inv_item[i].last_update,
+                                        ind_sinc = int.Parse(_dadosSincronismo.inv_item[i].ind_sinc.ToString())                                        
+                                    };
+
+                                    if (deletarTodos == 0)
+                                    {
+                                        invItemRepository.DeletarTodos();
+                                        deletarTodos = 1;
+                                    }
+
+                                    invItemRepository.Adicionar(inv_item);
+                                }
+                            }
                             #endregion                            
                         }
                         await dialogService.AlertAsync("Sincronia", "Sincronismo concluído com sucesso!", "Ok");

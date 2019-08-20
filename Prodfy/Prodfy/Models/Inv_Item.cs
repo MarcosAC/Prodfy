@@ -17,8 +17,8 @@ namespace Prodfy.Models
         public DateTime data_selecao { get; set; }
         public int colab_selecao_id { get; set; }
         public int qualidade_id { get; set; }
-        public DateTime data_inicio { get; set; }
-        public DateTime data_fim { get; set; }
+        public DateTime? data_inicio { get; set; }
+        public DateTime? data_fim { get; set; }
 
         [MaxLength(20)]
         public string latitude { get; set; }

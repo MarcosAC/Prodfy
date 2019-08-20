@@ -70,7 +70,8 @@ namespace Prodfy.Services.API
                         lista_atv = dadosSincronismo.lista_atv,
                         qualidade = dadosSincronismo.qualidade,
                         exped_dest = dadosSincronismo.exped_dest,
-                        estaq = dadosSincronismo.estaq
+                        estaq = dadosSincronismo.estaq,
+                        inv_item = dadosSincronismo.inv_item
                     };
 
                     return sincronismo;
