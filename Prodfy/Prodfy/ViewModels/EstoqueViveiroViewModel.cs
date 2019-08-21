@@ -1,6 +1,5 @@
 ﻿using Prodfy.Services.Dialog;
 using Prodfy.Services.Navigation;
-using Prodfy.Views;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -19,16 +18,26 @@ namespace Prodfy.ViewModels
             dialogService = new DialogService();
         }
 
+        private bool _visibleLabel = true;
+        public bool VisibleLabel
+        {
+            get => _visibleLabel;
+            set => SetProperty(ref _visibleLabel, value);
+        }
+
         private Command _titleViewBotaoVoltarCommand;
         public Command TitleViewBotaoVoltarCommand =>
             _titleViewBotaoVoltarCommand ?? (_titleViewBotaoVoltarCommand = new Command(async () => await ExecuteTitleViewBotaoVoltarCommand()));
 
         private async Task ExecuteTitleViewBotaoVoltarCommand() => await navigationService.PopAsync();        
 
-        private Command _irParaCadastroEstoqueViveiroCommand;
-        public Command IrParaCadastroEstoqueViveiroCommand =>
-            _irParaCadastroEstoqueViveiroCommand ?? (_irParaCadastroEstoqueViveiroCommand = new Command(async () => await ExecuteIrParaCadastroEstoqueViveiroCommand()));
+        private Command _pesquisaEstoqueViveiroCommand;
+        public Command PesquisaEstoqueViveiroCommand =>
+            _pesquisaEstoqueViveiroCommand ?? (_pesquisaEstoqueViveiroCommand = new Command(() => ExecutePesquisaEstoqueViveiroCommand()));
 
-        private async Task ExecuteIrParaCadastroEstoqueViveiroCommand() => await navigationService.PushAsync(new CadastroEstoqueViveiroView());
+        private void ExecutePesquisaEstoqueViveiroCommand()
+        {
+            VisibleLabel = false;
+        }
     }
 }

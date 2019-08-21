@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:control="clr-namespace:Prodfy.Controls"
              x:Class="Prodfy.Views.EstoqueViveiroView"
              BackgroundImage="splash_bg4.png">
 
@@ -26,7 +27,7 @@
                        HorizontalOptions="End">
 
                     <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding IrParaCadastroEstoqueViveiroCommand}" />
+                        <TapGestureRecognizer Command="{Binding PesquisaEstoqueViveiroCommand}" />
                     </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
@@ -34,10 +35,87 @@
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource baseStyleStackLayout}">
-            <Label Style="{StaticResource styleBaseLabel}" 
-                   Text="Clique no botão de busca para preencher o formulário de localização de estoque de viveiro." 
-                   FontSize="Large" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout Style="{StaticResource baseStyleStackLayout}" IsVisible="{Binding VisibleLabel}">
+                    <Label Style="{StaticResource styleBaseLabel}" 
+                           Text="Clique no botão de busca para preencher o formulário de localização de estoque de viveiro." 
+                           FontSize="Large" />
+                </StackLayout>
+
+                <StackLayout Padding="20,10,20,20" IsVisible="False">
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
+                    <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
+                                      ItemsSource="{Binding listaColaboradores}"
+                                      ItemDisplayBinding="{Binding nome_interno}"
+                                      SelectedItem="{Binding ColaboradorSelecionado}" />
+
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
+                    <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                      ItemsSource="{Binding listaAtividades}"
+                                      ItemDisplayBinding="{Binding atividade}"
+                                      SelectedItem="{Binding ListaAtividadeSelecionada}" />
+
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="Qualidade:" />
+                    <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                      ItemsSource="{Binding listaAtividades}"
+                                      ItemDisplayBinding="{Binding atividade}"
+                                      SelectedItem="{Binding ListaAtividadeSelecionada}" />
+
+                    <FlexLayout Direction="Row">
+                        <Label Style="{StaticResource styleLabelFormulario}" 
+                           Text="Estaqueamento - Data:"
+                           FlexLayout.Grow="2" />
+                        <Label Style="{StaticResource styleLabelFormulario}" 
+                           Text=" Dias:" 
+                           FlexLayout.Grow="1" />
+                    </FlexLayout>
+
+                    <FlexLayout Direction="Row" Padding="0,0,0,10">
+                        <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
+                                              Date="{Binding DataInicio}"
+                                              FlexLayout.Grow="2" 
+                                              Margin="0,0,5,0" />
+
+                        <control:CustomEntry Style="{StaticResource stylePickerFormulario}" 
+                                         Text="{Binding HoraInicio}"
+                                         FlexLayout.Grow="1" 
+                                         Margin="5,0,0,0" />
+                    </FlexLayout>
+
+                    <FlexLayout Direction="Row">
+                        <Label Style="{StaticResource styleLabelFormulario}" 
+                           Text="Seleção - Data:"
+                           FlexLayout.Grow="2" />
+                        <Label Style="{StaticResource styleLabelFormulario}" 
+                           Text=" Dias:" 
+                           FlexLayout.Grow="1" />
+                    </FlexLayout>
+
+                    <FlexLayout Direction="Row" Padding="0,0,0,10">
+                        <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
+                                              Date="{Binding DataInicio}"
+                                              FlexLayout.Grow="2" 
+                                              Margin="0,0,5,0" />
+
+                        <control:CustomEntry Style="{StaticResource stylePickerFormulario}" 
+                                         Text="{Binding HoraInicio}"
+                                         FlexLayout.Grow="1" 
+                                         Margin="5,0,0,0" />
+                    </FlexLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <control:CustomButton Style="{StaticResource styleButtonCancelar}"
+                                          BackgroundColor="Gray"
+                                          Text="Limpar" 
+                                          Command="{Binding CancelarCadastroCommand}" />
+
+                        <control:CustomButton Style="{StaticResource styleButtonSalvar}" 
+                                          Text="Localizar" 
+                                          Command="{Binding SalvarCadastroCommand}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
