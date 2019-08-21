@@ -755,7 +755,7 @@ namespace Prodfy.ViewModels
                             }
                             
                             // inv_evo
-                            if (_dadosSincronismo.inv.Length > 0)
+                            if (_dadosSincronismo.inv_evo.Length > 0)
                             {
                                 int deletarTodos = 0;
 
@@ -773,8 +773,8 @@ namespace Prodfy.ViewModels
                                         data_selecao = _dadosSincronismo.inv_evo[i].data_selecao,
                                         qtde = _dadosSincronismo.inv_evo[i].qtde,
                                         qtde_amostragem = _dadosSincronismo.inv_evo[i].qtde_amostragem,
-                                        last_update = _dadosSincronismo.inv[i].last_update,
-                                        ind_sinc = int.Parse(_dadosSincronismo.inv[i].ind_sinc.ToString())
+                                        last_update = _dadosSincronismo.inv_evo[i].last_update,
+                                        ind_sinc = int.Parse(_dadosSincronismo.inv_evo[i].ind_sinc.ToString())
                                     };
 
                                     if (deletarTodos == 0)

@@ -71,7 +71,9 @@ namespace Prodfy.Services.API
                         qualidade = dadosSincronismo.qualidade,
                         exped_dest = dadosSincronismo.exped_dest,
                         estaq = dadosSincronismo.estaq,
-                        inv_item = dadosSincronismo.inv_item
+                        inv_item = dadosSincronismo.inv_item,
+                        inv = dadosSincronismo.inv,
+                        inv_evo = dadosSincronismo.inv_evo
                     };
 
                     return sincronismo;
