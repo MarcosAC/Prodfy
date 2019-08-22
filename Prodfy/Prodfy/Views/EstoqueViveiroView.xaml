@@ -64,9 +64,10 @@
                     
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
                     <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
-                                          ItemsSource="{Binding listaColaboradores}"
-                                          ItemDisplayBinding="{Binding nome_interno}"
-                                          SelectedItem="{Binding ColaboradorSelecionado}" />
+                                          ItemsSource="{Binding listaLotes}"
+                                          ItemDisplayBinding="{Binding codigo}"
+                                          SelectedItem="{Binding LoteSelecionado}"
+                                          SelectedIndex="{Binding LoteSelecionadoIndex}" />
 
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
                     <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
