@@ -71,9 +71,10 @@
 
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
                     <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                          ItemsSource="{Binding listaAtividades}"
-                                          ItemDisplayBinding="{Binding atividade}"
-                                          SelectedItem="{Binding ListaAtividadeSelecionada}" />
+                                          ItemsSource="{Binding listaMudas}"
+                                          ItemDisplayBinding="{Binding nome}"
+                                          SelectedItem="{Binding MudaSelecionada}"
+                                          SelectedIndex="{Binding MudaSelecionadaIndex}" />
 
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Qualidade:" />
                     <control:CustomPicker Style="{StaticResource stylePickerFormulario}"

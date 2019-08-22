@@ -65,6 +65,13 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaDeLotes, value);
         }
 
+        private Muda _mudaSelecionada;
+        public Muda MudaSelecionada
+        {
+            get => _mudaSelecionada;
+            set => SetProperty(ref _mudaSelecionada, value);
+        }
+
         private Command _titleViewBotaoVoltarCommand;
         public Command TitleViewBotaoVoltarCommand =>
             _titleViewBotaoVoltarCommand ?? (_titleViewBotaoVoltarCommand = new Command(async () => await ExecuteTitleViewBotaoVoltarCommand()));
