@@ -35,9 +35,6 @@ namespace Prodfy.ViewModels
         public Command PesquisaEstoqueViveiroCommand =>
             _pesquisaEstoqueViveiroCommand ?? (_pesquisaEstoqueViveiroCommand = new Command(() => ExecutePesquisaEstoqueViveiroCommand()));
 
-        private void ExecutePesquisaEstoqueViveiroCommand()
-        {
-            Visible = true;
-        }
+        private void ExecutePesquisaEstoqueViveiroCommand() => Visible = true;
     }
 }
