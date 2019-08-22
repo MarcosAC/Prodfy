@@ -39,7 +39,10 @@
             <StackLayout>
                 <StackLayout Style="{StaticResource baseStyleStackLayout}">
                     <StackLayout.Triggers>
-                        <DataTrigger TargetType="StackLayout" Binding="{Binding Visible}" Value="True">
+                        <DataTrigger TargetType="StackLayout" 
+                                     Binding="{Binding Visible}" 
+                                     Value="True">
+                            
                             <Setter Property="IsVisible" Value="False" />
                         </DataTrigger>
                     </StackLayout.Triggers>
@@ -51,80 +54,83 @@
 
                 <StackLayout Padding="20,10,20,20" IsVisible="False">
                     <StackLayout.Triggers>
-                        <DataTrigger TargetType="StackLayout" Binding="{Binding Visible}" Value="True">
+                        <DataTrigger TargetType="StackLayout" 
+                                     Binding="{Binding Visible}" 
+                                     Value="True">
+                            
                             <Setter Property="IsVisible" Value="True" />
                         </DataTrigger>
                     </StackLayout.Triggers>
                     
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
                     <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
-                                      ItemsSource="{Binding listaColaboradores}"
-                                      ItemDisplayBinding="{Binding nome_interno}"
-                                      SelectedItem="{Binding ColaboradorSelecionado}" />
+                                          ItemsSource="{Binding listaColaboradores}"
+                                          ItemDisplayBinding="{Binding nome_interno}"
+                                          SelectedItem="{Binding ColaboradorSelecionado}" />
 
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
                     <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                      ItemsSource="{Binding listaAtividades}"
-                                      ItemDisplayBinding="{Binding atividade}"
-                                      SelectedItem="{Binding ListaAtividadeSelecionada}" />
+                                          ItemsSource="{Binding listaAtividades}"
+                                          ItemDisplayBinding="{Binding atividade}"
+                                          SelectedItem="{Binding ListaAtividadeSelecionada}" />
 
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Qualidade:" />
                     <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                      ItemsSource="{Binding listaAtividades}"
-                                      ItemDisplayBinding="{Binding atividade}"
-                                      SelectedItem="{Binding ListaAtividadeSelecionada}" />
+                                          ItemsSource="{Binding listaAtividades}"
+                                          ItemDisplayBinding="{Binding atividade}"
+                                          SelectedItem="{Binding ListaAtividadeSelecionada}" />
 
                     <FlexLayout Direction="Row">
                         <Label Style="{StaticResource styleLabelFormulario}" 
-                           Text="Estaqueamento - Data:"
-                           FlexLayout.Grow="2" />
+                               Text="Estaqueamento - Data:"
+                               FlexLayout.Grow="2" />
                         <Label Style="{StaticResource styleLabelFormulario}" 
-                           Text=" Dias:" 
-                           FlexLayout.Grow="1" />
+                               Text=" Dias:" 
+                               FlexLayout.Grow="1" />
                     </FlexLayout>
 
                     <FlexLayout Direction="Row" Padding="0,0,0,10">
                         <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
-                                              Date="{Binding DataInicio}"
-                                              FlexLayout.Grow="2" 
-                                              Margin="0,0,5,0" />
+                                                  Date="{Binding DataInicio}"
+                                                  FlexLayout.Grow="2" 
+                                                  Margin="0,0,5,0" />
 
                         <control:CustomEntry Style="{StaticResource stylePickerFormulario}" 
-                                         Text="{Binding HoraInicio}"
-                                         FlexLayout.Grow="1" 
-                                         Margin="5,0,0,0" />
+                                             Text="{Binding HoraInicio}"
+                                             FlexLayout.Grow="1" 
+                                             Margin="5,0,0,0" />
                     </FlexLayout>
 
                     <FlexLayout Direction="Row">
                         <Label Style="{StaticResource styleLabelFormulario}" 
-                           Text="Seleção - Data:"
-                           FlexLayout.Grow="2" />
+                               Text="Seleção - Data:"
+                               FlexLayout.Grow="2" />
                         <Label Style="{StaticResource styleLabelFormulario}" 
-                           Text=" Dias:" 
-                           FlexLayout.Grow="1" />
+                               Text=" Dias:" 
+                               FlexLayout.Grow="1" />
                     </FlexLayout>
 
                     <FlexLayout Direction="Row" Padding="0,0,0,10">
                         <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
-                                              Date="{Binding DataInicio}"
-                                              FlexLayout.Grow="2" 
-                                              Margin="0,0,5,0" />
+                                                  Date="{Binding DataInicio}"
+                                                  FlexLayout.Grow="2" 
+                                                  Margin="0,0,5,0" />
 
                         <control:CustomEntry Style="{StaticResource stylePickerFormulario}" 
-                                         Text="{Binding HoraInicio}"
-                                         FlexLayout.Grow="1" 
-                                         Margin="5,0,0,0" />
+                                             Text="{Binding HoraInicio}"
+                                             FlexLayout.Grow="1" 
+                                             Margin="5,0,0,0" />
                     </FlexLayout>
 
                     <StackLayout Orientation="Horizontal">
                         <control:CustomButton Style="{StaticResource styleButtonCancelar}"
-                                          BackgroundColor="Gray"
-                                          Text="Limpar" 
-                                          Command="{Binding CancelarCadastroCommand}" />
+                                              BackgroundColor="Gray"
+                                              Text="Limpar" 
+                                              Command="{Binding CancelarCadastroCommand}" />
 
                         <control:CustomButton Style="{StaticResource styleButtonSalvar}" 
-                                          Text="Localizar" 
-                                          Command="{Binding SalvarCadastroCommand}" />
+                                              Text="Localizar" 
+                                              Command="{Binding SalvarCadastroCommand}" />
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
