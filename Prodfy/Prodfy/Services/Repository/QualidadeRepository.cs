@@ -74,7 +74,8 @@ namespace Prodfy.Services.Repository
 
         public List<Qualidade> ObterTodos()
         {
-            throw new NotImplementedException();
+            var listaQualidade = dataBase._conexao.Query<Qualidade>("SELECT qualidade_id, codigo, titulo FROM Qualidade ORDER BY 2");
+            return listaQualidade;
         }
 
         public int ObterTotalDeRegistros()

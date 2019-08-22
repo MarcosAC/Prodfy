@@ -35,7 +35,7 @@ namespace Prodfy.ViewModels
 
             Lotes();
             Mudas();
-            //Qualidade();
+            Qualidade();
         }        
 
         private bool _visible;
@@ -75,6 +75,13 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _mudaSelecionada, value);
         }
 
+        private Qualidade _qualidadeSelecionada;
+        public Qualidade QualidadeSelecionada
+        {
+            get => _qualidadeSelecionada;
+            set => SetProperty(ref _qualidadeSelecionada, value);
+        }
+
         private Command _titleViewBotaoVoltarCommand;
         public Command TitleViewBotaoVoltarCommand =>
             _titleViewBotaoVoltarCommand ?? (_titleViewBotaoVoltarCommand = new Command(async () => await ExecuteTitleViewBotaoVoltarCommand()));
@@ -99,7 +106,7 @@ namespace Prodfy.ViewModels
 
         private List<Qualidade> Qualidade()
         {
-            throw new NotImplementedException();
+            return listaQualidade = qualidadeRepositorio.ObterTodos();
         }
     }
 }

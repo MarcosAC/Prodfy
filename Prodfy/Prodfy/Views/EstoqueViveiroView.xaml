@@ -78,9 +78,10 @@
 
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Qualidade:" />
                     <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                          ItemsSource="{Binding listaAtividades}"
-                                          ItemDisplayBinding="{Binding atividade}"
-                                          SelectedItem="{Binding ListaAtividadeSelecionada}" />
+                                          ItemsSource="{Binding listaQualidade}"
+                                          ItemDisplayBinding="{Binding titulo}"
+                                          SelectedItem="{Binding QualidadeSelecionada}"
+                                          SelectedIndex="{Binding QualidadeSelecionadaIndex}" />
 
                     <FlexLayout Direction="Row">
                         <Label Style="{StaticResource styleLabelFormulario}" 
