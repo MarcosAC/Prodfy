@@ -2,6 +2,7 @@
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Navigation;
 using Prodfy.Services.Repository;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -19,6 +20,7 @@ namespace Prodfy.ViewModels
 
         public List<Lote> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }
+        public List<Qualidade> listaQualidade { get; set; }
 
         public EstoqueViveiroViewModel()
         {
@@ -33,7 +35,8 @@ namespace Prodfy.ViewModels
 
             Lotes();
             Mudas();
-        }
+            //Qualidade();
+        }        
 
         private bool _visible;
         public bool Visible
@@ -92,6 +95,11 @@ namespace Prodfy.ViewModels
         private List<Muda> Mudas()
         {
             return listaMudas = mudaRepositorio.ObterTodos();
+        }
+
+        private List<Qualidade> Qualidade()
+        {
+            throw new NotImplementedException();
         }
     }
 }
