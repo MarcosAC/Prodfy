@@ -37,13 +37,25 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <StackLayout Style="{StaticResource baseStyleStackLayout}" IsVisible="{Binding VisibleLabel}">
+                <StackLayout Style="{StaticResource baseStyleStackLayout}">
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" Binding="{Binding Visible}" Value="True">
+                            <Setter Property="IsVisible" Value="False" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                    
                     <Label Style="{StaticResource styleBaseLabel}" 
                            Text="Clique no botão de busca para preencher o formulário de localização de estoque de viveiro." 
                            FontSize="Large" />
                 </StackLayout>
 
                 <StackLayout Padding="20,10,20,20" IsVisible="False">
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" Binding="{Binding Visible}" Value="True">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                    
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
                     <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
                                       ItemsSource="{Binding listaColaboradores}"

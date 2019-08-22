@@ -18,11 +18,11 @@ namespace Prodfy.ViewModels
             dialogService = new DialogService();
         }
 
-        private bool _visibleLabel = true;
-        public bool VisibleLabel
+        private bool _visible;
+        public bool Visible
         {
-            get => _visibleLabel;
-            set => SetProperty(ref _visibleLabel, value);
+            get => _visible;
+            set => SetProperty(ref _visible, value);
         }
 
         private Command _titleViewBotaoVoltarCommand;
@@ -37,7 +37,7 @@ namespace Prodfy.ViewModels
 
         private void ExecutePesquisaEstoqueViveiroCommand()
         {
-            VisibleLabel = false;
+            Visible = true;
         }
     }
 }
