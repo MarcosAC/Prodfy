@@ -70,59 +70,91 @@
                                           SelectedIndex="{Binding LoteSelecionadoIndex}" />
 
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Muda:" />
-                    <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                          ItemsSource="{Binding listaMudas}"
-                                          ItemDisplayBinding="{Binding nome}"
-                                          SelectedItem="{Binding MudaSelecionada}"
-                                          SelectedIndex="{Binding MudaSelecionadaIndex}" />
+                    <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                        <Grid control:CornerRadiusEffect.CornerRadius="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="55" />
+                            </Grid.RowDefinitions>
+                            
+                            <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                                  ItemsSource="{Binding listaMudas}"
+                                                  ItemDisplayBinding="{Binding nome}"
+                                                  SelectedItem="{Binding MudaSelecionada}"
+                                                  SelectedIndex="{Binding MudaSelecionadaIndex}" />
+
+                            <BoxView IsVisible="{Binding VisiblePontoControle}" 
+                                     HorizontalOptions="FillAndExpand" 
+                                     VerticalOptions="FillAndExpand" 
+                                     HeightRequest="2" 
+                                     BackgroundColor="Transparent">
+                                <BoxView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TappedMudaCommand}" />
+                                </BoxView.GestureRecognizers>
+                            </BoxView>
+                        </Grid>
+                    </StackLayout>
 
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Qualidade:" />
-                    <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                          ItemsSource="{Binding listaQualidade}"
-                                          ItemDisplayBinding="{Binding titulo}"
-                                          SelectedItem="{Binding QualidadeSelecionada}"
-                                          SelectedIndex="{Binding QualidadeSelecionadaIndex}" />
+                    <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                        <Grid control:CornerRadiusEffect.CornerRadius="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="55" />
+                            </Grid.RowDefinitions>
+
+                            <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                                  ItemsSource="{Binding listaQualidade}"
+                                                  ItemDisplayBinding="{Binding titulo}"
+                                                  SelectedItem="{Binding QualidadeSelecionada}"
+                                                  SelectedIndex="{Binding QualidadeSelecionadaIndex}" />
+
+                            <BoxView IsVisible="{Binding VisiblePontoControle}" 
+                                     HorizontalOptions="FillAndExpand" 
+                                     VerticalOptions="FillAndExpand" 
+                                     HeightRequest="2" 
+                                     BackgroundColor="Transparent">
+                                <BoxView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TappedQualidadeCommand}" />
+                                </BoxView.GestureRecognizers>
+                            </BoxView>
+                        </Grid>
+                    </StackLayout>                    
 
                     <FlexLayout Direction="Row">
                         <Label Style="{StaticResource styleLabelFormulario}" 
                                Text="Estaqueamento - Data:"
-                               FlexLayout.Grow="2" />
-                        <Label Style="{StaticResource styleLabelFormulario}" 
-                               Text=" Dias:" 
                                FlexLayout.Grow="1" />
                     </FlexLayout>
 
                     <FlexLayout Direction="Row" Padding="0,0,0,10">
-                        <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
-                                                  Date="{Binding DataInicio}"
-                                                  FlexLayout.Grow="2" 
-                                                  Margin="0,0,5,0" />
 
-                        <control:CustomEntry Style="{StaticResource stylePickerFormulario}" 
+                        <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                              FlexLayout.Grow="1" 
+                                              Margin="0,0,5,0" />
+
+                        <!--<control:CustomEntry Style="{StaticResource stylePickerFormulario}" 
                                              Text="{Binding HoraInicio}"
                                              FlexLayout.Grow="1" 
-                                             Margin="5,0,0,0" />
+                                             Margin="5,0,0,0" />-->                        
                     </FlexLayout>
 
                     <FlexLayout Direction="Row">
                         <Label Style="{StaticResource styleLabelFormulario}" 
                                Text="Seleção - Data:"
-                               FlexLayout.Grow="2" />
-                        <Label Style="{StaticResource styleLabelFormulario}" 
-                               Text=" Dias:" 
                                FlexLayout.Grow="1" />
+                        <!--<Label Style="{StaticResource styleLabelFormulario}" 
+                               Text=" Dias:" 
+                               FlexLayout.Grow="1" />-->
                     </FlexLayout>
 
                     <FlexLayout Direction="Row" Padding="0,0,0,10">
-                        <control:CustomDatePicker Style="{StaticResource stylePickerFormulario}" 
-                                                  Date="{Binding DataInicio}"
-                                                  FlexLayout.Grow="2" 
-                                                  Margin="0,0,5,0" />
+                        <control:CustomPicker Style="{StaticResource stylePickerFormulario}"                                                   
+                                              FlexLayout.Grow="1" 
+                                              Margin="0,0,5,0" />
 
-                        <control:CustomEntry Style="{StaticResource stylePickerFormulario}" 
+                        <!--<control:CustomEntry Style="{StaticResource stylePickerFormulario}" 
                                              Text="{Binding HoraInicio}"
                                              FlexLayout.Grow="1" 
-                                             Margin="5,0,0,0" />
+                                             Margin="5,0,0,0" />-->
                     </FlexLayout>
 
                     <StackLayout Orientation="Horizontal">
