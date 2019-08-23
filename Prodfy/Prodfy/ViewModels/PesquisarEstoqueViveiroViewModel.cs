@@ -2,14 +2,13 @@
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Navigation;
 using Prodfy.Services.Repository;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Prodfy.ViewModels
 {
-    public class EstoqueViveiroViewModel : BaseViewModel
+    public class PesquisarEstoqueViveiroViewModel : BaseViewModel
     {
         private readonly INavigationService navigationService;
         private readonly IDialogService dialogService;
@@ -22,7 +21,7 @@ namespace Prodfy.ViewModels
         public List<Muda> listaMudas { get; set; }
         public List<Qualidade> listaQualidade { get; set; }
 
-        public EstoqueViveiroViewModel()
+        public PesquisarEstoqueViveiroViewModel()
         {
             Title = "Estoque Viveiro";
 

@@ -166,7 +166,7 @@ namespace Prodfy.ViewModels
             _irPaginaEstoqueViveiroCommand ?? (_irPaginaEstoqueViveiroCommand = new Command(async () =>
                 await ExecuteIrPaginaEstoqueViveiroCommand(), CanExecuteFuncaoEstoqueViveiroCommand));
 
-        private async Task ExecuteIrPaginaEstoqueViveiroCommand() => await _navigationService.PushAsync(new EstoqueViveiroView());
+        private async Task ExecuteIrPaginaEstoqueViveiroCommand() => await _navigationService.PushAsync(new PesquisarEstoqueViveiroView());
 
         private Command _irPaginaAtividadeCommand;
         public Command IrPaginaAtividadeCommand =>

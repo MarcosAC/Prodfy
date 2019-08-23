@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:Prodfy.Controls"
-             x:Class="Prodfy.Views.EstoqueViveiroView"
+             x:Class="Prodfy.Views.PesquisarEstoqueViveiroView"
              BackgroundImage="splash_bg4.png">
 
     <NavigationPage.TitleView>

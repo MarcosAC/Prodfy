@@ -5,15 +5,15 @@ using Xamarin.Forms.Xaml;
 namespace Prodfy.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class EstoqueViveiroView : ContentPage
+	public partial class PesquisarEstoqueViveiroView : ContentPage
 	{
-		public EstoqueViveiroView ()
+		public PesquisarEstoqueViveiroView ()
 		{
 			InitializeComponent ();
 
             NavigationPage.SetHasBackButton(this, false);
 
-            BindingContext = new EstoqueViveiroViewModel();
+            BindingContext = new PesquisarEstoqueViveiroViewModel();
         }
 	}
 }

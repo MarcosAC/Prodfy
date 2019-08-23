@@ -41,6 +41,9 @@
     <Compile Update="Views\CadastroOcorrenciaView.xaml.cs">
       <DependentUpon>CadastroOcorrenciaView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\PesquisarEstoqueViveiroView.xaml.cs">
+      <DependentUpon>PesquisarEstoqueViveiroView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -96,7 +99,7 @@
     <EmbeddedResource Update="Views\DispositivoView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\EstoqueViveiroView.xaml">
+    <EmbeddedResource Update="Views\PesquisarEstoqueViveiroView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\EvolucaoLoteView.xaml">
