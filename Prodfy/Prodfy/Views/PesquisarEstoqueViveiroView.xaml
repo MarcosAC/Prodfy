@@ -82,11 +82,12 @@
                                                   SelectedItem="{Binding MudaSelecionada}"
                                                   SelectedIndex="{Binding MudaSelecionadaIndex}" />
 
-                            <BoxView IsVisible="{Binding VisiblePontoControle}" 
+                            <BoxView IsVisible="{Binding VisibleMuda}" 
                                      HorizontalOptions="FillAndExpand" 
                                      VerticalOptions="FillAndExpand" 
                                      HeightRequest="2" 
                                      BackgroundColor="Transparent">
+                                
                                 <BoxView.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding TappedMudaCommand}" />
                                 </BoxView.GestureRecognizers>
@@ -102,16 +103,17 @@
                             </Grid.RowDefinitions>
 
                             <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                                  ItemsSource="{Binding listaQualidade}"
+                                                  ItemsSource="{Binding listaQualidades}"
                                                   ItemDisplayBinding="{Binding titulo}"
                                                   SelectedItem="{Binding QualidadeSelecionada}"
                                                   SelectedIndex="{Binding QualidadeSelecionadaIndex}" />
 
-                            <BoxView IsVisible="{Binding VisiblePontoControle}" 
+                            <BoxView IsVisible="{Binding VisibleQualidade}" 
                                      HorizontalOptions="FillAndExpand" 
                                      VerticalOptions="FillAndExpand" 
                                      HeightRequest="2" 
                                      BackgroundColor="Transparent">
+                                
                                 <BoxView.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding TappedQualidadeCommand}" />
                                 </BoxView.GestureRecognizers>

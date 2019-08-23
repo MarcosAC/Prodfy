@@ -34,7 +34,7 @@ namespace Prodfy.ViewModels
 
             Lotes();
             Mudas();
-            Qualidade();
+            Qualidades();
         }        
 
         private bool _visible;
@@ -42,6 +42,20 @@ namespace Prodfy.ViewModels
         {
             get => _visible;
             set => SetProperty(ref _visible, value);
+        }
+
+        private bool _visibleMuda = true;
+        public bool VisibleMuda
+        {
+            get => _visibleMuda;
+            set => SetProperty(ref _visibleMuda, value);
+        }
+
+        private bool _visibleQualidade = true;
+        public bool VisibleQualidade
+        {
+            get => _visibleQualidade;
+            set => SetProperty(ref _visibleQualidade, value);
         }
 
         private Lote _loteSelecionado;
@@ -52,11 +66,11 @@ namespace Prodfy.ViewModels
             {
                 SetProperty(ref _loteSelecionado, value);
 
-                //if (_loteSelecionado != null)
-                //{
-                //    _listaPonteControle = PontoControles();
-                //    VisiblePontoControle = false;
-                //}
+                if (_loteSelecionado != null)
+                {
+                    _listaMudas = Mudas();
+                    VisibleMuda = false;
+                }
             }
         }
 
@@ -71,7 +85,23 @@ namespace Prodfy.ViewModels
         public Muda MudaSelecionada
         {
             get => _mudaSelecionada;
-            set => SetProperty(ref _mudaSelecionada, value);
+            set
+            {
+                SetProperty(ref _mudaSelecionada, value);
+
+                if (_mudaSelecionada != null)
+                {
+                    _listaQualidades = Qualidades();
+                    VisibleQualidade = false;
+                }
+            }
+        }
+
+        private List<Muda> _listaMudas;
+        public List<Muda> ListaMudas
+        {
+            get => _listaMudas;
+            set => SetProperty(ref _listaMudas, value);
         }
 
         private Qualidade _qualidadeSelecionada;
@@ -79,6 +109,13 @@ namespace Prodfy.ViewModels
         {
             get => _qualidadeSelecionada;
             set => SetProperty(ref _qualidadeSelecionada, value);
+        }
+
+        private List<Qualidade> _listaQualidades;
+        public List<Qualidade> ListaQualidades
+        {
+            get => _listaQualidades;
+            set => SetProperty(ref _listaQualidades, value);
         }
 
         private Command _titleViewBotaoVoltarCommand;
@@ -93,6 +130,28 @@ namespace Prodfy.ViewModels
 
         private void ExecutePesquisaEstoqueViveiroCommand() => Visible = true;
 
+        private Command _tappedMudaCommand;
+        public Command TappedMudaCommand =>
+            _tappedMudaCommand ?? (_tappedMudaCommand = new Command(async () => await VerificaPickerMudas()));
+
+        // Verifica se os dados do picker e nulo e não envia a mensagem.
+        private async Task VerificaPickerMudas()
+        {
+            if (_listaMudas == null)
+                await dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de MUDAS!", "Ok");
+        }
+
+        private Command _tappedQualidadeCommand;
+        public Command TappedQualidadeCommand =>
+            _tappedQualidadeCommand ?? (_tappedQualidadeCommand = new Command(async () => await VerificaPickerQualidades()));
+
+        // Verifica se os dados do picker e nulo e não envia a mensagem.
+        private async Task VerificaPickerQualidades()
+        {
+            if (_listaQualidades == null)
+                await dialogService.AlertAsync("ALERTA", "Selecione um MUDA para gerar a lista de QUALIDADES!", "Ok");
+        }
+
         private List<Lote> Lotes()
         {
             return listaLotes = loteRepositorio.ObterTodos();
@@ -103,7 +162,7 @@ namespace Prodfy.ViewModels
             return listaMudas = mudaRepositorio.ObterTodos();
         }
 
-        private List<Qualidade> Qualidade()
+        private List<Qualidade> Qualidades()
         {
             return listaQualidade = qualidadeRepositorio.ObterTodos();
         }
