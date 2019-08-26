@@ -119,46 +119,52 @@
                                 </BoxView.GestureRecognizers>
                             </BoxView>
                         </Grid>
-                    </StackLayout>                    
+                    </StackLayout>
 
-                    <FlexLayout Direction="Row">
-                        <Label Style="{StaticResource styleLabelFormulario}" 
-                               Text="Estaqueamento - Data:"
-                               FlexLayout.Grow="1" />
-                    </FlexLayout>
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="Estaqueamento - Data:"/>
+                    <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                        <Grid control:CornerRadiusEffect.CornerRadius="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="55" />
+                            </Grid.RowDefinitions>
 
-                    <FlexLayout Direction="Row" Padding="0,0,0,10">
+                            <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                           
+                            <BoxView IsVisible="{Binding VisibleDataEstaquemento}" 
+                                     HorizontalOptions="FillAndExpand" 
+                                     VerticalOptions="FillAndExpand" 
+                                     HeightRequest="2" 
+                                     BackgroundColor="Transparent">
 
-                        <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                              FlexLayout.Grow="1" 
-                                              Margin="0,0,5,0" />
+                                <BoxView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TappedDataEstaqueamentoCommand}" />
+                                </BoxView.GestureRecognizers>
+                            </BoxView>
+                        </Grid>
+                    </StackLayout>
 
-                        <!--<control:CustomEntry Style="{StaticResource stylePickerFormulario}" 
-                                             Text="{Binding HoraInicio}"
-                                             FlexLayout.Grow="1" 
-                                             Margin="5,0,0,0" />-->                        
-                    </FlexLayout>
+                    <Label Style="{StaticResource styleLabelFormulario}" Text="Seleção - Data:"/>
+                    <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                        <Grid control:CornerRadiusEffect.CornerRadius="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="55" />
+                            </Grid.RowDefinitions>
 
-                    <FlexLayout Direction="Row">
-                        <Label Style="{StaticResource styleLabelFormulario}" 
-                               Text="Seleção - Data:"
-                               FlexLayout.Grow="1" />
-                        <!--<Label Style="{StaticResource styleLabelFormulario}" 
-                               Text=" Dias:" 
-                               FlexLayout.Grow="1" />-->
-                    </FlexLayout>
+                            <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
 
-                    <FlexLayout Direction="Row" Padding="0,0,0,10">
-                        <control:CustomPicker Style="{StaticResource stylePickerFormulario}"                                                   
-                                              FlexLayout.Grow="1" 
-                                              Margin="0,0,5,0" />
+                            <BoxView IsVisible="{Binding VisibleDataSelecao}" 
+                                     HorizontalOptions="FillAndExpand" 
+                                     VerticalOptions="FillAndExpand" 
+                                     HeightRequest="2" 
+                                     BackgroundColor="Transparent">
 
-                        <!--<control:CustomEntry Style="{StaticResource stylePickerFormulario}" 
-                                             Text="{Binding HoraInicio}"
-                                             FlexLayout.Grow="1" 
-                                             Margin="5,0,0,0" />-->
-                    </FlexLayout>
-
+                                <BoxView.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TappedDataSelecaoCommand}" />
+                                </BoxView.GestureRecognizers>
+                            </BoxView>
+                        </Grid>
+                    </StackLayout>
+                    
                     <StackLayout Orientation="Horizontal">
                         <control:CustomButton Style="{StaticResource styleButtonCancelar}"
                                               BackgroundColor="Gray"
