@@ -154,9 +154,9 @@ namespace Prodfy.ViewModels
 
         private Command _tappedDataEstaqueamentoCommand;
         public Command TappedDataEstaqueamentoCommand =>
-            _tappedDataEstaqueamentoCommand ?? (_tappedDataEstaqueamentoCommand = new Command(async () => await VerificaPickerDataEstaqueamento()));
+            _tappedDataEstaqueamentoCommand ?? (_tappedDataEstaqueamentoCommand = new Command(async () => await ExecuteVerificaPickerDataEstaqueamentoCommand()));
        
-        private async Task VerificaPickerDataEstaqueamento()
+        private async Task ExecuteVerificaPickerDataEstaqueamentoCommand()
         {
             if (_listaQualidades == null)
                 await dialogService.AlertAsync("ALERTA", "Selecione uma QUALIDADE para gerar a lista de DATAS DE ESTAQUEAMENTO!", "Ok");
@@ -164,9 +164,9 @@ namespace Prodfy.ViewModels
 
         private Command _tappedDataSelecaoCommand;
         public Command TappedDataSelecaoCommand =>
-            _tappedDataSelecaoCommand ?? (_tappedDataSelecaoCommand = new Command(async () => await VerificaPickerDataSelecao()));
+            _tappedDataSelecaoCommand ?? (_tappedDataSelecaoCommand = new Command(async () => await ExecuteVerificaPickerDataSelecaoCommand()));
 
-        private async Task VerificaPickerDataSelecao()
+        private async Task ExecuteVerificaPickerDataSelecaoCommand()
         {
             if (_listaQualidades == null)
                 await dialogService.AlertAsync("ALERTA", "Selecione uma DATA DE ESTAQUEAMENTO para gerar a lista de DATAS DE SELEÇÃO!", "Ok");

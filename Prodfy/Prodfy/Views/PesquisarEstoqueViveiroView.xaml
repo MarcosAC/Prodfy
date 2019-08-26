@@ -103,7 +103,7 @@
                             </Grid.RowDefinitions>
 
                             <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                                  ItemsSource="{Binding listaQualidades}"
+                                                  ItemsSource="{Binding listaQualidade}"
                                                   ItemDisplayBinding="{Binding titulo}"
                                                   SelectedItem="{Binding QualidadeSelecionada}"
                                                   SelectedIndex="{Binding QualidadeSelecionadaIndex}" />
