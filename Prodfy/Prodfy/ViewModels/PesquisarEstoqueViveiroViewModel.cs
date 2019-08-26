@@ -132,10 +132,10 @@ namespace Prodfy.ViewModels
 
         private Command _tappedMudaCommand;
         public Command TappedMudaCommand =>
-            _tappedMudaCommand ?? (_tappedMudaCommand = new Command(async () => await VerificaPickerMudas()));
+            _tappedMudaCommand ?? (_tappedMudaCommand = new Command(async () => await ExecuteVerificaPickerMudasCommand()));
 
         // Verifica se os dados do picker e nulo e não envia a mensagem.
-        private async Task VerificaPickerMudas()
+        private async Task ExecuteVerificaPickerMudasCommand()
         {
             if (_listaMudas == null)
                 await dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de MUDAS!", "Ok");
@@ -143,10 +143,10 @@ namespace Prodfy.ViewModels
 
         private Command _tappedQualidadeCommand;
         public Command TappedQualidadeCommand =>
-            _tappedQualidadeCommand ?? (_tappedQualidadeCommand = new Command(async () => await VerificaPickerQualidades()));
+            _tappedQualidadeCommand ?? (_tappedQualidadeCommand = new Command(async () => await ExecuteVerificaPickerQualidadesCommand()));
 
         // Verifica se os dados do picker e nulo e não envia a mensagem.
-        private async Task VerificaPickerQualidades()
+        private async Task ExecuteVerificaPickerQualidadesCommand()
         {
             if (_listaQualidades == null)
                 await dialogService.AlertAsync("ALERTA", "Selecione uma MUDA para gerar a lista de QUALIDADES!", "Ok");
@@ -172,6 +172,12 @@ namespace Prodfy.ViewModels
                 await dialogService.AlertAsync("ALERTA", "Selecione uma DATA DE ESTAQUEAMENTO para gerar a lista de DATAS DE SELEÇÃO!", "Ok");
         }
 
+        private Command _localizarCommandCommand;
+        public Command LocalizarCommand =>
+            _localizarCommandCommand ?? (_localizarCommandCommand = new Command(async () => await ExecuteLocalizarCommand()));
+
+        private async Task ExecuteLocalizarCommand() => await ValidarCampos();
+
         private List<Lote> Lotes()
         {
             return listaLotes = loteRepositorio.ObterTodos();
@@ -185,6 +191,15 @@ namespace Prodfy.ViewModels
         private List<Qualidade> Qualidades()
         {
             return listaQualidade = qualidadeRepositorio.ObterTodos();
+        }
+
+        private async Task ValidarCampos()
+        {
+            if (LoteSelecionado == null)
+            {
+                await dialogService.AlertAsync("ALERTA", "O campo LOTE é obrigatório!", "Ok");
+                return;
+            }
         }
     }
 }

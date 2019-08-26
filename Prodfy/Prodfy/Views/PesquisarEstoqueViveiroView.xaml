@@ -169,11 +169,11 @@
                         <control:CustomButton Style="{StaticResource styleButtonCancelar}"
                                               BackgroundColor="Gray"
                                               Text="Limpar" 
-                                              Command="{Binding CancelarCadastroCommand}" />
+                                              Command="{Binding LimparCamposCommand}" />
 
                         <control:CustomButton Style="{StaticResource styleButtonSalvar}" 
                                               Text="Localizar" 
-                                              Command="{Binding SalvarCadastroCommand}" />
+                                              Command="{Binding LocalizarCommand}" />
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
