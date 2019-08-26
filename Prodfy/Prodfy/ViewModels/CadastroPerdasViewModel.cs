@@ -68,7 +68,7 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _visibleEstagio, value);
         }
 
-        public int LoteSelecionadoIndex { get => Index("Lote"); }
+        //public int LoteSelecionadoIndex { get => Index("Lote"); }
 
         private Lote _loteSelecionado;
         public Lote LoteSelecionado
@@ -93,7 +93,7 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaDeLotes, value);
         }
 
-       public int MudaSelecionadaIndex { get => Index("Muda"); }
+       //public int MudaSelecionadaIndex { get => Index("Muda"); }
 
         private Muda _mudaSelecionada;
         public Muda MudaSelecionada
@@ -102,7 +102,7 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _mudaSelecionada, value);
         }
 
-        public int PontoControleSelecionadoIndex { get => Index("PontoControle"); }
+        //public int PontoControleSelecionadoIndex { get => Index("PontoControle"); }
 
         private Ponto_Controle _pontoControleSelecionado;
         public Ponto_Controle PontoControleSelecionado
@@ -127,7 +127,7 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaPonteControle, value);
         }
 
-        public int EstagioSelecionadoIndex { get => Index("Estagio"); }
+        //public int EstagioSelecionadoIndex { get => Index("Estagio"); }
 
         private Estagio _estagioSelecionado;
         public Estagio EstagioSelecionado
@@ -143,7 +143,7 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaDeEstagios, value);
         }
 
-        public int PerdaMotivoSelecionadoIndex { get => Index("PerdaMotivo"); }
+        //public int PerdaMotivoSelecionadoIndex { get => Index("PerdaMotivo"); }
 
         private Perda_Motivo _motivoSelecionado;
         public Perda_Motivo MotivoSelecionado
@@ -526,45 +526,45 @@ namespace Prodfy.ViewModels
             return user;
         }
 
-        private int Index(string objeto)
-        {
-            int index = -1;
+        //private int Index(string objeto)
+        //{
+        //    int index = -1;
 
-            switch (objeto)
-            {
-                case "Lote":
-                    var listaLotes = Lotes();
-                    if (_dadosPerdaQr != null)
-                        if (!string.IsNullOrEmpty(_dadosPerdaQr.OloteCodigo))
-                            index = listaLotes.FindIndex(l => l.codigo == _dadosPerdaQr.OloteCodigo);
-                    break;
-                case "Muda":
-                    var listaMudas = Mudas();
-                    if (_dadosPerdaQr != null)
-                        if (!string.IsNullOrEmpty(_dadosPerdaQr.OmudaId))
-                            index = listaMudas.FindIndex(m => m.muda_id == int.Parse(_dadosPerdaQr.OmudaId));
-                    break;
-                case "PontoControle":
-                    var listaPontoControles = PontoControles();
-                    if (_dadosPerdaQr != null)
-                        if (!string.IsNullOrEmpty(_dadosPerdaQr.OpontoControleId))
-                            index = listaPontoControles.FindIndex(p => p.ponto_controle_id == int.Parse(_dadosPerdaQr.OpontoControleId));
-                    break;
-                case "Estagio":
-                    var listaEstagios = Estagios();
-                    if (_dadosPerdaQr != null)
-                        if (!string.IsNullOrEmpty(_dadosPerdaQr.OestagioId))
-                            index = listaEstagios.FindIndex(e => e.estagio_id == int.Parse(_dadosPerdaQr.OestagioId));
-                    break;
-                case "PerdaMotivo":
-                    var listaMotivos = PerdaMotivo();
-                    if (_dadosPerdaQr != null)
-                        if (!string.IsNullOrEmpty(_dadosPerdaQr.OPerdaMotivoId))
-                            index = listaMotivos.FindIndex(p => p.perda_motivo_id == int.Parse(_dadosPerdaQr.OPerdaMotivoId));
-                    break;
-            }
-            return index;
-        }
+        //    switch (objeto)
+        //    {
+        //        case "Lote":
+        //            var listaLotes = Lotes();
+        //            if (_dadosPerdaQr != null)
+        //                if (!string.IsNullOrEmpty(_dadosPerdaQr.OloteCodigo))
+        //                    index = listaLotes.FindIndex(l => l.codigo == _dadosPerdaQr.OloteCodigo);
+        //            break;
+        //        case "Muda":
+        //            var listaMudas = Mudas();
+        //            if (_dadosPerdaQr != null)
+        //                if (!string.IsNullOrEmpty(_dadosPerdaQr.OmudaId))
+        //                    index = listaMudas.FindIndex(m => m.muda_id == int.Parse(_dadosPerdaQr.OmudaId));
+        //            break;
+        //        case "PontoControle":
+        //            var listaPontoControles = PontoControles();
+        //            if (_dadosPerdaQr != null)
+        //                if (!string.IsNullOrEmpty(_dadosPerdaQr.OpontoControleId))
+        //                    index = listaPontoControles.FindIndex(p => p.ponto_controle_id == int.Parse(_dadosPerdaQr.OpontoControleId));
+        //            break;
+        //        case "Estagio":
+        //            var listaEstagios = Estagios();
+        //            if (_dadosPerdaQr != null)
+        //                if (!string.IsNullOrEmpty(_dadosPerdaQr.OestagioId))
+        //                    index = listaEstagios.FindIndex(e => e.estagio_id == int.Parse(_dadosPerdaQr.OestagioId));
+        //            break;
+        //        case "PerdaMotivo":
+        //            var listaMotivos = PerdaMotivo();
+        //            if (_dadosPerdaQr != null)
+        //                if (!string.IsNullOrEmpty(_dadosPerdaQr.OPerdaMotivoId))
+        //                    index = listaMotivos.FindIndex(p => p.perda_motivo_id == int.Parse(_dadosPerdaQr.OPerdaMotivoId));
+        //            break;
+        //    }
+        //    return index;
+        //}
 
         private async Task ValidarCampos()
         {
