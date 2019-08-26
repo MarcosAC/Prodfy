@@ -149,7 +149,27 @@ namespace Prodfy.ViewModels
         private async Task VerificaPickerQualidades()
         {
             if (_listaQualidades == null)
-                await dialogService.AlertAsync("ALERTA", "Selecione um MUDA para gerar a lista de QUALIDADES!", "Ok");
+                await dialogService.AlertAsync("ALERTA", "Selecione uma MUDA para gerar a lista de QUALIDADES!", "Ok");
+        }
+
+        private Command _tappedDataEstaqueamentoCommand;
+        public Command TappedDataEstaqueamentoCommand =>
+            _tappedDataEstaqueamentoCommand ?? (_tappedDataEstaqueamentoCommand = new Command(async () => await VerificaPickerDataEstaqueamento()));
+       
+        private async Task VerificaPickerDataEstaqueamento()
+        {
+            if (_listaQualidades == null)
+                await dialogService.AlertAsync("ALERTA", "Selecione uma QUALIDADE para gerar a lista de DATAS DE ESTAQUEAMENTO!", "Ok");
+        }
+
+        private Command _tappedDataSelecaoCommand;
+        public Command TappedDataSelecaoCommand =>
+            _tappedDataSelecaoCommand ?? (_tappedDataSelecaoCommand = new Command(async () => await VerificaPickerDataSelecao()));
+
+        private async Task VerificaPickerDataSelecao()
+        {
+            if (_listaQualidades == null)
+                await dialogService.AlertAsync("ALERTA", "Selecione uma DATA DE ESTAQUEAMENTO para gerar a lista de DATAS DE SELEÇÃO!", "Ok");
         }
 
         private List<Lote> Lotes()
