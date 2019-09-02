@@ -2,6 +2,7 @@
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Navigation;
 using Prodfy.Services.Repository;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -16,6 +17,7 @@ namespace Prodfy.ViewModels
         private readonly LoteRepository loteRepositorio;
         private readonly MudaRepository mudaRepositorio;
         private readonly QualidadeRepository qualidadeRepositorio;
+        private readonly InvItemRepository invItemRepositorio;
 
         public List<Lote> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }
@@ -31,10 +33,12 @@ namespace Prodfy.ViewModels
             loteRepositorio = new LoteRepository();
             mudaRepositorio = new MudaRepository();
             qualidadeRepositorio = new QualidadeRepository();
+            invItemRepositorio = new InvItemRepository();
 
             Lotes();
             Mudas();
             Qualidades();
+            //DatasEstaqueamentos();
         }        
 
         private bool _visible;
@@ -58,6 +62,13 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _visibleQualidade, value);
         }
 
+        private bool _visibleDataEstaquemento = true;
+        public bool VisibleDataEstaquemento
+        {
+            get => _visibleDataEstaquemento;
+            set => SetProperty(ref _visibleDataEstaquemento, value);
+        }        
+
         private Lote _loteSelecionado;
         public Lote LoteSelecionado
         {
@@ -69,7 +80,9 @@ namespace Prodfy.ViewModels
                 if (_loteSelecionado != null)
                 {
                     _listaMudas = Mudas();
+                    _listaDataEstaqueamentos = DatasEstaqueamentos();
                     VisibleMuda = false;
+                    VisibleDataEstaquemento = false;
                 }
             }
         }
@@ -116,6 +129,20 @@ namespace Prodfy.ViewModels
         {
             get => _listaQualidades;
             set => SetProperty(ref _listaQualidades, value);
+        }
+
+        private Inv_Item _dataEstaqueamentoSelecionada;
+        public Inv_Item DataEstaqueamentoSelelcionada
+        {
+            get => _dataEstaqueamentoSelecionada;
+            set => SetProperty(ref _dataEstaqueamentoSelecionada, value);
+        }
+
+        private List<Inv_Item> _listaDataEstaqueamentos;
+        public List<Inv_Item> ListaDataEstaqueamentos
+        {
+            get => _listaDataEstaqueamentos;
+            set => SetProperty(ref _listaDataEstaqueamentos, value);
         }
 
         private Command _titleViewBotaoVoltarCommand;
@@ -174,9 +201,14 @@ namespace Prodfy.ViewModels
 
         private Command _localizarCommandCommand;
         public Command LocalizarCommand =>
-            _localizarCommandCommand ?? (_localizarCommandCommand = new Command(async () => await ExecuteLocalizarCommand()));
+            _localizarCommandCommand ?? (_localizarCommandCommand = new Command(() => ExecuteLocalizarCommand()));
 
-        private async Task ExecuteLocalizarCommand() => await ValidarCampos();
+        private List<Inv_Item> ExecuteLocalizarCommand() => DatasEstaqueamentos();
+
+        private List<Inv_Item> DatasEstaqueamentos()
+        {
+            return ListaDataEstaqueamentos = invItemRepositorio.ObterDataEstaquemento(LoteSelecionado.lote_id); 
+        }
 
         private List<Lote> Lotes()
         {

@@ -121,6 +121,10 @@
                         </Grid>
                     </StackLayout>
 
+                    <!--<Label Style="{StaticResource styleLabelFormulario}" Text="Estaqueamento - Data:"/>
+                    <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                                  ItemsSource="{Binding listaDatasEstaqueamentos}"
+                                                  ItemDisplayBinding="{Binding data_estaq}" />-->
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Estaqueamento - Data:"/>
                     <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                         <Grid control:CornerRadiusEffect.CornerRadius="5">
@@ -128,7 +132,9 @@
                                 <RowDefinition Height="55" />
                             </Grid.RowDefinitions>
 
-                            <control:CustomPicker Style="{StaticResource stylePickerFormulario}" />
+                            <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
+                                                  ItemsSource="{Binding ListaDataEstaqueamentos}"
+                                                  ItemDisplayBinding="{Binding data_estaq}" />
                            
                             <BoxView IsVisible="{Binding VisibleDataEstaquemento}" 
                                      HorizontalOptions="FillAndExpand" 
