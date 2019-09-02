@@ -2,7 +2,6 @@
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Navigation;
 using Prodfy.Services.Repository;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -38,7 +37,6 @@ namespace Prodfy.ViewModels
             Lotes();
             Mudas();
             Qualidades();
-            //DatasEstaqueamentos();
         }        
 
         private bool _visible;
@@ -131,15 +129,15 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaQualidades, value);
         }
 
-        private Inv_Item _dataEstaqueamentoSelecionada;
-        public Inv_Item DataEstaqueamentoSelelcionada
+        private string _dataEstaqueamentoSelecionada;
+        public string DataEstaqueamentoSelelcionada
         {
             get => _dataEstaqueamentoSelecionada;
             set => SetProperty(ref _dataEstaqueamentoSelecionada, value);
         }
 
-        private List<Inv_Item> _listaDataEstaqueamentos;
-        public List<Inv_Item> ListaDataEstaqueamentos
+        private List<string> _listaDataEstaqueamentos;
+        public List<string> ListaDataEstaqueamentos
         {
             get => _listaDataEstaqueamentos;
             set => SetProperty(ref _listaDataEstaqueamentos, value);
@@ -203,11 +201,19 @@ namespace Prodfy.ViewModels
         public Command LocalizarCommand =>
             _localizarCommandCommand ?? (_localizarCommandCommand = new Command(() => ExecuteLocalizarCommand()));
 
-        private List<Inv_Item> ExecuteLocalizarCommand() => DatasEstaqueamentos();
+        private List<string> ExecuteLocalizarCommand() => DatasEstaqueamentos();
 
-        private List<Inv_Item> DatasEstaqueamentos()
+        private List<string> DatasEstaqueamentos()
         {
-            return ListaDataEstaqueamentos = invItemRepositorio.ObterDataEstaquemento(LoteSelecionado.lote_id); 
+            var datasEstaqueamentos = invItemRepositorio.ObterDataEstaquemento(LoteSelecionado.lote_id);
+            List<string> listaDataEstaqueamento = new List<string>();
+
+            foreach (var item in datasEstaqueamentos)
+            {
+                listaDataEstaqueamento.Add(item.data_estaq.ToString("dd/MM/yyyy"));
+            }
+
+            return ListaDataEstaqueamentos = listaDataEstaqueamento; 
         }
 
         private List<Lote> Lotes()

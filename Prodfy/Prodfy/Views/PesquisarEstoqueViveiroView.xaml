@@ -130,8 +130,8 @@
 
                             <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
                                                   ItemsSource="{Binding ListaDataEstaqueamentos}"
-                                                  ItemDisplayBinding="{Binding data_estaq, StringFormat='{0:dd/MM/yyyy}'}" />
-                           
+                                                   />
+                            <!--ItemDisplayBinding="{Binding _listaDataEstaqueamentos, StringFormat='{0:dd/MM/yyyy}'}"-->
                             <BoxView IsVisible="{Binding VisibleDataEstaquemento}" 
                                      HorizontalOptions="FillAndExpand" 
                                      VerticalOptions="FillAndExpand" 

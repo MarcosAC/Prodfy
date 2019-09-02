@@ -80,9 +80,16 @@ namespace Prodfy.Services.Repository
 
             var query = "SELECT data_estaq FROM Inv_Item Where lote_id = " + loteId;
 
-            var listaDatasEstaqueamentos = dataBase._conexao.Query<Inv_Item>(query);
+            //var datasEstaqueamentos = dataBase._conexao.Query<Inv_Item>(query);
+            return dataBase._conexao.Query<Inv_Item>(query);
+            //List<string> listaDataEstaqueamento = new List<string>();
 
-            return listaDatasEstaqueamentos;
+            //foreach (var item in datasEstaqueamentos)
+            //{
+            //    listaDataEstaqueamento.Add(item.data_estaq.ToString());
+            //}
+
+            //return listaDataEstaqueamento;
         }
 
         public SQLite.TableQuery<Inv_Item> AsQueryable()
