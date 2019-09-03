@@ -2,6 +2,7 @@
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Navigation;
 using Prodfy.Services.Repository;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -143,6 +144,20 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaDataEstaqueamentos, value);
         }
 
+        private string _dataSelecaoSelecionada;
+        public string DataSelecaoSelecionada
+        {
+            get => _dataSelecaoSelecionada;
+            set => SetProperty(ref _dataSelecaoSelecionada, value);
+        }
+
+        private string _listaDataSelecao;
+        public string ListaDataSelecao
+        {
+            get => _listaDataSelecao;
+            set => SetProperty(ref _listaDataSelecao, value);
+        }
+
         private Command _titleViewBotaoVoltarCommand;
         public Command TitleViewBotaoVoltarCommand =>
             _titleViewBotaoVoltarCommand ?? (_titleViewBotaoVoltarCommand = new Command(async () => await ExecuteTitleViewBotaoVoltarCommand()));
@@ -205,12 +220,13 @@ namespace Prodfy.ViewModels
 
         private List<string> DatasEstaqueamentos()
         {
-            var datasEstaqueamentos = invItemRepositorio.ObterDataEstaquemento(LoteSelecionado.lote_id);
+            var datasEstaqueamentos = invItemRepositorio.ObterDataEstaquemento(LoteSelecionado.lote_id, 0, 0);
             List<string> listaDataEstaqueamento = new List<string>();
 
             foreach (var item in datasEstaqueamentos)
             {
-                listaDataEstaqueamento.Add(item.data_estaq.ToString("dd/MM/yyyy"));
+                var totalDias = DateTime.Now - item.data_estaq;           
+                listaDataEstaqueamento.Add(item.data_estaq.ToString($"dd/MM/yyyy ({totalDias.Days} Dia's')"));
             }
 
             return ListaDataEstaqueamentos = listaDataEstaqueamento; 
