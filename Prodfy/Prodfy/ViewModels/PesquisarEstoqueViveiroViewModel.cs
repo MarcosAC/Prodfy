@@ -66,7 +66,14 @@ namespace Prodfy.ViewModels
         {
             get => _visibleDataEstaquemento;
             set => SetProperty(ref _visibleDataEstaquemento, value);
-        }        
+        }
+
+        private bool _visibleDataSelecao = true;
+        public bool VisibleDataSelecao
+        {
+            get => _visibleDataSelecao;
+            set => SetProperty(ref _visibleDataSelecao, value);
+        }
 
         private Lote _loteSelecionado;
         public Lote LoteSelecionado
@@ -134,7 +141,12 @@ namespace Prodfy.ViewModels
         public string DataEstaqueamentoSelelcionada
         {
             get => _dataEstaqueamentoSelecionada;
-            set => SetProperty(ref _dataEstaqueamentoSelecionada, value);
+            set
+            {
+                SetProperty(ref _dataEstaqueamentoSelecionada, value);
+                DatasSelecao();
+                VisibleDataSelecao = false;
+            } 
         }
 
         private List<string> _listaDataEstaqueamentos;
@@ -151,8 +163,8 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _dataSelecaoSelecionada, value);
         }
 
-        private string _listaDataSelecao;
-        public string ListaDataSelecao
+        private List<string> _listaDataSelecao;
+        public List<string> ListaDataSelecao
         {
             get => _listaDataSelecao;
             set => SetProperty(ref _listaDataSelecao, value);
@@ -230,6 +242,20 @@ namespace Prodfy.ViewModels
             }
 
             return ListaDataEstaqueamentos = listaDataEstaqueamento; 
+        }
+
+        private List<string> DatasSelecao()
+        {
+            var datasSelecao = invItemRepositorio.ObterDataSelecao(0, 0, 0, DataEstaqueamentoSelelcionada.Substring(0, 10)/*Convert.ToDateTime(DataEstaqueamentoSelelcionada.Substring(0, 10))*/);
+            List<string> listaDataSelecao = new List<string>();
+
+            foreach (var item in datasSelecao)
+            {
+                var totalDias = DateTime.Now - item.data_selecao;
+                listaDataSelecao.Add(item.data_selecao.ToString($"dd/MM/yyyy ({totalDias.Days} Dia's')"));
+            }
+
+            return ListaDataSelecao = listaDataSelecao;
         }
 
         private List<Lote> Lotes()

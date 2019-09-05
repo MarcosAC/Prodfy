@@ -128,7 +128,9 @@
                                 <RowDefinition Height="55" />
                             </Grid.RowDefinitions>
 
-                            <control:CustomPicker Style="{StaticResource stylePickerFormulario}" ItemsSource="{Binding ListaDataEstaqueamentos}" />
+                            <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
+                                                  ItemsSource="{Binding ListaDataEstaqueamentos}" 
+                                                  SelectedItem="{Binding DataEstaqueamentoSelelcionada}" />
                             
                             <BoxView IsVisible="{Binding VisibleDataEstaquemento}" 
                                      HorizontalOptions="FillAndExpand" 
@@ -150,8 +152,10 @@
                                 <RowDefinition Height="55" />
                             </Grid.RowDefinitions>
 
-                            <control:CustomPicker Style="{StaticResource stylePickerFormulario}" ItemsSource="{Binding ListaDataSelecao}" />
-
+                            <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
+                                                  ItemsSource="{Binding ListaDataSelecao}"
+                                                   />
+                            
                             <BoxView IsVisible="{Binding VisibleDataSelecao}" 
                                      HorizontalOptions="FillAndExpand" 
                                      VerticalOptions="FillAndExpand" 

@@ -2,6 +2,7 @@
 using Prodfy.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Prodfy.Services.Repository
 {
@@ -46,7 +47,7 @@ namespace Prodfy.Services.Repository
                 if (!string.IsNullOrEmpty(where))
                     cap = " AND ";
 
-                where += $"{cap}AA.muda_id = {mudaId}";
+                where += $"{cap}muda_id = {mudaId}";
             }
 
             if (qualidadeId > 0)
@@ -54,7 +55,7 @@ namespace Prodfy.Services.Repository
                 if (!string.IsNullOrEmpty(where))
                     cap = " AND ";
 
-                where += $"{cap}AA.qualidade_id = {qualidadeId}";
+                where += $"{cap}qualidade_id = {qualidadeId}";
             }
 
             if (!string.IsNullOrEmpty(where))
@@ -65,6 +66,67 @@ namespace Prodfy.Services.Repository
             query += " ORDER BY 1";
             
             return dataBase._conexao.Query<Inv_Item>(query);
+        }
+
+        public List<Inv_Item> ObterDataSelecao(int loteId, int mudaId, int qualidadeId, string dataEstaqueamento)
+        {
+            var where = string.Empty;
+            var cap = string.Empty;
+
+            //string dataEstaq = dataEstaqueamento.ToString("dd/MM/yyyy");
+
+            //var query = "SELECT data_selecao FROM Inv_Item";
+            //var query = "SELECT * FROM Inv_Item";
+
+            var listaInvItem = dataBase._conexao.Query<Inv_Item>("SELECT * FROM Inv_Item");
+
+            //var teste = listaInvItem.Find(l => l.data_estaq == Convert.ToDateTime(dataEstaqueamento));
+            List<Inv_Item> resultado = new List<Inv_Item>();
+
+            var dados =
+                from dataSelecao in listaInvItem
+                where dataSelecao.data_estaq == Convert.ToDateTime(dataEstaqueamento)
+                select dataSelecao;
+
+            foreach (var item in dados)
+            {
+                resultado.Add(item);
+            }
+
+
+            //where = $"data_estaq = '{dataEstaqueamento}'";
+
+                //if (loteId > 0)
+                //{
+                //    if (!string.IsNullOrEmpty(where))
+                //        cap = " AND ";
+
+                //    where += $"{cap}lote_id = {loteId}";
+                //}
+
+                //if (mudaId > 0)
+                //{
+                //    if (!string.IsNullOrEmpty(where))
+                //        cap = " AND ";
+
+                //    where += $"{cap}muda_id = {mudaId}";
+                //}
+
+                //if (qualidadeId > 0)
+                //{
+                //    if (!string.IsNullOrEmpty(where))
+                //        cap = " AND ";
+
+                //    where += $"{cap}qualidade_id = {qualidadeId}";
+                //}
+
+                //if (!string.IsNullOrEmpty(where))
+                //    where = $" WHERE {where}";
+
+                //query += where;
+                //query += " ORDER BY data_selecao desc";
+
+            return resultado;
         }
 
         public SQLite.TableQuery<Inv_Item> AsQueryable()
