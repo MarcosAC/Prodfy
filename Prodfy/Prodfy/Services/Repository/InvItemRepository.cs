@@ -70,61 +70,19 @@ namespace Prodfy.Services.Repository
 
         public List<Inv_Item> ObterDataSelecao(int loteId, int mudaId, int qualidadeId, string dataEstaqueamento)
         {
-            var where = string.Empty;
-            var cap = string.Empty;
-
-            //string dataEstaq = dataEstaqueamento.ToString("dd/MM/yyyy");
-
-            //var query = "SELECT data_selecao FROM Inv_Item";
-            //var query = "SELECT * FROM Inv_Item";
-
             var listaInvItem = dataBase._conexao.Query<Inv_Item>("SELECT * FROM Inv_Item");
 
-            //var teste = listaInvItem.Find(l => l.data_estaq == Convert.ToDateTime(dataEstaqueamento));
             List<Inv_Item> resultado = new List<Inv_Item>();
 
             var dados =
                 from dataSelecao in listaInvItem
-                where dataSelecao.data_estaq == Convert.ToDateTime(dataEstaqueamento)
+                where dataSelecao.data_estaq == Convert.ToDateTime(dataEstaqueamento) || dataSelecao.lote_id == loteId || dataSelecao.muda_id == mudaId || dataSelecao.qualidade_id == qualidadeId
                 select dataSelecao;
 
             foreach (var item in dados)
             {
                 resultado.Add(item);
             }
-
-
-            //where = $"data_estaq = '{dataEstaqueamento}'";
-
-                //if (loteId > 0)
-                //{
-                //    if (!string.IsNullOrEmpty(where))
-                //        cap = " AND ";
-
-                //    where += $"{cap}lote_id = {loteId}";
-                //}
-
-                //if (mudaId > 0)
-                //{
-                //    if (!string.IsNullOrEmpty(where))
-                //        cap = " AND ";
-
-                //    where += $"{cap}muda_id = {mudaId}";
-                //}
-
-                //if (qualidadeId > 0)
-                //{
-                //    if (!string.IsNullOrEmpty(where))
-                //        cap = " AND ";
-
-                //    where += $"{cap}qualidade_id = {qualidadeId}";
-                //}
-
-                //if (!string.IsNullOrEmpty(where))
-                //    where = $" WHERE {where}";
-
-                //query += where;
-                //query += " ORDER BY data_selecao desc";
 
             return resultado;
         }
