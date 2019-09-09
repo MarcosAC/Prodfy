@@ -19,7 +19,7 @@ namespace Prodfy.ViewModels
         private readonly QualidadeRepository qualidadeRepositorio;
         private readonly InvItemRepository invItemRepositorio;
 
-        public List<Lote> listaLotes { get; set; }
+        public List<string> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }
         public List<Qualidade> listaQualidade { get; set; }
 
@@ -86,15 +86,13 @@ namespace Prodfy.ViewModels
                 if (_loteSelecionado != null)
                 {
                     _listaMudas = Mudas();
-                    _listaDataEstaqueamentos = DatasEstaqueamentos();
                     VisibleMuda = false;
-                    VisibleDataEstaquemento = false;
                 }
             }
         }
 
-        private List<Lote> _listaDeLotes;
-        public List<Lote> ListaDeLotes
+        private List<string> _listaDeLotes;
+        public List<string> ListaDeLotes
         {
             get => _listaDeLotes;
             set => SetProperty(ref _listaDeLotes, value);
@@ -127,7 +125,16 @@ namespace Prodfy.ViewModels
         public Qualidade QualidadeSelecionada
         {
             get => _qualidadeSelecionada;
-            set => SetProperty(ref _qualidadeSelecionada, value);
+            set
+            {
+                SetProperty(ref _qualidadeSelecionada, value);
+
+                if (_qualidadeSelecionada != null)
+                {
+                    _listaDataEstaqueamentos = DatasEstaqueamentos();
+                    VisibleDataEstaquemento = false;
+                }
+            } 
         }
 
         private List<Qualidade> _listaQualidades;
@@ -228,11 +235,18 @@ namespace Prodfy.ViewModels
         public Command LocalizarCommand =>
             _localizarCommandCommand ?? (_localizarCommandCommand = new Command(() => ExecuteLocalizarCommand()));
 
-        private List<string> ExecuteLocalizarCommand() => DatasEstaqueamentos();
-
+        private List<string> ExecuteLocalizarCommand()
+        {
+            return null;
+        }
+        
         private List<string> DatasEstaqueamentos()
         {
-            var datasEstaqueamentos = invItemRepositorio.ObterDataEstaquemento(LoteSelecionado.lote_id, 0, 0);
+            //int? loteId = LoteSelecionado.lote_id;
+            //int? mudaId = LoteSelecionado.lote_id;
+            //int? qualidadeId = QualidadeSelecionada.qualidade_id;
+
+            var datasEstaqueamentos = invItemRepositorio.ObterDataEstaquemento(LoteSelecionado.lote_id, MudaSelecionada.muda_id, QualidadeSelecionada.qualidade_id);
             List<string> listaDataEstaqueamento = new List<string>();
 
             foreach (var item in datasEstaqueamentos)
@@ -258,9 +272,9 @@ namespace Prodfy.ViewModels
             return ListaDataSelecao = listaDataSelecao;
         }
 
-        private List<Lote> Lotes()
+        private List<string> Lotes()
         {
-            return listaLotes = loteRepositorio.ObterTodos();
+            return listaLotes = invItemRepositorio.ObterLoteParaEstoqueViveiro();
         }
 
         private List<Muda> Mudas()

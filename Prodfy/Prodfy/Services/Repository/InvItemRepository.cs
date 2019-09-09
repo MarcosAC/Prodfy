@@ -27,45 +27,75 @@ namespace Prodfy.Services.Repository
             }
         }
 
-        public List<Inv_Item> ObterDataEstaquemento(int loteId, int mudaId, int qualidadeId)
+        public List<string> ObterLoteParaEstoqueViveiro()
         {
-            var where = string.Empty;
-            var cap = string.Empty;
+            var dadosLote = dataBase._conexao.Query<Lote>("select * from Lote");
+            List<Lote> listaLotes = new List<Lote>();
 
-            var query = "SELECT data_estaq FROM Inv_Item";
-
-            if (loteId > 0)
+            for (int i = 0; i < dadosLote.Count; i++)
             {
-                if (!string.IsNullOrEmpty(where))
-                    cap = " AND ";
-
-                where += $"{cap}lote_id = {loteId}";
-            }               
-
-            if (mudaId > 0)
-            {
-                if (!string.IsNullOrEmpty(where))
-                    cap = " AND ";
-
-                where += $"{cap}muda_id = {mudaId}";
+                listaLotes.Add(dadosLote[i]);
             }
 
-            if (qualidadeId > 0)
-            {
-                if (!string.IsNullOrEmpty(where))
-                    cap = " AND ";
+            var dadosInvItem = dataBase._conexao.Query<Inv_Item>("select * from Inv_Item");
+            List<Inv_Item> listaInvItens = new List<Inv_Item>();
 
-                where += $"{cap}qualidade_id = {qualidadeId}";
+            for (int i = 0; i < dadosInvItem.Count; i++)
+            {
+                listaInvItens.Add(dadosInvItem[i]);
             }
 
-            if (!string.IsNullOrEmpty(where))
-                where = $" WHERE {where}";
+            var query = from invItem in listaInvItens
+                        join lote in listaLotes on invItem.lote_id equals lote.lote_id
+                        select new
+                        {
+                            invItem.lote_id,
+                            lote.produto_id,
+                            lote.codigo,
+                            lote.objetivo,
+                            lote.cliente
+                        };
 
-            query += where;
-            query += " GROUP BY data_estaq";
-            query += " ORDER BY 1";
+            List<string> dadosLoteEstoqueViveiro = new List<string>();
+
             
-            return dataBase._conexao.Query<Inv_Item>(query);
+
+            //foreach (var item in query)
+            //{
+            //    dadosLoteEstoqueViveiro.Add(item.ToString());
+            //}
+
+            //var loteEstoqueViveiro = new
+            //{
+            //    dadosLoteEstoqueViveiro.produto_id,
+            //    dadosLoteEstoqueViveiro.codigo,
+            //    dadosLoteEstoqueViveiro.objetivo,
+            //    dadosLoteEstoqueViveiro.cliente,
+            //    invItem = dadosLoteEstoqueViveiro.lote_id
+            //};
+
+            //var ret = dadosLoteEstoqueViveiro;
+
+            return dadosLoteEstoqueViveiro;
+        }
+
+        public List<Inv_Item> ObterDataEstaquemento(int? loteId, int? mudaId, int? qualidadeId)
+        {
+            var listaInvItem = dataBase._conexao.Query<Inv_Item>("SELECT * FROM Inv_Item"/*"SELECT data_estaq FROM Inv_Item"*/);
+
+            List<Inv_Item> resultado = new List<Inv_Item>();
+
+            var dados =
+               from dataEstaquemanto in listaInvItem
+               where dataEstaquemanto.lote_id == loteId && dataEstaquemanto.muda_id == mudaId && dataEstaquemanto.qualidade_id == qualidadeId
+               select dataEstaquemanto;
+
+            foreach (var item in dados)
+            {
+                resultado.Add(item);
+            }
+
+            return resultado;
         }
 
         public List<Inv_Item> ObterDataSelecao(int loteId, int mudaId, int qualidadeId, string dataEstaqueamento)
