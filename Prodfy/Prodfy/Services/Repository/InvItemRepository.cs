@@ -25,25 +25,7 @@ namespace Prodfy.Services.Repository
             {
                 App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
             }
-        }
-
-        public List<LotesEstoqueViveiro> ObterLoteParaEstoqueViveiro()
-        {
-            List<LotesEstoqueViveiro> listaLotes = dataBase._conexao.Query<LotesEstoqueViveiro>("SELECT "+
-                                                                                                    "AA.lote_id, " +
-                                                                                                    "L.produto_id, " +
-                                                                                                    "L.codigo, " +
-                                                                                                    "L.objetivo, " +
-                                                                                                    "L.cliente " +
-                                                                                                "FROM " +
-                                                                                                    "Inv_Item AA " +
-                                                                                                "INNER JOIN Lote L " +
-                                                                                                "ON L.lote_id = AA.lote_id " +
-                                                                                                "GROUP BY AA.lote_id " +
-                                                                                                "ORDER BY 3 DESC");
-
-            return listaLotes;
-        }
+        }       
 
         public List<Inv_Item> ObterDataEstaquemento(int? loteId, int? mudaId, int? qualidadeId)
         {

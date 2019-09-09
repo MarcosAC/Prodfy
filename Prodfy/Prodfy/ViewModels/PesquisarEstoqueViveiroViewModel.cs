@@ -18,6 +18,7 @@ namespace Prodfy.ViewModels
         private readonly MudaRepository mudaRepositorio;
         private readonly QualidadeRepository qualidadeRepositorio;
         private readonly InvItemRepository invItemRepositorio;
+        private readonly EstoqueViveiroRepository estoqueViveiroRepositorio;
 
         public List<LotesEstoqueViveiro> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }
@@ -34,6 +35,7 @@ namespace Prodfy.ViewModels
             mudaRepositorio = new MudaRepository();
             qualidadeRepositorio = new QualidadeRepository();
             invItemRepositorio = new InvItemRepository();
+            estoqueViveiroRepositorio = new EstoqueViveiroRepository();
 
             Lotes();
             Mudas();
@@ -274,7 +276,7 @@ namespace Prodfy.ViewModels
 
         private List<LotesEstoqueViveiro> Lotes()
         {
-            return listaLotes = invItemRepositorio.ObterLoteParaEstoqueViveiro();
+            return listaLotes = estoqueViveiroRepositorio.ObterLoteParaEstoqueViveiro();
         }
 
         private List<Muda> Mudas()
