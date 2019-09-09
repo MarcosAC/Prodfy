@@ -21,7 +21,7 @@ namespace Prodfy.ViewModels
         private readonly EstoqueViveiroRepository estoqueViveiroRepositorio;
 
         public List<LotesEstoqueViveiro> listaLotes { get; set; }
-        public List<Muda> listaMudas { get; set; }
+        //public List<MudasEstoqueViveiro> listaMudas { get; set; }
         public List<Qualidade> listaQualidade { get; set; }
 
         public PesquisarEstoqueViveiroViewModel()
@@ -38,7 +38,7 @@ namespace Prodfy.ViewModels
             estoqueViveiroRepositorio = new EstoqueViveiroRepository();
 
             Lotes();
-            Mudas();
+            //Mudas();
             Qualidades();
         }        
 
@@ -100,8 +100,8 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaDeLotes, value);
         }
 
-        private Muda _mudaSelecionada;
-        public Muda MudaSelecionada
+        private MudasEstoqueViveiro _mudaSelecionada;
+        public MudasEstoqueViveiro MudaSelecionada
         {
             get => _mudaSelecionada;
             set
@@ -116,8 +116,8 @@ namespace Prodfy.ViewModels
             }
         }
 
-        private List<Muda> _listaMudas;
-        public List<Muda> ListaMudas
+        private List<MudasEstoqueViveiro> _listaMudas;
+        public List<MudasEstoqueViveiro> ListaMudas
         {
             get => _listaMudas;
             set => SetProperty(ref _listaMudas, value);
@@ -279,9 +279,9 @@ namespace Prodfy.ViewModels
             return listaLotes = estoqueViveiroRepositorio.ObterLotesEstoqueViveiro();
         }
 
-        private List<Muda> Mudas()
+        private List<MudasEstoqueViveiro> Mudas()
         {
-            return listaMudas = mudaRepositorio.ObterTodos();
+            return ListaMudas = estoqueViveiroRepositorio.ObterMudasEstoqueViveiro(LoteSelecionado.lote_id);
         }
 
         private List<Qualidade> Qualidades()

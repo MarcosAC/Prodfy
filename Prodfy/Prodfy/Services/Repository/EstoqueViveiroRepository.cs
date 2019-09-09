@@ -83,6 +83,37 @@ namespace Prodfy.Services.Repository
             return listaLotes;
         }
 
+        public List<MudasEstoqueViveiro> ObterMudasEstoqueViveiro(int loteId)
+        {
+            string query = "SELECT " +
+                                "AA.muda_id, " +
+                                "M.nome_interno " +
+                           "FROM " +
+                                "Inv_Item AA " +
+                           "INNER JOIN Muda M " +
+                           "ON M.muda_id = AA.muda_id ";
+
+            string where = string.Empty;
+            string cap = string.Empty;
+
+            if (loteId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.lote_id = {loteId}";
+            }
+
+            if (!string.IsNullOrEmpty(where))
+                where = $" WHERE {where}";
+
+            query += $"{where} GROUP BY AA.muda_id ORDER BY M.nome_interno";
+
+            var listaMudas = dataBase._conexao.Query<MudasEstoqueViveiro>(query);
+
+            return listaMudas;
+        }
+
         public int ObterTotalDeRegistros()
         {
             throw new NotImplementedException();

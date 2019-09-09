@@ -77,8 +77,8 @@
                             </Grid.RowDefinitions>
                             
                             <control:CustomPicker Style="{StaticResource stylePickerFormulario}"
-                                                  ItemsSource="{Binding listaMudas}"
-                                                  ItemDisplayBinding="{Binding nome}"
+                                                  ItemsSource="{Binding ListaMudas}"
+                                                  ItemDisplayBinding="{Binding nome_interno}"
                                                   SelectedItem="{Binding MudaSelecionada}"
                                                   SelectedIndex="{Binding MudaSelecionadaIndex}" />
 
