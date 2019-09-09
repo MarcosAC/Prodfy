@@ -19,7 +19,7 @@ namespace Prodfy.ViewModels
         private readonly QualidadeRepository qualidadeRepositorio;
         private readonly InvItemRepository invItemRepositorio;
 
-        public List<string> listaLotes { get; set; }
+        public List<LotesEstoqueViveiro> listaLotes { get; set; }
         public List<Muda> listaMudas { get; set; }
         public List<Qualidade> listaQualidade { get; set; }
 
@@ -75,8 +75,8 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _visibleDataSelecao, value);
         }
 
-        private Lote _loteSelecionado;
-        public Lote LoteSelecionado
+        private LotesEstoqueViveiro _loteSelecionado;
+        public LotesEstoqueViveiro LoteSelecionado
         {
             get => _loteSelecionado;
             set
@@ -91,8 +91,8 @@ namespace Prodfy.ViewModels
             }
         }
 
-        private List<string> _listaDeLotes;
-        public List<string> ListaDeLotes
+        private List<LotesEstoqueViveiro> _listaDeLotes;
+        public List<LotesEstoqueViveiro> ListaDeLotes
         {
             get => _listaDeLotes;
             set => SetProperty(ref _listaDeLotes, value);
@@ -272,7 +272,7 @@ namespace Prodfy.ViewModels
             return ListaDataSelecao = listaDataSelecao;
         }
 
-        private List<string> Lotes()
+        private List<LotesEstoqueViveiro> Lotes()
         {
             return listaLotes = invItemRepositorio.ObterLoteParaEstoqueViveiro();
         }

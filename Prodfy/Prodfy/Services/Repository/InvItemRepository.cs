@@ -27,56 +27,22 @@ namespace Prodfy.Services.Repository
             }
         }
 
-        public List<string> ObterLoteParaEstoqueViveiro()
+        public List<LotesEstoqueViveiro> ObterLoteParaEstoqueViveiro()
         {
-            var dadosLote = dataBase._conexao.Query<Lote>("select * from Lote");
-            List<Lote> listaLotes = new List<Lote>();
+            List<LotesEstoqueViveiro> listaLotes = dataBase._conexao.Query<LotesEstoqueViveiro>("SELECT "+
+                                                                                                    "AA.lote_id, " +
+                                                                                                    "L.produto_id, " +
+                                                                                                    "L.codigo, " +
+                                                                                                    "L.objetivo, " +
+                                                                                                    "L.cliente " +
+                                                                                                "FROM " +
+                                                                                                    "Inv_Item AA " +
+                                                                                                "INNER JOIN Lote L " +
+                                                                                                "ON L.lote_id = AA.lote_id " +
+                                                                                                "GROUP BY AA.lote_id " +
+                                                                                                "ORDER BY 3 DESC");
 
-            for (int i = 0; i < dadosLote.Count; i++)
-            {
-                listaLotes.Add(dadosLote[i]);
-            }
-
-            var dadosInvItem = dataBase._conexao.Query<Inv_Item>("select * from Inv_Item");
-            List<Inv_Item> listaInvItens = new List<Inv_Item>();
-
-            for (int i = 0; i < dadosInvItem.Count; i++)
-            {
-                listaInvItens.Add(dadosInvItem[i]);
-            }
-
-            var query = from invItem in listaInvItens
-                        join lote in listaLotes on invItem.lote_id equals lote.lote_id
-                        select new
-                        {
-                            invItem.lote_id,
-                            lote.produto_id,
-                            lote.codigo,
-                            lote.objetivo,
-                            lote.cliente
-                        };
-
-            List<string> dadosLoteEstoqueViveiro = new List<string>();
-
-            
-
-            //foreach (var item in query)
-            //{
-            //    dadosLoteEstoqueViveiro.Add(item.ToString());
-            //}
-
-            //var loteEstoqueViveiro = new
-            //{
-            //    dadosLoteEstoqueViveiro.produto_id,
-            //    dadosLoteEstoqueViveiro.codigo,
-            //    dadosLoteEstoqueViveiro.objetivo,
-            //    dadosLoteEstoqueViveiro.cliente,
-            //    invItem = dadosLoteEstoqueViveiro.lote_id
-            //};
-
-            //var ret = dadosLoteEstoqueViveiro;
-
-            return dadosLoteEstoqueViveiro;
+            return listaLotes;
         }
 
         public List<Inv_Item> ObterDataEstaquemento(int? loteId, int? mudaId, int? qualidadeId)

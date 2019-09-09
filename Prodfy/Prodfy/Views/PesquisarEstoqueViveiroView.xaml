@@ -65,7 +65,7 @@
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
                     <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
                                           ItemsSource="{Binding listaLotes}"
-                                          
+                                          ItemDisplayBinding="{Binding codigo}"
                                           SelectedItem="{Binding LoteSelecionado}"
                                           SelectedIndex="{Binding LoteSelecionadoIndex}" />
 
