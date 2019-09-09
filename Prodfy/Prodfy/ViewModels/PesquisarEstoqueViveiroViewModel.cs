@@ -276,7 +276,7 @@ namespace Prodfy.ViewModels
 
         private List<LotesEstoqueViveiro> Lotes()
         {
-            return listaLotes = estoqueViveiroRepositorio.ObterLoteParaEstoqueViveiro();
+            return listaLotes = estoqueViveiroRepositorio.ObterLotesEstoqueViveiro();
         }
 
         private List<Muda> Mudas()

@@ -65,7 +65,7 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public List<LotesEstoqueViveiro> ObterLoteParaEstoqueViveiro()
+        public List<LotesEstoqueViveiro> ObterLotesEstoqueViveiro()
         {
             var listaLotes = dataBase._conexao.Query<LotesEstoqueViveiro>("SELECT " +
                                                                               "AA.lote_id, " +
