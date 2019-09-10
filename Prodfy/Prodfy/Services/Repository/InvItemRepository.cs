@@ -27,23 +27,61 @@ namespace Prodfy.Services.Repository
             }
         }       
 
-        public List<Inv_Item> ObterDataEstaquemento(int? loteId, int? mudaId, int? qualidadeId)
+        public List<Inv_Item> ObterDataEstaquemento(int loteId, int mudaId, int qualidadeId)
         {
-            var listaInvItem = dataBase._conexao.Query<Inv_Item>("SELECT * FROM Inv_Item"/*"SELECT data_estaq FROM Inv_Item"*/);
+            string query = "SELECT AA.data_estaq FROM Inv_Item AA ";
 
-            List<Inv_Item> resultado = new List<Inv_Item>();
+            string where = string.Empty;
+            string cap = string.Empty;
 
-            var dados =
-               from dataEstaquemanto in listaInvItem
-               where dataEstaquemanto.lote_id == loteId && dataEstaquemanto.muda_id == mudaId && dataEstaquemanto.qualidade_id == qualidadeId
-               select dataEstaquemanto;
-
-            foreach (var item in dados)
+            if (loteId > 0)
             {
-                resultado.Add(item);
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.lote_id = {loteId}";
             }
 
-            return resultado;
+            if (mudaId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.muda_id = {mudaId}";
+            }
+
+            if (qualidadeId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.qualidade_id = {qualidadeId}";
+            }
+
+            if (!string.IsNullOrEmpty(where))
+                where = $"WHERE {where}";
+
+            query += $"{where} GROUP BY AA.data_estaq ORDER BY 1";
+
+            var listaDatasEstaquementos = dataBase._conexao.Query<Inv_Item>(query);
+
+            return listaDatasEstaquementos;
+
+            //var listaInvItem = dataBase._conexao.Query<Inv_Item>("SELECT * FROM Inv_Item"/*"SELECT data_estaq FROM Inv_Item"*/);
+
+            //List<Inv_Item> resultado = new List<Inv_Item>();
+
+            //var dados =
+            //   from dataEstaquemanto in listaInvItem
+            //   where dataEstaquemanto.lote_id == loteId && dataEstaquemanto.muda_id == mudaId && dataEstaquemanto.qualidade_id == qualidadeId
+            //   select dataEstaquemanto;
+
+            //foreach (var item in dados)
+            //{
+            //    resultado.Add(item);
+            //}
+
+            //return resultado;
         }
 
         public List<Inv_Item> ObterDataSelecao(int loteId, int mudaId, int qualidadeId, string dataEstaqueamento)
