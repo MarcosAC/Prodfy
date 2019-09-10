@@ -21,8 +21,6 @@ namespace Prodfy.ViewModels
         private readonly EstoqueViveiroRepository estoqueViveiroRepositorio;
 
         public List<LotesEstoqueViveiro> listaLotes { get; set; }
-        //public List<MudasEstoqueViveiro> listaMudas { get; set; }
-        public List<Qualidade> listaQualidade { get; set; }
 
         public PesquisarEstoqueViveiroViewModel()
         {
@@ -38,8 +36,6 @@ namespace Prodfy.ViewModels
             estoqueViveiroRepositorio = new EstoqueViveiroRepository();
 
             Lotes();
-            //Mudas();
-            Qualidades();
         }        
 
         private bool _visible;
@@ -123,8 +119,8 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _listaMudas, value);
         }
 
-        private Qualidade _qualidadeSelecionada;
-        public Qualidade QualidadeSelecionada
+        private QualidadeEstoqueViveiro _qualidadeSelecionada;
+        public QualidadeEstoqueViveiro QualidadeSelecionada
         {
             get => _qualidadeSelecionada;
             set
@@ -139,8 +135,8 @@ namespace Prodfy.ViewModels
             } 
         }
 
-        private List<Qualidade> _listaQualidades;
-        public List<Qualidade> ListaQualidades
+        private List<QualidadeEstoqueViveiro> _listaQualidades;
+        public List<QualidadeEstoqueViveiro> ListaQualidades
         {
             get => _listaQualidades;
             set => SetProperty(ref _listaQualidades, value);
@@ -244,10 +240,6 @@ namespace Prodfy.ViewModels
         
         private List<string> DatasEstaqueamentos()
         {
-            //int? loteId = LoteSelecionado.lote_id;
-            //int? mudaId = LoteSelecionado.lote_id;
-            //int? qualidadeId = QualidadeSelecionada.qualidade_id;
-
             var datasEstaqueamentos = invItemRepositorio.ObterDataEstaquemento(LoteSelecionado.lote_id, MudaSelecionada.muda_id, QualidadeSelecionada.qualidade_id);
             List<string> listaDataEstaqueamento = new List<string>();
 
@@ -284,9 +276,9 @@ namespace Prodfy.ViewModels
             return ListaMudas = estoqueViveiroRepositorio.ObterMudasEstoqueViveiro(LoteSelecionado.lote_id);
         }
 
-        private List<Qualidade> Qualidades()
+        private List<QualidadeEstoqueViveiro> Qualidades()
         {
-            return listaQualidade = qualidadeRepositorio.ObterTodos();
+            return ListaQualidades = estoqueViveiroRepositorio.ObterQualidadeEstoqueViveiro(LoteSelecionado.lote_id, MudaSelecionada.muda_id);
         }
 
         private async Task ValidarCampos()
