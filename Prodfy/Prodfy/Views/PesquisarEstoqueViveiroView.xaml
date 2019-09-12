@@ -130,7 +130,7 @@
 
                             <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
                                                   ItemsSource="{Binding ListaDataEstaqueamentos}" 
-                                                  SelectedItem="{Binding DataEstaqueamentoSelelcionada}" />
+                                                  SelectedItem="{Binding DataEstaqueamentoSelecionada}" />
                             
                             <BoxView IsVisible="{Binding VisibleDataEstaquemento}" 
                                      HorizontalOptions="FillAndExpand" 
@@ -154,8 +154,8 @@
 
                             <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
                                                   ItemsSource="{Binding ListaDataSelecao}"
-                                                   />
-                            
+                                                  SelectedItem="{Binding DataSelecaoSelecionada}" />
+
                             <BoxView IsVisible="{Binding VisibleDataSelecao}" 
                                      HorizontalOptions="FillAndExpand" 
                                      VerticalOptions="FillAndExpand" 

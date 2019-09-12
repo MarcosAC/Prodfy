@@ -143,14 +143,18 @@ namespace Prodfy.ViewModels
         }
 
         private string _dataEstaqueamentoSelecionada;
-        public string DataEstaqueamentoSelelcionada
+        public string DataEstaqueamentoSelecionada
         {
             get => _dataEstaqueamentoSelecionada;
             set
             {
                 SetProperty(ref _dataEstaqueamentoSelecionada, value);
-                DatasSelecao();
-                VisibleDataSelecao = false;
+
+                if (_dataEstaqueamentoSelecionada != null)
+                {
+                    _listaDataSelecao = DatasSelecao();
+                    VisibleDataSelecao = false;
+                }
             } 
         }
 
@@ -215,7 +219,7 @@ namespace Prodfy.ViewModels
        
         private async Task ExecuteVerificaPickerDataEstaqueamentoCommand()
         {
-            if (_listaQualidades == null)
+            if (_listaDataEstaqueamentos == null)
                 await dialogService.AlertAsync("ALERTA", "Selecione uma QUALIDADE para gerar a lista de DATAS DE ESTAQUEAMENTO!", "Ok");
         }
 
@@ -225,7 +229,7 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteVerificaPickerDataSelecaoCommand()
         {
-            if (_listaQualidades == null)
+            if (_listaDataSelecao == null)
                 await dialogService.AlertAsync("ALERTA", "Selecione uma DATA DE ESTAQUEAMENTO para gerar a lista de DATAS DE SELEÇÃO!", "Ok");
         }
 
@@ -254,7 +258,7 @@ namespace Prodfy.ViewModels
 
         private List<string> DatasSelecao()
         {
-            var datasSelecao = invItemRepositorio.ObterDataSelecao(0, 0, 0, DataEstaqueamentoSelelcionada.Substring(0, 10)/*Convert.ToDateTime(DataEstaqueamentoSelelcionada.Substring(0, 10))*/);
+            var datasSelecao = invItemRepositorio.ObterDataSelecao(LoteSelecionado.lote_id, MudaSelecionada.muda_id, QualidadeSelecionada.qualidade_id, DataEstaqueamentoSelecionada.Substring(0, 10));
             List<string> listaDataSelecao = new List<string>();
 
             foreach (var item in datasSelecao)
