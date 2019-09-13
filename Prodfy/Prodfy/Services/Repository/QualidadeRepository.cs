@@ -27,6 +27,57 @@ namespace Prodfy.Services.Repository
             }
         }
 
+        public void DeletarTodos()
+        {
+            dataBase._conexao.DeleteAll<Qualidade>();
+        }
+
+        public List<QualidadeEstoqueViveiro> ObterQualidadeEstoqueViveiro(int loteId, int mudaId)
+        {
+            string query = "SELECT " +
+                                "Q.qualidade_id, " +
+                                "Q.codigo, " +
+                                "Q.titulo " +
+                           "FROM " +
+                                "Inv_Item AA " +
+                           "INNER JOIN Qualidade Q " +
+                           "ON Q.qualidade_id = AA.qualidade_id ";
+
+            string where = string.Empty;
+            string cap = string.Empty;
+
+            if (loteId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.lote_id = {loteId}";
+            }
+
+            if (mudaId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.muda_id = {mudaId}";
+            }
+
+            if (!string.IsNullOrEmpty(where))
+                where = $"WHERE {where}";
+
+            query += $"{where} GROUP BY AA.qualidade_id ORDER BY 3";
+
+            var listaQualidades = dataBase._conexao.Query<QualidadeEstoqueViveiro>(query);
+
+            return listaQualidades;
+        }
+
+        public List<Qualidade> ObterTodos()
+        {
+            var listaQualidade = dataBase._conexao.Query<Qualidade>("SELECT qualidade_id, codigo, titulo FROM Qualidade ORDER BY 2");
+            return listaQualidade;
+        }
+
         public TableQuery<Qualidade> AsQueryable()
         {
             throw new NotImplementedException();
@@ -35,11 +86,6 @@ namespace Prodfy.Services.Repository
         public void Deletar(int id)
         {
             throw new NotImplementedException();
-        }
-
-        public void DeletarTodos()
-        {
-            dataBase._conexao.DeleteAll<Qualidade>();
         }
 
         public void Editar(Qualidade entidade)
@@ -70,12 +116,6 @@ namespace Prodfy.Services.Repository
         public string ObterInformacoesParaIdentificacao(int id, string codigo)
         {
             throw new NotImplementedException();
-        }
-
-        public List<Qualidade> ObterTodos()
-        {
-            var listaQualidade = dataBase._conexao.Query<Qualidade>("SELECT qualidade_id, codigo, titulo FROM Qualidade ORDER BY 2");
-            return listaQualidade;
         }
 
         public int ObterTotalDeRegistros()

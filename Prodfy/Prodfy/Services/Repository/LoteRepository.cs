@@ -99,31 +99,6 @@ namespace Prodfy.Services.Repository
             }
         }
 
-        public TableQuery<Lote> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeletarTodos()
-        {
-            dataBase._conexao.DeleteAll<Lote>();
-        }
-
-        public void Editar(Lote entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Lote ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Lote> ObterTodos()
-        {
-            return dataBase._conexao.Query<Lote>($"SELECT lote_id, produto_id, codigo, objetivo, cliente FROM Lote ORDER BY 3 desc");
-        }
-
         public string ObterLotePorId(string id)
         {
             var dados = dataBase._conexao.Query<Lote>($"SELECT lote_id FROM Lote WHERE codigo = '{id}' LIMIT 1");
@@ -169,7 +144,50 @@ namespace Prodfy.Services.Repository
                 ret = "0|Registro não encontrado!||";
             }
 
-            return ret;            
+            return ret;
+        }
+
+        public void DeletarTodos()
+        {
+            dataBase._conexao.DeleteAll<Lote>();
+        }
+
+        public List<Lote> ObterTodos()
+        {
+            return dataBase._conexao.Query<Lote>($"SELECT lote_id, produto_id, codigo, objetivo, cliente FROM Lote ORDER BY 3 desc");
+        }
+
+        public List<LotesEstoqueViveiro> ObterLotesEstoqueViveiro()
+        {
+            var listaLotes = dataBase._conexao.Query<LotesEstoqueViveiro>("SELECT " +
+                                                                              "AA.lote_id, " +
+                                                                              "L.produto_id, " +
+                                                                              "L.codigo, " +
+                                                                              "L.objetivo, " +
+                                                                              "L.cliente " +
+                                                                          "FROM " +
+                                                                              "Inv_Item AA " +
+                                                                          "INNER JOIN Lote L " +
+                                                                          "ON L.lote_id = AA.lote_id " +
+                                                                          "GROUP BY AA.lote_id " +
+                                                                          "ORDER BY 3 DESC");
+
+            return listaLotes;
+        }
+
+        public TableQuery<Lote> AsQueryable()
+        {
+            throw new NotImplementedException();
+        }        
+
+        public void Editar(Lote entidade)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Lote ObterDados()
+        {
+            throw new NotImplementedException();
         }
 
         public string ObterInformacoesParaIdentificacao(int id)

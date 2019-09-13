@@ -272,17 +272,17 @@ namespace Prodfy.ViewModels
 
         private List<LotesEstoqueViveiro> Lotes()
         {
-            return listaLotes = estoqueViveiroRepositorio.ObterLotesEstoqueViveiro();
+            return listaLotes = loteRepositorio.ObterLotesEstoqueViveiro();
         }
 
         private List<MudasEstoqueViveiro> Mudas()
         {
-            return ListaMudas = estoqueViveiroRepositorio.ObterMudasEstoqueViveiro(LoteSelecionado.lote_id);
+            return ListaMudas = mudaRepositorio.ObterMudasEstoqueViveiro(LoteSelecionado.lote_id);
         }
 
         private List<QualidadeEstoqueViveiro> Qualidades()
         {
-            return ListaQualidades = estoqueViveiroRepositorio.ObterQualidadeEstoqueViveiro(LoteSelecionado.lote_id, MudaSelecionada.muda_id);
+            return ListaQualidades = qualidadeRepositorio.ObterQualidadeEstoqueViveiro(LoteSelecionado.lote_id, MudaSelecionada.muda_id);
         }
 
         private async Task ValidarCampos()
