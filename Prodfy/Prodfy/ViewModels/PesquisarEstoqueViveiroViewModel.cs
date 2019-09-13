@@ -71,6 +71,24 @@ namespace Prodfy.ViewModels
             set => SetProperty(ref _visibleDataSelecao, value);
         }
 
+        private int _loteSelecionadoIndex = -1;
+        public int LoteSelecionadoIndex
+        {
+            get => _loteSelecionadoIndex;
+            set
+            {
+                SetProperty(ref _loteSelecionadoIndex, value);
+
+                if (_loteSelecionadoIndex == -1)
+                {
+                    var mudas = Mudas();
+                    mudas.Clear();
+                    _listaMudas = mudas;
+                    OnPropertyChanged(nameof(_listaMudas));                    
+                }
+            }
+        }
+
         private LotesEstoqueViveiro _loteSelecionado;
         public LotesEstoqueViveiro LoteSelecionado
         {
@@ -87,12 +105,12 @@ namespace Prodfy.ViewModels
             }
         }
 
-        private List<LotesEstoqueViveiro> _listaDeLotes;
-        public List<LotesEstoqueViveiro> ListaDeLotes
-        {
-            get => _listaDeLotes;
-            set => SetProperty(ref _listaDeLotes, value);
-        }
+        //private List<LotesEstoqueViveiro> _listaDeLotes;
+        //public List<LotesEstoqueViveiro> ListaDeLotes
+        //{
+        //    get => _listaDeLotes;
+        //    set => SetProperty(ref _listaDeLotes, value);
+        //}
 
         private MudasEstoqueViveiro _mudaSelecionada;
         public MudasEstoqueViveiro MudaSelecionada
@@ -231,15 +249,24 @@ namespace Prodfy.ViewModels
                 await dialogService.AlertAsync("ALERTA", "Selecione uma DATA DE ESTAQUEAMENTO para gerar a lista de DATAS DE SELEÇÃO!", "Ok");
         }
 
-        private Command _localizarCommandCommand;
+        private Command _localizarCommand;
         public Command LocalizarCommand =>
-            _localizarCommandCommand ?? (_localizarCommandCommand = new Command(() => ExecuteLocalizarCommand()));
+            _localizarCommand ?? (_localizarCommand = new Command(() => ExecuteLocalizarCommand()));
 
-        private List<string> ExecuteLocalizarCommand()
+        private void ExecuteLocalizarCommand()
         {
-            return null;
+            
         }
-        
+
+        private Command _limparCamposCommand;
+        public Command LimparCamposCommand =>
+            _limparCamposCommand ?? (_limparCamposCommand = new Command(() => ExecuteLimparCamposCommand()));
+
+        private void ExecuteLimparCamposCommand()
+        {
+            LoteSelecionadoIndex = -1;
+        }
+
         private List<string> DatasEstaqueamentos()
         {
             var datasEstaqueamentos = invItemRepositorio.ObterDataEstaquemento(LoteSelecionado.lote_id, MudaSelecionada.muda_id, QualidadeSelecionada.qualidade_id);
