@@ -55,7 +55,7 @@
                 <StackLayout Padding="20,10,20,20" IsVisible="False">
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout" 
-                                     Binding="{Binding Visible}" 
+                                     Binding="{Binding VisibleCampos}" 
                                      Value="True">
                             
                             <Setter Property="IsVisible" Value="True" />

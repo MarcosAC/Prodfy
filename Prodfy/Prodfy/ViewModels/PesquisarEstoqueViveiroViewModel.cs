@@ -34,13 +34,15 @@ namespace Prodfy.ViewModels
             invItemRepositorio = new InvItemRepository();
 
             Lotes();
-        }        
+        }
 
-        private bool _visible;
-        public bool Visible
+        #region Propriedades
+
+        private bool _visibleCampos;
+        public bool VisibleCampos
         {
-            get => _visible;
-            set => SetProperty(ref _visible, value);
+            get => _visibleCampos;
+            set => SetProperty(ref _visibleCampos, value);
         }
 
         private bool _visibleMuda = true;
@@ -75,18 +77,7 @@ namespace Prodfy.ViewModels
         public int LoteSelecionadoIndex
         {
             get => _loteSelecionadoIndex;
-            set
-            {
-                SetProperty(ref _loteSelecionadoIndex, value);
-
-                if (_loteSelecionadoIndex == -1)
-                {
-                    var mudas = Mudas();
-                    mudas.Clear();
-                    _listaMudas = mudas;
-                    OnPropertyChanged(nameof(_listaMudas));                    
-                }
-            }
+            set => SetProperty(ref _loteSelecionadoIndex, value);
         }
 
         private LotesEstoqueViveiro _loteSelecionado;
@@ -104,13 +95,6 @@ namespace Prodfy.ViewModels
                 }
             }
         }
-
-        //private List<LotesEstoqueViveiro> _listaDeLotes;
-        //public List<LotesEstoqueViveiro> ListaDeLotes
-        //{
-        //    get => _listaDeLotes;
-        //    set => SetProperty(ref _listaDeLotes, value);
-        //}
 
         private MudasEstoqueViveiro _mudaSelecionada;
         public MudasEstoqueViveiro MudaSelecionada
@@ -194,6 +178,9 @@ namespace Prodfy.ViewModels
             get => _listaDataSelecao;
             set => SetProperty(ref _listaDataSelecao, value);
         }
+        #endregion
+
+        #region Comandos
 
         private Command _titleViewBotaoVoltarCommand;
         public Command TitleViewBotaoVoltarCommand =>
@@ -205,16 +192,16 @@ namespace Prodfy.ViewModels
         public Command PesquisaEstoqueViveiroCommand =>
             _pesquisaEstoqueViveiroCommand ?? (_pesquisaEstoqueViveiroCommand = new Command(() => ExecutePesquisaEstoqueViveiroCommand()));
 
-        private void ExecutePesquisaEstoqueViveiroCommand() => Visible = true;
+        private void ExecutePesquisaEstoqueViveiroCommand() => VisibleCampos = true;
 
         private Command _tappedMudaCommand;
         public Command TappedMudaCommand =>
             _tappedMudaCommand ?? (_tappedMudaCommand = new Command(async () => await ExecuteVerificaPickerMudasCommand()));
 
-        // Verifica se os dados do picker e nulo e não envia a mensagem.
+        // Verifica se os dados do picker e nulo e envia a mensagem.
         private async Task ExecuteVerificaPickerMudasCommand()
         {
-            if (_listaMudas == null)
+            if (_listaMudas == null || _listaMudas.Count == 0)
                 await dialogService.AlertAsync("ALERTA", "Selecione um LOTE para gerar a lista de MUDAS!", "Ok");
         }
 
@@ -222,10 +209,9 @@ namespace Prodfy.ViewModels
         public Command TappedQualidadeCommand =>
             _tappedQualidadeCommand ?? (_tappedQualidadeCommand = new Command(async () => await ExecuteVerificaPickerQualidadesCommand()));
 
-        // Verifica se os dados do picker e nulo e não envia a mensagem.
         private async Task ExecuteVerificaPickerQualidadesCommand()
         {
-            if (_listaQualidades == null)
+            if (_listaQualidades == null || _listaQualidades.Count == 0)
                 await dialogService.AlertAsync("ALERTA", "Selecione uma MUDA para gerar a lista de QUALIDADES!", "Ok");
         }
 
@@ -235,7 +221,7 @@ namespace Prodfy.ViewModels
        
         private async Task ExecuteVerificaPickerDataEstaqueamentoCommand()
         {
-            if (_listaDataEstaqueamentos == null)
+            if (_listaDataEstaqueamentos == null || _listaDataEstaqueamentos.Count == 0)
                 await dialogService.AlertAsync("ALERTA", "Selecione uma QUALIDADE para gerar a lista de DATAS DE ESTAQUEAMENTO!", "Ok");
         }
 
@@ -245,7 +231,7 @@ namespace Prodfy.ViewModels
 
         private async Task ExecuteVerificaPickerDataSelecaoCommand()
         {
-            if (_listaDataSelecao == null)
+            if (_listaDataSelecao == null || _listaDataSelecao.Count == 0)
                 await dialogService.AlertAsync("ALERTA", "Selecione uma DATA DE ESTAQUEAMENTO para gerar a lista de DATAS DE SELEÇÃO!", "Ok");
         }
 
@@ -265,6 +251,60 @@ namespace Prodfy.ViewModels
         private void ExecuteLimparCamposCommand()
         {
             LoteSelecionadoIndex = -1;
+
+            var listaMudas = new List<MudasEstoqueViveiro>();
+            var listaQualidades = new List<QualidadeEstoqueViveiro>();
+            var listaDataEstaqueamento = new List<string>();
+            var listdaDataSelecao = new List<string>();
+
+            #region Verifica se listas estão vazias
+
+            if (listaMudas != null || listaMudas.Count > 0)
+            {
+                listaMudas.Clear();
+                ListaMudas = listaMudas;
+                VisibleMuda = true;
+            }
+
+            if (listaQualidades != null || listaQualidades.Count > 0)
+            {
+                listaQualidades.Clear();
+                ListaQualidades = listaQualidades;
+                VisibleQualidade = true;
+            }            
+
+            if (listaDataEstaqueamento != null || listaDataEstaqueamento.Count > 0)
+            {
+                listaDataEstaqueamento.Clear();
+                ListaDataEstaqueamentos = listaDataEstaqueamento;
+                VisibleDataEstaquemento = true;
+            }
+
+            if (listdaDataSelecao != null || listdaDataSelecao.Count > 0)
+            {
+                listdaDataSelecao.Clear();
+                ListaDataSelecao = listdaDataSelecao;
+                VisibleDataSelecao = true;
+            }
+            #endregion
+        }
+        #endregion
+
+        #region Métodos e Funções
+
+        private List<LotesEstoqueViveiro> Lotes()
+        {
+            return listaLotes = loteRepositorio.ObterLotesEstoqueViveiro();
+        }
+
+        private List<MudasEstoqueViveiro> Mudas()
+        {
+            return ListaMudas = mudaRepositorio.ObterMudasEstoqueViveiro(LoteSelecionado.lote_id);
+        }
+
+        private List<QualidadeEstoqueViveiro> Qualidades()
+        {
+            return ListaQualidades = qualidadeRepositorio.ObterQualidadeEstoqueViveiro(LoteSelecionado.lote_id, MudaSelecionada.muda_id);
         }
 
         private List<string> DatasEstaqueamentos()
@@ -293,22 +333,7 @@ namespace Prodfy.ViewModels
             }
 
             return ListaDataSelecao = listaDataSelecao;
-        }
-
-        private List<LotesEstoqueViveiro> Lotes()
-        {
-            return listaLotes = loteRepositorio.ObterLotesEstoqueViveiro();
-        }
-
-        private List<MudasEstoqueViveiro> Mudas()
-        {
-            return ListaMudas = mudaRepositorio.ObterMudasEstoqueViveiro(LoteSelecionado.lote_id);
-        }
-
-        private List<QualidadeEstoqueViveiro> Qualidades()
-        {
-            return ListaQualidades = qualidadeRepositorio.ObterQualidadeEstoqueViveiro(LoteSelecionado.lote_id, MudaSelecionada.muda_id);
-        }
+        }        
 
         private async Task ValidarCampos()
         {
@@ -318,5 +343,6 @@ namespace Prodfy.ViewModels
                 return;
             }
         }
+        #endregion
     }
 }
