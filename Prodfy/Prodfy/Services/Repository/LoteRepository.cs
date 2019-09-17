@@ -175,6 +175,34 @@ namespace Prodfy.Services.Repository
             return listaLotes;
         }
 
+        public string ObterLoteEstoqueViveiroPorId(string loteId)
+        {
+            var loteInfo = dataBase._conexao.Query<LotesEstoqueViveiro>("SELECT " +
+                                                                        "L.lote_id, " +
+                                                                        "L.codigo, " +
+                                                                        "L.objetivo, " +
+                                                                        "L.cliente, " +
+                                                                        "P.titulo " +
+                                                                     "FROM Lote L " +
+                                                                     "LEFT JOIN Produto P " +
+                                                                     "ON P.produto_id = L.produto_id " +
+                                                                     $"WHERE L.lote_id = '{loteId}'" +
+                                                                     "LIMIT 1");            
+
+            string ret = string.Empty;
+
+            if (loteInfo[0].lote_id != 0)
+            {
+                ret = $"1||{loteInfo[0].lote_id}|{loteInfo[0].codigo}|{loteInfo[0].objetivo}|{loteInfo[0].cliente}|{loteInfo[0].titulo}|";
+            }
+            else
+            {
+                ret = "0|Registro não encontrado!|";
+            }
+
+            return ret;
+        }
+
         public TableQuery<Lote> AsQueryable()
         {
             throw new NotImplementedException();

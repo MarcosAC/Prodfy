@@ -51,7 +51,8 @@
                            Text="Clique no botão de busca para preencher o formulário de localização de estoque de viveiro." 
                            FontSize="Large" />
                 </StackLayout>
-
+                
+                <!-- Cadastro -->
                 <StackLayout Padding="20,10,20,20" IsVisible="False">
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout" 
@@ -179,6 +180,20 @@
                                               Text="Localizar" 
                                               Command="{Binding LocalizarCommand}" />
                     </StackLayout>
+                </StackLayout>
+                
+                <!-- Pagina HTML -->
+                <StackLayout Padding="20,10,20,20" IsVisible="False">
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" 
+                                     Binding="{Binding VisibleHTML}" 
+                                     Value="True">
+
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+
+                    <control:CustomWebView x:Name="EstoqueViveiroHtml" Source="{Binding CodigoHTML}"/>                    
                 </StackLayout>
             </StackLayout>
         </ScrollView>

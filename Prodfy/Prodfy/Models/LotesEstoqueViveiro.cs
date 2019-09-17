@@ -7,5 +7,6 @@
         public string codigo { get; set; }
         public string objetivo { get; set; }
         public string cliente { get; set; }
+        public string titulo { get; set; }
     }
 }

@@ -132,7 +132,7 @@ namespace Prodfy.ViewModels
                     _listaDataEstaqueamentos = DatasEstaqueamentos();
                     VisibleDataEstaquemento = false;
                 }
-            } 
+            }
         }
 
         private List<QualidadeEstoqueViveiro> _listaQualidades;
@@ -155,7 +155,7 @@ namespace Prodfy.ViewModels
                     _listaDataSelecao = DatasSelecao();
                     VisibleDataSelecao = false;
                 }
-            } 
+            }
         }
 
         private List<string> _listaDataEstaqueamentos;
@@ -177,6 +177,13 @@ namespace Prodfy.ViewModels
         {
             get => _listaDataSelecao;
             set => SetProperty(ref _listaDataSelecao, value);
+        }
+
+        private string _codigoHTML;
+        public string CodigoHTML
+        {
+            get => _codigoHTML;
+            set => SetProperty(ref _codigoHTML, value);
         }
         #endregion
 
@@ -242,6 +249,7 @@ namespace Prodfy.ViewModels
         private void ExecuteLocalizarCommand()
         {
             ValidarCampos();
+            var infoLote = loteRepositorio.ObterLoteEstoqueViveiroPorId(LoteSelecionado.lote_id.ToString());
         }
 
         private Command _limparCamposCommand;
@@ -334,6 +342,18 @@ namespace Prodfy.ViewModels
 
             return ListaDataSelecao = listaDataSelecao;
         }        
+
+        private string PaginaHTML()
+        {
+            string tmp = string.Empty;
+
+            if (LoteSelecionado != null && LoteSelecionado.lote_id > 0)
+            {
+                var infoLote = loteRepositorio.ObterLoteEstoqueViveiroPorId(LoteSelecionado.lote_id.ToString());
+            }
+
+            return string.Empty;
+        }
 
         private void ValidarCampos()
         {
