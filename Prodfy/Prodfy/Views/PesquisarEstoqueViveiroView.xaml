@@ -40,7 +40,7 @@
                 <StackLayout Style="{StaticResource baseStyleStackLayout}">
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout" 
-                                     Binding="{Binding Visible}" 
+                                     Binding="{Binding VisibleCampos}" 
                                      Value="True">
                             
                             <Setter Property="IsVisible" Value="False" />

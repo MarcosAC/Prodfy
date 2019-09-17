@@ -241,7 +241,7 @@ namespace Prodfy.ViewModels
 
         private void ExecuteLocalizarCommand()
         {
-            
+            ValidarCampos();
         }
 
         private Command _limparCamposCommand;
@@ -335,13 +335,37 @@ namespace Prodfy.ViewModels
             return ListaDataSelecao = listaDataSelecao;
         }        
 
-        private async Task ValidarCampos()
+        private void ValidarCampos()
         {
             if (LoteSelecionado == null)
             {
-                await dialogService.AlertAsync("ALERTA", "O campo LOTE é obrigatório!", "Ok");
+                dialogService.AlertAsync("ALERTA", "O campo LOTE é obrigatório!", "Ok");
                 return;
             }
+
+            //if (MudaSelecionada == null)
+            //{
+            //    dialogService.AlertAsync("ALERTA", "O campo MUDA é obrigatório!", "Ok");
+            //    return;
+            //}
+
+            //if (QualidadeSelecionada == null)
+            //{
+            //    dialogService.AlertAsync("ALERTA", "O campo QUALIDADE é obrigatório!", "Ok");
+            //    return;
+            //}
+
+            //if (DataEstaqueamentoSelecionada == null)
+            //{
+            //    dialogService.AlertAsync("ALERTA", "O campo DATA ESTAQUEMENTO é obrigatório!", "Ok");
+            //    return;
+            //}
+
+            //if (DataSelecaoSelecionada == null)
+            //{
+            //    dialogService.AlertAsync("ALERTA", "O campo DATA SELEÇÂO é obrigatório!", "Ok");
+            //    return;
+            //}
         }
         #endregion
     }
