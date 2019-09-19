@@ -14,16 +14,6 @@ namespace Prodfy.Views
             NavigationPage.SetHasBackButton(this, false);
 
             BindingContext = new PesquisarEstoqueViveiroViewModel();
-
-            //var conteudoHtml = new HtmlWebViewSource
-            //{
-            //    Html = @"<html><body>
-            //          <h1>Xamarin.Forms</h1>
-            //          <p>Welcome to WebView.</p>
-            //          </body></html>"
-            //};
-
-            //EstoqueViveiroHtml.Source = conteudoHtml;
         }
 	}
 }
