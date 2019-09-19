@@ -37,31 +37,31 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <StackLayout Style="{StaticResource baseStyleStackLayout}">
-                    <StackLayout.Triggers>
+                <StackLayout Style="{StaticResource baseStyleStackLayout}" IsVisible="{Binding VisibleLabel}">
+                    <!--<StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout" 
                                      Binding="{Binding VisibleCampos}" 
                                      Value="True">
                             
                             <Setter Property="IsVisible" Value="False" />
                         </DataTrigger>
-                    </StackLayout.Triggers>
+                    </StackLayout.Triggers>-->
                     
                     <Label Style="{StaticResource styleBaseLabel}" 
                            Text="Clique no botão de busca para preencher o formulário de localização de estoque de viveiro." 
-                           FontSize="Large" />
+                           FontSize="Large"/>
                 </StackLayout>
                 
                 <!-- Cadastro -->
-                <StackLayout Padding="20,10,20,20" IsVisible="False">
-                    <StackLayout.Triggers>
+                <StackLayout Padding="20,10,20,20" IsVisible="{Binding VisibleCampos}">
+                    <!--<StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout" 
                                      Binding="{Binding VisibleCampos}" 
                                      Value="True">
                             
                             <Setter Property="IsVisible" Value="True" />
                         </DataTrigger>
-                    </StackLayout.Triggers>
+                    </StackLayout.Triggers>-->
                     
                     <Label Style="{StaticResource styleLabelFormulario}" Text="Lote:" />
                     <control:CustomPicker Style="{StaticResource stylePickerFormulario}" 
@@ -183,7 +183,7 @@
                 </StackLayout>
                 
                 <!-- Pagina HTML -->
-                <StackLayout Padding="20,10,20,20" IsVisible="False">
+                <StackLayout IsVisible="{Binding VisibleHTML}" VerticalOptions="FillAndExpand">
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout" 
                                      Binding="{Binding VisibleHTML}" 
@@ -193,7 +193,11 @@
                         </DataTrigger>
                     </StackLayout.Triggers>
 
-                    <control:CustomWebView x:Name="EstoqueViveiroHtml" Source="{Binding CodigoHTML}"/>                    
+                    <control:CustomWebView x:Name="EstoqueViveiroHtml" HeightRequest="1000">
+                        <control:CustomWebView.Source>
+                            <HtmlWebViewSource Html="{Binding CodigoHTML}" />
+                        </control:CustomWebView.Source>
+                    </control:CustomWebView>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

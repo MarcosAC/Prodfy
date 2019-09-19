@@ -38,7 +38,14 @@ namespace Prodfy.ViewModels
 
         #region Propriedades
 
-        private bool _visibleCampos;
+        private bool _visibleLabel = true;
+        public bool VisibleLabel
+        {
+            get => _visibleLabel;
+            set => SetProperty(ref _visibleLabel, value);
+        }
+
+        private bool _visibleCampos = false;
         public bool VisibleCampos
         {
             get => _visibleCampos;
@@ -71,6 +78,13 @@ namespace Prodfy.ViewModels
         {
             get => _visibleDataSelecao;
             set => SetProperty(ref _visibleDataSelecao, value);
+        }
+
+        private bool _visibleHTML = false;
+        public bool VisibleHTML
+        {
+            get => _visibleHTML;
+            set => SetProperty(ref _visibleHTML, value);
         }
 
         private int _loteSelecionadoIndex = -1;
@@ -199,7 +213,11 @@ namespace Prodfy.ViewModels
         public Command PesquisaEstoqueViveiroCommand =>
             _pesquisaEstoqueViveiroCommand ?? (_pesquisaEstoqueViveiroCommand = new Command(() => ExecutePesquisaEstoqueViveiroCommand()));
 
-        private void ExecutePesquisaEstoqueViveiroCommand() => VisibleCampos = true;
+        private void ExecutePesquisaEstoqueViveiroCommand()
+        {
+            VisibleCampos = true;
+            VisibleLabel = false;
+        }
 
         private Command _tappedMudaCommand;
         public Command TappedMudaCommand =>
@@ -248,8 +266,10 @@ namespace Prodfy.ViewModels
 
         private void ExecuteLocalizarCommand()
         {
-            ValidarCampos();
-            var infoLote = loteRepositorio.ObterLoteEstoqueViveiroPorId(LoteSelecionado.lote_id.ToString());
+            ValidarCampos();            
+            PaginaHTML();
+            VisibleCampos = false;
+            VisibleHTML = true;
         }
 
         private Command _limparCamposCommand;
@@ -343,16 +363,71 @@ namespace Prodfy.ViewModels
             return ListaDataSelecao = listaDataSelecao;
         }        
 
-        private string PaginaHTML()
+        private void PaginaHTML()
         {
+            string info_lote_id = string.Empty;
+            string info_lote_codigo = string.Empty;
+            string info_lote_objetivo = string.Empty;
+            string info_lote_cliente = string.Empty;
+            string info_lote_titulo = string.Empty;
+
+            string codigoHtml = string.Empty;
             string tmp = string.Empty;
+            string loteTxt = string.Empty;
 
             if (LoteSelecionado != null && LoteSelecionado.lote_id > 0)
             {
-                var infoLote = loteRepositorio.ObterLoteEstoqueViveiroPorId(LoteSelecionado.lote_id.ToString());
+                tmp = loteRepositorio.ObterLoteEstoqueViveiroPorId(LoteSelecionado.lote_id.ToString());
+                var infoLote = tmp.Split('|');
+
+                if (infoLote[0] == "1")
+                {
+                    info_lote_id = infoLote[2];
+                    info_lote_codigo = infoLote[3];
+                    info_lote_objetivo = infoLote[4];
+                    info_lote_cliente = infoLote[5];
+                    info_lote_titulo = infoLote[6];
+                }
+
+                loteTxt = $"<b>{info_lote_codigo}";
+
+                if (!string.IsNullOrEmpty(info_lote_titulo))
+                {
+                    loteTxt += $" (<small>{info_lote_titulo}</small>)";
+                }
+
+                loteTxt += "</br>";
+            }
+            else
+            {
+                loteTxt += "<small><b>GERAL</b></small>";
             }
 
-            return string.Empty;
+            /*
+             * Retirei o padding: 15px; -> 10px e alterei o text-indent: 30px; -> 20px, dessa linha CSS:   
+             * .info-table td { width: 400px; font-size: 18px; text-align: left; vertical-align: top; color:#0000ff; text-indent: 20px; }
+             * 
+             * Alterei o tamanho da fonte para 18px
+             */
+            codigoHtml = "<html><head><title>Prodfy APP</title></head>";
+            codigoHtml += "<style type='text/css'>";
+            codigoHtml += "body { background-color: transparent; font-family: Helvetica; font-size: 60px; margin:10px 0; padding:0; text-align:center; margin-left: 15px; margin-right: 15px; margin-top: 15px; }";
+            codigoHtml += ".info-table { width: 100%; } .info-table th { width: 60px; font-size: 18px; text-align: left; vertical-align: top; padding: 10px; color:black; white-space: nowrap; } .info-table td { width: 400px; font-size: 18px; text-align: left; vertical-align: top; color:#0000ff; text-indent: 20px; }";
+            codigoHtml += ".font-size-70 { font-size: 70%; }";
+            codigoHtml += "</style><body><center>";
+            codigoHtml += "<table class='info-table'>";
+
+            if (!string.IsNullOrEmpty(info_lote_id))
+                codigoHtml += $"<tr><th><br/><b>Lote:</b></th></tr><tr><td><small>{loteTxt}</small></td></tr>";
+
+            codigoHtml += "</table><br/><br/></center></body></html>";
+
+            CodigoHTML = codigoHtml;
+
+            VisibleCampos = false;
+            VisibleHTML = true;
+
+            //return codigoHtml;
         }
 
         private void ValidarCampos()
