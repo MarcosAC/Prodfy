@@ -426,8 +426,6 @@ namespace Prodfy.ViewModels
 
             VisibleCampos = false;
             VisibleHTML = true;
-
-            //return codigoHtml;
         }
 
         private void ValidarCampos()
@@ -437,30 +435,6 @@ namespace Prodfy.ViewModels
                 dialogService.AlertAsync("ALERTA", "O campo LOTE é obrigatório!", "Ok");
                 return;
             }
-
-            //if (MudaSelecionada == null)
-            //{
-            //    dialogService.AlertAsync("ALERTA", "O campo MUDA é obrigatório!", "Ok");
-            //    return;
-            //}
-
-            //if (QualidadeSelecionada == null)
-            //{
-            //    dialogService.AlertAsync("ALERTA", "O campo QUALIDADE é obrigatório!", "Ok");
-            //    return;
-            //}
-
-            //if (DataEstaqueamentoSelecionada == null)
-            //{
-            //    dialogService.AlertAsync("ALERTA", "O campo DATA ESTAQUEMENTO é obrigatório!", "Ok");
-            //    return;
-            //}
-
-            //if (DataSelecaoSelecionada == null)
-            //{
-            //    dialogService.AlertAsync("ALERTA", "O campo DATA SELEÇÂO é obrigatório!", "Ok");
-            //    return;
-            //}
         }
         #endregion
     }
