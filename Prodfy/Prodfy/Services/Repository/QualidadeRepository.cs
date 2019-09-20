@@ -78,6 +78,27 @@ namespace Prodfy.Services.Repository
             return listaQualidade;
         }
 
+        public string ObterQualidadeInfo(int qualidadeId)
+        {
+            var dadosQualidade = dataBase._conexao.Table<Qualidade>().FirstOrDefault(q => q.qualidade_id == qualidadeId);
+
+            var qualidadeInfo = new
+            {
+                dadosQualidade.qualidade_id,
+                dadosQualidade.codigo,
+                dadosQualidade.titulo,
+            };
+
+            string ret = string.Empty;
+
+            if (qualidadeInfo.qualidade_id != 0)
+                ret = $"1||{qualidadeInfo.qualidade_id}|{qualidadeInfo.codigo}|{qualidadeInfo.titulo}";
+            else
+                ret = "0|Registro não encontrado!|";
+
+            return ret;
+        }
+
         public TableQuery<Qualidade> AsQueryable()
         {
             throw new NotImplementedException();
@@ -99,21 +120,6 @@ namespace Prodfy.Services.Repository
         }
 
         public Qualidade ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
         {
             throw new NotImplementedException();
         }

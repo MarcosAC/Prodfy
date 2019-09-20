@@ -454,6 +454,34 @@ namespace Prodfy.ViewModels
 
             #endregion Muda
 
+            #region Qualidade
+
+            string info_qualidade_id = string.Empty;
+            string info_qualidade_codigo = string.Empty;
+            string info_qualidade_titulo = string.Empty;
+            string qualidade_txt = string.Empty;
+
+            if (QualidadeSelecionada != null || QualidadeSelecionada.qualidade_id > 0)
+            {
+                var dadosQualidade = qualidadeRepositorio.ObterQualidadeInfo(QualidadeSelecionada.qualidade_id);
+                var infoQualidade = dadosQualidade.Split('|');
+
+                if (infoQualidade[0] == "1")
+                {
+                    info_qualidade_id = infoQualidade[2];
+                    info_qualidade_codigo = infoQualidade[3];
+                    info_qualidade_titulo = infoQualidade[4];
+                }
+
+                qualidade_txt = $"<b>{info_qualidade_titulo}";
+            }
+            else
+            {
+                qualidade_txt += "<small>GERAL</small>";
+            }
+
+            #endregion Qualidade
+
 
 
             #region Codigo HTML
@@ -478,8 +506,8 @@ namespace Prodfy.ViewModels
             if (!string.IsNullOrEmpty(info_muda_id))
                 codigoHtml += $"<tr><th><br/><b>Planta:</b></th></tr><tr><td><small>{planta_txt}</small></td></tr>";
 
-            //if (!string.IsNullOrEmpty(info_lote_id))
-            //    codigoHtml += $"<tr><th><br/><b>Lote:</b></th></tr><tr><td><small>{lote_txt}</small></td></tr>";
+            if (!string.IsNullOrEmpty(info_qualidade_id))
+                codigoHtml += $"<tr><th><br/><b>Qualidade:</b></th></tr><tr><td><small>{qualidade_txt}</small></td></tr>";
 
             //if (!string.IsNullOrEmpty(info_muda_id))
             //    codigoHtml += $"<tr><th><br/><b>Planta:</b></th></tr><tr><td><small>{planta_txt}</small></td></tr>";
