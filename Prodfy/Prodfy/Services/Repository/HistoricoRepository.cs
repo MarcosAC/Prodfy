@@ -83,7 +83,7 @@ namespace Prodfy.Services.Repository
             return dataBase._conexao.Table<Historico>().OrderBy(h => h.idHistorico).ToList();
         }
 
-        public string ObterInformacoesParaIdentificacao(string codigo)
+        public string ObterLoteInfo(string codigo)
         {
             throw new NotImplementedException();
         }
@@ -93,7 +93,7 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public string ObterInformacoesParaIdentificacao(int id)
+        public string ObterMudaInfo(int id)
         {
             throw new NotImplementedException();
         }

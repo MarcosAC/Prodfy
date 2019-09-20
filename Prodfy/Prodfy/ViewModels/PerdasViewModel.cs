@@ -120,7 +120,7 @@ namespace Prodfy.ViewModels
                 {
                     loteCodigo = dadosQR.qrLoteCod;
                     //Lote ID
-                    string loteInfo = loteRepositorio.ObterLotePorId(dadosQR.qrLoteCod);
+                    string loteInfo = loteRepositorio.ObterLoteId(dadosQR.qrLoteCod);
                     var tmpLoteInfo = loteInfo.Split('|');
 
                     if (tmpLoteInfo[0] == "0")
@@ -131,7 +131,7 @@ namespace Prodfy.ViewModels
 
 
                     //Lote Produto ID
-                    string loteProdutoInfo = loteRepositorio.ObterLoteProdutoPorId(dadosQR.qrLoteCod);
+                    string loteProdutoInfo = loteRepositorio.ObterLoteProdutoId(dadosQR.qrLoteCod);
                     var tmpLoteprodutoInfo = loteProdutoInfo.Split('|');
 
                     if (tmpLoteprodutoInfo[0] == "0")
@@ -149,7 +149,7 @@ namespace Prodfy.ViewModels
                     mudaId = dadosQR.qrMudaId;
 
                     //Muda Nome Comum
-                    string mudaIndo = mudaRepositorio.ObterInformacoesParaIdentificacao(int.Parse(dadosQR.qrMudaId));
+                    string mudaIndo = mudaRepositorio.ObterMudaInfo(dadosQR.qrMudaId);
                     var tmpMudainfo = mudaIndo.Split('|');
 
                     if (tmpMudainfo[0] == "0")
@@ -180,7 +180,7 @@ namespace Prodfy.ViewModels
                         pontoControleId = dadosQR.qrPontoControleId;
 
                         //Ponto Controle Info
-                        string pontoControleInfo = pontoControleRepositorio.ObterInformacoesParaIdentificacao(int.Parse(dadosQR.qrPontoControleId));
+                        string pontoControleInfo = pontoControleRepositorio.ObterMudaInfo(int.Parse(dadosQR.qrPontoControleId));
                         var tmpPontoControleInfo = pontoControleInfo.Split('|');
 
                         if (tmpPontoControleInfo[0] == "0")

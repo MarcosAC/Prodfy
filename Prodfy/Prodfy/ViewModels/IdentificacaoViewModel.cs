@@ -102,7 +102,7 @@ namespace Prodfy.ViewModels
                 }
 
                 #region Lote
-                var temp = loteRepositorio.ObterInformacoesParaIdentificacao(dadosQR.qrLoteCod);
+                var temp = loteRepositorio.ObterLoteInfo(dadosQR.qrLoteCod);
                 var infoLote = temp.Split('|');
 
                 if (infoLote[0] == "0")
@@ -124,7 +124,7 @@ namespace Prodfy.ViewModels
                 #endregion
 
                 #region Muda
-                var temp2 = mudaRepository.ObterInformacoesParaIdentificacao(Convert.ToInt32(dadosQR.qrMudaId));
+                var temp2 = mudaRepository.ObterMudaInfo(dadosQR.qrMudaId);
                 var infoMuda = temp2.Split('|');
 
                 List<string> listaMuda = new List<string>();

@@ -365,19 +365,21 @@ namespace Prodfy.ViewModels
 
         private void PaginaHTML()
         {
+            string codigoHtml = string.Empty;
+            string tmp = string.Empty;
+
+            #region Lote
+
             string info_lote_id = string.Empty;
             string info_lote_codigo = string.Empty;
             string info_lote_objetivo = string.Empty;
             string info_lote_cliente = string.Empty;
-            string info_lote_titulo = string.Empty;
-
-            string codigoHtml = string.Empty;
-            string tmp = string.Empty;
-            string loteTxt = string.Empty;
+            string info_lote_titulo = string.Empty;            
+            string lote_txt = string.Empty;
 
             if (LoteSelecionado != null && LoteSelecionado.lote_id > 0)
             {
-                tmp = loteRepositorio.ObterLoteEstoqueViveiroPorId(LoteSelecionado.lote_id.ToString());
+                tmp = loteRepositorio.ObterLoteInfoPorId(LoteSelecionado.lote_id.ToString());
                 var infoLote = tmp.Split('|');
 
                 if (infoLote[0] == "1")
@@ -389,19 +391,72 @@ namespace Prodfy.ViewModels
                     info_lote_titulo = infoLote[6];
                 }
 
-                loteTxt = $"<b>{info_lote_codigo}";
+                lote_txt = $"<b>{info_lote_codigo}";
 
                 if (!string.IsNullOrEmpty(info_lote_titulo))
-                {
-                    loteTxt += $" (<small>{info_lote_titulo}</small>)";
-                }
+                    lote_txt += $" (<small>{info_lote_titulo}</small>)";
 
-                loteTxt += "</br>";
+                lote_txt += "</br>";
             }
             else
             {
-                loteTxt += "<small><b>GERAL</b></small>";
+                lote_txt += "<small><b>GERAL</b></small>";
             }
+
+            #endregion Lote
+
+            #region Muda
+
+            string info_muda_id = string.Empty;
+            string info_muda_nome_interno = string.Empty;
+            string info_muda_nome = string.Empty;
+            string info_muda_especie = string.Empty;
+            string info_muda_origem = string.Empty;
+            string info_muda_viveiro = string.Empty;
+            string info_muda_canaletao = string.Empty;
+            string info_muda_linha = string.Empty;
+            string info_muda_coluna = string.Empty;
+            string info_muda_qtde = string.Empty;
+            string planta_txt = string.Empty;
+
+            if (MudaSelecionada != null || MudaSelecionada.muda_id > 0)
+            {
+                var dadosMuda = mudaRepositorio.ObterMudaInfo(MudaSelecionada.muda_id.ToString());
+                var infoMuda = dadosMuda.Split('|');
+
+                if (infoMuda[0] == "1")
+                {
+                    info_muda_id = infoMuda[2];
+                    info_muda_nome_interno = infoMuda[3];
+                    info_muda_nome = infoMuda[4];
+                    info_muda_especie = infoMuda[5];
+                    info_muda_origem = infoMuda[8];
+                    info_muda_viveiro = infoMuda[9];
+                    info_muda_canaletao = infoMuda[10];
+                    info_muda_linha = infoMuda[11];
+                    info_muda_coluna = infoMuda[12];
+                    info_muda_qtde = infoMuda[13];
+                }
+
+                planta_txt = $"<b>{info_muda_nome_interno}";
+
+                if (!string.IsNullOrEmpty(info_muda_especie))
+                    planta_txt += $" - <small><i>{info_muda_especie}</i></small>";
+                else if (!string.IsNullOrEmpty(info_muda_nome))
+                    planta_txt += $" - <small><i>{info_muda_nome}</i></small>";
+
+                planta_txt += "</br>";
+            }
+            else
+            {
+                planta_txt += "<small>GERAL</small>";
+            }
+
+            #endregion Muda
+
+
+
+            #region Codigo HTML
 
             /*
              * Retirei o padding: 15px; -> 10px e alterei o text-indent: 30px; -> 20px, dessa linha CSS:   
@@ -418,7 +473,19 @@ namespace Prodfy.ViewModels
             codigoHtml += "<table class='info-table'>";
 
             if (!string.IsNullOrEmpty(info_lote_id))
-                codigoHtml += $"<tr><th><br/><b>Lote:</b></th></tr><tr><td><small>{loteTxt}</small></td></tr>";
+                codigoHtml += $"<tr><th><br/><b>Lote:</b></th></tr><tr><td><small>{lote_txt}</small></td></tr>";
+
+            if (!string.IsNullOrEmpty(info_muda_id))
+                codigoHtml += $"<tr><th><br/><b>Planta:</b></th></tr><tr><td><small>{planta_txt}</small></td></tr>";
+
+            //if (!string.IsNullOrEmpty(info_lote_id))
+            //    codigoHtml += $"<tr><th><br/><b>Lote:</b></th></tr><tr><td><small>{lote_txt}</small></td></tr>";
+
+            //if (!string.IsNullOrEmpty(info_muda_id))
+            //    codigoHtml += $"<tr><th><br/><b>Planta:</b></th></tr><tr><td><small>{planta_txt}</small></td></tr>";
+
+            //if (!string.IsNullOrEmpty(info_muda_id))
+            //    codigoHtml += $"<tr><th><br/><b>Planta:</b></th></tr><tr><td><small>{planta_txt}</small></td></tr>";
 
             codigoHtml += "</table><br/><br/></center></body></html>";
 
@@ -426,6 +493,8 @@ namespace Prodfy.ViewModels
 
             VisibleCampos = false;
             VisibleHTML = true;
+
+            #endregion Codigo HTML
         }
 
         private void ValidarCampos()

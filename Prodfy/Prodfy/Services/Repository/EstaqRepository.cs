@@ -80,7 +80,7 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public string ObterInformacoesParaIdentificacao(int codigo)
+        public string ObterMudaInfo(int codigo)
         {
             throw new NotImplementedException();
         }
@@ -95,7 +95,7 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public string ObterInformacoesParaIdentificacao(string codigo)
+        public string ObterLoteInfo(string codigo)
         {
             throw new NotImplementedException();
         }

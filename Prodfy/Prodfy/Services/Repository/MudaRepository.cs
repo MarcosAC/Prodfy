@@ -64,9 +64,11 @@ namespace Prodfy.Services.Repository
                                                  "ORDER BY 2");
         }
 
-        public string ObterInformacoesParaIdentificacao(int mudaId)
+        public string ObterMudaInfo(string mudaId)
         {
-            var dadosMuda = dataBase._conexao.Table<Muda>().FirstOrDefault(m => m.muda_id == mudaId);
+            int id = int.Parse(mudaId);
+
+            var dadosMuda = dataBase._conexao.Table<Muda>().FirstOrDefault(m => m.muda_id == id);
 
             var mudaInfo = new
             {
@@ -165,7 +167,7 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public string ObterInformacoesParaIdentificacao(string codigo)
+        public string ObterLoteInfo(string codigo)
         {
             throw new NotImplementedException();
         }

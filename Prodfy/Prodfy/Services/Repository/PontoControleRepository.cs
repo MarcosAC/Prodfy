@@ -103,12 +103,12 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public string ObterInformacoesParaIdentificacao(string codigo)
+        public string ObterLoteInfo(string codigo)
         {
             throw new NotImplementedException();
         }
 
-        public string ObterInformacoesParaIdentificacao(int pontoControleId)
+        public string ObterMudaInfo(int pontoControleId)
         {
             var dadosPontoControle = dataBase._conexao.Table<Ponto_Controle>().FirstOrDefault(p => p.ponto_controle_id == pontoControleId);
 

@@ -26,7 +26,7 @@ namespace Prodfy.Services.Repository
             return 0;
         }
 
-        public string ObterInformacoesParaIdentificacao(string codigo)
+        public string ObterLoteInfo(string codigo)
         {
             var dadosLote = dataBase._conexao.Query<Lote>("select * from Lote");
             List<Lote> listaLotes = new List<Lote>();
@@ -99,9 +99,9 @@ namespace Prodfy.Services.Repository
             }
         }
 
-        public string ObterLotePorId(string id)
+        public string ObterLoteId(string codigo)
         {
-            var dados = dataBase._conexao.Query<Lote>($"SELECT lote_id FROM Lote WHERE codigo = '{id}' LIMIT 1");
+            var dados = dataBase._conexao.Query<Lote>($"SELECT lote_id FROM Lote WHERE codigo = '{codigo}' LIMIT 1");
 
             string lotePorId = string.Empty;
             string ret = string.Empty;
@@ -123,9 +123,9 @@ namespace Prodfy.Services.Repository
             return ret;
         }
 
-        public string ObterLoteProdutoPorId(string id)
+        public string ObterLoteProdutoId(string codigo)
         {
-            var dados = dataBase._conexao.Query<Lote>($"SELECT produto_id FROM Lote WHERE codigo = '{id}' LIMIT 1");
+            var dados = dataBase._conexao.Query<Lote>($"SELECT produto_id FROM Lote WHERE codigo = '{codigo}' LIMIT 1");
 
             string loteProdutoPorId = string.Empty;
             string ret = string.Empty;
@@ -175,7 +175,7 @@ namespace Prodfy.Services.Repository
             return listaLotes;
         }
 
-        public string ObterLoteEstoqueViveiroPorId(string loteId)
+        public string ObterLoteInfoPorId(string loteId)
         {
             var loteInfo = dataBase._conexao.Query<LotesEstoqueViveiro>("SELECT " +
                                                                         "L.lote_id, " +
@@ -218,7 +218,7 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public string ObterInformacoesParaIdentificacao(int id)
+        public string ObterMudaInfo(int id)
         {
             throw new NotImplementedException();
         }

@@ -55,7 +55,7 @@ namespace Prodfy.Services.Repository
             return _dataBase._conexao.Table<Expedicao>().OrderBy(e => e.idExpedicao).ToList();
         }
 
-        public string ObterInformacoesParaIdentificacao(int codigo)
+        public string ObterMudaInfo(int codigo)
         {
             throw new NotImplementedException();
         }
@@ -65,7 +65,7 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
 
-        public string ObterInformacoesParaIdentificacao(string codigo)
+        public string ObterLoteInfo(string codigo)
         {
             throw new NotImplementedException();
         }
