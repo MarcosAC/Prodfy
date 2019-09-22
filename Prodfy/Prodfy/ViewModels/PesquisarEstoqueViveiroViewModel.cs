@@ -2,6 +2,7 @@
 using Prodfy.Services.Dialog;
 using Prodfy.Services.Navigation;
 using Prodfy.Services.Repository;
+using Prodfy.Utils;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -342,8 +343,12 @@ namespace Prodfy.ViewModels
 
             foreach (var item in datasEstaqueamentos)
             {
-                var totalDias = DateTime.Now - item.data_estaq;           
-                listaDataEstaqueamento.Add(item.data_estaq.ToString($"dd/MM/yyyy ({totalDias.Days} Dia's')"));
+                int totalDias = int.Parse(CalculaIdade.CalcularPorDataIniciaDataFinal(item.data_estaq, DateTime.Now));
+
+                if (totalDias <= 0 || totalDias > 1)
+                    listaDataEstaqueamento.Add(item.data_estaq.ToString($"dd/MM/yyyy ({totalDias} Dia's')"));
+                else
+                    listaDataEstaqueamento.Add(item.data_estaq.ToString($"dd/MM/yyyy ({totalDias} Dia)"));
             }
 
             return ListaDataEstaqueamentos = listaDataEstaqueamento; 
@@ -356,8 +361,12 @@ namespace Prodfy.ViewModels
 
             foreach (var item in datasSelecao)
             {
-                var totalDias = DateTime.Now - item.data_selecao;
-                listaDataSelecao.Add(item.data_selecao.ToString($"dd/MM/yyyy ({totalDias.Days} Dia's')"));
+                int totalDias = int.Parse(CalculaIdade.CalcularPorDataIniciaDataFinal(item.data_selecao, DateTime.Now));
+
+                if (totalDias <= 0 || totalDias > 1)
+                    listaDataSelecao.Add(item.data_selecao.ToString($"dd/MM/yyyy ({totalDias} Dia's')"));
+                else
+                    listaDataSelecao.Add(item.data_selecao.ToString($"dd/MM/yyyy ({totalDias} Dia)"));
             }
 
             return ListaDataSelecao = listaDataSelecao;
@@ -482,7 +491,35 @@ namespace Prodfy.ViewModels
 
             #endregion Qualidade
 
+            #region Data Estaqueamento
 
+            string data_estaq_txt = string.Empty;
+
+            if (!string.IsNullOrEmpty(DataEstaqueamentoSelecionada))
+            {
+                data_estaq_txt = $"<b>{DataEstaqueamentoSelecionada}</b>";
+            }
+            else
+            {
+                data_estaq_txt += "<small>GERAL</small>";
+            }
+
+            #endregion Data Estaqueamento
+
+            #region Data Seleção
+
+            string data_selecao_txt = string.Empty;
+
+            if (!string.IsNullOrEmpty(DataSelecaoSelecionada))
+            {
+                data_selecao_txt = $"<b>{DataSelecaoSelecionada}</b>";
+            }
+            else
+            {
+                data_selecao_txt += "<small>GERAL</small>";
+            }
+
+            #endregion Data Seleção
 
             #region Codigo HTML
 
@@ -509,11 +546,11 @@ namespace Prodfy.ViewModels
             if (!string.IsNullOrEmpty(info_qualidade_id))
                 codigoHtml += $"<tr><th><br/><b>Qualidade:</b></th></tr><tr><td><small>{qualidade_txt}</small></td></tr>";
 
-            //if (!string.IsNullOrEmpty(info_muda_id))
-            //    codigoHtml += $"<tr><th><br/><b>Planta:</b></th></tr><tr><td><small>{planta_txt}</small></td></tr>";
+            if (!string.IsNullOrEmpty(DataEstaqueamentoSelecionada))
+                codigoHtml += $"<tr><th><br/><b>Estaqueamento:</b></th></tr><tr><td><small>{data_estaq_txt}</small></td></tr>";
 
-            //if (!string.IsNullOrEmpty(info_muda_id))
-            //    codigoHtml += $"<tr><th><br/><b>Planta:</b></th></tr><tr><td><small>{planta_txt}</small></td></tr>";
+            if (!string.IsNullOrEmpty(DataSelecaoSelecionada))
+                codigoHtml += $"<tr><th><br/><b>Seleção:</b></th></tr><tr><td><small>{data_selecao_txt}</small></td></tr>";
 
             codigoHtml += "</table><br/><br/></center></body></html>";
 
