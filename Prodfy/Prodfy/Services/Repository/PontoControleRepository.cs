@@ -78,36 +78,6 @@ namespace Prodfy.Services.Repository
             return listaPontoControles; ;
         }
 
-        public TableQuery<Ponto_Controle> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeletarTodos()
-        {
-            dataBase._conexao.DeleteAll<Ponto_Controle>();
-        }
-
-        public void Editar(Ponto_Controle entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Ponto_Controle ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Ponto_Controle ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
         public string ObterMudaInfo(int pontoControleId)
         {
             var dadosPontoControle = dataBase._conexao.Table<Ponto_Controle>().FirstOrDefault(p => p.ponto_controle_id == pontoControleId);
@@ -145,7 +115,12 @@ namespace Prodfy.Services.Repository
             }
 
             return ret;
-        }        
+        }
+
+        public void DeletarTodos()
+        {
+            dataBase._conexao.DeleteAll<Ponto_Controle>();
+        }
 
         public List<Ponto_Controle> ObterTodos()
         {
@@ -160,6 +135,112 @@ namespace Prodfy.Services.Repository
             return null;
         }
 
+        public List<EstoqueViveiroPontoControle> ObterEstoqueViveiroPontoControle(int loteId, int mudaId, int qualidadeId, string dataEstaqueamento, string dataSelecao)
+        {
+            string query = ("SELECT distinct " +
+                              "PC.produto_id, " +
+                              "PC.ponto_controle_id, " +
+                              "PC.codigo, " +
+                              "PC.titulo, " +
+                              "PC.unidade, " +
+                              "PC.maturacao, " +
+                              "PC.maturacao_seg, " +
+                              "PC.ind_alertas, " +
+                              "PC.ordem, " +
+                              "AA.data_estaq, " +
+                              "AA.data_selecao " +
+                            "FROM Inv_Item AA " +
+                            "INNER JOIN Ponto_Controle PC " +
+                            "ON PC.ponto_controle_id = AA.ponto_controle_id ");         
+
+            string where = string.Empty;
+            string cap = string.Empty;
+
+            if (loteId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.lote_id = {loteId}";
+            }
+
+            if (mudaId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.muda_id = {mudaId}";
+            }
+
+            if (qualidadeId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.qualidade_id = {qualidadeId}";
+            }
+
+            //if (!string.IsNullOrEmpty(dataEstaqueamento))
+            //{
+            //    if (!string.IsNullOrEmpty(where))
+            //        cap = " AND ";
+            //    var data = Convert.ToDateTime(dataEstaqueamento.Substring(0, 10));
+            //    where += $"{cap}julianday(AA.data_estaq) = " + "'" + data + "'" + ""; //{string.Format("{0:yyyy-MM-dd}", data)}'"; data.ToString("yyyy'-'MM'-'dd")
+            //}
+
+            //if (!string.IsNullOrEmpty(dataSelecao))
+            //{
+            //    if (!string.IsNullOrEmpty(where))
+            //        cap = " AND ";
+            //    var data = Convert.ToDateTime(dataSelecao.Substring(0, 10));
+            //    where += $"{cap}julianday(AA.data_selecao) = " + "'" + data + "'" + ""; //{string.Format("{0:yyyy-MM-dd}", data)}'";
+            //}
+
+            if (!string.IsNullOrEmpty(where))
+                where = $"WHERE {where}";
+
+            query += $"{where} GROUP BY AA.ponto_controle_id ORDER BY PC.ordem";
+
+            var dadosEstoqueViveiroPontoControle = dataBase._conexao.Query<EstoqueViveiroPontoControle>(query);
+
+            List<EstoqueViveiroPontoControle> listaEstoqueViveiroPontoControle = new List<EstoqueViveiroPontoControle>();
+                        
+            foreach (EstoqueViveiroPontoControle item in listaEstoqueViveiroPontoControle)
+            {
+                if (item.data_estaq.Equals(Convert.ToDateTime(dataEstaqueamento)) && item.data_selecao.Equals(Convert.ToDateTime(dataSelecao)))
+                {
+                    listaEstoqueViveiroPontoControle.Add(item);
+                }
+            }
+
+            return listaEstoqueViveiroPontoControle;
+        }
+
+        public TableQuery<Ponto_Controle> AsQueryable()
+        {
+            throw new NotImplementedException();
+        }        
+
+        public void Editar(Ponto_Controle entidade)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Ponto_Controle ObterDados()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Ponto_Controle ObterDadosPorId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ObterLoteInfo(string codigo)
+        {
+            throw new NotImplementedException();
+        }        
+
         public int ObterTotalDeRegistros()
         {
             throw new NotImplementedException();
@@ -170,4 +251,18 @@ namespace Prodfy.Services.Repository
             throw new NotImplementedException();
         }
     }
+}
+
+public class EstoqueViveiroPontoControle
+{
+    public int produto_id { get; set; }
+    public int ponto_controle_id { get; set; }
+    public string codigo { get; set; }
+    public string titulo { get; set; }
+    public int maturacao { get; set; }
+    public int maturacao_seg { get; set; }
+    public int ind_alertas { get; set; }
+    public int ordem { get; set; }
+    public DateTime data_estaq { get; set; }
+    public DateTime data_selecao { get; set; }
 }

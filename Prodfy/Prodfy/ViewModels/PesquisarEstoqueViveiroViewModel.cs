@@ -19,6 +19,7 @@ namespace Prodfy.ViewModels
         private readonly MudaRepository mudaRepositorio;
         private readonly QualidadeRepository qualidadeRepositorio;
         private readonly InvItemRepository invItemRepositorio;
+        private readonly PontoControleRepository pontoControleRepositorio;
 
         public List<LotesEstoqueViveiro> listaLotes { get; set; }
 
@@ -33,6 +34,7 @@ namespace Prodfy.ViewModels
             mudaRepositorio = new MudaRepository();
             qualidadeRepositorio = new QualidadeRepository();
             invItemRepositorio = new InvItemRepository();
+            pontoControleRepositorio = new PontoControleRepository();
 
             Lotes();
         }
@@ -520,6 +522,18 @@ namespace Prodfy.ViewModels
             }
 
             #endregion Data Seleção
+
+            #region Locais
+
+            string locais = string.Empty;
+            string locaisEstagios = string.Empty;
+            string listaPontoControle = string.Empty;
+            string listaPontoControleEstagio = string.Empty; ;
+            string pontoControleEstagioQuantidade = string.Empty;
+
+            var dadosPontoControle = pontoControleRepositorio.ObterEstoqueViveiroPontoControle(LoteSelecionado.lote_id, MudaSelecionada.muda_id, QualidadeSelecionada.qualidade_id, DataEstaqueamentoSelecionada.Substring(0, 10), DataSelecaoSelecionada.Substring(0, 10));
+
+            #endregion Locais
 
             #region Codigo HTML
 
