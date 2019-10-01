@@ -135,7 +135,11 @@ namespace Prodfy.Services.Repository
             return null;
         }
 
-        public List<EstoqueViveiroPontoControle> ObterEstoqueViveiroPontoControle(int loteId, int mudaId, int qualidadeId, string dataEstaqueamento, string dataSelecao)
+        public List<EstoqueViveiroPontoControle> ObterEstoqueViveiroPontoControle(int loteId, 
+                                                                                  int mudaId, 
+                                                                                  int qualidadeId, 
+                                                                                  string dataEstaqueamento = null, 
+                                                                                  string dataSelecao = null)
         {
             string query = ("SELECT distinct " +
                               "PC.produto_id, " +
@@ -180,6 +184,60 @@ namespace Prodfy.Services.Repository
                 where += $"{cap}AA.qualidade_id = {qualidadeId}";
             }
 
+            if (!string.IsNullOrEmpty(where))
+                where = $"WHERE {where}";
+
+            query += $"{where} GROUP BY AA.ponto_controle_id ORDER BY PC.ordem";
+
+            var dadosEstoqueViveiroPontoControle = dataBase._conexao.Query<EstoqueViveiroPontoControle>(query);            
+
+            if (!string.IsNullOrEmpty(dataEstaqueamento) && !string.IsNullOrEmpty(dataSelecao))
+            {
+                var listaEstoqueViveiroPontoControle = new List<EstoqueViveiroPontoControle>();
+
+                foreach (EstoqueViveiroPontoControle item in dadosEstoqueViveiroPontoControle)
+                {
+                    if (item.data_estaq.Equals(Convert.ToDateTime(dataEstaqueamento)) && item.data_selecao.Equals(Convert.ToDateTime(dataSelecao)))
+                    {
+                        listaEstoqueViveiroPontoControle.Add(item);
+                    }
+                }
+
+                return listaEstoqueViveiroPontoControle;
+            }
+            else if (!string.IsNullOrEmpty(dataEstaqueamento))
+            {
+                var listaEstoqueViveiroPontoControle = new List<EstoqueViveiroPontoControle>();
+
+                foreach (EstoqueViveiroPontoControle item in dadosEstoqueViveiroPontoControle)
+                {
+                    if (item.data_estaq.Equals(Convert.ToDateTime(dataEstaqueamento)))
+                    {
+                        listaEstoqueViveiroPontoControle.Add(item);
+                    }
+                }
+
+                return listaEstoqueViveiroPontoControle;
+            }
+            else if (!string.IsNullOrEmpty(dataSelecao))
+            {
+                var listaEstoqueViveiroPontoControle = new List<EstoqueViveiroPontoControle>();
+
+                foreach (EstoqueViveiroPontoControle item in dadosEstoqueViveiroPontoControle)
+                {
+                    if (item.data_selecao.Equals(Convert.ToDateTime(dataSelecao)))
+                    {
+                        listaEstoqueViveiroPontoControle.Add(item);
+                    }
+                }
+
+                return listaEstoqueViveiroPontoControle;
+            }
+
+            return dadosEstoqueViveiroPontoControle;
+
+            #region Codigo comentado
+
             //if (!string.IsNullOrEmpty(dataEstaqueamento))
             //{
             //    if (!string.IsNullOrEmpty(where))
@@ -196,24 +254,7 @@ namespace Prodfy.Services.Repository
             //    where += $"{cap}julianday(AA.data_selecao) = " + "'" + data + "'" + ""; //{string.Format("{0:yyyy-MM-dd}", data)}'";
             //}
 
-            if (!string.IsNullOrEmpty(where))
-                where = $"WHERE {where}";
-
-            query += $"{where} GROUP BY AA.ponto_controle_id ORDER BY PC.ordem";
-
-            var dadosEstoqueViveiroPontoControle = dataBase._conexao.Query<EstoqueViveiroPontoControle>(query);
-
-            List<EstoqueViveiroPontoControle> listaEstoqueViveiroPontoControle = new List<EstoqueViveiroPontoControle>();
-                        
-            foreach (EstoqueViveiroPontoControle item in listaEstoqueViveiroPontoControle)
-            {
-                if (item.data_estaq.Equals(Convert.ToDateTime(dataEstaqueamento)) && item.data_selecao.Equals(Convert.ToDateTime(dataSelecao)))
-                {
-                    listaEstoqueViveiroPontoControle.Add(item);
-                }
-            }
-
-            return listaEstoqueViveiroPontoControle;
+            #endregion
         }
 
         public TableQuery<Ponto_Controle> AsQueryable()
