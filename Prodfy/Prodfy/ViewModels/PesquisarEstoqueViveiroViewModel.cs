@@ -530,17 +530,17 @@ namespace Prodfy.ViewModels
             string listaPontoControle = string.Empty;
             string listaPontoControleEstagio = string.Empty;
             string pontoControleEstagioQuantidade = string.Empty;
-            string dataEstaqueamento = null;
-            string dataSelecao = null;
-
-            if (DataSelecaoSelecionada != null)
-                dataSelecao = DataSelecaoSelecionada.Substring(0, 10);
 
             var dadosPontoControle = pontoControleRepositorio.ObterEstoqueViveiroPontoControle(LoteSelecionado.lote_id, 
                                                                                                MudaSelecionada.muda_id, 
                                                                                                QualidadeSelecionada.qualidade_id,
-                                                                                               dataEstaqueamento,
-                                                                                               dataSelecao);
+                                                                                               DataEstaqueamentoSelecionada?.Substring(0, 10),
+                                                                                               DataSelecaoSelecionada?.Substring(0, 10));
+
+            foreach (var item in dadosPontoControle)
+            {
+                var dadosEstagios = "";
+            }
 
             #endregion Locais
 

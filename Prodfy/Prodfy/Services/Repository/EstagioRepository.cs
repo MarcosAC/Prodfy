@@ -112,6 +112,93 @@ namespace Prodfy.Services.Repository
             return quantidade;
         }
 
+        public List<EstoqueViveiroEsatgio> ObterEstoqueViveiroEstagio(int loteId,
+                                                                      int mudaId,
+                                                                      int qualidadeId,
+                                                                      int pontoControleId,
+                                                                      string dataEstaqueamento = null,
+                                                                      string dataSelecao = null)
+        {
+            string query = "SELECT distinct " +
+                             "PC.produto_id, " +
+                             "PC.ponto_controle_id, " +
+                             "PCE.estagio_id, " +
+                             "PCE.codigo, " +
+                             "PCE.titulo, " +
+                             "PCE.unidade, " +
+                             "PCE.maturacao, " +
+                             "PCE.maturacao_seg, " +
+                             "PCE.ind_alertas, " +
+                             "PCE.ordem " +
+                           "FROM Inv_Item AA " +
+                           "INNER JOIN Ponto_Controle PC " +
+                           "ON PC.ponto_controle_id = AA.ponto_controle_id " +
+                           "INNER JOIN Estagio PCE " +
+                           "ON PCE.ponto_controle_id = AA.ponto_controle_id " +
+                           "AND PCE.estagio_id = AA.estagio_id ";
+
+            string where = string.Empty;
+            string cap = string.Empty;
+
+            if (pontoControleId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.ponto_controle_id = {pontoControleId}";
+            }
+
+            if (loteId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.lote_id = {loteId}";
+            }
+
+            if (mudaId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.muda_id = {mudaId}";
+            }
+
+            if (qualidadeId > 0)
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.qualidade_id = {qualidadeId}";
+            }
+
+            if (!string.IsNullOrEmpty(dataEstaqueamento))
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.data_estaq = {dataEstaqueamento}";
+            }
+
+            if (!string.IsNullOrEmpty(dataSelecao))
+            {
+                if (!string.IsNullOrEmpty(where))
+                    cap = " AND ";
+
+                where += $"{cap}AA.data_selecao = {qualidadeId}";
+            }
+
+            if (!string.IsNullOrEmpty(where))
+                where = $"WHERE {where}";
+
+            query += $"{where} GROUP BY AA.ponto_controle_id, AA.estagio_id";
+            query += $"{where} ORDER BY PC.ordem, PCE.ordem";
+
+            var dadosEstoqueViveiroEstagio = dataBase._conexao.Query<EstoqueViveiroEsatgio>(query);
+
+            return dadosEstoqueViveiroEstagio;
+        }
+
         public TableQuery<Estagio> AsQueryable()
         {
             throw new NotImplementedException();
