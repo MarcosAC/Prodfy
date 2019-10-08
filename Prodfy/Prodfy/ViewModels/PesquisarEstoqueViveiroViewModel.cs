@@ -20,6 +20,7 @@ namespace Prodfy.ViewModels
         private readonly QualidadeRepository qualidadeRepositorio;
         private readonly InvItemRepository invItemRepositorio;
         private readonly PontoControleRepository pontoControleRepositorio;
+        private readonly EstagioRepository estagioRepositorio;
 
         public List<LotesEstoqueViveiro> listaLotes { get; set; }
 
@@ -35,6 +36,7 @@ namespace Prodfy.ViewModels
             qualidadeRepositorio = new QualidadeRepository();
             invItemRepositorio = new InvItemRepository();
             pontoControleRepositorio = new PontoControleRepository();
+            estagioRepositorio = new EstagioRepository();
 
             Lotes();
         }
@@ -537,10 +539,22 @@ namespace Prodfy.ViewModels
                                                                                                DataEstaqueamentoSelecionada?.Substring(0, 10),
                                                                                                DataSelecaoSelecionada?.Substring(0, 10));
 
-            foreach (var item in dadosPontoControle)
+            foreach (var pontoControle in dadosPontoControle)
             {
-                var dadosEstagios = "";
+                var dadosEstagios = estagioRepositorio.ObterEstoqueViveiroEstagio(LoteSelecionado.lote_id,
+                                                                              MudaSelecionada.muda_id,
+                                                                              QualidadeSelecionada.qualidade_id,
+                                                                              pontoControle.ponto_controle_id,
+                                                                              DataEstaqueamentoSelecionada?.Substring(0, 10),
+                                                                              DataSelecaoSelecionada?.Substring(0, 10));
             }
+
+            
+
+            //foreach (var item in dadosPontoControle)
+            //{
+            //    var dadosEstagios = "";
+            //}
 
             #endregion Locais
 

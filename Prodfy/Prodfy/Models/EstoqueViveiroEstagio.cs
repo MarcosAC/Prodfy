@@ -1,6 +1,8 @@
-﻿namespace Prodfy.Models
+﻿using System;
+
+namespace Prodfy.Models
 {
-    public class EstoqueViveiroEsatgio
+    public class EstoqueViveiroEstagio
     {
         public int produto_id { get; set; }
         public int ponto_controle_id { get; set; }
@@ -11,6 +13,8 @@
         public int maturacao { get; set; }
         public int maturacao_seg { get; set; }
         public int ind_alertas { get; set; }
-        public int ordem { get; set; 
+        public int ordem { get; set; }
+        public DateTime data_estaq { get; set; }
+        public DateTime data_selecao { get; set; }
     }
 }
