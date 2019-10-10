@@ -174,22 +174,6 @@ namespace Prodfy.Services.Repository
                 where += $"{cap}AA.qualidade_id = {qualidadeId} ";
             }
 
-            //if (!string.IsNullOrEmpty(dataEstaqueamento))
-            //{
-            //    if (!string.IsNullOrEmpty(where))
-            //        cap = " AND ";
-
-            //    where += $"{cap}AA.data_estaq = {dataEstaqueamento} ";
-            //}
-
-            //if (!string.IsNullOrEmpty(dataSelecao))
-            //{
-            //    if (!string.IsNullOrEmpty(where))
-            //        cap = " AND ";
-
-            //    where += $"{cap}AA.data_selecao = {qualidadeId} ";
-            //}
-
             if (!string.IsNullOrEmpty(where))
                 where = $"WHERE {where}";
 
@@ -241,41 +225,6 @@ namespace Prodfy.Services.Repository
             }
 
             return dadosEstoqueViveiroEstagio;
-        }
-
-        public TableQuery<Estagio> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeletarTodos()
-        {
-            dataBase._conexao.DeleteAll<Estagio>();
-        }
-
-        public void Editar(Estagio entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Estagio ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Estagio ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
         }
 
         public string ObterInformacoesParaIdentificacao(int pontoControleId, int estagioId)
@@ -340,13 +289,48 @@ namespace Prodfy.Services.Repository
             if (pontoControleId != 0)
                 return dataBase._conexao.Table<Estagio>().Where(e => e.ponto_controle_id == pontoControleId).OrderBy(e => e.ordem).ToList();
 
-            return null;            
+            return null;
         }
 
         public List<Estagio> ObterTodos()
         {
             return dataBase._conexao.Table<Estagio>().ToList();
         }
+
+        public TableQuery<Estagio> AsQueryable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeletarTodos()
+        {
+            dataBase._conexao.DeleteAll<Estagio>();
+        }
+
+        public void Editar(Estagio entidade)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Estagio ObterDados()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Estagio ObterDadosPorId(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ObterMudaInfo(int codigo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ObterLoteInfo(string codigo)
+        {
+            throw new NotImplementedException();
+        }        
 
         public int ObterTotalDeRegistros()
         {

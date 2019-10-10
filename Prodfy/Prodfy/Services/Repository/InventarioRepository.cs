@@ -23,7 +23,7 @@ namespace Prodfy.Services.Repository
                 return total;
 
             return 0;
-        }
+        }        
 
         public void Adicionar(Inventario entidade)
         {

@@ -21,6 +21,7 @@ namespace Prodfy.ViewModels
         private readonly InvItemRepository invItemRepositorio;
         private readonly PontoControleRepository pontoControleRepositorio;
         private readonly EstagioRepository estagioRepositorio;
+        private readonly InvRepository invRepositorio;
 
         public List<LotesEstoqueViveiro> listaLotes { get; set; }
 
@@ -37,6 +38,7 @@ namespace Prodfy.ViewModels
             invItemRepositorio = new InvItemRepository();
             pontoControleRepositorio = new PontoControleRepository();
             estagioRepositorio = new EstagioRepository();
+            invRepositorio = new InvRepository();
 
             Lotes();
         }
@@ -542,20 +544,31 @@ namespace Prodfy.ViewModels
             foreach (var pontoControle in dadosPontoControle)
             {
                 var dadosEstagios = estagioRepositorio.ObterEstoqueViveiroEstagio(LoteSelecionado.lote_id,
-                                                                              MudaSelecionada.muda_id,
-                                                                              QualidadeSelecionada.qualidade_id,
-                                                                              pontoControle.ponto_controle_id,
-                                                                              DataEstaqueamentoSelecionada?.Substring(0, 10),
-                                                                              DataSelecaoSelecionada?.Substring(0, 10));
+                                                                                  MudaSelecionada.muda_id,
+                                                                                  QualidadeSelecionada.qualidade_id,
+                                                                                  pontoControle.ponto_controle_id,
+                                                                                  DataEstaqueamentoSelecionada?.Substring(0, 10),
+                                                                                  DataSelecaoSelecionada?.Substring(0, 10));
+
+                foreach (var estoqueViveiroEstagio in dadosEstagios)
+                {
+                    var dadosQuantidadeMudasNoEstagio = invRepositorio.ObterEstoqueViveiroQuantidadeMudasNoEstoque(LoteSelecionado.lote_id,
+                                                                                                                   MudaSelecionada.muda_id,
+                                                                                                                   QualidadeSelecionada.qualidade_id,
+                                                                                                                   pontoControle.ponto_controle_id,
+                                                                                                                   DataEstaqueamentoSelecionada?.Substring(0, 10),
+                                                                                                                   DataSelecaoSelecionada?.Substring(0, 10));
+
+                    if (dadosQuantidadeMudasNoEstagio.Count > 0)
+                        listaPontoControleEstagio = $"<li>{estoqueViveiroEstagio.titulo}: <b style='color:#ff7b00;'>{pontoControleEstagioQuantidade}</b></li>";
+                }
+
+                if (!string.IsNullOrEmpty(listaPontoControleEstagio))
+                    locaisEstagios = $"<ul style='list-style-image: url((BASE64_IMG_SRC_LISTDOT_ESTAGIO));'>{listaPontoControleEstagio}</ul>";
+
+                if (!string.IsNullOrEmpty(locaisEstagios))
+                    locais = $"<li>{pontoControle.titulo}: {locaisEstagios}</li>";
             }
-
-            
-
-            //foreach (var item in dadosPontoControle)
-            //{
-            //    var dadosEstagios = "";
-            //}
-
             #endregion Locais
 
             #region Codigo HTML
