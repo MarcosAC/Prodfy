@@ -552,14 +552,14 @@ namespace Prodfy.ViewModels
 
                 foreach (var estoqueViveiroEstagio in dadosEstagios)
                 {
-                    var dadosQuantidadeMudasNoEstagio = invRepositorio.ObterEstoqueViveiroQuantidadeMudasNoEstoque(LoteSelecionado.lote_id,
+                    var dadosQuantidadeMudasNoEstagio = invRepositorio.ObterEstoqueViveiroQuantidadeMudasNoEstagio(LoteSelecionado.lote_id,
                                                                                                                    MudaSelecionada.muda_id,
                                                                                                                    QualidadeSelecionada.qualidade_id,
-                                                                                                                   pontoControle.ponto_controle_id,
+                                                                                                                   estoqueViveiroEstagio.estagio_id,
                                                                                                                    DataEstaqueamentoSelecionada?.Substring(0, 10),
                                                                                                                    DataSelecaoSelecionada?.Substring(0, 10));
 
-                    if (dadosQuantidadeMudasNoEstagio.Count > 0)
+                    if (int.Parse(dadosQuantidadeMudasNoEstagio) > 0)
                         listaPontoControleEstagio = $"<li>{estoqueViveiroEstagio.titulo}: <b style='color:#ff7b00;'>{pontoControleEstagioQuantidade}</b></li>";
                 }
 
@@ -601,6 +601,15 @@ namespace Prodfy.ViewModels
 
             if (!string.IsNullOrEmpty(DataSelecaoSelecionada))
                 codigoHtml += $"<tr><th><br/><b>Seleção:</b></th></tr><tr><td><small>{data_selecao_txt}</small></td></tr>";
+
+            string local_txt = string.Empty;
+
+            if (!string.IsNullOrEmpty(locais))
+                local_txt += $"<ul style='font-size:80%; list-style-image: url((BASE64_IMG_SRC_LISTDOT_PONTO_CONTROLE));'>{locais}</ul>";
+            else
+                local_txt = "<b style='color:#ff0000;'>Não locazalizado!</b>";
+
+            codigoHtml += $"<tr><th><br/><b>Localização:</b></th></tr><tr><td>{local_txt}</td></tr>";
 
             codigoHtml += "</table><br/><br/></center></body></html>";
 
