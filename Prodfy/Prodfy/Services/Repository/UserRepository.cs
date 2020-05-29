@@ -1,12 +1,12 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
+using Prodfy.Services.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class UserRepository : IRepository<User>
+    public class UserRepository : IUserRepository
     {
         private DataBase _dataBase;
 
@@ -26,11 +26,6 @@ namespace Prodfy.Services.Repository
                 App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
             }
         }
-               
-        public void DeletarTodos()
-        {
-            _dataBase._conexao.Execute("Delete From User");
-        }
 
         public void Editar(User user)
         {
@@ -41,8 +36,13 @@ namespace Prodfy.Services.Repository
             catch (Exception ex)
             {
                 App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
-            }            
+            }
         }
+
+        public void DeletarTodos()
+        {
+            _dataBase._conexao.Execute("Delete From User");
+        }        
 
         public User ObterDados()
         {
@@ -73,41 +73,6 @@ namespace Prodfy.Services.Repository
         public List<User> ObterDispositivoId()
         {
             return _dataBase._conexao.Query<User>("SELECT disp_id FROM User LIMIT 1");
-        }
-
-        public TableQuery<User> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int ObterTotalDeRegistros()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public User ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }
