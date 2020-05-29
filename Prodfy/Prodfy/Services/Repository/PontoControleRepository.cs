@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Prodfy.Services.Repository
 {
-    public class PontoControleRepository : IRepository<Ponto_Controle>
+    public class PontoControleRepository
     {
         private readonly DataBase dataBase;
 

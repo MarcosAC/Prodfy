@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class HistoricoRepository : IRepository<Historico>
+    public class HistoricoRepository
     {
         private readonly DataBase dataBase;
 

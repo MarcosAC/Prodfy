@@ -4,7 +4,7 @@ using System;
 
 namespace Prodfy.Services.Repository
 {
-    public class ObjetivoRepository : IRepository<Objetivo>
+    public class ObjetivoRepository
     {
         private readonly DataBase dataBase;
 

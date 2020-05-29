@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class InvItemRepository : IRepository<Inv_Item>
+    public class InvItemRepository
     {
         private readonly DataBase dataBase;
 

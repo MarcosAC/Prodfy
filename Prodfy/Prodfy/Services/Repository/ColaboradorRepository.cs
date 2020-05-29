@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class ColaboradorRepository : IRepository<Colaborador>
+    public class ColaboradorRepository
     {
         private readonly DataBase dataBase;
 

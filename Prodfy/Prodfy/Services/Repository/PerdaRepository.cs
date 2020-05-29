@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class PerdaRepository : IRepository<Perda>
+    public class PerdaRepository
     {
         private readonly DataBase dataBase;
 

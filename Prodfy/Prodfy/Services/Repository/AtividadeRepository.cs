@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class AtividadeRepository : IRepository<Atividade>
+    public class AtividadeRepository
     {
         private readonly DataBase dataBase;
 

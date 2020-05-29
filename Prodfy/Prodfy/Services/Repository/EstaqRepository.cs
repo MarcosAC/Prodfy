@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Prodfy.Services.Repository
 {
-    public class EstaqRepository : IRepository<Estaq>
+    public class EstaqRepository
     {
         private readonly DataBase dataBase;
 

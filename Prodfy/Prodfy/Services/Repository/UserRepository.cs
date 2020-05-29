@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class UserRepository : IRepository<User>
+    public class UserRepository
     {
         private readonly DataBase _dataBase;
 

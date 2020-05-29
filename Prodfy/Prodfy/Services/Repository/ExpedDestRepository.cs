@@ -4,7 +4,7 @@ using System;
 
 namespace Prodfy.Services.Repository
 {
-    public class ExpedDestRepository : IRepository<Exped_Dest>
+    public class ExpedDestRepository
     {
         private readonly DataBase dataBase;
 

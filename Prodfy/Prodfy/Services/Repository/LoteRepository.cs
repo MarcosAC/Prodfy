@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Prodfy.Services.Repository
 {
-    public class LoteRepository : IRepository<Lote>
+    public class LoteRepository
     {
         private readonly DataBase dataBase;
 

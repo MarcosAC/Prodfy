@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Prodfy.Services.Repository
 {
-    public class EstagioRepository : IRepository<Estagio>
+    public class EstagioRepository
     {
         private readonly DataBase dataBase;
 

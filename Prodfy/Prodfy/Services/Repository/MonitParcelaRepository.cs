@@ -4,7 +4,7 @@ using System;
 
 namespace Prodfy.Services.Repository
 {
-    public class MonitParcelaRepository : IRepository<Monit_Parcela>
+    public class MonitParcelaRepository
     {
         private readonly DataBase dataBase;
 

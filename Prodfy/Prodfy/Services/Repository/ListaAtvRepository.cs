@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class ListaAtvRepository : IRepository<Lista_Atv>
+    public class ListaAtvRepository
     {
         private DataBase dataBase;
 
