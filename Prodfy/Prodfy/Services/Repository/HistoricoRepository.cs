@@ -1,6 +1,5 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +7,7 @@ namespace Prodfy.Services.Repository
 {
     public class HistoricoRepository : IRepository<Historico>
     {
-        private DataBase dataBase;
+        private readonly DataBase dataBase;
 
         public HistoricoRepository()
         {
@@ -57,50 +56,14 @@ namespace Prodfy.Services.Repository
 
             return lista.FindAll(l => l.Codigo.Contains(filtro));
         }
-
-        public TableQuery<Historico> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
         public void DeletarTodos()
         {
             dataBase._conexao.DeleteAll<Historico>();
         }
 
-        public void Editar(Historico entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Historico ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Historico> ObterTodos()
         {
             return dataBase._conexao.Table<Historico>().OrderBy(h => h.idHistorico).ToList();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Historico ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
-        {
-            throw new NotImplementedException();
         }
     }
 }

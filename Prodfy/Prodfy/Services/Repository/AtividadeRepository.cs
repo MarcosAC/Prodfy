@@ -1,6 +1,5 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +7,7 @@ namespace Prodfy.Services.Repository
 {
     public class AtividadeRepository : IRepository<Atividade>
     {
-        private DataBase dataBase;
+        private readonly DataBase dataBase;
 
         public AtividadeRepository()
         {
@@ -35,11 +34,6 @@ namespace Prodfy.Services.Repository
             {
                 App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
             }
-        }
-
-        public TableQuery<Atividade> AsQueryable()
-        {
-            throw new NotImplementedException();
         }
 
         public void DeletarTodos()
@@ -92,12 +86,7 @@ namespace Prodfy.Services.Repository
             return lista.FindAll(l => l.nome_interno.Contains(filtro));
         }
 
-        public void Editar(Atividade entidade)
-        {
-            throw new NotImplementedException();
-        }       
-
-        public Atividade ObterDados()
+        public Atividade ObterDadosAtividade()
         {
             if (dataBase._conexao.Table<Atividade>().Count() > 0)
             {
@@ -108,29 +97,14 @@ namespace Prodfy.Services.Repository
             return null;
         }
 
-        public List<Atividade> ObterTodos()
+        public List<Atividade> ListaAtvidadesOrdenasPorId()
         {            
             List<Atividade> lista = new List<Atividade>();
             lista = dataBase._conexao.Table<Atividade>().OrderBy(a => a.idAtividade).ToList();
             return lista;
         }
 
-        public string ObterMudaInfo(int codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Atividade ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
+        public void DeletarAtividadePorId(int id)
         {
             dataBase._conexao.Delete<Atividade>(id);
         }

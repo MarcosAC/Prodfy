@@ -1,7 +1,6 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
 using Prodfy.Services.Dialog;
-using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +9,7 @@ namespace Prodfy.Services.Repository
 {
     public class EstaqRepository : IRepository<Estaq>
     {
-        private DataBase dataBase;
+        private readonly DataBase dataBase;
 
         private readonly IDialogService dialogService;
 
@@ -31,11 +30,6 @@ namespace Prodfy.Services.Repository
             {
                 App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
             }
-        }
-
-        public TableQuery<Estaq> AsQueryable()
-        {
-            return dataBase._conexao.Table<Estaq>();
         }
 
         public async Task<List<Estaq>> ListaDadosEstaqueamento(int loteId, int mudaId, DateTime dataEstaq)
@@ -63,46 +57,6 @@ namespace Prodfy.Services.Repository
         public void DeletarTodos()
         {
             dataBase._conexao.DeleteAll<Estaq>();
-        }
-
-        public void Editar(Estaq entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Estaq ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Estaq ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Estaq> ObterTodos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int ObterTotalDeRegistros()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

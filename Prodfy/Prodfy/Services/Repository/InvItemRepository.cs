@@ -7,7 +7,7 @@ namespace Prodfy.Services.Repository
 {
     public class InvItemRepository : IRepository<Inv_Item>
     {
-        DataBase dataBase;
+        private readonly DataBase dataBase;
 
         public InvItemRepository()
         {
@@ -109,55 +109,10 @@ namespace Prodfy.Services.Repository
 
             return listaDatasSelecao;
         }
-
-        public SQLite.TableQuery<Inv_Item> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+                
         public void DeletarTodos()
         {
             dataBase._conexao.DeleteAll<Inv_Item>();
-        }
-
-        public void Editar(Inv_Item entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Inv_Item ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Inv_Item ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Inv_Item> ObterTodos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int ObterTotalDeRegistros()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,14 +1,12 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
 using System;
-using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
     public class InvRepository : IRepository<Inv>
     {
-        DataBase dataBase;
+        private readonly DataBase dataBase;
 
         public InvRepository()
         {
@@ -27,54 +25,9 @@ namespace Prodfy.Services.Repository
             }
         }
 
-        public TableQuery<Inv> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void DeletarTodos()
         {
             dataBase._conexao.DeleteAll<Inv>();
-        }
-
-        public void Editar(Inv entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Inv ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Inv ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Inv> ObterTodos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int ObterTotalDeRegistros()
-        {
-            throw new NotImplementedException();
         }
     }
 }

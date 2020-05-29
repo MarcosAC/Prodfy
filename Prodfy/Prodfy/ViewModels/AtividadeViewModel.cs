@@ -70,7 +70,7 @@ namespace Prodfy.ViewModels
             {
                 try
                 {
-                    atividadeRepositorio.Deletar(atividadeSelecionada.idatividade);
+                    atividadeRepositorio.DeletarAtividadePorId(atividadeSelecionada.idatividade);
                     await RefreshCommandExecute();
                 }
                 catch (Exception)

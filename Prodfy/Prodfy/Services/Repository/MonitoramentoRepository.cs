@@ -1,14 +1,11 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
-using System;
-using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class MonitoramentoRepository : IRepository<Monit>
+    public class MonitoramentoRepository
     {
-        private DataBase _dataBase;
+        private readonly DataBase _dataBase;
 
         public MonitoramentoRepository()
         {
@@ -23,61 +20,6 @@ namespace Prodfy.Services.Repository
                 return totalRegistro;
 
             return 0;
-        }
-
-        public void Adicionar(Monit entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TableQuery<Monit> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeletarTodos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Editar(Monit entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Monit ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Monit> ObterTodos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Monit ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
-        }
+        }        
     }
 }

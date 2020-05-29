@@ -1,7 +1,6 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
 using Prodfy.Services.Dialog;
-using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +9,7 @@ namespace Prodfy.Services.Repository
 {
     public class PontoControleRepository : IRepository<Ponto_Controle>
     {
-        private DataBase dataBase;
+        private readonly DataBase dataBase;
 
         private readonly IDialogService dialogService;
 
@@ -78,34 +77,9 @@ namespace Prodfy.Services.Repository
             return listaPontoControles; ;
         }
 
-        public TableQuery<Ponto_Controle> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
         public void DeletarTodos()
         {
             dataBase._conexao.DeleteAll<Ponto_Controle>();
-        }
-
-        public void Editar(Ponto_Controle entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Ponto_Controle ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Ponto_Controle ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
         }
 
         public string ObterMudaInfo(int pontoControleId)
@@ -158,16 +132,6 @@ namespace Prodfy.Services.Repository
                 return dataBase._conexao.Table<Ponto_Controle>().Where(p => p.produto_id == produtoId).OrderBy(p => p.ordem).ToList();
 
             return null;
-        }
-
-        public int ObterTotalDeRegistros()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

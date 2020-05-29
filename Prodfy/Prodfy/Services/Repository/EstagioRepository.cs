@@ -1,7 +1,6 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
 using Prodfy.Services.Dialog;
-using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +9,7 @@ namespace Prodfy.Services.Repository
 {
     public class EstagioRepository : IRepository<Estagio>
     {
-        private DataBase dataBase;
+        private readonly DataBase dataBase;
 
         private readonly IDialogService dialogService;
 
@@ -112,39 +111,9 @@ namespace Prodfy.Services.Repository
             return quantidade;
         }
 
-        public TableQuery<Estagio> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
         public void DeletarTodos()
         {
             dataBase._conexao.DeleteAll<Estagio>();
-        }
-
-        public void Editar(Estagio entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Estagio ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Estagio ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
         }
 
         public string ObterInformacoesParaIdentificacao(int pontoControleId, int estagioId)
@@ -215,16 +184,6 @@ namespace Prodfy.Services.Repository
         public List<Estagio> ObterTodos()
         {
             return dataBase._conexao.Table<Estagio>().ToList();
-        }
-
-        public int ObterTotalDeRegistros()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
-        }
+        }       
     }
 }

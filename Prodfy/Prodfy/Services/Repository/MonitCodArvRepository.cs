@@ -1,14 +1,12 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
 using System;
-using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
     public class MonitCodArvRepository : IRepository<Monit_Cod_Arv>
     {
-        private DataBase dataBase;
+        private readonly DataBase dataBase;
 
         public MonitCodArvRepository()
         {
@@ -37,54 +35,9 @@ namespace Prodfy.Services.Repository
             }
         }
 
-        public TableQuery<Monit_Cod_Arv> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
         public void DeletarTodos()
         {
             dataBase._conexao.DeleteAll<Monit_Cod_Arv>();
-        }
-
-        public void Editar(Monit_Cod_Arv entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Monit_Cod_Arv ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Monit_Cod_Arv> ObterTodos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Monit_Cod_Arv ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

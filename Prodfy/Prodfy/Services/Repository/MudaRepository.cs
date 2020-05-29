@@ -1,6 +1,5 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
 using System;
 using System.Collections.Generic;
 
@@ -8,7 +7,7 @@ namespace Prodfy.Services.Repository
 {
     public class MudaRepository : IRepository<Muda>
     {
-        private DataBase dataBase;
+        private readonly DataBase dataBase;
 
         public MudaRepository()
         {
@@ -140,41 +139,6 @@ namespace Prodfy.Services.Repository
             var listaMudas = dataBase._conexao.Query<MudasEstoqueViveiro>(query);
 
             return listaMudas;
-        }
-
-        public TableQuery<Muda> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
-        }        
-
-        public void Editar(Muda entidade)
-        {
-            throw new NotImplementedException();
-        }        
-
-        public Muda ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int ObterTotalDeRegistros()
-        {
-            throw new NotImplementedException();
         }
     }
 }

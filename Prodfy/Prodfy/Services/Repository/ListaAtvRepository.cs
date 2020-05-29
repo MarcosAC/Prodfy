@@ -1,6 +1,5 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
 using System;
 using System.Collections.Generic;
 
@@ -26,61 +25,16 @@ namespace Prodfy.Services.Repository
                 App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
             }
         }
-
-        public TableQuery<Lista_Atv> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+               
         public void DeletarTodos()
         {
             dataBase._conexao.DeleteAll<Lista_Atv>();
-        }
-
-        public void Editar(Lista_Atv entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Lista_Atv ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Lista_Atv ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Lista_Atv> ObterTodos()
         {
             var lista = dataBase._conexao.Table<Lista_Atv>().OrderBy(la => la.idLista_Atv).ToList();
             return lista;
-        }
-
-        public int ObterTotalDeRegistros()
-        {
-            throw new NotImplementedException();
         }
     }
 }

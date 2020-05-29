@@ -195,7 +195,7 @@ namespace Prodfy.ViewModels
 
         private List<Colaborador> Colaboradores()
         {
-            return listaColaboradores = colaboradorRepositorio.ObterTodos();
+            return listaColaboradores = colaboradorRepositorio.ObterTodosColaboradores();
         }
 
         private List<Lista_Atv> ListaAtividades()

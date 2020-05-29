@@ -1,6 +1,5 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ namespace Prodfy.Services.Repository
 {
     public class LoteRepository : IRepository<Lote>
     {
-        private DataBase dataBase;
+        private readonly DataBase dataBase;
 
         public LoteRepository()
         {
@@ -201,41 +200,6 @@ namespace Prodfy.Services.Repository
             }
 
             return ret;
-        }
-
-        public TableQuery<Lote> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }        
-
-        public void Editar(Lote entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Lote ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Lote ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

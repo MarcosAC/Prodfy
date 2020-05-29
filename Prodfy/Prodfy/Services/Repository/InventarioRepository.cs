@@ -1,14 +1,12 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
-using System;
 using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class InventarioRepository : IRepository<Inventario>
+    public class InventarioRepository
     {
-        private DataBase _dataBase;
+        private readonly DataBase _dataBase;
 
         public InventarioRepository()
         {
@@ -25,59 +23,14 @@ namespace Prodfy.Services.Repository
             return 0;
         }
 
-        public void Adicionar(Inventario entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TableQuery<Inventario> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
         public void DeletarTodos()
         {
             _dataBase._conexao.Execute("Delete From Contagem"); ;
         }
 
-        public void Editar(Inventario entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Inventario ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Inventario> ObterTodos()
         {
             return _dataBase._conexao.Table<Inventario>().OrderBy(i => i.idInventario).ToList();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Inventario ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

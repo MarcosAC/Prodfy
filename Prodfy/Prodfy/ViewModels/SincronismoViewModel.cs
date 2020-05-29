@@ -874,9 +874,9 @@ namespace Prodfy.ViewModels
                 dadosSincronismo.Add(dadosExpedicao);
             }
 
-            if (atividadeRepository.ObterTodos().Count() > 0)
+            if (atividadeRepository.ListaAtvidadesOrdenasPorId().Count() > 0)
             {
-                dadosAtividade = atividadeRepository.ObterTodos();
+                dadosAtividade = atividadeRepository.ListaAtvidadesOrdenasPorId();
 
                 dadosSincronismo.Add(dadosAtividade);
             }

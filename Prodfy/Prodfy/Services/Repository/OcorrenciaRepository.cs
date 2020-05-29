@@ -1,14 +1,12 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
-using System;
 using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class OcorrenciaRepository : IRepository<Monit_Ocorr>
+    public class OcorrenciaRepository
     {
-        private DataBase _dataBase;
+        private readonly DataBase _dataBase;
 
         public OcorrenciaRepository()
         {
@@ -25,59 +23,14 @@ namespace Prodfy.Services.Repository
             return 0;
         }
 
-        public void Adicionar(Monit_Ocorr entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TableQuery<Monit_Ocorr> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
         public void DeletarTodos()
         {
             _dataBase._conexao.Execute("Delete From Monit_Ocorr");
         }
 
-        public void Editar(Monit_Ocorr entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Monit_Ocorr ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Monit_Ocorr> ObterTodos()
         {
             return _dataBase._conexao.Table<Monit_Ocorr>().OrderBy(o => o.idMonit_Ocorr).ToList();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Monit_Ocorr ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

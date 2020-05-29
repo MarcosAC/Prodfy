@@ -1,14 +1,12 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using SQLite;
 using System;
-using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
     public class MonitParcelaRepository : IRepository<Monit_Parcela>
     {
-        private DataBase dataBase;
+        private readonly DataBase dataBase;
 
         public MonitParcelaRepository()
         {
@@ -26,60 +24,10 @@ namespace Prodfy.Services.Repository
                 App.Current.MainPage.DisplayAlert("Erro", ex.Message, "OK");
             }
         }
-
-        public TableQuery<Monit_Parcela> AsQueryable()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Deletar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
+                
         public void DeletarTodos()
         {
             dataBase._conexao.DeleteAll<Monit_Parcela>();
-        }
-
-        public void Editar(Monit_Parcela entidade)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Monit_Parcela ObterDados()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Monit_Parcela ObterDadosPorId(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterLoteInfo(string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterMudaInfo(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string ObterInformacoesParaIdentificacao(int id, string codigo)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Monit_Parcela> ObterTodos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int ObterTotalDeRegistros()
-        {
-            throw new NotImplementedException();
-        }
+        } 
     }
 }

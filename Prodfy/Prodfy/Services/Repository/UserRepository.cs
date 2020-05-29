@@ -1,14 +1,13 @@
 ﻿using Prodfy.Helpers;
 using Prodfy.Models;
-using Prodfy.Services.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 
 namespace Prodfy.Services.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IRepository<User>
     {
-        private DataBase _dataBase;
+        private readonly DataBase _dataBase;
 
         public UserRepository()
         {            
